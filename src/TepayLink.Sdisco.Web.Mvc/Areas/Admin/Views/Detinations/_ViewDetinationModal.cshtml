@@ -1,0 +1,32 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Detinations
+@model DetinationViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="DetinationInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Image") :</h6>
+                @Model.Detination.Image
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Name") :</h6>
+                @Model.Detination.Name
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Status") :</h6>
+                @L("Enum_DetinationStatusEnum_" + (int)Model.Detination.Status)
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

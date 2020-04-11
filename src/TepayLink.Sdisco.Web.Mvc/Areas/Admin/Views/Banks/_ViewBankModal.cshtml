@@ -1,0 +1,52 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Banks
+@model BankViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="BankInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("BankName") :</h6>
+                @Model.Bank.BankName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("BankCode") :</h6>
+                @Model.Bank.BankCode
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("DisplayName") :</h6>
+                @Model.Bank.DisplayName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Type") :</h6>
+                @L("Enum_BankTypeEnum_" + (int)Model.Bank.Type)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Order") :</h6>
+                @Model.Bank.Order
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Logo") :</h6>
+                @Model.Bank.Logo
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CardImage") :</h6>
+                @Model.Bank.CardImage
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Description") :</h6>
+                @Model.Bank.Description
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

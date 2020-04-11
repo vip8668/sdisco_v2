@@ -1,4 +1,4 @@
-﻿{
+{
 "propertyTemplates":[
 		{
 			"placeholder" : "{{Property_Looped_Template_Here}}",
@@ -146,8 +146,7 @@
 			"placeholder": "{{EntityHistoryIsEnabled_Dec_Here}}",
 			"condition": "{{Entity_History_Here}} == true",
 			"content": "        function entityHistoryIsEnabled() {
-            return abp.auth.hasPermission('Pages.Administration.AuditLogs') &&
-                abp.custom.EntityHistory &&
+            return abp.custom.EntityHistory &&
                 abp.custom.EntityHistory.IsEnabled &&
                 _.filter(abp.custom.EntityHistory.EnabledEntities, entityType => entityType === _entityTypeFullName).length === 1;
         }"

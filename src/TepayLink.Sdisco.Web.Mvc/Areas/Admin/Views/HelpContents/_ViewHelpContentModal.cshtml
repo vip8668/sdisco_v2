@@ -1,0 +1,32 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.HelpContents
+@model HelpContentViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="HelpContentInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Question") :</h6>
+                @Model.HelpContent.Question
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Answer") :</h6>
+                @Model.HelpContent.Answer
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("HelpCategory")) @L("CategoryName") :</h6>
+                @Model.HelpCategoryCategoryName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

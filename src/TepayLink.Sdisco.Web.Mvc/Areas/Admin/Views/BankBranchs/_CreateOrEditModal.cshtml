@@ -1,0 +1,64 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BankBranchs
+@model CreateOrEditBankBranchModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditBankBranch")) : L("CreateNewBankBranch")))
+
+<div class="modal-body">
+        <div id="BankBranchInformationsTab">
+            <form name="BankBranchInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.BankBranch.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="BankBankName">@L("Bank")</label>
+									    <div class="input-group">
+											<input class="form-control" id="BankBankName" name="bankBankName" value="@Model.BankBankName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenBankLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearBankBankNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="BankBranch_BankId" value="@Model.BankBranch.BankId" type="text" name="bankId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="BankBranch_BankId" value="" type="text" name="bankId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="BankBranch_BranchName">@L("BranchName")</label>
+									<input class="form-control" id="BankBranch_BranchName" value="@Model.BankBranch.BranchName" type="text" name="branchName"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="BankBranch_Address">@L("Address")</label>
+									<input class="form-control" id="BankBranch_Address" value="@Model.BankBranch.Address" type="text" name="address"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="BankBranch_Order">@L("Order")</label>
+									<input class="form-control m-input" id="BankBranch_Order" value="@Model.BankBranch.Order.ToString(CultureInfo.InvariantCulture)" type="number" name="order"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -1,0 +1,77 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "admin",
+  "RelativeNamespace": "Help",
+  "EntityName": "HelpCategory",
+  "EntityNamePlural": "HelpCategories",
+  "TableName": "HelpCategories",
+  "PrimaryKeyType": "long",
+  "BaseClass": "AuditedEntity",
+  "EntityHistory": false,
+  "AutoMigration": false,
+  "UpdateDatabase": false,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [
+    {
+      "Name": "CategoryName",
+      "Type": "string",
+      "MaxLength": -1,
+      "MinLength": -1,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    },
+    {
+      "Name": "Type",
+      "Type": "HelpTypeEnum",
+      "MaxLength": 0,
+      "MinLength": 0,
+      "Range": {
+        "IsRangeSet": false,
+        "MinimumValue": 0,
+        "MaximumValue": 0
+      },
+      "Required": false,
+      "Nullable": false,
+      "Regex": "",
+      "UserInterface": {
+        "AdvancedFilter": true,
+        "List": true,
+        "CreateOrUpdate": true
+      }
+    }
+  ],
+  "NavigationProperties": [],
+  "EnumDefinitions": [
+    {
+      "Name": "HelpTypeEnum",
+      "Namespace": "TepayLink.Sdisco.Help",
+      "EnumProperties": [
+        {
+          "Name": "Traveler",
+          "Value": 1
+        },
+        {
+          "Name": "Kol",
+          "Value": 2
+        }
+      ]
+    }
+  ]
+}

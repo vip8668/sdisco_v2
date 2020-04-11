@@ -1,0 +1,48 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BlogComments
+@model BlogCommentViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="BlogCommentInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Email") :</h6>
+                @Model.BlogComment.Email
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("FullName") :</h6>
+                @Model.BlogComment.FullName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Rating") :</h6>
+                @Model.BlogComment.Rating
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("WebSite") :</h6>
+                @Model.BlogComment.WebSite
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Title") :</h6>
+                @Model.BlogComment.Title
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Comment") :</h6>
+                @Model.BlogComment.Comment
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("BlogPost")) @L("Title") :</h6>
+                @Model.BlogPostTitle
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

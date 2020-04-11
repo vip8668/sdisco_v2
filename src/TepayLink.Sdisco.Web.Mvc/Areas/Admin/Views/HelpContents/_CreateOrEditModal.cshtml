@@ -1,0 +1,59 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.HelpContents
+@model CreateOrEditHelpContentModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditHelpContent")) : L("CreateNewHelpContent")))
+
+<div class="modal-body">
+        <div id="HelpContentInformationsTab">
+            <form name="HelpContentInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.HelpContent.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="HelpCategoryCategoryName">@L("HelpCategory")</label>
+									    <div class="input-group">
+											<input class="form-control" id="HelpCategoryCategoryName" name="helpCategoryCategoryName" value="@Model.HelpCategoryCategoryName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenHelpCategoryLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearHelpCategoryCategoryNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="HelpContent_HelpCategoryId" value="@Model.HelpContent.HelpCategoryId" type="text" name="helpCategoryId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="HelpContent_HelpCategoryId" value="" type="text" name="helpCategoryId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="HelpContent_Question">@L("Question")</label>
+									<input class="form-control" id="HelpContent_Question" value="@Model.HelpContent.Question" type="text" name="question"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="HelpContent_Answer">@L("Answer")</label>
+									<input class="form-control" id="HelpContent_Answer" value="@Model.HelpContent.Answer" type="text" name="answer"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

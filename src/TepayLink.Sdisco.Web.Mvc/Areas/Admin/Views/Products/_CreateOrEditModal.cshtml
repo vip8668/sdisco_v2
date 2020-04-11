@@ -1,0 +1,213 @@
+﻿@using TepayLink.Sdisco.Products;
+					@using TepayLink.Sdisco.Products;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Products
+@model CreateOrEditProductModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditProduct")) : L("CreateNewProduct")))
+
+<div class="modal-body">
+        <div id="ProductInformationsTab">
+            <form name="ProductInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Product.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="CategoryName">@L("Category")</label>
+									    <div class="input-group">
+											<input class="form-control" id="CategoryName" name="categoryName" value="@Model.CategoryName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenCategoryLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearCategoryNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Product_CategoryId" value="@Model.Product.CategoryId" type="text" name="categoryId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Product_CategoryId" value="" type="text" name="categoryId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="UserName">@L("User")</label>
+									    <div class="input-group">
+											<input class="form-control" id="UserName" name="userName" value="@Model.UserName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenUserLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearUserNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Product_HostUserId" value="@Model.Product.HostUserId" type="text" name="hostUserId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Product_HostUserId" value="" type="text" name="hostUserId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="PlaceName">@L("Place")</label>
+									    <div class="input-group">
+											<input class="form-control" id="PlaceName" name="placeName" value="@Model.PlaceName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenPlaceLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearPlaceNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Product_PlaceId" value="@Model.Product.PlaceId" type="text" name="placeId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Product_PlaceId" value="" type="text" name="placeId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="Product_Name">@L("Name")</label>
+									<input class="form-control" id="Product_Name" value="@Model.Product.Name" type="text" name="name"     />
+								</div>
+					
+								@{
+					var selectListType = Html.GetEnumSelectList(typeof(ProductTypeEnum));
+					 foreach (var selectOption in selectListType) { selectOption.Text = L("Enum_ProductTypeEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Product_Type">@L("Type")</label>
+										<select class="form-control m-input m-input--square" name="type" id="Product_Type" asp-for="@Model.Product.Type" asp-items="@selectListType">
+									</select>
+								</div>
+					
+								@{
+					var selectListStatus = Html.GetEnumSelectList(typeof(ProductStatusEnum));
+					 foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_ProductStatusEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Product_Status">@L("Status")</label>
+										<select class="form-control m-input m-input--square" name="status" id="Product_Status" asp-for="@Model.Product.Status" asp-items="@selectListStatus">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="Product_Description">@L("Description")</label>
+									<input class="form-control" id="Product_Description" value="@Model.Product.Description" type="text" name="description"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Product_Policies">@L("Policies")</label>
+									<input class="form-control" id="Product_Policies" value="@Model.Product.Policies" type="text" name="policies"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Product_Duration">@L("Duration")</label>
+									<input class="form-control m-input" id="Product_Duration" value="@Model.Product.Duration.ToString(CultureInfo.InvariantCulture)" type="number" name="duration"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Product_StartTime">@L("StartTime")</label>
+									<input class="form-control" id="Product_StartTime" value="@Model.Product.StartTime" type="text" name="startTime"     />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Product_IncludeTourGuide" class="kt-checkbox">
+										<input id="Product_IncludeTourGuide" type="checkbox" name="includeTourGuide" value="true" @Html.Raw(Model.Product.IncludeTourGuide ?"checked=\"checked\"":"") />
+										@L("IncludeTourGuide")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Product_AllowRetail" class="kt-checkbox">
+										<input id="Product_AllowRetail" type="checkbox" name="allowRetail" value="true" @Html.Raw(Model.Product.AllowRetail ?"checked=\"checked\"":"") />
+										@L("AllowRetail")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="form-group">
+									<label for="Product_TotalSlot">@L("TotalSlot")</label>
+									<input class="form-control m-input" id="Product_TotalSlot" value="@Model.Product.TotalSlot.ToString(CultureInfo.InvariantCulture)" type="number" name="totalSlot"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Product_Price">@L("Price")</label>
+									<input class="form-control m-input" id="Product_Price" value="@Model.Product.Price.ToString(CultureInfo.InvariantCulture)" type="number" name="price"  />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Product_InstantBook" class="kt-checkbox">
+										<input id="Product_InstantBook" type="checkbox" name="instantBook" value="true" @Html.Raw(Model.Product.InstantBook ?"checked=\"checked\"":"") />
+										@L("InstantBook")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="form-group">
+									<label for="Product_TripLengh">@L("TripLengh")</label>
+									<input class="form-control m-input" id="Product_TripLengh" value="@Model.Product.TripLengh.ToString(CultureInfo.InvariantCulture)" type="number" name="tripLengh"  />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Product_IsHotDeal" class="kt-checkbox">
+										<input id="Product_IsHotDeal" type="checkbox" name="isHotDeal" value="true" @Html.Raw(Model.Product.IsHotDeal ?"checked=\"checked\"":"") />
+										@L("IsHotDeal")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Product_IsBestSeller" class="kt-checkbox">
+										<input id="Product_IsBestSeller" type="checkbox" name="isBestSeller" value="true" @Html.Raw(Model.Product.IsBestSeller ?"checked=\"checked\"":"") />
+										@L("IsBestSeller")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Product_IsTrending" class="kt-checkbox">
+										<input id="Product_IsTrending" type="checkbox" name="isTrending" value="true" @Html.Raw(Model.Product.IsTrending ?"checked=\"checked\"":"") />
+										@L("IsTrending")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Product_IsTop" class="kt-checkbox">
+										<input id="Product_IsTop" type="checkbox" name="isTop" value="true" @Html.Raw(Model.Product.IsTop ?"checked=\"checked\"":"") />
+										@L("IsTop")
+										<span></span>
+									</label>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

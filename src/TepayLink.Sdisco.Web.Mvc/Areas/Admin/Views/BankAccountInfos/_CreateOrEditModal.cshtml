@@ -1,0 +1,105 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BankAccountInfos
+@model CreateOrEditBankAccountInfoModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditBankAccountInfo")) : L("CreateNewBankAccountInfo")))
+
+<div class="modal-body">
+        <div id="BankAccountInfoInformationsTab">
+            <form name="BankAccountInfoInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.BankAccountInfo.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="BankBankName">@L("Bank")</label>
+									    <div class="input-group">
+											<input class="form-control" id="BankBankName" name="bankBankName" value="@Model.BankBankName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenBankLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearBankBankNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="BankAccountInfo_BankId" value="@Model.BankAccountInfo.BankId" type="text" name="bankId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="BankAccountInfo_BankId" value="" type="text" name="bankId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="BankBranchBranchName">@L("BankBranch")</label>
+									    <div class="input-group">
+											<input class="form-control" id="BankBranchBranchName" name="bankBranchBranchName" value="@Model.BankBranchBranchName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenBankBranchLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearBankBranchBranchNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="BankAccountInfo_BankBranchId" value="@Model.BankAccountInfo.BankBranchId" type="text" name="bankBranchId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="BankAccountInfo_BankBranchId" value="" type="text" name="bankBranchId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="UserName">@L("User")</label>
+									    <div class="input-group">
+											<input class="form-control" id="UserName" name="userName" value="@Model.UserName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenUserLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearUserNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="BankAccountInfo_UserId" value="@Model.BankAccountInfo.UserId" type="text" name="userId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="BankAccountInfo_UserId" value="" type="text" name="userId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="BankAccountInfo_AccountName">@L("AccountName")</label>
+									<input class="form-control" id="BankAccountInfo_AccountName" value="@Model.BankAccountInfo.AccountName" type="text" name="accountName"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="BankAccountInfo_AccountNo">@L("AccountNo")</label>
+									<input class="form-control" id="BankAccountInfo_AccountNo" value="@Model.BankAccountInfo.AccountNo" type="text" name="accountNo"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

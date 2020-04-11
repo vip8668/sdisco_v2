@@ -1,0 +1,44 @@
+{
+  "IsRegenerate": false,
+  "MenuPosition": "main",
+  "RelativeNamespace": "Blog",
+  "EntityName": "BlogProductRelated",
+  "EntityNamePlural": "BlogProductRelateds",
+  "TableName": "BlogProductRelateds",
+  "PrimaryKeyType": "long",
+  "BaseClass": "AuditedEntity",
+  "EntityHistory": false,
+  "AutoMigration": false,
+  "UpdateDatabase": false,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "TepayLink.Sdisco.Blog",
+      "ForeignEntityName": "BlogPost",
+      "IdType": "long",
+      "IsNullable": true,
+      "PropertyName": "BlogPostId",
+      "DisplayPropertyName": "Title",
+      "DuplicationNumber": 0,
+      "RelationType": "single"
+    },
+    {
+      "Namespace": "TepayLink.Sdisco.Products",
+      "ForeignEntityName": "Product",
+      "IdType": "long",
+      "IsNullable": true,
+      "PropertyName": "ProductId",
+      "DisplayPropertyName": "Name",
+      "DuplicationNumber": 0,
+      "RelationType": "single"
+    }
+  ],
+  "EnumDefinitions": []
+}

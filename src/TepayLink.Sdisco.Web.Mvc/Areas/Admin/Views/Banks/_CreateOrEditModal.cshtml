@@ -1,0 +1,72 @@
+﻿@using TepayLink.Sdisco.AdminConfig;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Banks
+@model CreateOrEditBankModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditBank")) : L("CreateNewBank")))
+
+<div class="modal-body">
+        <div id="BankInformationsTab">
+            <form name="BankInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Bank.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Bank_BankName">@L("BankName")</label>
+									<input class="form-control" id="Bank_BankName" value="@Model.Bank.BankName" type="text" name="bankName"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Bank_BankCode">@L("BankCode")</label>
+									<input class="form-control" id="Bank_BankCode" value="@Model.Bank.BankCode" type="text" name="bankCode"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Bank_DisplayName">@L("DisplayName")</label>
+									<input class="form-control" id="Bank_DisplayName" value="@Model.Bank.DisplayName" type="text" name="displayName"     />
+								</div>
+					
+								@{
+					var selectListType = Html.GetEnumSelectList(typeof(BankTypeEnum));
+					 foreach (var selectOption in selectListType) { selectOption.Text = L("Enum_BankTypeEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Bank_Type">@L("Type")</label>
+										<select class="form-control m-input m-input--square" name="type" id="Bank_Type" asp-for="@Model.Bank.Type" asp-items="@selectListType">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="Bank_Order">@L("Order")</label>
+									<input class="form-control m-input" id="Bank_Order" value="@Model.Bank.Order.ToString(CultureInfo.InvariantCulture)" type="number" name="order"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Bank_Logo">@L("Logo")</label>
+									<input class="form-control" id="Bank_Logo" value="@Model.Bank.Logo" type="text" name="logo"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Bank_CardImage">@L("CardImage")</label>
+									<input class="form-control" id="Bank_CardImage" value="@Model.Bank.CardImage" type="text" name="cardImage"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Bank_Description">@L("Description")</label>
+									<input class="form-control" id="Bank_Description" value="@Model.Bank.Description" type="text" name="description"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

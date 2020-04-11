@@ -1,0 +1,32 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.PlaceCategories
+@model PlaceCategoryViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="PlaceCategoryInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Name") :</h6>
+                @Model.PlaceCategory.Name
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Image") :</h6>
+                @Model.PlaceCategory.Image
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Icon") :</h6>
+                @Model.PlaceCategory.Icon
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

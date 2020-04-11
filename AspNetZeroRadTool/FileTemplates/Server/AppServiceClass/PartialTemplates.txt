@@ -1,4 +1,4 @@
-﻿{
+{
 "propertyTemplates":[
 		{
 			"placeholder" : "{{Property_Enum_Variable_Here}}",
@@ -175,15 +175,7 @@
 					"relation" : "multi",
 					"content" : "using {{NP_Namespace_Here}};
 "
-					},
-					{
-					"relation" : "single",
-					"viewType": "Dropdown",						
-					"preventDuplicate":true,
-					"content" : "using {{NP_Namespace_Here}};
-					using System.Collections.Generic;
-"
-					},
+					}
 				]
 		},
 		{
@@ -192,7 +184,6 @@
 					{
 					"relation" : "single",
 					"preventDuplicate":true,
-					"viewType": "LookupTable",
 					"content" : "
 
 		[AbpAuthorize(AppPermissions.{{Permission_Name_Here}})]
@@ -200,7 +191,7 @@
          {
              var query = _lookup_{{nP_Foreign_Entity_Name_Here}}Repository.GetAll().WhereIf(
                     !string.IsNullOrWhiteSpace(input.Filter),
-                   e=> (e.{{NP_Display_Property_Name_Here}} != null ? e.{{NP_Display_Property_Name_Here}}.ToString():\"\").Contains(input.Filter)
+                   e=> e.{{NP_Display_Property_Name_Here}}.ToString().Contains(input.Filter)
                 );
 
             var totalCount = await query.CountAsync();
@@ -223,26 +214,9 @@
                 lookupTableDtoList
             );
          }"
-					},
-					{
-						"relation" : "single",
-						"preventDuplicate":true,
-						"viewType": "Dropdown",					
-						"content" : "
-			[AbpAuthorize(AppPermissions.{{Permission_Name_Here}})]
-			public async Task<List<{{Entity_Name_Here}}{{NP_Foreign_Entity_Name_Here}}LookupTableDto>> GetAll{{NP_Foreign_Entity_Name_Here}}ForTableDropdown()
-			{
-				return await _lookup_{{nP_Foreign_Entity_Name_Here}}Repository.GetAll()
-					.Select({{nP_Foreign_Entity_Name_Here}} => new {{Entity_Name_Here}}{{NP_Foreign_Entity_Name_Here}}LookupTableDto
-					{
-						Id = {{nP_Foreign_Entity_Name_Here}}.Id{{NP_Id_Type_ToStringIfNeeded_Here}},
-						DisplayName = {{nP_Foreign_Entity_Name_Here}}.{{NP_Display_Property_Name_Here}}.ToString()
-					}).ToListAsync();
-			}
-							"
 					}
 				]
-		}		
+		}
 	],
 "enumTemplates":[
 		{

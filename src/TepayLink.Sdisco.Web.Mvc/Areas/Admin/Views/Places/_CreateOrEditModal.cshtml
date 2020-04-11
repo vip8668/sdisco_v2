@@ -1,0 +1,107 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Places
+@model CreateOrEditPlaceModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditPlace")) : L("CreateNewPlace")))
+
+<div class="modal-body">
+        <div id="PlaceInformationsTab">
+            <form name="PlaceInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Place.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="DetinationName">@L("Detination")</label>
+									    <div class="input-group">
+											<input class="form-control" id="DetinationName" name="detinationName" value="@Model.DetinationName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenDetinationLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearDetinationNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Place_DetinationId" value="@Model.Place.DetinationId" type="text" name="detinationId" required hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Place_DetinationId" value="" type="text" name="detinationId" required hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="PlaceCategoryName">@L("PlaceCategory")</label>
+									    <div class="input-group">
+											<input class="form-control" id="PlaceCategoryName" name="placeCategoryName" value="@Model.PlaceCategoryName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenPlaceCategoryLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearPlaceCategoryNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Place_PlaceCategoryId" value="@Model.Place.PlaceCategoryId" type="text" name="placeCategoryId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Place_PlaceCategoryId" value="" type="text" name="placeCategoryId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="Place_Name">@L("Name")</label>
+									<input class="form-control" id="Place_Name" value="@Model.Place.Name" type="text" name="name"   maxlength="@TepayLink.Sdisco.Products.PlaceConsts.MaxNameLength"  minlength="@TepayLink.Sdisco.Products.PlaceConsts.MinNameLength"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Place_DisplayAddress">@L("DisplayAddress")</label>
+									<input class="form-control" id="Place_DisplayAddress" value="@Model.Place.DisplayAddress" type="text" name="displayAddress"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Place_GoogleAddress">@L("GoogleAddress")</label>
+									<input class="form-control" id="Place_GoogleAddress" value="@Model.Place.GoogleAddress" type="text" name="googleAddress"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Place_Overview">@L("Overview")</label>
+									<input class="form-control" id="Place_Overview" value="@Model.Place.Overview" type="text" name="overview"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="Place_WhatToExpect">@L("WhatToExpect")</label>
+									<input class="form-control" id="Place_WhatToExpect" value="@Model.Place.WhatToExpect" type="text" name="whatToExpect"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="Place_Lat">@L("Lat")</label>
+									<input class="form-control m-input" id="Place_Lat" value="@Model.Place.Lat.ToString(CultureInfo.InvariantCulture)" type="number" name="lat"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Place_Long">@L("Long")</label>
+									<input class="form-control m-input" id="Place_Long" value="@Model.Place.Long.ToString(CultureInfo.InvariantCulture)" type="number" name="long"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

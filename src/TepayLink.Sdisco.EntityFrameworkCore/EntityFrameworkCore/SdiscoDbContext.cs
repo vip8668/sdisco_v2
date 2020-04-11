@@ -1,4 +1,9 @@
-﻿using Abp.IdentityServer4;
+﻿using TepayLink.Sdisco.Help;
+using TepayLink.Sdisco.Blog;
+using TepayLink.Sdisco.Account;
+using TepayLink.Sdisco.AdminConfig;
+using TepayLink.Sdisco.Products;
+using Abp.IdentityServer4;
 using Abp.Zero.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -16,6 +21,34 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
 {
     public class SdiscoDbContext : AbpZeroDbContext<Tenant, Role, User, SdiscoDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<HelpContent> HelpContents { get; set; }
+
+        public virtual DbSet<HelpCategory> HelpCategories { get; set; }
+
+        public virtual DbSet<BlogProductRelated> BlogProductRelateds { get; set; }
+
+        public virtual DbSet<BlogComment> BlogComments { get; set; }
+
+        public virtual DbSet<BlogPost> BlogPosts { get; set; }
+
+        public virtual DbSet<BankAccountInfo> BankAccountInfos { get; set; }
+
+        public virtual DbSet<BankBranch> BankBranchs { get; set; }
+
+        public virtual DbSet<Bank> Banks { get; set; }
+
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
+
+        public virtual DbSet<Product> Products { get; set; }
+
+        public virtual DbSet<Category> Categories { get; set; }
+
+        public virtual DbSet<Place> Places { get; set; }
+
+        public virtual DbSet<PlaceCategory> PlaceCategories { get; set; }
+
+        public virtual DbSet<Detination> Detinations { get; set; }
+
         /* Define an IDbSet for each entity of the application */
 
         public virtual DbSet<BinaryObject> BinaryObjects { get; set; }
@@ -44,7 +77,77 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<BinaryObject>(b =>
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+            modelBuilder.Entity<HelpContent>(h =>
+            {
+                h.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<HelpCategory>(h =>
+            {
+                h.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BlogProductRelated>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BlogComment>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BlogPost>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BankAccountInfo>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BankBranch>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Bank>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ProductImage>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Product>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Category>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Place>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<PlaceCategory>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Detination>(d =>
+            {
+                d.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BinaryObject>(b =>
             {
                 b.HasIndex(e => new { e.TenantId });
             });

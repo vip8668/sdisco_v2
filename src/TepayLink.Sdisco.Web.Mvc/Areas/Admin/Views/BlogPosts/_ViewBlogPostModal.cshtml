@@ -1,0 +1,44 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BlogPosts
+@model BlogPostViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="BlogPostInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Title") :</h6>
+                @Model.BlogPost.Title
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ShortDescription") :</h6>
+                @Model.BlogPost.ShortDescription
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Content") :</h6>
+                @Model.BlogPost.Content
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("PublishDate") :</h6>
+                @Model.BlogPost.PublishDate
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ThumbImage") :</h6>
+                @Model.BlogPost.ThumbImage
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Status") :</h6>
+                @L("Enum_BlogStatusEnum_" + (int)Model.BlogPost.Status)
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

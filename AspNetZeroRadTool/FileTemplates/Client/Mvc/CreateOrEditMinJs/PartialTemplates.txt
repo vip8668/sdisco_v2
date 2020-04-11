@@ -1,4 +1,4 @@
-﻿{
+{
 "navigationPropertyTemplates":[
 		{
 			"placeholder" : "{{NP_Modal_Init_Here}}",
@@ -16,7 +16,6 @@
 		},
 		{
 			"placeholder" : "{{NP_Modal_Open_Clear_Here}}",
-			"viewType":"LookupTable",
 			"templates" : [
 					{
 					"relation" : "single",

@@ -1,4 +1,14 @@
-﻿using Abp.Application.Editions;
+﻿using TepayLink.Sdisco.Help.Dtos;
+using TepayLink.Sdisco.Help;
+using TepayLink.Sdisco.Blog.Dtos;
+using TepayLink.Sdisco.Blog;
+using TepayLink.Sdisco.Account.Dtos;
+using TepayLink.Sdisco.Account;
+using TepayLink.Sdisco.AdminConfig.Dtos;
+using TepayLink.Sdisco.AdminConfig;
+using TepayLink.Sdisco.Products.Dtos;
+using TepayLink.Sdisco.Products;
+using Abp.Application.Editions;
 using Abp.Application.Features;
 using Abp.Auditing;
 using Abp.Authorization;
@@ -43,6 +53,34 @@ namespace TepayLink.Sdisco
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditHelpContentDto, HelpContent>().ReverseMap();
+            configuration.CreateMap<HelpContentDto, HelpContent>().ReverseMap();
+            configuration.CreateMap<CreateOrEditHelpCategoryDto, HelpCategory>().ReverseMap();
+            configuration.CreateMap<HelpCategoryDto, HelpCategory>().ReverseMap();
+            configuration.CreateMap<CreateOrEditBlogProductRelatedDto, BlogProductRelated>().ReverseMap();
+            configuration.CreateMap<BlogProductRelatedDto, BlogProductRelated>().ReverseMap();
+            configuration.CreateMap<CreateOrEditBlogCommentDto, BlogComment>().ReverseMap();
+            configuration.CreateMap<BlogCommentDto, BlogComment>().ReverseMap();
+            configuration.CreateMap<CreateOrEditBlogPostDto, BlogPost>().ReverseMap();
+            configuration.CreateMap<BlogPostDto, BlogPost>().ReverseMap();
+            configuration.CreateMap<CreateOrEditBankAccountInfoDto, BankAccountInfo>().ReverseMap();
+            configuration.CreateMap<BankAccountInfoDto, BankAccountInfo>().ReverseMap();
+            configuration.CreateMap<CreateOrEditBankBranchDto, BankBranch>().ReverseMap();
+            configuration.CreateMap<BankBranchDto, BankBranch>().ReverseMap();
+            configuration.CreateMap<CreateOrEditBankDto, Bank>().ReverseMap();
+            configuration.CreateMap<BankDto, Bank>().ReverseMap();
+            configuration.CreateMap<CreateOrEditProductImageDto, ProductImage>().ReverseMap();
+            configuration.CreateMap<ProductImageDto, ProductImage>().ReverseMap();
+            configuration.CreateMap<CreateOrEditProductDto, Product>().ReverseMap();
+            configuration.CreateMap<ProductDto, Product>().ReverseMap();
+            configuration.CreateMap<CreateOrEditCategoryDto, Category>().ReverseMap();
+            configuration.CreateMap<CategoryDto, Category>().ReverseMap();
+            configuration.CreateMap<CreateOrEditPlaceDto, Place>().ReverseMap();
+            configuration.CreateMap<PlaceDto, Place>().ReverseMap();
+            configuration.CreateMap<CreateOrEditPlaceCategoryDto, PlaceCategory>().ReverseMap();
+            configuration.CreateMap<PlaceCategoryDto, PlaceCategory>().ReverseMap();
+            configuration.CreateMap<CreateOrEditDetinationDto, Detination>().ReverseMap();
+            configuration.CreateMap<DetinationDto, Detination>().ReverseMap();
             //Inputs
             configuration.CreateMap<CheckboxInputType, FeatureInputTypeDto>();
             configuration.CreateMap<SingleLineStringInputType, FeatureInputTypeDto>();

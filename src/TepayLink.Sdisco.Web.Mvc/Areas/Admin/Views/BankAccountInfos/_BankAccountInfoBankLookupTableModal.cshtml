@@ -1,0 +1,48 @@
+﻿@using TepayLink.Sdisco.Authorization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BankAccountInfos
+@using TepayLink.Sdisco.Web.Areas.Admin.Startup
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@model BankAccountInfoBankLookupTableViewModel
+
+@section Scripts
+    {
+    <script abp-src="/view-resources/Areas/Admin/Views/BankAccountInfos/_BankAccountInfoBankLookupTableModal.js" asp-append-version="true"></script>
+}
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("PickBank")))
+
+
+
+<div class="kt-content">
+    <div class="kt-portlet">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="kt-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="BankTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetBankButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <table id="BankTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>@L("Actions")</th>
+                            <th>@L("BankName")</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")

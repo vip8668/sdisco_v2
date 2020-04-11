@@ -1,0 +1,52 @@
+﻿@using TepayLink.Sdisco.Products;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Categories
+@model CreateOrEditCategoryModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCategory")) : L("CreateNewCategory")))
+
+<div class="modal-body">
+        <div id="CategoryInformationsTab">
+            <form name="CategoryInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Category.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Category_Name">@L("Name")</label>
+									<input class="form-control" id="Category_Name" value="@Model.Category.Name" type="text" name="name"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Category_Image">@L("Image")</label>
+									<input class="form-control" id="Category_Image" value="@Model.Category.Image" type="text" name="image"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Category_Icon">@L("Icon")</label>
+									<input class="form-control" id="Category_Icon" value="@Model.Category.Icon" type="text" name="icon"     />
+								</div>
+					
+								@{
+					var selectListProductType = Html.GetEnumSelectList(typeof(ProductTypeEnum));
+					 foreach (var selectOption in selectListProductType) { selectOption.Text = L("Enum_ProductTypeEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Category_ProductType">@L("ProductType")</label>
+										<select class="form-control m-input m-input--square" name="productType" id="Category_ProductType" asp-for="@Model.Category.ProductType" asp-items="@selectListProductType">
+									</select>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -6,6 +6,81 @@
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_Administration_HelpContents = "Pages.Administration.HelpContents";
+        public const string Pages_Administration_HelpContents_Create = "Pages.Administration.HelpContents.Create";
+        public const string Pages_Administration_HelpContents_Edit = "Pages.Administration.HelpContents.Edit";
+        public const string Pages_Administration_HelpContents_Delete = "Pages.Administration.HelpContents.Delete";
+
+        public const string Pages_Administration_HelpCategories = "Pages.Administration.HelpCategories";
+        public const string Pages_Administration_HelpCategories_Create = "Pages.Administration.HelpCategories.Create";
+        public const string Pages_Administration_HelpCategories_Edit = "Pages.Administration.HelpCategories.Edit";
+        public const string Pages_Administration_HelpCategories_Delete = "Pages.Administration.HelpCategories.Delete";
+
+        public const string Pages_BlogProductRelateds = "Pages.BlogProductRelateds";
+        public const string Pages_BlogProductRelateds_Create = "Pages.BlogProductRelateds.Create";
+        public const string Pages_BlogProductRelateds_Edit = "Pages.BlogProductRelateds.Edit";
+        public const string Pages_BlogProductRelateds_Delete = "Pages.BlogProductRelateds.Delete";
+
+        public const string Pages_Administration_BlogComments = "Pages.Administration.BlogComments";
+        public const string Pages_Administration_BlogComments_Create = "Pages.Administration.BlogComments.Create";
+        public const string Pages_Administration_BlogComments_Edit = "Pages.Administration.BlogComments.Edit";
+        public const string Pages_Administration_BlogComments_Delete = "Pages.Administration.BlogComments.Delete";
+
+        public const string Pages_Administration_BlogPosts = "Pages.Administration.BlogPosts";
+        public const string Pages_Administration_BlogPosts_Create = "Pages.Administration.BlogPosts.Create";
+        public const string Pages_Administration_BlogPosts_Edit = "Pages.Administration.BlogPosts.Edit";
+        public const string Pages_Administration_BlogPosts_Delete = "Pages.Administration.BlogPosts.Delete";
+
+        public const string Pages_Administration_BankAccountInfos = "Pages.Administration.BankAccountInfos";
+        public const string Pages_Administration_BankAccountInfos_Create = "Pages.Administration.BankAccountInfos.Create";
+        public const string Pages_Administration_BankAccountInfos_Edit = "Pages.Administration.BankAccountInfos.Edit";
+        public const string Pages_Administration_BankAccountInfos_Delete = "Pages.Administration.BankAccountInfos.Delete";
+
+        public const string Pages_BankBranchs = "Pages.BankBranchs";
+        public const string Pages_BankBranchs_Create = "Pages.BankBranchs.Create";
+        public const string Pages_BankBranchs_Edit = "Pages.BankBranchs.Edit";
+        public const string Pages_BankBranchs_Delete = "Pages.BankBranchs.Delete";
+
+        public const string Pages_Administration_Banks = "Pages.Administration.Banks";
+        public const string Pages_Administration_Banks_Create = "Pages.Administration.Banks.Create";
+        public const string Pages_Administration_Banks_Edit = "Pages.Administration.Banks.Edit";
+        public const string Pages_Administration_Banks_Delete = "Pages.Administration.Banks.Delete";
+
+        public const string Pages_ProductImages = "Pages.ProductImages";
+        public const string Pages_ProductImages_Create = "Pages.ProductImages.Create";
+        public const string Pages_ProductImages_Edit = "Pages.ProductImages.Edit";
+        public const string Pages_ProductImages_Delete = "Pages.ProductImages.Delete";
+
+        public const string Pages_Administration_Products = "Pages.Administration.Products";
+        public const string Pages_Administration_Products_Create = "Pages.Administration.Products.Create";
+        public const string Pages_Administration_Products_Edit = "Pages.Administration.Products.Edit";
+        public const string Pages_Administration_Products_Delete = "Pages.Administration.Products.Delete";
+
+        public const string Pages_Products = "Pages.Products";
+        public const string Pages_Products_Create = "Pages.Products.Create";
+        public const string Pages_Products_Edit = "Pages.Products.Edit";
+        public const string Pages_Products_Delete = "Pages.Products.Delete";
+
+        public const string Pages_Administration_Categories = "Pages.Administration.Categories";
+        public const string Pages_Administration_Categories_Create = "Pages.Administration.Categories.Create";
+        public const string Pages_Administration_Categories_Edit = "Pages.Administration.Categories.Edit";
+        public const string Pages_Administration_Categories_Delete = "Pages.Administration.Categories.Delete";
+
+        public const string Pages_Administration_Places = "Pages.Administration.Places";
+        public const string Pages_Administration_Places_Create = "Pages.Administration.Places.Create";
+        public const string Pages_Administration_Places_Edit = "Pages.Administration.Places.Edit";
+        public const string Pages_Administration_Places_Delete = "Pages.Administration.Places.Delete";
+
+        public const string Pages_Administration_PlaceCategories = "Pages.Administration.PlaceCategories";
+        public const string Pages_Administration_PlaceCategories_Create = "Pages.Administration.PlaceCategories.Create";
+        public const string Pages_Administration_PlaceCategories_Edit = "Pages.Administration.PlaceCategories.Edit";
+        public const string Pages_Administration_PlaceCategories_Delete = "Pages.Administration.PlaceCategories.Delete";
+
+        public const string Pages_Administration_Detinations = "Pages.Administration.Detinations";
+        public const string Pages_Administration_Detinations_Create = "Pages.Administration.Detinations.Create";
+        public const string Pages_Administration_Detinations_Edit = "Pages.Administration.Detinations.Edit";
+        public const string Pages_Administration_Detinations_Delete = "Pages.Administration.Detinations.Delete";
+
         //COMMON PERMISSIONS (FOR BOTH OF TENANTS AND HOST)
 
         public const string Pages = "Pages";

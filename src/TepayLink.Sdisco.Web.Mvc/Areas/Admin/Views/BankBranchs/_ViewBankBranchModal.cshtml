@@ -1,0 +1,36 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BankBranchs
+@model BankBranchViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="BankBranchInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("BranchName") :</h6>
+                @Model.BankBranch.BranchName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Address") :</h6>
+                @Model.BankBranch.Address
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Order") :</h6>
+                @Model.BankBranch.Order
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Bank")) @L("BankName") :</h6>
+                @Model.BankBankName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

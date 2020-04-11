@@ -1,0 +1,47 @@
+﻿@using TepayLink.Sdisco.Products;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Detinations
+@model CreateOrEditDetinationModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditDetination")) : L("CreateNewDetination")))
+
+<div class="modal-body">
+        <div id="DetinationInformationsTab">
+            <form name="DetinationInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Detination.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Detination_Image">@L("Image")</label>
+									<input class="form-control" id="Detination_Image" value="@Model.Detination.Image" type="text" name="image"  required    />
+								</div>
+					
+								<div class="form-group">
+									<label for="Detination_Name">@L("Name")</label>
+									<input class="form-control" id="Detination_Name" value="@Model.Detination.Name" type="text" name="name"   maxlength="@TepayLink.Sdisco.Products.DetinationConsts.MaxNameLength"  minlength="@TepayLink.Sdisco.Products.DetinationConsts.MinNameLength"  />
+								</div>
+					
+								@{
+					var selectListStatus = Html.GetEnumSelectList(typeof(DetinationStatusEnum));
+					 foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_DetinationStatusEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Detination_Status">@L("Status")</label>
+										<select class="form-control m-input m-input--square" name="status" id="Detination_Status" asp-for="@Model.Detination.Status" asp-items="@selectListStatus">
+									</select>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

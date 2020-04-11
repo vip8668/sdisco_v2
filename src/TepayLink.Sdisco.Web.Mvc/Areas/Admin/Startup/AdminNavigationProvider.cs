@@ -23,6 +23,34 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Startup
                         order: 1
                     )
                 ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.BlogProductRelateds,
+                        L("BlogProductRelateds"),
+                        url: "Admin/BlogProductRelateds",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_BlogProductRelateds
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.BankBranchs,
+                        L("BankBranchs"),
+                        url: "Admin/BankBranchs",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_BankBranchs
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ProductImages,
+                        L("ProductImages"),
+                        url: "Admin/ProductImages",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_ProductImages
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Products,
+                        L("Products"),
+                        url: "Admin/Products",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Products
+                    )
+                ).AddItem(new MenuItemDefinition(
                     AdminPageNames.Host.Tenants,
                     L("Tenants"),
                     url: "Admin/Tenants",
@@ -76,6 +104,83 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Startup
                             order: 3
                         )
                     ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.HelpContents,
+                        L("HelpContents"),
+                        url: "Admin/HelpContents",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_HelpContents
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.HelpCategories,
+                        L("HelpCategories"),
+                        url: "Admin/HelpCategories",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_HelpCategories
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.BlogComments,
+                        L("BlogComments"),
+                        url: "Admin/BlogComments",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_BlogComments
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.BlogPosts,
+                        L("BlogPosts"),
+                        url: "Admin/BlogPosts",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_BlogPosts
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.BankAccountInfos,
+                        L("BankAccountInfos"),
+                        url: "Admin/BankAccountInfos",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_BankAccountInfos
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Banks,
+                        L("Banks"),
+                        url: "Admin/Banks",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Banks
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Products,
+                        L("Products"),
+                        url: "Admin/Products",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Products
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Categories,
+                        L("Categories"),
+                        url: "Admin/Categories",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Categories
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Places,
+                        L("Places"),
+                        url: "Admin/Places",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Places
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.PlaceCategories,
+                        L("PlaceCategories"),
+                        url: "Admin/PlaceCategories",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_PlaceCategories
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Detinations,
+                        L("Detinations"),
+                        url: "Admin/Detinations",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Detinations
+                    )
+                ).AddItem(new MenuItemDefinition(
                             AdminPageNames.Common.Languages,
                             L("Languages"),
                             url: "Admin/Languages",

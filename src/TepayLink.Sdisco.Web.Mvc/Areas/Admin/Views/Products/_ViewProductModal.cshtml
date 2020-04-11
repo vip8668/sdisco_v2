@@ -1,0 +1,100 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Products
+@model ProductViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ProductInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Name") :</h6>
+                @Model.Product.Name
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Type") :</h6>
+                @L("Enum_ProductTypeEnum_" + (int)Model.Product.Type)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Status") :</h6>
+                @L("Enum_ProductStatusEnum_" + (int)Model.Product.Status)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Description") :</h6>
+                @Model.Product.Description
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Policies") :</h6>
+                @Model.Product.Policies
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Duration") :</h6>
+                @Model.Product.Duration
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("StartTime") :</h6>
+                @Model.Product.StartTime
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IncludeTourGuide") :</h6>
+                @Model.Product.IncludeTourGuide
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("AllowRetail") :</h6>
+                @Model.Product.AllowRetail
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TotalSlot") :</h6>
+                @Model.Product.TotalSlot
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Price") :</h6>
+                @Model.Product.Price
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("InstantBook") :</h6>
+                @Model.Product.InstantBook
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TripLengh") :</h6>
+                @Model.Product.TripLengh
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IsHotDeal") :</h6>
+                @Model.Product.IsHotDeal
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IsBestSeller") :</h6>
+                @Model.Product.IsBestSeller
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IsTrending") :</h6>
+                @Model.Product.IsTrending
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IsTop") :</h6>
+                @Model.Product.IsTop
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Category")) @L("Name") :</h6>
+                @Model.CategoryName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("User")) @L("Name") :</h6>
+                @Model.UserName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("Place")) @L("Name") :</h6>
+                @Model.PlaceName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

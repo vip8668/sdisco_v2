@@ -1,0 +1,75 @@
+﻿@using TepayLink.Sdisco.Products;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductImages
+@model CreateOrEditProductImageModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditProductImage")) : L("CreateNewProductImage")))
+
+<div class="modal-body">
+        <div id="ProductImageInformationsTab">
+            <form name="ProductImageInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ProductImage.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductImage_ProductId" value="@Model.ProductImage.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductImage_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="ProductImage_Url">@L("Url")</label>
+									<input class="form-control" id="ProductImage_Url" value="@Model.ProductImage.Url" type="text" name="url"     />
+								</div>
+					
+								@{
+					var selectListImageType = Html.GetEnumSelectList(typeof(ImageType));
+					 foreach (var selectOption in selectListImageType) { selectOption.Text = L("Enum_ImageType_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="ProductImage_ImageType">@L("ImageType")</label>
+										<select class="form-control m-input m-input--square" name="imageType" id="ProductImage_ImageType" asp-for="@Model.ProductImage.ImageType" asp-items="@selectListImageType">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductImage_Tag">@L("Tag")</label>
+									<input class="form-control" id="ProductImage_Tag" value="@Model.ProductImage.Tag" type="text" name="tag"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductImage_Title">@L("Title")</label>
+									<input class="form-control" id="ProductImage_Title" value="@Model.ProductImage.Title" type="text" name="title"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -4,6 +4,21 @@
     {
         public static class Common
         {
+            public const string HelpContents = "Administration.Help.HelpContents";
+            public const string HelpCategories = "Administration.Help.HelpCategories";
+            public const string BlogProductRelateds = "Blog.BlogProductRelateds";
+            public const string BlogComments = "Administration.Blog.BlogComments";
+            public const string BlogPosts = "Administration.Blog.BlogPosts";
+            public const string BankAccountInfos = "Administration.Account.BankAccountInfos";
+            public const string BankBranchs = "AdminConfig.BankBranchs";
+            public const string Banks = "Administration.AdminConfig.Banks";
+            public const string ProductImages = "Products.ProductImages";
+            public const string Products = "Administration.Products.Products";
+            public const string Products = "Products.Products";
+            public const string Categories = "Administration.Products.Categories";
+            public const string Places = "Administration.Products.Places";
+            public const string PlaceCategories = "Administration.Products.PlaceCategories";
+            public const string Detinations = "Administration.Products.Detinations";
             public const string Administration = "Administration";
             public const string Roles = "Administration.Roles";
             public const string Users = "Administration.Users";

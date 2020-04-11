@@ -1,0 +1,40 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BankAccountInfos
+@model BankAccountInfoViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="BankAccountInfoInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("AccountName") :</h6>
+                @Model.BankAccountInfo.AccountName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("AccountNo") :</h6>
+                @Model.BankAccountInfo.AccountNo
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Bank")) @L("BankName") :</h6>
+                @Model.BankBankName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("BankBranch")) @L("BranchName") :</h6>
+                @Model.BankBranchBranchName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("User")) @L("Name") :</h6>
+                @Model.UserName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

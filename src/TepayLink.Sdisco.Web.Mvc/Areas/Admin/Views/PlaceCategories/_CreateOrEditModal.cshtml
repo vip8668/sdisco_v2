@@ -1,0 +1,41 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.PlaceCategories
+@model CreateOrEditPlaceCategoryModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditPlaceCategory")) : L("CreateNewPlaceCategory")))
+
+<div class="modal-body">
+        <div id="PlaceCategoryInformationsTab">
+            <form name="PlaceCategoryInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.PlaceCategory.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="PlaceCategory_Name">@L("Name")</label>
+									<input class="form-control" id="PlaceCategory_Name" value="@Model.PlaceCategory.Name" type="text" name="name"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="PlaceCategory_Image">@L("Image")</label>
+									<input class="form-control" id="PlaceCategory_Image" value="@Model.PlaceCategory.Image" type="text" name="image"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="PlaceCategory_Icon">@L("Icon")</label>
+									<input class="form-control" id="PlaceCategory_Icon" value="@Model.PlaceCategory.Icon" type="text" name="icon"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

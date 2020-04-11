@@ -1,0 +1,42 @@
+﻿@using TepayLink.Sdisco.Help;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.HelpCategories
+@model CreateOrEditHelpCategoryModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditHelpCategory")) : L("CreateNewHelpCategory")))
+
+<div class="modal-body">
+        <div id="HelpCategoryInformationsTab">
+            <form name="HelpCategoryInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.HelpCategory.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="HelpCategory_CategoryName">@L("CategoryName")</label>
+									<input class="form-control" id="HelpCategory_CategoryName" value="@Model.HelpCategory.CategoryName" type="text" name="categoryName"     />
+								</div>
+					
+								@{
+					var selectListType = Html.GetEnumSelectList(typeof(HelpTypeEnum));
+					 foreach (var selectOption in selectListType) { selectOption.Text = L("Enum_HelpTypeEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="HelpCategory_Type">@L("Type")</label>
+										<select class="form-control m-input m-input--square" name="type" id="HelpCategory_Type" asp-for="@Model.HelpCategory.Type" asp-items="@selectListType">
+									</select>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

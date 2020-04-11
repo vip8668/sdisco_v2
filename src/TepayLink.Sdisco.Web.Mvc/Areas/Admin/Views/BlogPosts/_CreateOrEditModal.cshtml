@@ -1,0 +1,62 @@
+﻿@using TepayLink.Sdisco.Blog;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BlogPosts
+@model CreateOrEditBlogPostModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditBlogPost")) : L("CreateNewBlogPost")))
+
+<div class="modal-body">
+        <div id="BlogPostInformationsTab">
+            <form name="BlogPostInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.BlogPost.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="BlogPost_Title">@L("Title")</label>
+									<input class="form-control" id="BlogPost_Title" value="@Model.BlogPost.Title" type="text" name="title"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="BlogPost_ShortDescription">@L("ShortDescription")</label>
+									<input class="form-control" id="BlogPost_ShortDescription" value="@Model.BlogPost.ShortDescription" type="text" name="shortDescription"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="BlogPost_Content">@L("Content")</label>
+									<input class="form-control" id="BlogPost_Content" value="@Model.BlogPost.Content" type="text" name="content"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="BlogPost_PublishDate">@L("PublishDate")</label>
+									<input class="form-control m-input date-picker" id="BlogPost_PublishDate" type="text" name="publishDate" value="@Model.BlogPost.PublishDate"/>
+								</div>
+					
+								<div class="form-group">
+									<label for="BlogPost_ThumbImage">@L("ThumbImage")</label>
+									<input class="form-control" id="BlogPost_ThumbImage" value="@Model.BlogPost.ThumbImage" type="text" name="thumbImage"     />
+								</div>
+					
+								@{
+					var selectListStatus = Html.GetEnumSelectList(typeof(BlogStatusEnum));
+					 foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_BlogStatusEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="BlogPost_Status">@L("Status")</label>
+										<select class="form-control m-input m-input--square" name="status" id="BlogPost_Status" asp-for="@Model.BlogPost.Status" asp-items="@selectListStatus">
+									</select>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")
