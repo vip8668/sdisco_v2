@@ -1,0 +1,9 @@
+﻿namespace TepayLink.Sdisco.Authorization.Users.Profile.Dto
+{
+    public class VerifySmsCodeInputDto
+    {
+        public string Code { get; set; }
+
+        public string PhoneNumber { get; set; }
+    }
+}

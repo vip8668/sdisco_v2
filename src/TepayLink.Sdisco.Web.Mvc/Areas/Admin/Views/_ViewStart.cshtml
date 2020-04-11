@@ -1,0 +1,5 @@
+﻿@using TepayLink.Sdisco.UiCustomization.Dto
+@{
+    UiCustomizationSettingsDto theme = await GetTheme();
+    Layout = "~/Areas/Admin/Views/Layout/" + theme.BaseSettings.Theme + "/_Layout.cshtml";
+}

@@ -1,0 +1,15 @@
+﻿@using TepayLink.Sdisco.Web.Areas.Admin.Models.Layout
+@using TepayLink.Sdisco.Web.Areas.Admin.Views.Shared.Components.AdminLogo
+@model HeaderViewModel
+@{
+    Layout = null;
+    var theme = await GetTheme();
+}
+
+<div class="kt-header__brand " id="kt_header_brand">
+    <div class="kt-header__brand-logo">
+        <a href="@Url.Action("Index", "Home", new {area = string.Empty})" target="_blank">
+            @await Component.InvokeAsync(typeof(AdminLogoViewComponent), new { LogoSkin = "dark" })
+        </a>
+    </div>
+</div>
