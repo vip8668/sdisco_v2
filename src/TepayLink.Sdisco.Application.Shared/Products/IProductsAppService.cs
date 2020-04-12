@@ -28,5 +28,7 @@ namespace TepayLink.Sdisco.Products
 		
 		Task<PagedResultDto<ProductPlaceLookupTableDto>> GetAllPlaceForLookupTable(GetAllForLookupTableInput input);
 		
+		Task<PagedResultDto<ProductApplicationLanguageLookupTableDto>> GetAllApplicationLanguageForLookupTable(GetAllForLookupTableInput input);
+		
     }
 }

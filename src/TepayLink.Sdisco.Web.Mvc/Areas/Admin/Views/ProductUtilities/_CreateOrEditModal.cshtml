@@ -1,0 +1,72 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductUtilities
+@model CreateOrEditProductUtilityModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditProductUtility")) : L("CreateNewProductUtility")))
+
+<div class="modal-body">
+        <div id="ProductUtilityInformationsTab">
+            <form name="ProductUtilityInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ProductUtility.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductUtility_ProductId" value="@Model.ProductUtility.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductUtility_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="UtilityName">@L("Utility")</label>
+									    <div class="input-group">
+											<input class="form-control" id="UtilityName" name="utilityName" value="@Model.UtilityName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenUtilityLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearUtilityNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductUtility_UtilityId" value="@Model.ProductUtility.UtilityId" type="text" name="utilityId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductUtility_UtilityId" value="" type="text" name="utilityId"  hidden/>
+								}
+
+
+
+				
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

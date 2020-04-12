@@ -1,0 +1,60 @@
+﻿@using TepayLink.Sdisco.Bookings;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Bookings
+@model CreateOrEditBookingModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditBooking")) : L("CreateNewBooking")))
+
+<div class="modal-body">
+        <div id="BookingInformationsTab">
+            <form name="BookingInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Booking.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Booking_ProductId" value="@Model.Booking.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Booking_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+
+
+				
+								@{
+					var selectListStatus = Html.GetEnumSelectList(typeof(BookingStatusEnum));
+					 foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_BookingStatusEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Booking_Status">@L("Status")</label>
+										<select class="form-control m-input m-input--square" name="status" id="Booking_Status" asp-for="@Model.Booking.Status" asp-items="@selectListStatus">
+									</select>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

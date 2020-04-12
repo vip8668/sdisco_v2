@@ -1,0 +1,49 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Countries
+@model CreateOrEditCountryModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCountry")) : L("CreateNewCountry")))
+
+<div class="modal-body">
+        <div id="CountryInformationsTab">
+            <form name="CountryInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Country.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Country_Name">@L("Name")</label>
+									<input class="form-control" id="Country_Name" value="@Model.Country.Name" type="text" name="name"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Country_DisplayName">@L("DisplayName")</label>
+									<input class="form-control" id="Country_DisplayName" value="@Model.Country.DisplayName" type="text" name="displayName"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Country_Icon">@L("Icon")</label>
+									<input class="form-control" id="Country_Icon" value="@Model.Country.Icon" type="text" name="icon"     />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Country_IsDisabled" class="kt-checkbox">
+										<input id="Country_IsDisabled" type="checkbox" name="isDisabled" value="true" @Html.Raw(Model.Country.IsDisabled ?"checked=\"checked\"":"") />
+										@L("IsDisabled")
+										<span></span>
+									</label>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -1,0 +1,46 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.PartnerShips
+@model CreateOrEditPartnerShipModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditPartnerShip")) : L("CreateNewPartnerShip")))
+
+<div class="modal-body">
+        <div id="PartnerShipInformationsTab">
+            <form name="PartnerShipInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.PartnerShip.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="PartnerShip_Logo">@L("Logo")</label>
+									<input class="form-control" id="PartnerShip_Logo" value="@Model.PartnerShip.Logo" type="text" name="logo"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="PartnerShip_Title">@L("Title")</label>
+									<input class="form-control" id="PartnerShip_Title" value="@Model.PartnerShip.Title" type="text" name="title"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="PartnerShip_Link">@L("Link")</label>
+									<input class="form-control" id="PartnerShip_Link" value="@Model.PartnerShip.Link" type="text" name="link"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="PartnerShip_Order">@L("Order")</label>
+									<input class="form-control m-input" id="PartnerShip_Order" value="@Model.PartnerShip.Order.ToString(CultureInfo.InvariantCulture)" type="number" name="order"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

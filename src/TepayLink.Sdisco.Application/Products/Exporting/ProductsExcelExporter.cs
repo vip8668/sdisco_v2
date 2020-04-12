@@ -54,7 +54,8 @@ namespace TepayLink.Sdisco.Products.Exporting
                         L("IsTop"),
                         (L("Category")) + L("Name"),
                         (L("User")) + L("Name"),
-                        (L("Place")) + L("Name")
+                        (L("Place")) + L("Name"),
+                        (L("ApplicationLanguage")) + L("Name")
                         );
 
                     AddObjects(
@@ -78,7 +79,8 @@ namespace TepayLink.Sdisco.Products.Exporting
                         _ => _.Product.IsTop,
                         _ => _.CategoryName,
                         _ => _.UserName,
-                        _ => _.PlaceName
+                        _ => _.PlaceName,
+                        _ => _.ApplicationLanguageName
                         );
 
 					

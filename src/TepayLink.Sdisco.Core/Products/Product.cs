@@ -3,6 +3,7 @@ using TepayLink.Sdisco.Products;
 using TepayLink.Sdisco.Products;
 using TepayLink.Sdisco.Authorization.Users;
 using TepayLink.Sdisco.Products;
+using Abp.Localization;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -80,6 +81,11 @@ namespace TepayLink.Sdisco.Products
 		
         [ForeignKey("PlaceId")]
 		public Place PlaceFk { get; set; }
+		
+		public virtual int? LanguageId { get; set; }
+		
+        [ForeignKey("LanguageId")]
+		public ApplicationLanguage LanguageFk { get; set; }
 		
     }
 }

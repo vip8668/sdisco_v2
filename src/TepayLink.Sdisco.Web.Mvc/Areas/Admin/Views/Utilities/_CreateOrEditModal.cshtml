@@ -1,0 +1,36 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Utilities
+@model CreateOrEditUtilityModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditUtility")) : L("CreateNewUtility")))
+
+<div class="modal-body">
+        <div id="UtilityInformationsTab">
+            <form name="UtilityInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Utility.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Utility_Name">@L("Name")</label>
+									<input class="form-control" id="Utility_Name" value="@Model.Utility.Name" type="text" name="name"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Utility_Icon">@L("Icon")</label>
+									<input class="form-control" id="Utility_Icon" value="@Model.Utility.Icon" type="text" name="icon"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -20,7 +20,7 @@ namespace TepayLink.Sdisco.Products
     public enum ProductStatusEnum
     {
         Draft = 0,
-        Active = 1,
+        Publish = 1,
         WaitApprove = 2,
         Delete = 3
     }

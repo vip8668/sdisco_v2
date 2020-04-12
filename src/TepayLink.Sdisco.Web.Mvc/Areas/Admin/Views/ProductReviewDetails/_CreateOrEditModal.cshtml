@@ -1,0 +1,26 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductReviewDetails
+@model CreateOrEditProductReviewDetailModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditProductReviewDetail")) : L("CreateNewProductReviewDetail")))
+
+<div class="modal-body">
+        <div id="ProductReviewDetailInformationsTab">
+            <form name="ProductReviewDetailInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ProductReviewDetail.Id" />
+                }
+
+				
+
+				
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

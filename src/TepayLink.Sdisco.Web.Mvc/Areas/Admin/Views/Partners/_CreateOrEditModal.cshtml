@@ -1,0 +1,123 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Partners
+@model CreateOrEditPartnerModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditPartner")) : L("CreateNewPartner")))
+
+<div class="modal-body">
+        <div id="PartnerInformationsTab">
+            <form name="PartnerInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Partner.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="UserName">@L("User")</label>
+									    <div class="input-group">
+											<input class="form-control" id="UserName" name="userName" value="@Model.UserName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenUserLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearUserNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Partner_UserId" value="@Model.Partner.UserId" type="text" name="userId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Partner_UserId" value="" type="text" name="userId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="DetinationName">@L("Detination")</label>
+									    <div class="input-group">
+											<input class="form-control" id="DetinationName" name="detinationName" value="@Model.DetinationName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenDetinationLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearDetinationNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Partner_DetinationId" value="@Model.Partner.DetinationId" type="text" name="detinationId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Partner_DetinationId" value="" type="text" name="detinationId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="Partner_Name">@L("Name")</label>
+									<input class="form-control" id="Partner_Name" value="@Model.Partner.Name" type="text" name="name"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Partner_WebsiteUrl">@L("WebsiteUrl")</label>
+									<input class="form-control" id="Partner_WebsiteUrl" value="@Model.Partner.WebsiteUrl" type="text" name="websiteUrl"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Partner_Languages">@L("Languages")</label>
+									<input class="form-control" id="Partner_Languages" value="@Model.Partner.Languages" type="text" name="languages"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Partner_SkypeId">@L("SkypeId")</label>
+									<input class="form-control" id="Partner_SkypeId" value="@Model.Partner.SkypeId" type="text" name="skypeId"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Partner_Comment">@L("Comment")</label>
+									<input class="form-control" id="Partner_Comment" value="@Model.Partner.Comment" type="text" name="comment"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Partner_AffiliateKey">@L("AffiliateKey")</label>
+									<input class="form-control" id="Partner_AffiliateKey" value="@Model.Partner.AffiliateKey" type="text" name="affiliateKey"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Partner_Status">@L("Status")</label>
+									<input class="form-control m-input" id="Partner_Status" value="@Model.Partner.Status.ToString(CultureInfo.InvariantCulture)" type="number" name="status"  />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Partner_AlreadyBecomeSdiscoPartner" class="kt-checkbox">
+										<input id="Partner_AlreadyBecomeSdiscoPartner" type="checkbox" name="alreadyBecomeSdiscoPartner" value="true" @Html.Raw(Model.Partner.AlreadyBecomeSdiscoPartner ?"checked=\"checked\"":"") />
+										@L("AlreadyBecomeSdiscoPartner")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Partner_HasDriverLicense" class="kt-checkbox">
+										<input id="Partner_HasDriverLicense" type="checkbox" name="hasDriverLicense" value="true" @Html.Raw(Model.Partner.HasDriverLicense ?"checked=\"checked\"":"") />
+										@L("HasDriverLicense")
+										<span></span>
+									</label>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

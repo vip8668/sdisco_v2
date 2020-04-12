@@ -1,0 +1,55 @@
+﻿@using TepayLink.Sdisco.Bookings;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BookingDetails
+@model CreateOrEditBookingDetailModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditBookingDetail")) : L("CreateNewBookingDetail")))
+
+<div class="modal-body">
+        <div id="BookingDetailInformationsTab">
+            <form name="BookingDetailInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.BookingDetail.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="BookingDetail_ProductId" value="@Model.BookingDetail.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="BookingDetail_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="BookingDetail_RefundAmount">@L("RefundAmount")</label>
+									<input class="form-control m-input" id="BookingDetail_RefundAmount" value="@Model.BookingDetail.RefundAmount?.ToString(CultureInfo.InvariantCulture)" type="number" name="refundAmount"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -1,0 +1,40 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.TransPortdetails
+@model TransPortdetailViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="TransPortdetailInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("From") :</h6>
+                @Model.TransPortdetail.From
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("To") :</h6>
+                @Model.TransPortdetail.To
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TotalSeat") :</h6>
+                @Model.TransPortdetail.TotalSeat
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IsTaxi") :</h6>
+                @Model.TransPortdetail.IsTaxi
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Product")) @L("Name") :</h6>
+                @Model.ProductName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

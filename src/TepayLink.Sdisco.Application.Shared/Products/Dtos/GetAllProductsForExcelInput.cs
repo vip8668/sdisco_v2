@@ -29,6 +29,8 @@ namespace TepayLink.Sdisco.Products.Dtos
 
 		 		 public string PlaceNameFilter { get; set; }
 
+		 		 public string ApplicationLanguageNameFilter { get; set; }
+
 		 
     }
 }

@@ -1,0 +1,69 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductDetails
+@model CreateOrEditProductDetailModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditProductDetail")) : L("CreateNewProductDetail")))
+
+<div class="modal-body">
+        <div id="ProductDetailInformationsTab">
+            <form name="ProductDetailInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ProductDetail.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductDetail_ProductId" value="@Model.ProductDetail.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductDetail_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="ProductDetail_Title">@L("Title")</label>
+									<input class="form-control" id="ProductDetail_Title" value="@Model.ProductDetail.Title" type="text" name="title"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductDetail_Order">@L("Order")</label>
+									<input class="form-control m-input" id="ProductDetail_Order" value="@Model.ProductDetail.Order.ToString(CultureInfo.InvariantCulture)" type="number" name="order"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductDetail_Description">@L("Description")</label>
+									<input class="form-control" id="ProductDetail_Description" value="@Model.ProductDetail.Description" type="text" name="description"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductDetail_ThumbImage">@L("ThumbImage")</label>
+									<input class="form-control" id="ProductDetail_ThumbImage" value="@Model.ProductDetail.ThumbImage" type="text" name="thumbImage"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -1,0 +1,36 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Countries
+@model CountryViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="CountryInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Name") :</h6>
+                @Model.Country.Name
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("DisplayName") :</h6>
+                @Model.Country.DisplayName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Icon") :</h6>
+                @Model.Country.Icon
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IsDisabled") :</h6>
+                @Model.Country.IsDisabled
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

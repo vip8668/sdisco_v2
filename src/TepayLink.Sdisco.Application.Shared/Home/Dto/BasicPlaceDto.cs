@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Abp.Domain.Entities;
-using SDisco.Utils;
+
+using TepayLink.Sdisco.Utils;
 
 namespace SDisco.Home.Dto
 {

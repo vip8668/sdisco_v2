@@ -1,0 +1,52 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Chatconversations
+@model ChatconversationViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ChatconversationInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("UserId") :</h6>
+                @Model.Chatconversation.UserId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("FriendUserId") :</h6>
+                @Model.Chatconversation.FriendUserId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("UnreadCount") :</h6>
+                @Model.Chatconversation.UnreadCount
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ShardChatConversationId") :</h6>
+                @Model.Chatconversation.ShardChatConversationId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("BookingId") :</h6>
+                @Model.Chatconversation.BookingId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("LastMessage") :</h6>
+                @Model.Chatconversation.LastMessage
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Side") :</h6>
+                @Model.Chatconversation.Side
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Status") :</h6>
+                @Model.Chatconversation.Status
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

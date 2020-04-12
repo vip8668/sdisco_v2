@@ -1,0 +1,64 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Partners
+@model PartnerViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="PartnerInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Name") :</h6>
+                @Model.Partner.Name
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("WebsiteUrl") :</h6>
+                @Model.Partner.WebsiteUrl
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Languages") :</h6>
+                @Model.Partner.Languages
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("SkypeId") :</h6>
+                @Model.Partner.SkypeId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Comment") :</h6>
+                @Model.Partner.Comment
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("AffiliateKey") :</h6>
+                @Model.Partner.AffiliateKey
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Status") :</h6>
+                @Model.Partner.Status
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("AlreadyBecomeSdiscoPartner") :</h6>
+                @Model.Partner.AlreadyBecomeSdiscoPartner
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("HasDriverLicense") :</h6>
+                @Model.Partner.HasDriverLicense
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("User")) @L("Name") :</h6>
+                @Model.UserName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("Detination")) @L("Name") :</h6>
+                @Model.DetinationName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

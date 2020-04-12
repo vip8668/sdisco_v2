@@ -1,0 +1,72 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.UserDefaultCashoutMethodTypes
+@model CreateOrEditUserDefaultCashoutMethodTypeModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditUserDefaultCashoutMethodType")) : L("CreateNewUserDefaultCashoutMethodType")))
+
+<div class="modal-body">
+        <div id="UserDefaultCashoutMethodTypeInformationsTab">
+            <form name="UserDefaultCashoutMethodTypeInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.UserDefaultCashoutMethodType.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="CashoutMethodTypeTitle">@L("CashoutMethodType")</label>
+									    <div class="input-group">
+											<input class="form-control" id="CashoutMethodTypeTitle" name="cashoutMethodTypeTitle" value="@Model.CashoutMethodTypeTitle" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenCashoutMethodTypeLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearCashoutMethodTypeTitleButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="UserDefaultCashoutMethodType_CashoutMethodTypeId" value="@Model.UserDefaultCashoutMethodType.CashoutMethodTypeId" type="text" name="cashoutMethodTypeId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="UserDefaultCashoutMethodType_CashoutMethodTypeId" value="" type="text" name="cashoutMethodTypeId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="UserName">@L("User")</label>
+									    <div class="input-group">
+											<input class="form-control" id="UserName" name="userName" value="@Model.UserName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenUserLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearUserNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="UserDefaultCashoutMethodType_UserId" value="@Model.UserDefaultCashoutMethodType.UserId" type="text" name="userId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="UserDefaultCashoutMethodType_UserId" value="" type="text" name="userId"  hidden/>
+								}
+
+
+
+				
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

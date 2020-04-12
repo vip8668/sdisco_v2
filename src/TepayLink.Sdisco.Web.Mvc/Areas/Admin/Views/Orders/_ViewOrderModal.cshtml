@@ -1,0 +1,80 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Orders
+@model OrderViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="OrderInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("OrderCode") :</h6>
+                @Model.Order.OrderCode
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("OrderType") :</h6>
+                @L("Enum_OrderTypeEnum_" + (int)Model.Order.OrderType)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Amount") :</h6>
+                @Model.Order.Amount
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Note") :</h6>
+                @Model.Order.Note
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Status") :</h6>
+                @L("Enum_OrderStatus_" + (int)Model.Order.Status)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("OrderRef") :</h6>
+                @Model.Order.OrderRef
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("UserId") :</h6>
+                @Model.Order.UserId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("BankCode") :</h6>
+                @Model.Order.BankCode
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CardId") :</h6>
+                @Model.Order.CardId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CardNumber") :</h6>
+                @Model.Order.CardNumber
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Currency") :</h6>
+                @Model.Order.Currency
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IssueDate") :</h6>
+                @Model.Order.IssueDate
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("NameOnCard") :</h6>
+                @Model.Order.NameOnCard
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TransactionId") :</h6>
+                @Model.Order.TransactionId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("BookingId") :</h6>
+                @Model.Order.BookingId
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

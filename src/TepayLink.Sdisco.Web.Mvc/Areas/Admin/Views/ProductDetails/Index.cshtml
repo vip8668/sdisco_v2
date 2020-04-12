@@ -1,0 +1,103 @@
+﻿@using TepayLink.Sdisco.Authorization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductDetails
+@using TepayLink.Sdisco.Web.Areas.Admin.Startup
+@model ProductDetailsViewModel
+@{
+    ViewBag.CurrentPageName = AdminPageNames.Common.ProductDetails;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/Admin/Views/ProductDetails/Index.js" asp-append-version="true"></script>
+}
+
+ <div class="kt-subheader kt-grid__item">
+  
+    <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title">
+            <span>@L("ProductDetails")</span>
+        </h3>
+        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        <span class="kt-subheader__desc">
+            @L("ProductDetailsHeaderInfo")
+        </span>
+    </div>
+    <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+            <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            @if (IsGranted(AppPermissions.Pages_Administration_ProductDetails_Create))
+            {
+                <button id="CreateNewProductDetailButton" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewProductDetail")</button>
+            }
+        </div>
+    </div>
+  
+</div>
+<div class="kt-content">
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="ProductDetailsTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetProductDetailsButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="TitleFilterId">@L("Title")</label>
+									<input type="text" class="form-control" name="titleFilter" id="TitleFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinOrderFilterId">@L("MinMax") @L("Order")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minOrderFilter" id="MinOrderFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxOrderFilter"  id="MaxOrderFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="ProductNameFilterId">(@L("Product")) @L("Name")</label>
+									<input type="text" class="form-control" name="productNameFilter" id="ProductNameFilterId">
+								</div>
+                            </div>
+
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="ProductDetailsTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>@L("Actions")</th>
+								<th>@L("Title")</th>
+								<th>@L("Order")</th>
+								<th>@L("Description")</th>
+								<th>@L("ThumbImage")</th>
+								<th>@L("ProductName")</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+</div>

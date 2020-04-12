@@ -13,6 +13,8 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Models.Products
 
 		public string PlaceName { get; set;}
 
+		public string ApplicationLanguageName { get; set;}
+
 
 	   public bool IsEditMode => Product.Id.HasValue;
     }

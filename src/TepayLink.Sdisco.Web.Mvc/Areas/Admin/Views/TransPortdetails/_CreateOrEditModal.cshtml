@@ -1,0 +1,72 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.TransPortdetails
+@model CreateOrEditTransPortdetailModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditTransPortdetail")) : L("CreateNewTransPortdetail")))
+
+<div class="modal-body">
+        <div id="TransPortdetailInformationsTab">
+            <form name="TransPortdetailInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.TransPortdetail.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="TransPortdetail_ProductId" value="@Model.TransPortdetail.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="TransPortdetail_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="TransPortdetail_From">@L("From")</label>
+									<input class="form-control" id="TransPortdetail_From" value="@Model.TransPortdetail.From" type="text" name="from"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="TransPortdetail_To">@L("To")</label>
+									<input class="form-control" id="TransPortdetail_To" value="@Model.TransPortdetail.To" type="text" name="to"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="TransPortdetail_TotalSeat">@L("TotalSeat")</label>
+									<input class="form-control m-input" id="TransPortdetail_TotalSeat" value="@Model.TransPortdetail.TotalSeat.ToString(CultureInfo.InvariantCulture)" type="number" name="totalSeat"  />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="TransPortdetail_IsTaxi" class="kt-checkbox">
+										<input id="TransPortdetail_IsTaxi" type="checkbox" name="isTaxi" value="true" @Html.Raw(Model.TransPortdetail.IsTaxi ?"checked=\"checked\"":"") />
+										@L("IsTaxi")
+										<span></span>
+									</label>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

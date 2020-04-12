@@ -1,0 +1,80 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Bookings
+@model BookingViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="BookingInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("StartDate") :</h6>
+                @Model.Booking.StartDate
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("EndDate") :</h6>
+                @Model.Booking.EndDate
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TripLength") :</h6>
+                @Model.Booking.TripLength
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Status") :</h6>
+                @L("Enum_BookingStatusEnum_" + (int)Model.Booking.Status)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Quantity") :</h6>
+                @Model.Booking.Quantity
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Amount") :</h6>
+                @Model.Booking.Amount
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Fee") :</h6>
+                @Model.Booking.Fee
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Note") :</h6>
+                @Model.Booking.Note
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("GuestInfo") :</h6>
+                @Model.Booking.GuestInfo
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CouponCode") :</h6>
+                @Model.Booking.CouponCode
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("BonusAmount") :</h6>
+                @Model.Booking.BonusAmount
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Contact") :</h6>
+                @Model.Booking.Contact
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CouponId") :</h6>
+                @Model.Booking.CouponId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TotalAmount") :</h6>
+                @Model.Booking.TotalAmount
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Product")) @L("Name") :</h6>
+                @Model.ProductName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

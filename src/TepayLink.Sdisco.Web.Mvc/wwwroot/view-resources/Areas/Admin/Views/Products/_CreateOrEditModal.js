@@ -18,6 +18,10 @@
             viewUrl: abp.appPath + 'Admin/Products/PlaceLookupTableModal',
             scriptUrl: abp.appPath + 'view-resources/Areas/Admin/Views/Products/_ProductPlaceLookupTableModal.js',
             modalClass: 'PlaceLookupTableModal'
+        });        var _ProductapplicationLanguageLookupTableModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'Admin/Products/ApplicationLanguageLookupTableModal',
+            scriptUrl: abp.appPath + 'view-resources/Areas/Admin/Views/Products/_ProductApplicationLanguageLookupTableModal.js',
+            modalClass: 'ApplicationLanguageLookupTableModal'
         });
 
         this.init = function (modalManager) {
@@ -78,6 +82,21 @@
                 _$productInformationForm.find('input[name=placeId]').val(''); 
         });
 		
+        $('#OpenApplicationLanguageLookupTableButton').click(function () {
+
+            var product = _$productInformationForm.serializeFormToObject();
+
+            _ProductapplicationLanguageLookupTableModal.open({ id: product.languageId, displayName: product.applicationLanguageName }, function (data) {
+                _$productInformationForm.find('input[name=applicationLanguageName]').val(data.displayName); 
+                _$productInformationForm.find('input[name=languageId]').val(data.id); 
+            });
+        });
+		
+		$('#ClearApplicationLanguageNameButton').click(function () {
+                _$productInformationForm.find('input[name=applicationLanguageName]').val(''); 
+                _$productInformationForm.find('input[name=languageId]').val(''); 
+        });
+		
 
 
         this.save = function () {
@@ -94,6 +113,10 @@
             }
             if ($('#Product_PlaceId').prop('required') && $('#Product_PlaceId').val() == '') {
                 abp.message.error(app.localize('{0}IsRequired', app.localize('Place')));
+                return;
+            }
+            if ($('#Product_LanguageId').prop('required') && $('#Product_LanguageId').val() == '') {
+                abp.message.error(app.localize('{0}IsRequired', app.localize('ApplicationLanguage')));
                 return;
             }
 

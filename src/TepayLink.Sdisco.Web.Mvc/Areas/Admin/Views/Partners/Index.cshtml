@@ -1,0 +1,161 @@
+﻿@using TepayLink.Sdisco.Authorization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Partners
+@using TepayLink.Sdisco.Web.Areas.Admin.Startup
+@model PartnersViewModel
+@{
+    ViewBag.CurrentPageName = AdminPageNames.Common.Partners;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/Admin/Views/Partners/Index.js" asp-append-version="true"></script>
+}
+
+ <div class="kt-subheader kt-grid__item">
+  
+    <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title">
+            <span>@L("Partners")</span>
+        </h3>
+        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        <span class="kt-subheader__desc">
+            @L("PartnersHeaderInfo")
+        </span>
+    </div>
+    <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+            <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            @if (IsGranted(AppPermissions.Pages_Partners_Create))
+            {
+                <button id="CreateNewPartnerButton" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewPartner")</button>
+            }
+        </div>
+    </div>
+  
+</div>
+<div class="kt-content">
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="PartnersTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetPartnersButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="NameFilterId">@L("Name")</label>
+									<input type="text" class="form-control" name="nameFilter" id="NameFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="WebsiteUrlFilterId">@L("WebsiteUrl")</label>
+									<input type="text" class="form-control" name="websiteUrlFilter" id="WebsiteUrlFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="LanguagesFilterId">@L("Languages")</label>
+									<input type="text" class="form-control" name="languagesFilter" id="LanguagesFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="SkypeIdFilterId">@L("SkypeId")</label>
+									<input type="text" class="form-control" name="skypeIdFilter" id="SkypeIdFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="CommentFilterId">@L("Comment")</label>
+									<input type="text" class="form-control" name="commentFilter" id="CommentFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="AffiliateKeyFilterId">@L("AffiliateKey")</label>
+									<input type="text" class="form-control" name="affiliateKeyFilter" id="AffiliateKeyFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinStatusFilterId">@L("MinMax") @L("Status")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minStatusFilter" id="MinStatusFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxStatusFilter"  id="MaxStatusFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<label for="AlreadyBecomeSdiscoPartnerFilterId">@L("AlreadyBecomeSdiscoPartner")</label>
+								<select class="form-control" name="AlreadyBecomeSdiscoPartnerFilter" id="AlreadyBecomeSdiscoPartnerFilterId">
+									<option value="-1">@L("All")</option>
+									<option value="0">@L("False")</option>
+									<option value="1">@L("True")</option>
+								</select>
+                            </div>
+							<div class="col-md-3">
+								<label for="HasDriverLicenseFilterId">@L("HasDriverLicense")</label>
+								<select class="form-control" name="HasDriverLicenseFilter" id="HasDriverLicenseFilterId">
+									<option value="-1">@L("All")</option>
+									<option value="0">@L("False")</option>
+									<option value="1">@L("True")</option>
+								</select>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="UserNameFilterId">(@L("User")) @L("Name")</label>
+									<input type="text" class="form-control" name="userNameFilter" id="UserNameFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="DetinationNameFilterId">(@L("Detination")) @L("Name")</label>
+									<input type="text" class="form-control" name="detinationNameFilter" id="DetinationNameFilterId">
+								</div>
+                            </div>
+
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="PartnersTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>@L("Actions")</th>
+								<th>@L("Name")</th>
+								<th>@L("WebsiteUrl")</th>
+								<th>@L("Languages")</th>
+								<th>@L("SkypeId")</th>
+								<th>@L("Comment")</th>
+								<th>@L("AffiliateKey")</th>
+								<th>@L("Status")</th>
+								<th>@L("AlreadyBecomeSdiscoPartner")</th>
+								<th>@L("HasDriverLicense")</th>
+								<th>@L("UserName")</th>
+								<th>@L("DetinationName")</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+</div>

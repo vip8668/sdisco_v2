@@ -55,7 +55,8 @@
 					isTrendingFilter: $('#IsTrendingFilterId').val(),
 					categoryNameFilter: $('#CategoryNameFilterId').val(),
 					userNameFilter: $('#UserNameFilterId').val(),
-					placeNameFilter: $('#PlaceNameFilterId').val()
+					placeNameFilter: $('#PlaceNameFilterId').val(),
+					applicationLanguageNameFilter: $('#ApplicationLanguageNameFilterId').val()
                     };
                 }
             },
@@ -253,6 +254,11 @@
 						targets: 20,
 						 data: "placeName" ,
 						 name: "placeFk.name" 
+					},
+					{
+						targets: 21,
+						 data: "applicationLanguageName" ,
+						 name: "languageFk.name" 
 					}
             ]
         });
@@ -308,7 +314,8 @@
 					isTrendingFilter: $('#IsTrendingFilterId').val(),
 					categoryNameFilter: $('#CategoryNameFilterId').val(),
 					userNameFilter: $('#UserNameFilterId').val(),
-					placeNameFilter: $('#PlaceNameFilterId').val()
+					placeNameFilter: $('#PlaceNameFilterId').val(),
+					applicationLanguageNameFilter: $('#ApplicationLanguageNameFilterId').val()
 				})
                 .done(function (result) {
                     app.downloadTempFile(result);

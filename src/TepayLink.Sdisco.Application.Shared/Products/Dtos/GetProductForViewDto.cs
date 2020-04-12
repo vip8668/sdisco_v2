@@ -10,6 +10,8 @@
 
 		public string PlaceName { get; set;}
 
+		public string ApplicationLanguageName { get; set;}
+
 
     }
 }

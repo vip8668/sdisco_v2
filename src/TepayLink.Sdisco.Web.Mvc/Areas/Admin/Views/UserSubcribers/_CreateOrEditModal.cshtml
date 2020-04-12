@@ -1,0 +1,31 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.UserSubcribers
+@model CreateOrEditUserSubcriberModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditUserSubcriber")) : L("CreateNewUserSubcriber")))
+
+<div class="modal-body">
+        <div id="UserSubcriberInformationsTab">
+            <form name="UserSubcriberInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.UserSubcriber.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="UserSubcriber_Email">@L("Email")</label>
+									<input class="form-control" id="UserSubcriber_Email" value="@Model.UserSubcriber.Email" type="text" name="email"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

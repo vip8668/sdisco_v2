@@ -1,0 +1,36 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.PartnerShips
+@model PartnerShipViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="PartnerShipInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Logo") :</h6>
+                @Model.PartnerShip.Logo
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Title") :</h6>
+                @Model.PartnerShip.Title
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Link") :</h6>
+                @Model.PartnerShip.Link
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Order") :</h6>
+                @Model.PartnerShip.Order
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

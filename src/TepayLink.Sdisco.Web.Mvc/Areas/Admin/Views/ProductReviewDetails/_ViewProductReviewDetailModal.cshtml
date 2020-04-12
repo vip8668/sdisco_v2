@@ -1,0 +1,76 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductReviewDetails
+@model ProductReviewDetailViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ProductReviewDetailInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("RatingAvg") :</h6>
+                @Model.ProductReviewDetail.RatingAvg
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Intineraty") :</h6>
+                @Model.ProductReviewDetail.Intineraty
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Service") :</h6>
+                @Model.ProductReviewDetail.Service
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Transport") :</h6>
+                @Model.ProductReviewDetail.Transport
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("GuideTour") :</h6>
+                @Model.ProductReviewDetail.GuideTour
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Food") :</h6>
+                @Model.ProductReviewDetail.Food
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Title") :</h6>
+                @Model.ProductReviewDetail.Title
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Comment") :</h6>
+                @Model.ProductReviewDetail.Comment
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("BookingId") :</h6>
+                @Model.ProductReviewDetail.BookingId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Read") :</h6>
+                @Model.ProductReviewDetail.Read
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ReplyComment") :</h6>
+                @Model.ProductReviewDetail.ReplyComment
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ReplyId") :</h6>
+                @Model.ProductReviewDetail.ReplyId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Avatar") :</h6>
+                @Model.ProductReviewDetail.Avatar
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Reviewer") :</h6>
+                @Model.ProductReviewDetail.Reviewer
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

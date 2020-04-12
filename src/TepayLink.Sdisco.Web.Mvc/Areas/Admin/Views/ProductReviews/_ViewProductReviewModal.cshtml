@@ -1,0 +1,52 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductReviews
+@model ProductReviewViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ProductReviewInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("RatingAvg") :</h6>
+                @Model.ProductReview.RatingAvg
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ReviewCount") :</h6>
+                @Model.ProductReview.ReviewCount
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Intineraty") :</h6>
+                @Model.ProductReview.Intineraty
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Service") :</h6>
+                @Model.ProductReview.Service
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Transport") :</h6>
+                @Model.ProductReview.Transport
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("GuideTour") :</h6>
+                @Model.ProductReview.GuideTour
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Food") :</h6>
+                @Model.ProductReview.Food
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Product")) @L("Name") :</h6>
+                @Model.ProductName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

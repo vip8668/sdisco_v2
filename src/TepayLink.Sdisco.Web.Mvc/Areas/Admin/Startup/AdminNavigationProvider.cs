@@ -23,6 +23,34 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Startup
                         order: 1
                     )
                 ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.TransPortdetails,
+                        L("TransPortdetails"),
+                        url: "Admin/TransPortdetails",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_TransPortdetails
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Partners,
+                        L("Partners"),
+                        url: "Admin/Partners",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Partners
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Bookings,
+                        L("Bookings"),
+                        url: "Admin/Bookings",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Bookings
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Countries,
+                        L("Countries"),
+                        url: "Admin/Countries",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Countries
+                    )
+                ).AddItem(new MenuItemDefinition(
                         AdminPageNames.Common.BlogProductRelateds,
                         L("BlogProductRelateds"),
                         url: "Admin/BlogProductRelateds",
@@ -104,6 +132,160 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Startup
                             order: 3
                         )
                     ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Chatconversations,
+                        L("Chatconversations"),
+                        url: "Admin/Chatconversations",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Chatconversations
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.UserDefaultCashoutMethodTypes,
+                        L("UserDefaultCashoutMethodTypes"),
+                        url: "Admin/UserDefaultCashoutMethodTypes",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_UserDefaultCashoutMethodTypes
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.CashoutMethodTypes,
+                        L("CashoutMethodTypes"),
+                        url: "Admin/CashoutMethodTypes",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_CashoutMethodTypes
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Coupons,
+                        L("Coupons"),
+                        url: "Admin/Coupons",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Coupons
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.PartnerShips,
+                        L("PartnerShips"),
+                        url: "Admin/PartnerShips",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_PartnerShips
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Orders,
+                        L("Orders"),
+                        url: "Admin/Orders",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Orders
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ClientSettings,
+                        L("ClientSettings"),
+                        url: "Admin/ClientSettings",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ClientSettings
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.BookingClaims,
+                        L("BookingClaims"),
+                        url: "Admin/BookingClaims",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_BookingClaims
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ClaimReasons,
+                        L("ClaimReasons"),
+                        url: "Admin/ClaimReasons",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ClaimReasons
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.BookingDetails,
+                        L("BookingDetails"),
+                        url: "Admin/BookingDetails",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_BookingDetails
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Currencies,
+                        L("Currencies"),
+                        url: "Admin/Currencies",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Currencies
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.UserSubcribers,
+                        L("UserSubcribers"),
+                        url: "Admin/UserSubcribers",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_UserSubcribers
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ProductSchedules,
+                        L("ProductSchedules"),
+                        url: "Admin/ProductSchedules",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ProductSchedules
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ProductDetailCombos,
+                        L("ProductDetailCombos"),
+                        url: "Admin/ProductDetailCombos",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ProductDetailCombos
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ProductDetails,
+                        L("ProductDetails"),
+                        url: "Admin/ProductDetails",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ProductDetails
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.UserReviewDetails,
+                        L("UserReviewDetails"),
+                        url: "Admin/UserReviewDetails",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_UserReviewDetails
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.UserReviews,
+                        L("UserReviews"),
+                        url: "Admin/UserReviews",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_UserReviews
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ProductReviewDetails,
+                        L("ProductReviewDetails"),
+                        url: "Admin/ProductReviewDetails",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ProductReviewDetails
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ProductReviews,
+                        L("ProductReviews"),
+                        url: "Admin/ProductReviews",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ProductReviews
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ProductUtilities,
+                        L("ProductUtilities"),
+                        url: "Admin/ProductUtilities",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ProductUtilities
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Utilities,
+                        L("Utilities"),
+                        url: "Admin/Utilities",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Utilities
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.SaveItems,
+                        L("SaveItems"),
+                        url: "Admin/SaveItems",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_SaveItems
+                    )
+                ).AddItem(new MenuItemDefinition(
                         AdminPageNames.Common.HelpContents,
                         L("HelpContents"),
                         url: "Admin/HelpContents",

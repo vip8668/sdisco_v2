@@ -1,0 +1,66 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Chatconversations
+@model CreateOrEditChatconversationModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditChatconversation")) : L("CreateNewChatconversation")))
+
+<div class="modal-body">
+        <div id="ChatconversationInformationsTab">
+            <form name="ChatconversationInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Chatconversation.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Chatconversation_UserId">@L("UserId")</label>
+									<input class="form-control m-input" id="Chatconversation_UserId" value="@Model.Chatconversation.UserId.ToString(CultureInfo.InvariantCulture)" type="number" name="userId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Chatconversation_FriendUserId">@L("FriendUserId")</label>
+									<input class="form-control m-input" id="Chatconversation_FriendUserId" value="@Model.Chatconversation.FriendUserId.ToString(CultureInfo.InvariantCulture)" type="number" name="friendUserId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Chatconversation_UnreadCount">@L("UnreadCount")</label>
+									<input class="form-control m-input" id="Chatconversation_UnreadCount" value="@Model.Chatconversation.UnreadCount.ToString(CultureInfo.InvariantCulture)" type="number" name="unreadCount"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Chatconversation_ShardChatConversationId">@L("ShardChatConversationId")</label>
+									<input class="form-control" id="Chatconversation_ShardChatConversationId" value="@Model.Chatconversation.ShardChatConversationId" type="text" name="shardChatConversationId"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Chatconversation_BookingId">@L("BookingId")</label>
+									<input class="form-control m-input" id="Chatconversation_BookingId" value="@Model.Chatconversation.BookingId.ToString(CultureInfo.InvariantCulture)" type="number" name="bookingId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Chatconversation_LastMessage">@L("LastMessage")</label>
+									<input class="form-control" id="Chatconversation_LastMessage" value="@Model.Chatconversation.LastMessage" type="text" name="lastMessage"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Chatconversation_Side">@L("Side")</label>
+									<input class="form-control m-input" id="Chatconversation_Side" value="@Model.Chatconversation.Side.ToString(CultureInfo.InvariantCulture)" type="number" name="side"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Chatconversation_Status">@L("Status")</label>
+									<input class="form-control m-input" id="Chatconversation_Status" value="@Model.Chatconversation.Status.ToString(CultureInfo.InvariantCulture)" type="number" name="status"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

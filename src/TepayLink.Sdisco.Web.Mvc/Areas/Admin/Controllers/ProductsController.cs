@@ -52,7 +52,8 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
 				Product = getProductForEditOutput.Product,
 					CategoryName = getProductForEditOutput.CategoryName,
 					UserName = getProductForEditOutput.UserName,
-					PlaceName = getProductForEditOutput.PlaceName
+					PlaceName = getProductForEditOutput.PlaceName,
+					ApplicationLanguageName = getProductForEditOutput.ApplicationLanguageName
             };
 
             return PartialView("_CreateOrEditModal", viewModel);
@@ -70,6 +71,8 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
                 , UserName = getProductForViewDto.UserName 
 
                 , PlaceName = getProductForViewDto.PlaceName 
+
+                , ApplicationLanguageName = getProductForViewDto.ApplicationLanguageName 
 
             };
 
@@ -111,6 +114,18 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
             };
 
             return PartialView("_ProductPlaceLookupTableModal", viewModel);
+        }
+        [AbpMvcAuthorize(AppPermissions.Pages_Administration_Products_Create, AppPermissions.Pages_Administration_Products_Edit)]
+        public PartialViewResult ApplicationLanguageLookupTableModal(int? id, string displayName)
+        {
+            var viewModel = new ProductApplicationLanguageLookupTableViewModel()
+            {
+                Id = id,
+                DisplayName = displayName,
+                FilterText = ""
+            };
+
+            return PartialView("_ProductApplicationLanguageLookupTableModal", viewModel);
         }
 
     }

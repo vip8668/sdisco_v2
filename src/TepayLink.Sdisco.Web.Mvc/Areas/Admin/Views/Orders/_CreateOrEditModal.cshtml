@@ -1,0 +1,78 @@
+﻿@using TepayLink.Sdisco.Bookings;
+					@using TepayLink.Sdisco.Bookings;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Orders
+@model CreateOrEditOrderModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditOrder")) : L("CreateNewOrder")))
+
+<div class="modal-body">
+        <div id="OrderInformationsTab">
+            <form name="OrderInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Order.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Order_OrderCode">@L("OrderCode")</label>
+									<input class="form-control" id="Order_OrderCode" value="@Model.Order.OrderCode" type="text" name="orderCode"     />
+								</div>
+					
+								@{
+					var selectListOrderType = Html.GetEnumSelectList(typeof(OrderTypeEnum));
+					 foreach (var selectOption in selectListOrderType) { selectOption.Text = L("Enum_OrderTypeEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Order_OrderType">@L("OrderType")</label>
+										<select class="form-control m-input m-input--square" name="orderType" id="Order_OrderType" asp-for="@Model.Order.OrderType" asp-items="@selectListOrderType">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="Order_Note">@L("Note")</label>
+									<input class="form-control" id="Order_Note" value="@Model.Order.Note" type="text" name="note"     />
+								</div>
+					
+								@{
+					var selectListStatus = Html.GetEnumSelectList(typeof(OrderStatus));
+					 foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_OrderStatus_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Order_Status">@L("Status")</label>
+										<select class="form-control m-input m-input--square" name="status" id="Order_Status" asp-for="@Model.Order.Status" asp-items="@selectListStatus">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="Order_OrderRef">@L("OrderRef")</label>
+									<input class="form-control" id="Order_OrderRef" value="@Model.Order.OrderRef" type="text" name="orderRef"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Order_IssueDate">@L("IssueDate")</label>
+									<input class="form-control" id="Order_IssueDate" value="@Model.Order.IssueDate" type="text" name="issueDate"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Order_NameOnCard">@L("NameOnCard")</label>
+									<input class="form-control" id="Order_NameOnCard" value="@Model.Order.NameOnCard" type="text" name="nameOnCard"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Order_TransactionId">@L("TransactionId")</label>
+									<input class="form-control" id="Order_TransactionId" value="@Model.Order.TransactionId" type="text" name="transactionId"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

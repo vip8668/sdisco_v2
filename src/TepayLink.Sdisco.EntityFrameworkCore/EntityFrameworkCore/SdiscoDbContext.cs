@@ -1,12 +1,18 @@
-﻿using TepayLink.Sdisco.Help;
+﻿using TepayLink.Sdisco.Cashout;
+using TepayLink.Sdisco.Search;
+using TepayLink.Sdisco.Client;
+
+using TepayLink.Sdisco.Bookings;
+using TepayLink.Sdisco.Products;
+using TepayLink.Sdisco.Help;
 using TepayLink.Sdisco.Blog;
 using TepayLink.Sdisco.Account;
 using TepayLink.Sdisco.AdminConfig;
-using TepayLink.Sdisco.Products;
+
 using Abp.IdentityServer4;
 using Abp.Zero.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+
 using TepayLink.Sdisco.Authorization.Roles;
 using TepayLink.Sdisco.Authorization.Users;
 using TepayLink.Sdisco.Chat;
@@ -21,6 +27,62 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
 {
     public class SdiscoDbContext : AbpZeroDbContext<Tenant, Role, User, SdiscoDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<Chatconversation> Chatconversations { get; set; }
+
+        public virtual DbSet<UserDefaultCashoutMethodType> UserDefaultCashoutMethodTypes { get; set; }
+
+        public virtual DbSet<CashoutMethodType> CashoutMethodTypes { get; set; }
+
+        public virtual DbSet<TransPortdetail> TransPortdetails { get; set; }
+
+        public virtual DbSet<Coupon> Coupons { get; set; }
+
+        public virtual DbSet<SearchHistory> SearchHistories { get; set; }
+
+        public virtual DbSet<Wallet> Wallets { get; set; }
+
+        public virtual DbSet<PartnerShip> PartnerShips { get; set; }
+
+        public virtual DbSet<Partner> Partners { get; set; }
+
+        public virtual DbSet<Order> Orders { get; set; }
+
+        public virtual DbSet<ClientSetting> ClientSettings { get; set; }
+
+        public virtual DbSet<BookingClaim> BookingClaims { get; set; }
+
+        public virtual DbSet<ClaimReason> ClaimReasons { get; set; }
+
+        public virtual DbSet<BookingDetail> BookingDetails { get; set; }
+
+        public virtual DbSet<Booking> Bookings { get; set; }
+
+        public virtual DbSet<Country> Countries { get; set; }
+
+        public virtual DbSet<Currency> Currencies { get; set; }
+
+        public virtual DbSet<UserSubcriber> UserSubcribers { get; set; }
+
+        public virtual DbSet<ProductSchedule> ProductSchedules { get; set; }
+
+        public virtual DbSet<ProductDetailCombo> ProductDetailCombos { get; set; }
+
+        public virtual DbSet<ProductDetail> ProductDetails { get; set; }
+
+        public virtual DbSet<UserReviewDetail> UserReviewDetails { get; set; }
+
+        public virtual DbSet<UserReview> UserReviews { get; set; }
+
+        public virtual DbSet<ProductReviewDetail> ProductReviewDetails { get; set; }
+
+        public virtual DbSet<ProductReview> ProductReviews { get; set; }
+
+        public virtual DbSet<ProductUtility> ProductUtilities { get; set; }
+
+        public virtual DbSet<Utility> Utilities { get; set; }
+
+        public virtual DbSet<SaveItem> SaveItems { get; set; }
+
         public virtual DbSet<HelpContent> HelpContents { get; set; }
 
         public virtual DbSet<HelpCategory> HelpCategories { get; set; }
@@ -91,7 +153,147 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
            
            
            
-            modelBuilder.Entity<HelpContent>(h =>
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+            modelBuilder.Entity<Chatconversation>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<UserDefaultCashoutMethodType>(u =>
+            {
+                u.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<CashoutMethodType>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<TransPortdetail>(t =>
+            {
+                t.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Coupon>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<SearchHistory>(s =>
+            {
+                s.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Wallet>(w =>
+            {
+                w.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<PartnerShip>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Partner>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Order>(o =>
+            {
+                o.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ClientSetting>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BookingClaim>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ClaimReason>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BookingDetail>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Booking>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Country>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Currency>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<UserSubcriber>(u =>
+            {
+                u.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ProductSchedule>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ProductDetailCombo>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ProductDetail>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<UserReviewDetail>(u =>
+            {
+                u.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<UserReview>(u =>
+            {
+                u.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ProductReviewDetail>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ProductReview>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ProductUtility>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Utility>(u =>
+            {
+                u.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<SaveItem>(s =>
+            {
+                s.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<HelpContent>(h =>
             {
                 h.HasIndex(e => new { e.TenantId });
             });

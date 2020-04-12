@@ -1,6 +1,7 @@
 ﻿using TepayLink.Sdisco.Products;
 using TepayLink.Sdisco.Authorization.Users;
 using TepayLink.Sdisco.Products;
+using Abp.Localization;
 
 using TepayLink.Sdisco.Products;
 using TepayLink.Sdisco.Products;
@@ -31,15 +32,17 @@ namespace TepayLink.Sdisco.Products
 		 private readonly IRepository<Category,int> _lookup_categoryRepository;
 		 private readonly IRepository<User,long> _lookup_userRepository;
 		 private readonly IRepository<Place,long> _lookup_placeRepository;
+		 private readonly IRepository<ApplicationLanguage,int> _lookup_applicationLanguageRepository;
 		 
 
-		  public ProductsAppService(IRepository<Product, long> productRepository, IProductsExcelExporter productsExcelExporter , IRepository<Category, int> lookup_categoryRepository, IRepository<User, long> lookup_userRepository, IRepository<Place, long> lookup_placeRepository) 
+		  public ProductsAppService(IRepository<Product, long> productRepository, IProductsExcelExporter productsExcelExporter , IRepository<Category, int> lookup_categoryRepository, IRepository<User, long> lookup_userRepository, IRepository<Place, long> lookup_placeRepository, IRepository<ApplicationLanguage, int> lookup_applicationLanguageRepository) 
 		  {
 			_productRepository = productRepository;
 			_productsExcelExporter = productsExcelExporter;
 			_lookup_categoryRepository = lookup_categoryRepository;
 		_lookup_userRepository = lookup_userRepository;
 		_lookup_placeRepository = lookup_placeRepository;
+		_lookup_applicationLanguageRepository = lookup_applicationLanguageRepository;
 		
 		  }
 
@@ -52,6 +55,7 @@ namespace TepayLink.Sdisco.Products
 						.Include( e => e.CategoryFk)
 						.Include( e => e.HostUserFk)
 						.Include( e => e.PlaceFk)
+						.Include( e => e.LanguageFk)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Name.Contains(input.Filter) || e.Description.Contains(input.Filter) || e.Policies.Contains(input.Filter) || e.StartTime.Contains(input.Filter) || e.FileName.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameFilter),  e => e.Name == input.NameFilter)
 						.WhereIf(input.TypeFilter > -1, e => e.Type == typeFilter)
@@ -63,7 +67,8 @@ namespace TepayLink.Sdisco.Products
 						.WhereIf(input.IsTrendingFilter > -1,  e => (input.IsTrendingFilter == 1 && e.IsTrending) || (input.IsTrendingFilter == 0 && !e.IsTrending) )
 						.WhereIf(!string.IsNullOrWhiteSpace(input.CategoryNameFilter), e => e.CategoryFk != null && e.CategoryFk.Name == input.CategoryNameFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.UserNameFilter), e => e.HostUserFk != null && e.HostUserFk.Name == input.UserNameFilter)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.PlaceNameFilter), e => e.PlaceFk != null && e.PlaceFk.Name == input.PlaceNameFilter);
+						.WhereIf(!string.IsNullOrWhiteSpace(input.PlaceNameFilter), e => e.PlaceFk != null && e.PlaceFk.Name == input.PlaceNameFilter)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ApplicationLanguageNameFilter), e => e.LanguageFk != null && e.LanguageFk.Name == input.ApplicationLanguageNameFilter);
 
 			var pagedAndFilteredProducts = filteredProducts
                 .OrderBy(input.Sorting ?? "id asc")
@@ -78,6 +83,9 @@ namespace TepayLink.Sdisco.Products
                          
                          join o3 in _lookup_placeRepository.GetAll() on o.PlaceId equals o3.Id into j3
                          from s3 in j3.DefaultIfEmpty()
+                         
+                         join o4 in _lookup_applicationLanguageRepository.GetAll() on o.LanguageId equals o4.Id into j4
+                         from s4 in j4.DefaultIfEmpty()
                          
                          select new GetProductForViewDto() {
 							Product = new ProductDto
@@ -103,7 +111,8 @@ namespace TepayLink.Sdisco.Products
 							},
                          	CategoryName = s1 == null ? "" : s1.Name.ToString(),
                          	UserName = s2 == null ? "" : s2.Name.ToString(),
-                         	PlaceName = s3 == null ? "" : s3.Name.ToString()
+                         	PlaceName = s3 == null ? "" : s3.Name.ToString(),
+                         	ApplicationLanguageName = s4 == null ? "" : s4.Name.ToString()
 						};
 
             var totalCount = await filteredProducts.CountAsync();
@@ -137,6 +146,12 @@ namespace TepayLink.Sdisco.Products
                 var _lookupPlace = await _lookup_placeRepository.FirstOrDefaultAsync((long)output.Product.PlaceId);
                 output.PlaceName = _lookupPlace.Name.ToString();
             }
+
+		    if (output.Product.LanguageId != null)
+            {
+                var _lookupApplicationLanguage = await _lookup_applicationLanguageRepository.FirstOrDefaultAsync((int)output.Product.LanguageId);
+                output.ApplicationLanguageName = _lookupApplicationLanguage.Name.ToString();
+            }
 			
             return output;
          }
@@ -164,6 +179,12 @@ namespace TepayLink.Sdisco.Products
             {
                 var _lookupPlace = await _lookup_placeRepository.FirstOrDefaultAsync((long)output.Product.PlaceId);
                 output.PlaceName = _lookupPlace.Name.ToString();
+            }
+
+		    if (output.Product.LanguageId != null)
+            {
+                var _lookupApplicationLanguage = await _lookup_applicationLanguageRepository.FirstOrDefaultAsync((int)output.Product.LanguageId);
+                output.ApplicationLanguageName = _lookupApplicationLanguage.Name.ToString();
             }
 			
             return output;
@@ -216,6 +237,7 @@ namespace TepayLink.Sdisco.Products
 						.Include( e => e.CategoryFk)
 						.Include( e => e.HostUserFk)
 						.Include( e => e.PlaceFk)
+						.Include( e => e.LanguageFk)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Name.Contains(input.Filter) || e.Description.Contains(input.Filter) || e.Policies.Contains(input.Filter) || e.StartTime.Contains(input.Filter) || e.FileName.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameFilter),  e => e.Name == input.NameFilter)
 						.WhereIf(input.TypeFilter > -1, e => e.Type == typeFilter)
@@ -227,7 +249,8 @@ namespace TepayLink.Sdisco.Products
 						.WhereIf(input.IsTrendingFilter > -1,  e => (input.IsTrendingFilter == 1 && e.IsTrending) || (input.IsTrendingFilter == 0 && !e.IsTrending) )
 						.WhereIf(!string.IsNullOrWhiteSpace(input.CategoryNameFilter), e => e.CategoryFk != null && e.CategoryFk.Name == input.CategoryNameFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.UserNameFilter), e => e.HostUserFk != null && e.HostUserFk.Name == input.UserNameFilter)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.PlaceNameFilter), e => e.PlaceFk != null && e.PlaceFk.Name == input.PlaceNameFilter);
+						.WhereIf(!string.IsNullOrWhiteSpace(input.PlaceNameFilter), e => e.PlaceFk != null && e.PlaceFk.Name == input.PlaceNameFilter)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ApplicationLanguageNameFilter), e => e.LanguageFk != null && e.LanguageFk.Name == input.ApplicationLanguageNameFilter);
 
 			var query = (from o in filteredProducts
                          join o1 in _lookup_categoryRepository.GetAll() on o.CategoryId equals o1.Id into j1
@@ -238,6 +261,9 @@ namespace TepayLink.Sdisco.Products
                          
                          join o3 in _lookup_placeRepository.GetAll() on o.PlaceId equals o3.Id into j3
                          from s3 in j3.DefaultIfEmpty()
+                         
+                         join o4 in _lookup_applicationLanguageRepository.GetAll() on o.LanguageId equals o4.Id into j4
+                         from s4 in j4.DefaultIfEmpty()
                          
                          select new GetProductForViewDto() { 
 							Product = new ProductDto
@@ -263,7 +289,8 @@ namespace TepayLink.Sdisco.Products
 							},
                          	CategoryName = s1 == null ? "" : s1.Name.ToString(),
                          	UserName = s2 == null ? "" : s2.Name.ToString(),
-                         	PlaceName = s3 == null ? "" : s3.Name.ToString()
+                         	PlaceName = s3 == null ? "" : s3.Name.ToString(),
+                         	ApplicationLanguageName = s4 == null ? "" : s4.Name.ToString()
 						 });
 
 
@@ -356,6 +383,35 @@ namespace TepayLink.Sdisco.Products
 			}
 
             return new PagedResultDto<ProductPlaceLookupTableDto>(
+                totalCount,
+                lookupTableDtoList
+            );
+         }
+
+		[AbpAuthorize(AppPermissions.Pages_Administration_Products)]
+         public async Task<PagedResultDto<ProductApplicationLanguageLookupTableDto>> GetAllApplicationLanguageForLookupTable(GetAllForLookupTableInput input)
+         {
+             var query = _lookup_applicationLanguageRepository.GetAll().WhereIf(
+                    !string.IsNullOrWhiteSpace(input.Filter),
+                   e=> e.Name.ToString().Contains(input.Filter)
+                );
+
+            var totalCount = await query.CountAsync();
+
+            var applicationLanguageList = await query
+                .PageBy(input)
+                .ToListAsync();
+
+			var lookupTableDtoList = new List<ProductApplicationLanguageLookupTableDto>();
+			foreach(var applicationLanguage in applicationLanguageList){
+				lookupTableDtoList.Add(new ProductApplicationLanguageLookupTableDto
+				{
+					Id = applicationLanguage.Id,
+					DisplayName = applicationLanguage.Name?.ToString()
+				});
+			}
+
+            return new PagedResultDto<ProductApplicationLanguageLookupTableDto>(
                 totalCount,
                 lookupTableDtoList
             );

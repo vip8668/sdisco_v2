@@ -30,6 +30,55 @@ namespace TepayLink.Sdisco.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var chatconversations = pages.CreateChildPermission(AppPermissions.Pages_Chatconversations, L("Chatconversations"));
+            chatconversations.CreateChildPermission(AppPermissions.Pages_Chatconversations_Create, L("CreateNewChatconversation"));
+            chatconversations.CreateChildPermission(AppPermissions.Pages_Chatconversations_Edit, L("EditChatconversation"));
+            chatconversations.CreateChildPermission(AppPermissions.Pages_Chatconversations_Delete, L("DeleteChatconversation"));
+
+
+
+            var transPortdetails = pages.CreateChildPermission(AppPermissions.Pages_TransPortdetails, L("TransPortdetails"));
+            transPortdetails.CreateChildPermission(AppPermissions.Pages_TransPortdetails_Create, L("CreateNewTransPortdetail"));
+            transPortdetails.CreateChildPermission(AppPermissions.Pages_TransPortdetails_Edit, L("EditTransPortdetail"));
+            transPortdetails.CreateChildPermission(AppPermissions.Pages_TransPortdetails_Delete, L("DeleteTransPortdetail"));
+
+
+
+            var searchHistories = pages.CreateChildPermission(AppPermissions.Pages_SearchHistories, L("SearchHistories"));
+            searchHistories.CreateChildPermission(AppPermissions.Pages_SearchHistories_Create, L("CreateNewSearchHistory"));
+            searchHistories.CreateChildPermission(AppPermissions.Pages_SearchHistories_Edit, L("EditSearchHistory"));
+            searchHistories.CreateChildPermission(AppPermissions.Pages_SearchHistories_Delete, L("DeleteSearchHistory"));
+
+
+
+            var wallets = pages.CreateChildPermission(AppPermissions.Pages_Wallets, L("Wallets"));
+            wallets.CreateChildPermission(AppPermissions.Pages_Wallets_Create, L("CreateNewWallet"));
+            wallets.CreateChildPermission(AppPermissions.Pages_Wallets_Edit, L("EditWallet"));
+            wallets.CreateChildPermission(AppPermissions.Pages_Wallets_Delete, L("DeleteWallet"));
+
+
+
+            var partners = pages.CreateChildPermission(AppPermissions.Pages_Partners, L("Partners"));
+            partners.CreateChildPermission(AppPermissions.Pages_Partners_Create, L("CreateNewPartner"));
+            partners.CreateChildPermission(AppPermissions.Pages_Partners_Edit, L("EditPartner"));
+            partners.CreateChildPermission(AppPermissions.Pages_Partners_Delete, L("DeletePartner"));
+
+
+
+            var bookings = pages.CreateChildPermission(AppPermissions.Pages_Bookings, L("Bookings"));
+            bookings.CreateChildPermission(AppPermissions.Pages_Bookings_Create, L("CreateNewBooking"));
+            bookings.CreateChildPermission(AppPermissions.Pages_Bookings_Edit, L("EditBooking"));
+            bookings.CreateChildPermission(AppPermissions.Pages_Bookings_Delete, L("DeleteBooking"));
+
+
+
+            var countries = pages.CreateChildPermission(AppPermissions.Pages_Countries, L("Countries"));
+            countries.CreateChildPermission(AppPermissions.Pages_Countries_Create, L("CreateNewCountry"));
+            countries.CreateChildPermission(AppPermissions.Pages_Countries_Edit, L("EditCountry"));
+            countries.CreateChildPermission(AppPermissions.Pages_Countries_Delete, L("DeleteCountry"));
+
+
+
             var blogProductRelateds = pages.CreateChildPermission(AppPermissions.Pages_BlogProductRelateds, L("BlogProductRelateds"));
             blogProductRelateds.CreateChildPermission(AppPermissions.Pages_BlogProductRelateds_Create, L("CreateNewBlogProductRelated"));
             blogProductRelateds.CreateChildPermission(AppPermissions.Pages_BlogProductRelateds_Edit, L("EditBlogProductRelated"));
@@ -55,6 +104,160 @@ namespace TepayLink.Sdisco.Authorization
             pages.CreateChildPermission(AppPermissions.Pages_DemoUiComponents, L("DemoUiComponents"));
 
             var administration = pages.CreateChildPermission(AppPermissions.Pages_Administration, L("Administration"));
+
+            var chatconversations = administration.CreateChildPermission(AppPermissions.Pages_Administration_Chatconversations, L("Chatconversations"));
+            chatconversations.CreateChildPermission(AppPermissions.Pages_Administration_Chatconversations_Create, L("CreateNewChatconversation"));
+            chatconversations.CreateChildPermission(AppPermissions.Pages_Administration_Chatconversations_Edit, L("EditChatconversation"));
+            chatconversations.CreateChildPermission(AppPermissions.Pages_Administration_Chatconversations_Delete, L("DeleteChatconversation"));
+
+
+
+            var userDefaultCashoutMethodTypes = administration.CreateChildPermission(AppPermissions.Pages_Administration_UserDefaultCashoutMethodTypes, L("UserDefaultCashoutMethodTypes"));
+            userDefaultCashoutMethodTypes.CreateChildPermission(AppPermissions.Pages_Administration_UserDefaultCashoutMethodTypes_Create, L("CreateNewUserDefaultCashoutMethodType"));
+            userDefaultCashoutMethodTypes.CreateChildPermission(AppPermissions.Pages_Administration_UserDefaultCashoutMethodTypes_Edit, L("EditUserDefaultCashoutMethodType"));
+            userDefaultCashoutMethodTypes.CreateChildPermission(AppPermissions.Pages_Administration_UserDefaultCashoutMethodTypes_Delete, L("DeleteUserDefaultCashoutMethodType"));
+
+
+
+            var cashoutMethodTypes = administration.CreateChildPermission(AppPermissions.Pages_Administration_CashoutMethodTypes, L("CashoutMethodTypes"));
+            cashoutMethodTypes.CreateChildPermission(AppPermissions.Pages_Administration_CashoutMethodTypes_Create, L("CreateNewCashoutMethodType"));
+            cashoutMethodTypes.CreateChildPermission(AppPermissions.Pages_Administration_CashoutMethodTypes_Edit, L("EditCashoutMethodType"));
+            cashoutMethodTypes.CreateChildPermission(AppPermissions.Pages_Administration_CashoutMethodTypes_Delete, L("DeleteCashoutMethodType"));
+
+
+
+            var coupons = administration.CreateChildPermission(AppPermissions.Pages_Administration_Coupons, L("Coupons"));
+            coupons.CreateChildPermission(AppPermissions.Pages_Administration_Coupons_Create, L("CreateNewCoupon"));
+            coupons.CreateChildPermission(AppPermissions.Pages_Administration_Coupons_Edit, L("EditCoupon"));
+            coupons.CreateChildPermission(AppPermissions.Pages_Administration_Coupons_Delete, L("DeleteCoupon"));
+
+
+
+            var partnerShips = administration.CreateChildPermission(AppPermissions.Pages_Administration_PartnerShips, L("PartnerShips"));
+            partnerShips.CreateChildPermission(AppPermissions.Pages_Administration_PartnerShips_Create, L("CreateNewPartnerShip"));
+            partnerShips.CreateChildPermission(AppPermissions.Pages_Administration_PartnerShips_Edit, L("EditPartnerShip"));
+            partnerShips.CreateChildPermission(AppPermissions.Pages_Administration_PartnerShips_Delete, L("DeletePartnerShip"));
+
+
+
+            var orders = administration.CreateChildPermission(AppPermissions.Pages_Administration_Orders, L("Orders"));
+            orders.CreateChildPermission(AppPermissions.Pages_Administration_Orders_Create, L("CreateNewOrder"));
+            orders.CreateChildPermission(AppPermissions.Pages_Administration_Orders_Edit, L("EditOrder"));
+            orders.CreateChildPermission(AppPermissions.Pages_Administration_Orders_Delete, L("DeleteOrder"));
+
+
+
+            var clientSettings = administration.CreateChildPermission(AppPermissions.Pages_Administration_ClientSettings, L("ClientSettings"));
+            clientSettings.CreateChildPermission(AppPermissions.Pages_Administration_ClientSettings_Create, L("CreateNewClientSetting"));
+            clientSettings.CreateChildPermission(AppPermissions.Pages_Administration_ClientSettings_Edit, L("EditClientSetting"));
+            clientSettings.CreateChildPermission(AppPermissions.Pages_Administration_ClientSettings_Delete, L("DeleteClientSetting"));
+
+
+
+            var bookingClaims = administration.CreateChildPermission(AppPermissions.Pages_Administration_BookingClaims, L("BookingClaims"));
+            bookingClaims.CreateChildPermission(AppPermissions.Pages_Administration_BookingClaims_Create, L("CreateNewBookingClaim"));
+            bookingClaims.CreateChildPermission(AppPermissions.Pages_Administration_BookingClaims_Edit, L("EditBookingClaim"));
+            bookingClaims.CreateChildPermission(AppPermissions.Pages_Administration_BookingClaims_Delete, L("DeleteBookingClaim"));
+
+
+
+            var claimReasons = administration.CreateChildPermission(AppPermissions.Pages_Administration_ClaimReasons, L("ClaimReasons"));
+            claimReasons.CreateChildPermission(AppPermissions.Pages_Administration_ClaimReasons_Create, L("CreateNewClaimReason"));
+            claimReasons.CreateChildPermission(AppPermissions.Pages_Administration_ClaimReasons_Edit, L("EditClaimReason"));
+            claimReasons.CreateChildPermission(AppPermissions.Pages_Administration_ClaimReasons_Delete, L("DeleteClaimReason"));
+
+
+
+            var bookingDetails = administration.CreateChildPermission(AppPermissions.Pages_Administration_BookingDetails, L("BookingDetails"));
+            bookingDetails.CreateChildPermission(AppPermissions.Pages_Administration_BookingDetails_Create, L("CreateNewBookingDetail"));
+            bookingDetails.CreateChildPermission(AppPermissions.Pages_Administration_BookingDetails_Edit, L("EditBookingDetail"));
+            bookingDetails.CreateChildPermission(AppPermissions.Pages_Administration_BookingDetails_Delete, L("DeleteBookingDetail"));
+
+
+
+            var currencies = administration.CreateChildPermission(AppPermissions.Pages_Administration_Currencies, L("Currencies"));
+            currencies.CreateChildPermission(AppPermissions.Pages_Administration_Currencies_Create, L("CreateNewCurrency"));
+            currencies.CreateChildPermission(AppPermissions.Pages_Administration_Currencies_Edit, L("EditCurrency"));
+            currencies.CreateChildPermission(AppPermissions.Pages_Administration_Currencies_Delete, L("DeleteCurrency"));
+
+
+
+            var userSubcribers = administration.CreateChildPermission(AppPermissions.Pages_Administration_UserSubcribers, L("UserSubcribers"));
+            userSubcribers.CreateChildPermission(AppPermissions.Pages_Administration_UserSubcribers_Create, L("CreateNewUserSubcriber"));
+            userSubcribers.CreateChildPermission(AppPermissions.Pages_Administration_UserSubcribers_Edit, L("EditUserSubcriber"));
+            userSubcribers.CreateChildPermission(AppPermissions.Pages_Administration_UserSubcribers_Delete, L("DeleteUserSubcriber"));
+
+
+
+            var productSchedules = administration.CreateChildPermission(AppPermissions.Pages_Administration_ProductSchedules, L("ProductSchedules"));
+            productSchedules.CreateChildPermission(AppPermissions.Pages_Administration_ProductSchedules_Create, L("CreateNewProductSchedule"));
+            productSchedules.CreateChildPermission(AppPermissions.Pages_Administration_ProductSchedules_Edit, L("EditProductSchedule"));
+            productSchedules.CreateChildPermission(AppPermissions.Pages_Administration_ProductSchedules_Delete, L("DeleteProductSchedule"));
+
+
+
+            var productDetailCombos = administration.CreateChildPermission(AppPermissions.Pages_Administration_ProductDetailCombos, L("ProductDetailCombos"));
+            productDetailCombos.CreateChildPermission(AppPermissions.Pages_Administration_ProductDetailCombos_Create, L("CreateNewProductDetailCombo"));
+            productDetailCombos.CreateChildPermission(AppPermissions.Pages_Administration_ProductDetailCombos_Edit, L("EditProductDetailCombo"));
+            productDetailCombos.CreateChildPermission(AppPermissions.Pages_Administration_ProductDetailCombos_Delete, L("DeleteProductDetailCombo"));
+
+
+
+            var productDetails = administration.CreateChildPermission(AppPermissions.Pages_Administration_ProductDetails, L("ProductDetails"));
+            productDetails.CreateChildPermission(AppPermissions.Pages_Administration_ProductDetails_Create, L("CreateNewProductDetail"));
+            productDetails.CreateChildPermission(AppPermissions.Pages_Administration_ProductDetails_Edit, L("EditProductDetail"));
+            productDetails.CreateChildPermission(AppPermissions.Pages_Administration_ProductDetails_Delete, L("DeleteProductDetail"));
+
+
+
+            var userReviewDetails = administration.CreateChildPermission(AppPermissions.Pages_Administration_UserReviewDetails, L("UserReviewDetails"));
+            userReviewDetails.CreateChildPermission(AppPermissions.Pages_Administration_UserReviewDetails_Create, L("CreateNewUserReviewDetail"));
+            userReviewDetails.CreateChildPermission(AppPermissions.Pages_Administration_UserReviewDetails_Edit, L("EditUserReviewDetail"));
+            userReviewDetails.CreateChildPermission(AppPermissions.Pages_Administration_UserReviewDetails_Delete, L("DeleteUserReviewDetail"));
+
+
+
+            var userReviews = administration.CreateChildPermission(AppPermissions.Pages_Administration_UserReviews, L("UserReviews"));
+            userReviews.CreateChildPermission(AppPermissions.Pages_Administration_UserReviews_Create, L("CreateNewUserReview"));
+            userReviews.CreateChildPermission(AppPermissions.Pages_Administration_UserReviews_Edit, L("EditUserReview"));
+            userReviews.CreateChildPermission(AppPermissions.Pages_Administration_UserReviews_Delete, L("DeleteUserReview"));
+
+
+
+            var productReviewDetails = administration.CreateChildPermission(AppPermissions.Pages_Administration_ProductReviewDetails, L("ProductReviewDetails"));
+            productReviewDetails.CreateChildPermission(AppPermissions.Pages_Administration_ProductReviewDetails_Create, L("CreateNewProductReviewDetail"));
+            productReviewDetails.CreateChildPermission(AppPermissions.Pages_Administration_ProductReviewDetails_Edit, L("EditProductReviewDetail"));
+            productReviewDetails.CreateChildPermission(AppPermissions.Pages_Administration_ProductReviewDetails_Delete, L("DeleteProductReviewDetail"));
+
+
+
+            var productReviews = administration.CreateChildPermission(AppPermissions.Pages_Administration_ProductReviews, L("ProductReviews"));
+            productReviews.CreateChildPermission(AppPermissions.Pages_Administration_ProductReviews_Create, L("CreateNewProductReview"));
+            productReviews.CreateChildPermission(AppPermissions.Pages_Administration_ProductReviews_Edit, L("EditProductReview"));
+            productReviews.CreateChildPermission(AppPermissions.Pages_Administration_ProductReviews_Delete, L("DeleteProductReview"));
+
+
+
+            var productUtilities = administration.CreateChildPermission(AppPermissions.Pages_Administration_ProductUtilities, L("ProductUtilities"));
+            productUtilities.CreateChildPermission(AppPermissions.Pages_Administration_ProductUtilities_Create, L("CreateNewProductUtility"));
+            productUtilities.CreateChildPermission(AppPermissions.Pages_Administration_ProductUtilities_Edit, L("EditProductUtility"));
+            productUtilities.CreateChildPermission(AppPermissions.Pages_Administration_ProductUtilities_Delete, L("DeleteProductUtility"));
+
+
+
+            var utilities = administration.CreateChildPermission(AppPermissions.Pages_Administration_Utilities, L("Utilities"));
+            utilities.CreateChildPermission(AppPermissions.Pages_Administration_Utilities_Create, L("CreateNewUtility"));
+            utilities.CreateChildPermission(AppPermissions.Pages_Administration_Utilities_Edit, L("EditUtility"));
+            utilities.CreateChildPermission(AppPermissions.Pages_Administration_Utilities_Delete, L("DeleteUtility"));
+
+
+
+            var saveItems = administration.CreateChildPermission(AppPermissions.Pages_Administration_SaveItems, L("SaveItems"));
+            saveItems.CreateChildPermission(AppPermissions.Pages_Administration_SaveItems_Create, L("CreateNewSaveItem"));
+            saveItems.CreateChildPermission(AppPermissions.Pages_Administration_SaveItems_Edit, L("EditSaveItem"));
+            saveItems.CreateChildPermission(AppPermissions.Pages_Administration_SaveItems_Delete, L("DeleteSaveItem"));
+
+
 
             var helpContents = administration.CreateChildPermission(AppPermissions.Pages_Administration_HelpContents, L("HelpContents"));
             helpContents.CreateChildPermission(AppPermissions.Pages_Administration_HelpContents_Create, L("CreateNewHelpContent"));

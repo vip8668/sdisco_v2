@@ -6,6 +6,151 @@
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_Chatconversations = "Pages.Chatconversations";
+        public const string Pages_Chatconversations_Create = "Pages.Chatconversations.Create";
+        public const string Pages_Chatconversations_Edit = "Pages.Chatconversations.Edit";
+        public const string Pages_Chatconversations_Delete = "Pages.Chatconversations.Delete";
+
+        public const string Pages_Administration_Chatconversations = "Pages.Administration.Chatconversations";
+        public const string Pages_Administration_Chatconversations_Create = "Pages.Administration.Chatconversations.Create";
+        public const string Pages_Administration_Chatconversations_Edit = "Pages.Administration.Chatconversations.Edit";
+        public const string Pages_Administration_Chatconversations_Delete = "Pages.Administration.Chatconversations.Delete";
+
+        public const string Pages_Administration_UserDefaultCashoutMethodTypes = "Pages.Administration.UserDefaultCashoutMethodTypes";
+        public const string Pages_Administration_UserDefaultCashoutMethodTypes_Create = "Pages.Administration.UserDefaultCashoutMethodTypes.Create";
+        public const string Pages_Administration_UserDefaultCashoutMethodTypes_Edit = "Pages.Administration.UserDefaultCashoutMethodTypes.Edit";
+        public const string Pages_Administration_UserDefaultCashoutMethodTypes_Delete = "Pages.Administration.UserDefaultCashoutMethodTypes.Delete";
+
+        public const string Pages_Administration_CashoutMethodTypes = "Pages.Administration.CashoutMethodTypes";
+        public const string Pages_Administration_CashoutMethodTypes_Create = "Pages.Administration.CashoutMethodTypes.Create";
+        public const string Pages_Administration_CashoutMethodTypes_Edit = "Pages.Administration.CashoutMethodTypes.Edit";
+        public const string Pages_Administration_CashoutMethodTypes_Delete = "Pages.Administration.CashoutMethodTypes.Delete";
+
+        public const string Pages_TransPortdetails = "Pages.TransPortdetails";
+        public const string Pages_TransPortdetails_Create = "Pages.TransPortdetails.Create";
+        public const string Pages_TransPortdetails_Edit = "Pages.TransPortdetails.Edit";
+        public const string Pages_TransPortdetails_Delete = "Pages.TransPortdetails.Delete";
+
+        public const string Pages_Administration_Coupons = "Pages.Administration.Coupons";
+        public const string Pages_Administration_Coupons_Create = "Pages.Administration.Coupons.Create";
+        public const string Pages_Administration_Coupons_Edit = "Pages.Administration.Coupons.Edit";
+        public const string Pages_Administration_Coupons_Delete = "Pages.Administration.Coupons.Delete";
+
+        public const string Pages_SearchHistories = "Pages.SearchHistories";
+        public const string Pages_SearchHistories_Create = "Pages.SearchHistories.Create";
+        public const string Pages_SearchHistories_Edit = "Pages.SearchHistories.Edit";
+        public const string Pages_SearchHistories_Delete = "Pages.SearchHistories.Delete";
+
+        public const string Pages_Wallets = "Pages.Wallets";
+        public const string Pages_Wallets_Create = "Pages.Wallets.Create";
+        public const string Pages_Wallets_Edit = "Pages.Wallets.Edit";
+        public const string Pages_Wallets_Delete = "Pages.Wallets.Delete";
+
+        public const string Pages_Administration_PartnerShips = "Pages.Administration.PartnerShips";
+        public const string Pages_Administration_PartnerShips_Create = "Pages.Administration.PartnerShips.Create";
+        public const string Pages_Administration_PartnerShips_Edit = "Pages.Administration.PartnerShips.Edit";
+        public const string Pages_Administration_PartnerShips_Delete = "Pages.Administration.PartnerShips.Delete";
+
+        public const string Pages_Partners = "Pages.Partners";
+        public const string Pages_Partners_Create = "Pages.Partners.Create";
+        public const string Pages_Partners_Edit = "Pages.Partners.Edit";
+        public const string Pages_Partners_Delete = "Pages.Partners.Delete";
+
+        public const string Pages_Administration_Orders = "Pages.Administration.Orders";
+        public const string Pages_Administration_Orders_Create = "Pages.Administration.Orders.Create";
+        public const string Pages_Administration_Orders_Edit = "Pages.Administration.Orders.Edit";
+        public const string Pages_Administration_Orders_Delete = "Pages.Administration.Orders.Delete";
+
+        public const string Pages_Administration_ClientSettings = "Pages.Administration.ClientSettings";
+        public const string Pages_Administration_ClientSettings_Create = "Pages.Administration.ClientSettings.Create";
+        public const string Pages_Administration_ClientSettings_Edit = "Pages.Administration.ClientSettings.Edit";
+        public const string Pages_Administration_ClientSettings_Delete = "Pages.Administration.ClientSettings.Delete";
+
+        public const string Pages_Administration_BookingClaims = "Pages.Administration.BookingClaims";
+        public const string Pages_Administration_BookingClaims_Create = "Pages.Administration.BookingClaims.Create";
+        public const string Pages_Administration_BookingClaims_Edit = "Pages.Administration.BookingClaims.Edit";
+        public const string Pages_Administration_BookingClaims_Delete = "Pages.Administration.BookingClaims.Delete";
+
+        public const string Pages_Administration_ClaimReasons = "Pages.Administration.ClaimReasons";
+        public const string Pages_Administration_ClaimReasons_Create = "Pages.Administration.ClaimReasons.Create";
+        public const string Pages_Administration_ClaimReasons_Edit = "Pages.Administration.ClaimReasons.Edit";
+        public const string Pages_Administration_ClaimReasons_Delete = "Pages.Administration.ClaimReasons.Delete";
+
+        public const string Pages_Administration_BookingDetails = "Pages.Administration.BookingDetails";
+        public const string Pages_Administration_BookingDetails_Create = "Pages.Administration.BookingDetails.Create";
+        public const string Pages_Administration_BookingDetails_Edit = "Pages.Administration.BookingDetails.Edit";
+        public const string Pages_Administration_BookingDetails_Delete = "Pages.Administration.BookingDetails.Delete";
+
+        public const string Pages_Bookings = "Pages.Bookings";
+        public const string Pages_Bookings_Create = "Pages.Bookings.Create";
+        public const string Pages_Bookings_Edit = "Pages.Bookings.Edit";
+        public const string Pages_Bookings_Delete = "Pages.Bookings.Delete";
+
+        public const string Pages_Countries = "Pages.Countries";
+        public const string Pages_Countries_Create = "Pages.Countries.Create";
+        public const string Pages_Countries_Edit = "Pages.Countries.Edit";
+        public const string Pages_Countries_Delete = "Pages.Countries.Delete";
+
+        public const string Pages_Administration_Currencies = "Pages.Administration.Currencies";
+        public const string Pages_Administration_Currencies_Create = "Pages.Administration.Currencies.Create";
+        public const string Pages_Administration_Currencies_Edit = "Pages.Administration.Currencies.Edit";
+        public const string Pages_Administration_Currencies_Delete = "Pages.Administration.Currencies.Delete";
+
+        public const string Pages_Administration_UserSubcribers = "Pages.Administration.UserSubcribers";
+        public const string Pages_Administration_UserSubcribers_Create = "Pages.Administration.UserSubcribers.Create";
+        public const string Pages_Administration_UserSubcribers_Edit = "Pages.Administration.UserSubcribers.Edit";
+        public const string Pages_Administration_UserSubcribers_Delete = "Pages.Administration.UserSubcribers.Delete";
+
+        public const string Pages_Administration_ProductSchedules = "Pages.Administration.ProductSchedules";
+        public const string Pages_Administration_ProductSchedules_Create = "Pages.Administration.ProductSchedules.Create";
+        public const string Pages_Administration_ProductSchedules_Edit = "Pages.Administration.ProductSchedules.Edit";
+        public const string Pages_Administration_ProductSchedules_Delete = "Pages.Administration.ProductSchedules.Delete";
+
+        public const string Pages_Administration_ProductDetailCombos = "Pages.Administration.ProductDetailCombos";
+        public const string Pages_Administration_ProductDetailCombos_Create = "Pages.Administration.ProductDetailCombos.Create";
+        public const string Pages_Administration_ProductDetailCombos_Edit = "Pages.Administration.ProductDetailCombos.Edit";
+        public const string Pages_Administration_ProductDetailCombos_Delete = "Pages.Administration.ProductDetailCombos.Delete";
+
+        public const string Pages_Administration_ProductDetails = "Pages.Administration.ProductDetails";
+        public const string Pages_Administration_ProductDetails_Create = "Pages.Administration.ProductDetails.Create";
+        public const string Pages_Administration_ProductDetails_Edit = "Pages.Administration.ProductDetails.Edit";
+        public const string Pages_Administration_ProductDetails_Delete = "Pages.Administration.ProductDetails.Delete";
+
+        public const string Pages_Administration_UserReviewDetails = "Pages.Administration.UserReviewDetails";
+        public const string Pages_Administration_UserReviewDetails_Create = "Pages.Administration.UserReviewDetails.Create";
+        public const string Pages_Administration_UserReviewDetails_Edit = "Pages.Administration.UserReviewDetails.Edit";
+        public const string Pages_Administration_UserReviewDetails_Delete = "Pages.Administration.UserReviewDetails.Delete";
+
+        public const string Pages_Administration_UserReviews = "Pages.Administration.UserReviews";
+        public const string Pages_Administration_UserReviews_Create = "Pages.Administration.UserReviews.Create";
+        public const string Pages_Administration_UserReviews_Edit = "Pages.Administration.UserReviews.Edit";
+        public const string Pages_Administration_UserReviews_Delete = "Pages.Administration.UserReviews.Delete";
+
+        public const string Pages_Administration_ProductReviewDetails = "Pages.Administration.ProductReviewDetails";
+        public const string Pages_Administration_ProductReviewDetails_Create = "Pages.Administration.ProductReviewDetails.Create";
+        public const string Pages_Administration_ProductReviewDetails_Edit = "Pages.Administration.ProductReviewDetails.Edit";
+        public const string Pages_Administration_ProductReviewDetails_Delete = "Pages.Administration.ProductReviewDetails.Delete";
+
+        public const string Pages_Administration_ProductReviews = "Pages.Administration.ProductReviews";
+        public const string Pages_Administration_ProductReviews_Create = "Pages.Administration.ProductReviews.Create";
+        public const string Pages_Administration_ProductReviews_Edit = "Pages.Administration.ProductReviews.Edit";
+        public const string Pages_Administration_ProductReviews_Delete = "Pages.Administration.ProductReviews.Delete";
+
+        public const string Pages_Administration_ProductUtilities = "Pages.Administration.ProductUtilities";
+        public const string Pages_Administration_ProductUtilities_Create = "Pages.Administration.ProductUtilities.Create";
+        public const string Pages_Administration_ProductUtilities_Edit = "Pages.Administration.ProductUtilities.Edit";
+        public const string Pages_Administration_ProductUtilities_Delete = "Pages.Administration.ProductUtilities.Delete";
+
+        public const string Pages_Administration_Utilities = "Pages.Administration.Utilities";
+        public const string Pages_Administration_Utilities_Create = "Pages.Administration.Utilities.Create";
+        public const string Pages_Administration_Utilities_Edit = "Pages.Administration.Utilities.Edit";
+        public const string Pages_Administration_Utilities_Delete = "Pages.Administration.Utilities.Delete";
+
+        public const string Pages_Administration_SaveItems = "Pages.Administration.SaveItems";
+        public const string Pages_Administration_SaveItems_Create = "Pages.Administration.SaveItems.Create";
+        public const string Pages_Administration_SaveItems_Edit = "Pages.Administration.SaveItems.Edit";
+        public const string Pages_Administration_SaveItems_Delete = "Pages.Administration.SaveItems.Delete";
+
         public const string Pages_Administration_HelpContents = "Pages.Administration.HelpContents";
         public const string Pages_Administration_HelpContents_Create = "Pages.Administration.HelpContents.Create";
         public const string Pages_Administration_HelpContents_Edit = "Pages.Administration.HelpContents.Edit";

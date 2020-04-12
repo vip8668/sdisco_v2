@@ -1,0 +1,54 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BookingClaims
+@model CreateOrEditBookingClaimModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditBookingClaim")) : L("CreateNewBookingClaim")))
+
+<div class="modal-body">
+        <div id="BookingClaimInformationsTab">
+            <form name="BookingClaimInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.BookingClaim.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ClaimReasonTitle">@L("ClaimReason")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ClaimReasonTitle" name="claimReasonTitle" value="@Model.ClaimReasonTitle" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenClaimReasonLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearClaimReasonTitleButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="BookingClaim_ClaimReasonId" value="@Model.BookingClaim.ClaimReasonId" type="text" name="claimReasonId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="BookingClaim_ClaimReasonId" value="" type="text" name="claimReasonId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="BookingClaim_BookingDetailId">@L("BookingDetailId")</label>
+									<input class="form-control m-input" id="BookingClaim_BookingDetailId" value="@Model.BookingClaim.BookingDetailId.ToString(CultureInfo.InvariantCulture)" type="number" name="bookingDetailId"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

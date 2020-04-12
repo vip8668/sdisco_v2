@@ -4,8 +4,9 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Text;
 using Abp.Domain.Entities;
-using SDisco.Tour.Dto;
-using SDisco.Utils;
+
+using TepayLink.Sdisco.Tour.Dtos;
+using TepayLink.Sdisco.Utils;
 
 namespace SDisco.Home.Dto
 {

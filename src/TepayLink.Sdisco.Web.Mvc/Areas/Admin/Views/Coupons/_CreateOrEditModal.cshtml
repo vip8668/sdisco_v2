@@ -1,0 +1,47 @@
+﻿@using TepayLink.Sdisco.Bookings;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Coupons
+@model CreateOrEditCouponModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCoupon")) : L("CreateNewCoupon")))
+
+<div class="modal-body">
+        <div id="CouponInformationsTab">
+            <form name="CouponInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Coupon.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Coupon_Code">@L("Code")</label>
+									<input class="form-control" id="Coupon_Code" value="@Model.Coupon.Code" type="text" name="code"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Coupon_Amount">@L("Amount")</label>
+									<input class="form-control m-input" id="Coupon_Amount" value="@Model.Coupon.Amount.ToString(CultureInfo.InvariantCulture)" type="number" name="amount"  />
+								</div>
+					
+								@{
+					var selectListStatus = Html.GetEnumSelectList(typeof(CouponStatusEnum));
+					 foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_CouponStatusEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Coupon_Status">@L("Status")</label>
+										<select class="form-control m-input m-input--square" name="status" id="Coupon_Status" asp-for="@Model.Coupon.Status" asp-items="@selectListStatus">
+									</select>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

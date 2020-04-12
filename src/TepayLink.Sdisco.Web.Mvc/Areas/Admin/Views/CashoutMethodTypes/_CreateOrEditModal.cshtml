@@ -1,0 +1,36 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.CashoutMethodTypes
+@model CreateOrEditCashoutMethodTypeModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCashoutMethodType")) : L("CreateNewCashoutMethodType")))
+
+<div class="modal-body">
+        <div id="CashoutMethodTypeInformationsTab">
+            <form name="CashoutMethodTypeInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.CashoutMethodType.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="CashoutMethodType_Title">@L("Title")</label>
+									<input class="form-control" id="CashoutMethodType_Title" value="@Model.CashoutMethodType.Title" type="text" name="title"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="CashoutMethodType_Note">@L("Note")</label>
+									<input class="form-control" id="CashoutMethodType_Note" value="@Model.CashoutMethodType.Note" type="text" name="note"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

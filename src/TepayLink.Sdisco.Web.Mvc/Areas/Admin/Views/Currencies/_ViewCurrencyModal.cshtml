@@ -1,0 +1,40 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Currencies
+@model CurrencyViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="CurrencyInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Name") :</h6>
+                @Model.Currency.Name
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("DisplayName") :</h6>
+                @Model.Currency.DisplayName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Icon") :</h6>
+                @Model.Currency.Icon
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CurrencySign") :</h6>
+                @Model.Currency.CurrencySign
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IsDisabled") :</h6>
+                @Model.Currency.IsDisabled
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

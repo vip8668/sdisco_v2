@@ -1,0 +1,105 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductDetailCombos
+@model CreateOrEditProductDetailComboModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditProductDetailCombo")) : L("CreateNewProductDetailCombo")))
+
+<div class="modal-body">
+        <div id="ProductDetailComboInformationsTab">
+            <form name="ProductDetailComboInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ProductDetailCombo.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductDetailCombo_ProductId" value="@Model.ProductDetailCombo.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductDetailCombo_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="ProductDetailTitle">@L("ProductDetail")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductDetailTitle" name="productDetailTitle" value="@Model.ProductDetailTitle" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductDetailLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductDetailTitleButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductDetailCombo_ProductDetailId" value="@Model.ProductDetailCombo.ProductDetailId" type="text" name="productDetailId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductDetailCombo_ProductDetailId" value="" type="text" name="productDetailId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="ProductName2">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName2" name="productName2" value="@Model.ProductName2" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProduct2LookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductName2Button"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductDetailCombo_ItemId" value="@Model.ProductDetailCombo.ItemId" type="text" name="itemId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductDetailCombo_ItemId" value="" type="text" name="itemId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="ProductDetailCombo_RoomId">@L("RoomId")</label>
+									<input class="form-control m-input" id="ProductDetailCombo_RoomId" value="@Model.ProductDetailCombo.RoomId?.ToString(CultureInfo.InvariantCulture)" type="number" name="roomId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductDetailCombo_Description">@L("Description")</label>
+									<input class="form-control" id="ProductDetailCombo_Description" value="@Model.ProductDetailCombo.Description" type="text" name="description"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

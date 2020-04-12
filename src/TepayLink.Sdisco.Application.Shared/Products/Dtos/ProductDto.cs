@@ -49,6 +49,8 @@ namespace TepayLink.Sdisco.Products.Dtos
 
 		 		 public long? PlaceId { get; set; }
 
+		 		 public int? LanguageId { get; set; }
+
 		 
     }
 }

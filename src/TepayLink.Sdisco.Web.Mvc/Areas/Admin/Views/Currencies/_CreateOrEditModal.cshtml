@@ -1,0 +1,54 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Currencies
+@model CreateOrEditCurrencyModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditCurrency")) : L("CreateNewCurrency")))
+
+<div class="modal-body">
+        <div id="CurrencyInformationsTab">
+            <form name="CurrencyInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Currency.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Currency_Name">@L("Name")</label>
+									<input class="form-control" id="Currency_Name" value="@Model.Currency.Name" type="text" name="name"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Currency_DisplayName">@L("DisplayName")</label>
+									<input class="form-control" id="Currency_DisplayName" value="@Model.Currency.DisplayName" type="text" name="displayName"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Currency_Icon">@L("Icon")</label>
+									<input class="form-control" id="Currency_Icon" value="@Model.Currency.Icon" type="text" name="icon"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="Currency_CurrencySign">@L("CurrencySign")</label>
+									<input class="form-control" id="Currency_CurrencySign" value="@Model.Currency.CurrencySign" type="text" name="currencySign"     />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="Currency_IsDisabled" class="kt-checkbox">
+										<input id="Currency_IsDisabled" type="checkbox" name="isDisabled" value="true" @Html.Raw(Model.Currency.IsDisabled ?"checked=\"checked\"":"") />
+										@L("IsDisabled")
+										<span></span>
+									</label>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

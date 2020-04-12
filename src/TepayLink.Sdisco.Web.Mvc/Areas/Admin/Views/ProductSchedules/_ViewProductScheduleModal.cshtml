@@ -1,0 +1,76 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ProductSchedules
+@model ProductScheduleViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ProductScheduleInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("TotalSlot") :</h6>
+                @Model.ProductSchedule.TotalSlot
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TotalBook") :</h6>
+                @Model.ProductSchedule.TotalBook
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("LockedSlot") :</h6>
+                @Model.ProductSchedule.LockedSlot
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TripLength") :</h6>
+                @Model.ProductSchedule.TripLength
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Note") :</h6>
+                @Model.ProductSchedule.Note
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Price") :</h6>
+                @Model.ProductSchedule.Price
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TicketPrice") :</h6>
+                @Model.ProductSchedule.TicketPrice
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CostPrice") :</h6>
+                @Model.ProductSchedule.CostPrice
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("HotelPrice") :</h6>
+                @Model.ProductSchedule.HotelPrice
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("StartDat") :</h6>
+                @Model.ProductSchedule.StartDat
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("EndDate") :</h6>
+                @Model.ProductSchedule.EndDate
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("DepartureTime") :</h6>
+                @Model.ProductSchedule.DepartureTime
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Revenue") :</h6>
+                @Model.ProductSchedule.Revenue
+            </div>
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Product")) @L("Name") :</h6>
+                @Model.ProductName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

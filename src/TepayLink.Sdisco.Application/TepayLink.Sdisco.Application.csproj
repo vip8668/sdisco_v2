@@ -27,8 +27,4 @@
     <ProjectReference Include="..\TepayLink.Sdisco.EntityFrameworkCore\TepayLink.Sdisco.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Home\" />
-  </ItemGroup>
-
 </Project>

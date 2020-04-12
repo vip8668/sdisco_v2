@@ -86,6 +86,29 @@
 									<input class="form-control" id="Product_PlaceId" value="" type="text" name="placeId"  hidden/>
 								}
 
+            
+								<div class="form-group m-form__group">
+										<label for="ApplicationLanguageName">@L("ApplicationLanguage")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ApplicationLanguageName" name="applicationLanguageName" value="@Model.ApplicationLanguageName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenApplicationLanguageLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearApplicationLanguageNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="Product_LanguageId" value="@Model.Product.LanguageId" type="text" name="languageId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="Product_LanguageId" value="" type="text" name="languageId"  hidden/>
+								}
+
 
 
 				

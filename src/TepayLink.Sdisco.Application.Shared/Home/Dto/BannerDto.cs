@@ -1,9 +1,10 @@
-﻿using SDisco.Tour.Dto;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TepayLink.Sdisco.Tour.Dtos;
 
-namespace SDisco.Home.Dto
+namespace TepayLink.Sdisco.Home.Dto
 {
   public  class BannerDto
     {

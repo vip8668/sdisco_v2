@@ -1,0 +1,28 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.UserDefaultCashoutMethodTypes
+@model UserDefaultCashoutMethodTypeViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="UserDefaultCashoutMethodTypeInformationsTab">
+        
+        <div class="row">
+
+            <div class="col-6 mb-3">
+                <h6>(@L("CashoutMethodType")) @L("Title") :</h6>
+                @Model.CashoutMethodTypeTitle
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("User")) @L("Name") :</h6>
+                @Model.UserName
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

@@ -4,6 +4,32 @@
     {
         public static class Common
         {
+            public const string Chatconversations = "Administration.Chat.Chatconversations";
+            public const string UserDefaultCashoutMethodTypes = "Administration.Cashout.UserDefaultCashoutMethodTypes";
+            public const string CashoutMethodTypes = "Administration.Cashout.CashoutMethodTypes";
+            public const string TransPortdetails = "Products.TransPortdetails";
+            public const string Coupons = "Administration.Bookings.Coupons";
+            public const string PartnerShips = "Administration.AdminConfig.PartnerShips";
+            public const string Partners = "Account.Partners";
+            public const string Orders = "Administration.Bookings.Orders";
+            public const string ClientSettings = "Administration.Client.ClientSettings";
+            public const string BookingClaims = "Administration.Booking.BookingClaims";
+            public const string ClaimReasons = "Administration.Booking.ClaimReasons";
+            public const string BookingDetails = "Administration.Bookings.BookingDetails";
+            public const string Bookings = "Bookings.Bookings";
+            public const string Countries = "AdminConfig.Countries";
+            public const string Currencies = "Administration.AdminConfig.Currencies";
+            public const string UserSubcribers = "Administration.Account.UserSubcribers";
+            public const string ProductSchedules = "Administration.Products.ProductSchedules";
+            public const string ProductDetailCombos = "Administration.Product.ProductDetailCombos";
+            public const string ProductDetails = "Administration.Products.ProductDetails";
+            public const string UserReviewDetails = "Administration.Account.UserReviewDetails";
+            public const string UserReviews = "Administration.Account.UserReviews";
+            public const string ProductReviewDetails = "Administration.Products.ProductReviewDetails";
+            public const string ProductReviews = "Administration.Products.ProductReviews";
+            public const string ProductUtilities = "Administration.Products.ProductUtilities";
+            public const string Utilities = "Administration.Products.Utilities";
+            public const string SaveItems = "Administration.Account.SaveItems";
             public const string HelpContents = "Administration.Help.HelpContents";
             public const string HelpCategories = "Administration.Help.HelpCategories";
             public const string BlogProductRelateds = "Blog.BlogProductRelateds";
@@ -14,7 +40,7 @@
             public const string Banks = "Administration.AdminConfig.Banks";
             public const string ProductImages = "Products.ProductImages";
             public const string Products = "Administration.Products.Products";
-            public const string Products = "Products.Products";
+           
             public const string Categories = "Administration.Products.Categories";
             public const string Places = "Administration.Products.Places";
             public const string PlaceCategories = "Administration.Products.PlaceCategories";
