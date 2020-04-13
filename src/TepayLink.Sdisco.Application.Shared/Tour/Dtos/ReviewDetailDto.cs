@@ -11,7 +11,7 @@ namespace TepayLink.Sdisco.Tour.Dtos
         public string Reviewer { get; set; }
         public string Title { get; set; }
         public string Comment { get; set; }
-        public float Ratting { get; set; }
+        public double Ratting { get; set; }
         public string Avatar { get; set; }
         public DateTime ReviewDate { get; set; }
         

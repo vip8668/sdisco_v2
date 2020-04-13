@@ -1,4 +1,5 @@
-﻿using System;
+﻿using TepayLink.Sdisco.Products;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities.Auditing;
@@ -41,5 +42,10 @@ namespace TepayLink.Sdisco.Products
 		public virtual string Reviewer { get; set; }
 		
 
+		public virtual long ProductId { get; set; }
+		
+        [ForeignKey("ProductId")]
+		public Product ProductFk { get; set; }
+		
     }
 }

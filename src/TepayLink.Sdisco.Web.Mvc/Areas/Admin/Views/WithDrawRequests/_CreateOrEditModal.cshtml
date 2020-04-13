@@ -1,0 +1,57 @@
+﻿@using TepayLink.Sdisco.Account;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.WithDrawRequests
+@model CreateOrEditWithDrawRequestModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditWithDrawRequest")) : L("CreateNewWithDrawRequest")))
+
+<div class="modal-body">
+        <div id="WithDrawRequestInformationsTab">
+            <form name="WithDrawRequestInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.WithDrawRequest.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="WithDrawRequest_UserId">@L("UserId")</label>
+									<input class="form-control m-input" id="WithDrawRequest_UserId" value="@Model.WithDrawRequest.UserId.ToString(CultureInfo.InvariantCulture)" type="number" name="userId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="WithDrawRequest_Amount">@L("Amount")</label>
+									<input class="form-control m-input" id="WithDrawRequest_Amount" value="@Model.WithDrawRequest.Amount.ToString(CultureInfo.InvariantCulture)" type="number" name="amount"  />
+								</div>
+					
+								@{
+					var selectListStatus = Html.GetEnumSelectList(typeof(WithDrawRequestStatus));
+					 foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_WithDrawRequestStatus_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="WithDrawRequest_Status">@L("Status")</label>
+										<select class="form-control m-input m-input--square" name="status" id="WithDrawRequest_Status" asp-for="@Model.WithDrawRequest.Status" asp-items="@selectListStatus">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="WithDrawRequest_TransactionId">@L("TransactionId")</label>
+									<input class="form-control m-input" id="WithDrawRequest_TransactionId" value="@Model.WithDrawRequest.TransactionId.ToString(CultureInfo.InvariantCulture)" type="number" name="transactionId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="WithDrawRequest_BankAccountId">@L("BankAccountId")</label>
+									<input class="form-control m-input" id="WithDrawRequest_BankAccountId" value="@Model.WithDrawRequest.BankAccountId.ToString(CultureInfo.InvariantCulture)" type="number" name="bankAccountId"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

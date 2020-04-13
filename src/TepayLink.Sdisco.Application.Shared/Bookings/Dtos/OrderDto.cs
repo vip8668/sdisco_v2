@@ -26,7 +26,7 @@ namespace TepayLink.Sdisco.Bookings.Dtos
 
 		public long CardId { get; set; }
 
-		public long CardNumber { get; set; }
+		public string CardNumber { get; set; }
 
 		public string Currency { get; set; }
 

@@ -21,6 +21,9 @@ namespace TepayLink.Sdisco.Products.Dtos
 		public ProductTypeEnum ProductType { get; set; }
 		
 		
+		public int Order { get; set; }
+		
+		
 
     }
 }

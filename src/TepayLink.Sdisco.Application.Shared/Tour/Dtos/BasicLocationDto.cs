@@ -21,11 +21,11 @@ namespace TepayLink.Sdisco.Tour.Dtos
         /// <summary>
         /// Lat
         /// </summary>
-        public float Lat { get; set; }
+        public double Lat { get; set; }
         /// <summary>
         /// Long
         /// </summary>
-        public float Long { get; set; }
+        public double Long { get; set; }
         /// <summary>
         /// Khoảng các
         /// </summary>

@@ -33,6 +33,18 @@ namespace TepayLink.Sdisco
 
         public static string UserIdentifier = "user_identifier";
 
+
+        //todo cho nay dua vao serversetting
+        public static double ServiceFeePercent = 0.05;
+        public static int SharePoint = 3;
+        public static int Booking = 100;
+        public static int CoppyPoint = 5;
+        public static int X_DAY_1 = 30;
+        public static int REFUND_PERCENT_1 = 100;
+        public static int X_DAY_2 = 7;
+        public static int REFUND_PERCENT_2 = 50;
+        public static string Domain = "";
+
         public const string ThemeDefault = "default";
         public const string Theme2 = "theme2";
         public const string Theme3 = "theme3";

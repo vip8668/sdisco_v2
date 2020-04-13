@@ -1,4 +1,7 @@
-﻿using TepayLink.Sdisco.Cashout;
+﻿using TepayLink.Sdisco.KOL;
+using TepayLink.Sdisco.Affiliate;
+using TepayLink.Sdisco.Places;
+using TepayLink.Sdisco.Cashout;
 using TepayLink.Sdisco.Search;
 using TepayLink.Sdisco.Client;
 
@@ -27,6 +30,26 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
 {
     public class SdiscoDbContext : AbpZeroDbContext<Tenant, Role, User, SdiscoDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<Transaction> Transactions { get; set; }
+
+        public virtual DbSet<WithDrawRequest> WithDrawRequests { get; set; }
+
+        public virtual DbSet<ShareTransaction> ShareTransactions { get; set; }
+
+        public virtual DbSet<PartnerRevenue> PartnerRevenues { get; set; }
+
+        public virtual DbSet<ShortLink> ShortLinks { get; set; }
+
+        public virtual DbSet<ChatMessageV2> ChatMessageV2s { get; set; }
+
+        public virtual DbSet<NearbyPlace> NearbyPlaces { get; set; }
+
+        public virtual DbSet<SuggestedProduct> SuggestedProducts { get; set; }
+
+        public virtual DbSet<RelatedProduct> RelatedProducts { get; set; }
+
+        public virtual DbSet<SimilarProduct> SimilarProducts { get; set; }
+
         public virtual DbSet<Chatconversation> Chatconversations { get; set; }
 
         public virtual DbSet<UserDefaultCashoutMethodType> UserDefaultCashoutMethodTypes { get; set; }
@@ -181,7 +204,57 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
            
            
            
-            modelBuilder.Entity<Chatconversation>(c =>
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+            modelBuilder.Entity<Transaction>(t =>
+            {
+                t.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<WithDrawRequest>(w =>
+            {
+                w.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ShareTransaction>(s =>
+            {
+                s.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<PartnerRevenue>(p =>
+            {
+                p.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ShortLink>(s =>
+            {
+                s.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<ChatMessageV2>(c =>
+            {
+                c.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<NearbyPlace>(n =>
+            {
+                n.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<SuggestedProduct>(s =>
+            {
+                s.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<RelatedProduct>(r =>
+            {
+                r.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<SimilarProduct>(s =>
+            {
+                s.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Chatconversation>(c =>
             {
                 c.HasIndex(e => new { e.TenantId });
             });

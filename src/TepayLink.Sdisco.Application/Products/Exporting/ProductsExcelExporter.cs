@@ -52,6 +52,9 @@ namespace TepayLink.Sdisco.Products.Exporting
                         L("IsBestSeller"),
                         L("IsTrending"),
                         L("IsTop"),
+                        L("ExtraData"),
+                        L("WhatWeDo"),
+                        L("LastBookTime"),
                         (L("Category")) + L("Name"),
                         (L("User")) + L("Name"),
                         (L("Place")) + L("Name"),
@@ -77,12 +80,18 @@ namespace TepayLink.Sdisco.Products.Exporting
                         _ => _.Product.IsBestSeller,
                         _ => _.Product.IsTrending,
                         _ => _.Product.IsTop,
+                        _ => _.Product.ExtraData,
+                        _ => _.Product.WhatWeDo,
+                        _ => _timeZoneConverter.Convert(_.Product.LastBookTime, _abpSession.TenantId, _abpSession.GetUserId()),
                         _ => _.CategoryName,
                         _ => _.UserName,
                         _ => _.PlaceName,
                         _ => _.ApplicationLanguageName
                         );
 
+					var lastBookTimeColumn = sheet.Column(20);
+                    lastBookTimeColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+					lastBookTimeColumn.AutoFit();
 					
 
                 });

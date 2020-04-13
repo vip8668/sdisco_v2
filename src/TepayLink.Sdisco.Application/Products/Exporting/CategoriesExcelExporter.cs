@@ -38,7 +38,8 @@ namespace TepayLink.Sdisco.Products.Exporting
                         L("Name"),
                         L("Image"),
                         L("Icon"),
-                        L("ProductType")
+                        L("ProductType"),
+                        L("Order")
                         );
 
                     AddObjects(
@@ -46,7 +47,8 @@ namespace TepayLink.Sdisco.Products.Exporting
                         _ => _.Category.Name,
                         _ => _.Category.Image,
                         _ => _.Category.Icon,
-                        _ => _.Category.ProductType
+                        _ => _.Category.ProductType,
+                        _ => _.Category.Order
                         );
 
 					

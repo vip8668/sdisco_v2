@@ -51,10 +51,10 @@ namespace TepayLink.Sdisco.Tour
         Task<List<BasicTourDto>> GetRelateTour(long itemId);
 
 
-        Task<List<SaveItemDto>> GetSaveItem(List<long> itemIds, ItemTypeEnum itemType);
+        Task<List<SaveItemDto>> GetSaveItem(List<long> itemIds);
 
 
-        Task<bool> IsSave(long itemIds, ItemTypeEnum itemType);
+        Task<bool> IsSave(long itemIds);
 
         Task<List<BasicTourDto>> GetTourByTourIds(List<long> tourIds);
 

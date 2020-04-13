@@ -22,6 +22,13 @@ namespace TepayLink.Sdisco.Products.Dtos
 
 		public int IsTrendingFilter { get; set; }
 
+		public string ExtraDataFilter { get; set; }
+
+		public string WhatWeDoFilter { get; set; }
+
+		public DateTime? MaxLastBookTimeFilter { get; set; }
+		public DateTime? MinLastBookTimeFilter { get; set; }
+
 
 		 public string CategoryNameFilter { get; set; }
 

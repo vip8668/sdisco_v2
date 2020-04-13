@@ -55,6 +55,14 @@
 					</div>
 
 							<div class="col-md-3">
+								<label for="AllowBookFilterId">@L("AllowBook")</label>
+								<select class="form-control" name="AllowBookFilter" id="AllowBookFilterId">
+									<option value="-1">@L("All")</option>
+									<option value="0">@L("False")</option>
+									<option value="1">@L("True")</option>
+								</select>
+                            </div>
+							<div class="col-md-3">
 								<div class="form-group">
 									<label for="ProductNameFilterId">(@L("Product")) @L("Name")</label>
 									<input type="text" class="form-control" name="productNameFilter" id="ProductNameFilterId">
@@ -82,10 +90,11 @@
 								<th>@L("TicketPrice")</th>
 								<th>@L("CostPrice")</th>
 								<th>@L("HotelPrice")</th>
-								<th>@L("StartDat")</th>
+								<th>@L("StartDate")</th>
 								<th>@L("EndDate")</th>
 								<th>@L("DepartureTime")</th>
 								<th>@L("Revenue")</th>
+								<th>@L("AllowBook")</th>
 								<th>@L("ProductName")</th>
                         </tr>
                     </thead>

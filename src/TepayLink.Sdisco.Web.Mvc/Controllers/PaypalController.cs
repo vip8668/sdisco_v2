@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TepayLink.Sdisco.Bookings;
 using TepayLink.Sdisco.MultiTenancy.Payments;
 using TepayLink.Sdisco.MultiTenancy.Payments.Paypal;
 using TepayLink.Sdisco.MultiTenancy.Payments.PayPal;
+using TepayLink.Sdisco.Payment;
 using TepayLink.Sdisco.Web.Models.Paypal;
 
 namespace TepayLink.Sdisco.Web.Controllers
@@ -14,50 +18,59 @@ namespace TepayLink.Sdisco.Web.Controllers
         private readonly PayPalPaymentGatewayConfiguration _payPalConfiguration;
         private readonly ISubscriptionPaymentRepository _subscriptionPaymentRepository;
         private readonly IPayPalPaymentAppService _payPalPaymentAppService;
+        private readonly Payment.IPaymentAppService _paymentAppService;
+        private readonly IRepository<Bookings.Order, long> _orderRepository;
 
         public PayPalController(
             PayPalPaymentGatewayConfiguration payPalConfiguration,
             ISubscriptionPaymentRepository subscriptionPaymentRepository, 
-            IPayPalPaymentAppService payPalPaymentAppService)
+            IPayPalPaymentAppService payPalPaymentAppService,
+            Payment.IPaymentAppService paymentAppService,
+             IRepository<Bookings.Order, long> orderRepository)
         {
             _payPalConfiguration = payPalConfiguration;
             _subscriptionPaymentRepository = subscriptionPaymentRepository;
             _payPalPaymentAppService = payPalPaymentAppService;
             _payPalConfiguration = payPalConfiguration;
+            _paymentAppService = paymentAppService;
+            _orderRepository = orderRepository;
         }
 
-        public async Task<ActionResult> Purchase(long paymentId)
+        public async Task<ActionResult> Purchase(long paymentId, string successUrl, string failUrl)
         {
-            var payment = await _subscriptionPaymentRepository.GetAsync(paymentId);
-            if (payment.Status != SubscriptionPaymentStatus.NotPaid)
+            var uraaal = HttpContext.Session.GetString("successUrl" + paymentId);
+            Console.WriteLine(uraaal);
+            var order = _orderRepository.FirstOrDefault(p => p.Id == paymentId);
+            if (order == null || order.Status != OrderStatus.Init)
             {
-                throw new ApplicationException("This payment is processed before");
+                var url = failUrl + (failUrl.Contains("?") ? "&" : "?") + "failmessage=" + "Đơn hàng không tồn tại hoặc đã được thanh toán";
+                return Redirect(url);
             }
 
-            if (payment.IsRecurring)
-            {
-                throw new ApplicationException("PayPal integration doesn't support recurring payments !");
-            }
+            HttpContext.Session.SetString("successUrl" + paymentId, successUrl);
+            HttpContext.Session.SetString("failUrl" + paymentId, failUrl);
+
+
+
 
             var model = new PayPalPurchaseViewModel
             {
-                PaymentId = payment.Id,
-                Amount = payment.Amount,
-                Description = payment.Description,
+                PaymentId = order.Id,
+                Amount = order.Amount,
+                Description = order.Note,
                 Configuration = _payPalConfiguration
             };
-
             return View(model);
         }
 
         [HttpPost]
         [UnitOfWork(IsDisabled = true)]
-        public async Task<ActionResult> ConfirmPayment(long paymentId, string paypalOrderId)
+        public async Task<ActionResult> ConfirmPayment(long paymentId, string paypalPaymentId, string paypalPayerId)
         {
             try
             {
-                await _payPalPaymentAppService.ConfirmPayment(paymentId, paypalOrderId);
-            
+                await _paymentAppService.ConfirmPaymentPaypal(paymentId, paypalPaymentId, paypalPayerId);
+
                 var returnUrl = await GetSuccessUrlAsync(paymentId);
                 return Redirect(returnUrl);
             }
@@ -72,14 +85,17 @@ namespace TepayLink.Sdisco.Web.Controllers
 
         private async Task<string> GetSuccessUrlAsync(long paymentId)
         {
-            var payment = await _subscriptionPaymentRepository.GetAsync(paymentId);
-            return payment.SuccessUrl + (payment.SuccessUrl.Contains("?") ? "&" : "?") + "paymentId=" + paymentId;
+            var url = HttpContext.Session.GetString("successUrl" + paymentId);
+            var order = _orderRepository.FirstOrDefault(p => p.Id == (paymentId));
+            return url + (url.Contains("?") ? "&" : "?") + "bookingid=" + order?.BookingId;
         }
 
         private async Task<string> GetErrorUrlAsync(long paymentId)
         {
-            var payment = await _subscriptionPaymentRepository.GetAsync(paymentId);
-            return payment.ErrorUrl + (payment.ErrorUrl.Contains("?") ? "&" : "?") + "paymentId=" + paymentId;
+            var url = HttpContext.Session.GetString("failUrl" + paymentId);
+            var order = _orderRepository.FirstOrDefault(p => p.Id == (paymentId));
+
+            return url + (url.Contains("?") ? "&" : "?") + "bookingid=" + order?.BookingId + "&failmessage=Giao dịch không thành công";
         }
     }
 }

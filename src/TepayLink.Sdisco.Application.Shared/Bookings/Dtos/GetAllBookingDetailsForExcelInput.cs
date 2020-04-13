@@ -10,6 +10,9 @@ namespace TepayLink.Sdisco.Bookings.Dtos
 		public decimal? MaxRefundAmountFilter { get; set; }
 		public decimal? MinRefundAmountFilter { get; set; }
 
+		public long? MaxProductDetailComboIdFilter { get; set; }
+		public long? MinProductDetailComboIdFilter { get; set; }
+
 
 		 public string ProductNameFilter { get; set; }
 

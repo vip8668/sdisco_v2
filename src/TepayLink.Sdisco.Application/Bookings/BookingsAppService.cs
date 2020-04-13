@@ -23,12 +23,12 @@ namespace TepayLink.Sdisco.Bookings
 	[AbpAuthorize(AppPermissions.Pages_Bookings)]
     public class BookingsAppService : SdiscoAppServiceBase, IBookingsAppService
     {
-		 private readonly IRepository<Booking> _bookingRepository;
+		 private readonly IRepository<Booking, long> _bookingRepository;
 		 private readonly IBookingsExcelExporter _bookingsExcelExporter;
 		 private readonly IRepository<Product,long> _lookup_productRepository;
 		 
 
-		  public BookingsAppService(IRepository<Booking> bookingRepository, IBookingsExcelExporter bookingsExcelExporter , IRepository<Product, long> lookup_productRepository) 
+		  public BookingsAppService(IRepository<Booking, long> bookingRepository, IBookingsExcelExporter bookingsExcelExporter , IRepository<Product, long> lookup_productRepository) 
 		  {
 			_bookingRepository = bookingRepository;
 			_bookingsExcelExporter = bookingsExcelExporter;
@@ -84,7 +84,7 @@ namespace TepayLink.Sdisco.Bookings
             );
          }
 		 
-		 public async Task<GetBookingForViewDto> GetBookingForView(int id)
+		 public async Task<GetBookingForViewDto> GetBookingForView(long id)
          {
             var booking = await _bookingRepository.GetAsync(id);
 
@@ -100,7 +100,7 @@ namespace TepayLink.Sdisco.Bookings
          }
 		 
 		 [AbpAuthorize(AppPermissions.Pages_Bookings_Edit)]
-		 public async Task<GetBookingForEditOutput> GetBookingForEdit(EntityDto input)
+		 public async Task<GetBookingForEditOutput> GetBookingForEdit(EntityDto<long> input)
          {
             var booking = await _bookingRepository.FirstOrDefaultAsync(input.Id);
            
@@ -143,12 +143,12 @@ namespace TepayLink.Sdisco.Bookings
 		 [AbpAuthorize(AppPermissions.Pages_Bookings_Edit)]
 		 protected virtual async Task Update(CreateOrEditBookingDto input)
          {
-            var booking = await _bookingRepository.FirstOrDefaultAsync((int)input.Id);
+            var booking = await _bookingRepository.FirstOrDefaultAsync((long)input.Id);
              ObjectMapper.Map(input, booking);
          }
 
 		 [AbpAuthorize(AppPermissions.Pages_Bookings_Delete)]
-         public async Task Delete(EntityDto input)
+         public async Task Delete(EntityDto<long> input)
          {
             await _bookingRepository.DeleteAsync(input.Id);
          } 

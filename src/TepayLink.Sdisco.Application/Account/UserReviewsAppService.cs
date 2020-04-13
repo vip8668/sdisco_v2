@@ -21,11 +21,11 @@ namespace TepayLink.Sdisco.Account
 	[AbpAuthorize(AppPermissions.Pages_Administration_UserReviews)]
     public class UserReviewsAppService : SdiscoAppServiceBase, IUserReviewsAppService
     {
-		 private readonly IRepository<UserReview> _userReviewRepository;
+		 private readonly IRepository<UserReview, long> _userReviewRepository;
 		 private readonly IUserReviewsExcelExporter _userReviewsExcelExporter;
 		 
 
-		  public UserReviewsAppService(IRepository<UserReview> userReviewRepository, IUserReviewsExcelExporter userReviewsExcelExporter ) 
+		  public UserReviewsAppService(IRepository<UserReview, long> userReviewRepository, IUserReviewsExcelExporter userReviewsExcelExporter ) 
 		  {
 			_userReviewRepository = userReviewRepository;
 			_userReviewsExcelExporter = userReviewsExcelExporter;
@@ -66,7 +66,7 @@ namespace TepayLink.Sdisco.Account
             );
          }
 		 
-		 public async Task<GetUserReviewForViewDto> GetUserReviewForView(int id)
+		 public async Task<GetUserReviewForViewDto> GetUserReviewForView(long id)
          {
             var userReview = await _userReviewRepository.GetAsync(id);
 
@@ -76,7 +76,7 @@ namespace TepayLink.Sdisco.Account
          }
 		 
 		 [AbpAuthorize(AppPermissions.Pages_Administration_UserReviews_Edit)]
-		 public async Task<GetUserReviewForEditOutput> GetUserReviewForEdit(EntityDto input)
+		 public async Task<GetUserReviewForEditOutput> GetUserReviewForEdit(EntityDto<long> input)
          {
             var userReview = await _userReviewRepository.FirstOrDefaultAsync(input.Id);
            
@@ -113,12 +113,12 @@ namespace TepayLink.Sdisco.Account
 		 [AbpAuthorize(AppPermissions.Pages_Administration_UserReviews_Edit)]
 		 protected virtual async Task Update(CreateOrEditUserReviewDto input)
          {
-            var userReview = await _userReviewRepository.FirstOrDefaultAsync((int)input.Id);
+            var userReview = await _userReviewRepository.FirstOrDefaultAsync((long)input.Id);
              ObjectMapper.Map(input, userReview);
          }
 
 		 [AbpAuthorize(AppPermissions.Pages_Administration_UserReviews_Delete)]
-         public async Task Delete(EntityDto input)
+         public async Task Delete(EntityDto<long> input)
          {
             await _userReviewRepository.DeleteAsync(input.Id);
          } 

@@ -37,14 +37,18 @@ namespace TepayLink.Sdisco.Products.Exporting
                         sheet,
                         L("Image"),
                         L("Name"),
-                        L("Status")
+                        L("Status"),
+                        L("IsTop"),
+                        L("BookingCount")
                         );
 
                     AddObjects(
                         sheet, 2, detinations,
                         _ => _.Detination.Image,
                         _ => _.Detination.Name,
-                        _ => _.Detination.Status
+                        _ => _.Detination.Status,
+                        _ => _.Detination.IsTop,
+                        _ => _.Detination.BookingCount
                         );
 
 					

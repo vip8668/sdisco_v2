@@ -6,7 +6,11 @@
         var _modalManager;
         var _$productReviewDetailInformationForm = null;
 
-		
+		        var _ProductReviewDetailproductLookupTableModal = new app.ModalManager({
+            viewUrl: abp.appPath + 'Admin/ProductReviewDetails/ProductLookupTableModal',
+            scriptUrl: abp.appPath + 'view-resources/Areas/Admin/Views/ProductReviewDetails/_ProductReviewDetailProductLookupTableModal.js',
+            modalClass: 'ProductLookupTableModal'
+        });
 
         this.init = function (modalManager) {
             _modalManager = modalManager;
@@ -21,10 +25,29 @@
             _$productReviewDetailInformationForm.validate();
         };
 
-		  
+		          $('#OpenProductLookupTableButton').click(function () {
+
+            var productReviewDetail = _$productReviewDetailInformationForm.serializeFormToObject();
+
+            _ProductReviewDetailproductLookupTableModal.open({ id: productReviewDetail.productId, displayName: productReviewDetail.productName }, function (data) {
+                _$productReviewDetailInformationForm.find('input[name=productName]').val(data.displayName); 
+                _$productReviewDetailInformationForm.find('input[name=productId]').val(data.id); 
+            });
+        });
+		
+		$('#ClearProductNameButton').click(function () {
+                _$productReviewDetailInformationForm.find('input[name=productName]').val(''); 
+                _$productReviewDetailInformationForm.find('input[name=productId]').val(''); 
+        });
+		
+
 
         this.save = function () {
             if (!_$productReviewDetailInformationForm.valid()) {
+                return;
+            }
+            if ($('#ProductReviewDetail_ProductId').prop('required') && $('#ProductReviewDetail_ProductId').val() == '') {
+                abp.message.error(app.localize('{0}IsRequired', app.localize('Product')));
                 return;
             }
 

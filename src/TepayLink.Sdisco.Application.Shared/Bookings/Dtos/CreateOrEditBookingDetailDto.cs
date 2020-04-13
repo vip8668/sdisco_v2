@@ -12,6 +12,9 @@ namespace TepayLink.Sdisco.Bookings.Dtos
 		public decimal? RefundAmount { get; set; }
 		
 		
+		public long ProductDetailComboId { get; set; }
+		
+		
 		 public long? ProductId { get; set; }
 		 
 		 

@@ -11,13 +11,13 @@ namespace TepayLink.Sdisco.Account
     {
         Task<PagedResultDto<GetUserReviewForViewDto>> GetAll(GetAllUserReviewsInput input);
 
-        Task<GetUserReviewForViewDto> GetUserReviewForView(int id);
+        Task<GetUserReviewForViewDto> GetUserReviewForView(long id);
 
-		Task<GetUserReviewForEditOutput> GetUserReviewForEdit(EntityDto input);
+		Task<GetUserReviewForEditOutput> GetUserReviewForEdit(EntityDto<long> input);
 
 		Task CreateOrEdit(CreateOrEditUserReviewDto input);
 
-		Task Delete(EntityDto input);
+		Task Delete(EntityDto<long> input);
 
 		Task<FileDto> GetUserReviewsToExcel(GetAllUserReviewsForExcelInput input);
 

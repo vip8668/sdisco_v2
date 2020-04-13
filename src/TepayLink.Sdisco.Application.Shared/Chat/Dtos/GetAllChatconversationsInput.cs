@@ -7,24 +7,26 @@ namespace TepayLink.Sdisco.Chat.Dtos
     {
 		public string Filter { get; set; }
 
-		public long? MaxChatConversationIdFilter { get; set; }
-		public long? MinChatConversationIdFilter { get; set; }
-
 		public long? MaxUserIdFilter { get; set; }
 		public long? MinUserIdFilter { get; set; }
 
-		public string MessageFilter { get; set; }
+		public long? MaxFriendUserIdFilter { get; set; }
+		public long? MinFriendUserIdFilter { get; set; }
 
-		public int? MaxSideFilter { get; set; }
-		public int? MinSideFilter { get; set; }
+		public int? MaxUnreadCountFilter { get; set; }
+		public int? MinUnreadCountFilter { get; set; }
 
-		public int? MaxReadStateFilter { get; set; }
-		public int? MinReadStateFilter { get; set; }
+		public string ShardChatConversationIdFilter { get; set; }
 
-		public int? MaxReceiverReadStateFilter { get; set; }
-		public int? MinReceiverReadStateFilter { get; set; }
+		public long? MaxBookingIdFilter { get; set; }
+		public long? MinBookingIdFilter { get; set; }
 
-		public string SharedMessageIdFilter { get; set; }
+		public string LastMessageFilter { get; set; }
+
+		public int SideFilter { get; set; }
+
+		public int? MaxStatusFilter { get; set; }
+		public int? MinStatusFilter { get; set; }
 
 
 

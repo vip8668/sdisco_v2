@@ -15,7 +15,30 @@
                     <input type="hidden" name="id" value="@Model.ProductReviewDetail.Id" />
                 }
 
-				
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="ProductReviewDetail_ProductId" value="@Model.ProductReviewDetail.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="ProductReviewDetail_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+
 
 				
 

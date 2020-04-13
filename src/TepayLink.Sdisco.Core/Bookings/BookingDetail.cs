@@ -20,7 +20,7 @@ namespace TepayLink.Sdisco.Bookings
 		
 		public virtual DateTime EndDate { get; set; }
 		
-		public virtual DateTime TripLength { get; set; }
+		public virtual int TripLength { get; set; }
 		
 		public virtual BookingStatusEnum Status { get; set; }
 		
@@ -49,6 +49,8 @@ namespace TepayLink.Sdisco.Bookings
 		public virtual DateTime? CancelDate { get; set; }
 		
 		public virtual decimal? RefundAmount { get; set; }
+		
+		public virtual long? ProductDetailComboId { get; set; }
 		
 
 		public virtual long? ProductId { get; set; }

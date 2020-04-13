@@ -71,6 +71,23 @@
 
 								</select>
                             </div>
+							<div class="col-md-3">
+								<label for="IsTopFilterId">@L("IsTop")</label>
+								<select class="form-control" name="IsTopFilter" id="IsTopFilterId">
+									<option value="-1">@L("All")</option>
+									<option value="0">@L("False")</option>
+									<option value="1">@L("True")</option>
+								</select>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinBookingCountFilterId">@L("MinMax") @L("BookingCount")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minBookingCountFilter" id="MinBookingCountFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxBookingCountFilter"  id="MaxBookingCountFilterId"/>
+									</div>
+                                </div>
+                            </div>
 
                 </div>
                 <div class="row mb-4">
@@ -87,6 +104,8 @@
 								<th>@L("Image")</th>
 								<th>@L("Name")</th>
 								<th>@L("Status")</th>
+								<th>@L("IsTop")</th>
+								<th>@L("BookingCount")</th>
                         </tr>
                     </thead>
                 </table>

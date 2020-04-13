@@ -23,6 +23,13 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Startup
                         order: 1
                     )
                 ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ChatMessageV2s,
+                        L("ChatMessageV2s"),
+                        url: "Admin/ChatMessageV2s",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_ChatMessageV2s
+                    )
+                ).AddItem(new MenuItemDefinition(
                         AdminPageNames.Common.TransPortdetails,
                         L("TransPortdetails"),
                         url: "Admin/TransPortdetails",
@@ -132,6 +139,69 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Startup
                             order: 3
                         )
                     ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.Transactions,
+                        L("Transactions"),
+                        url: "Admin/Transactions",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_Transactions
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.WithDrawRequests,
+                        L("WithDrawRequests"),
+                        url: "Admin/WithDrawRequests",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_WithDrawRequests
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ShareTransactions,
+                        L("ShareTransactions"),
+                        url: "Admin/ShareTransactions",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ShareTransactions
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.PartnerRevenues,
+                        L("PartnerRevenues"),
+                        url: "Admin/PartnerRevenues",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_PartnerRevenues
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.ShortLinks,
+                        L("ShortLinks"),
+                        url: "Admin/ShortLinks",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_ShortLinks
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.NearbyPlaces,
+                        L("NearbyPlaces"),
+                        url: "Admin/NearbyPlaces",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_NearbyPlaces
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.SuggestedProducts,
+                        L("SuggestedProducts"),
+                        url: "Admin/SuggestedProducts",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_SuggestedProducts
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.RelatedProducts,
+                        L("RelatedProducts"),
+                        url: "Admin/RelatedProducts",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_RelatedProducts
+                    )
+                ).AddItem(new MenuItemDefinition(
+                        AdminPageNames.Common.SimilarProducts,
+                        L("SimilarProducts"),
+                        url: "Admin/SimilarProducts",
+                        icon: "flaticon-more",
+                        requiredPermissionName: AppPermissions.Pages_Administration_SimilarProducts
+                    )
+                ).AddItem(new MenuItemDefinition(
                         AdminPageNames.Common.Chatconversations,
                         L("Chatconversations"),
                         url: "Admin/Chatconversations",

@@ -1,0 +1,78 @@
+﻿@using TepayLink.Sdisco.Account;
+					@using TepayLink.Sdisco.Account;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Transactions
+@model CreateOrEditTransactionModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditTransaction")) : L("CreateNewTransaction")))
+
+<div class="modal-body">
+        <div id="TransactionInformationsTab">
+            <form name="TransactionInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.Transaction.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="Transaction_UserId">@L("UserId")</label>
+									<input class="form-control m-input" id="Transaction_UserId" value="@Model.Transaction.UserId.ToString(CultureInfo.InvariantCulture)" type="number" name="userId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Transaction_Amount">@L("Amount")</label>
+									<input class="form-control m-input" id="Transaction_Amount" value="@Model.Transaction.Amount.ToString(CultureInfo.InvariantCulture)" type="number" name="amount"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Transaction_Side">@L("Side")</label>
+									<input class="form-control m-input" id="Transaction_Side" value="@Model.Transaction.Side.ToString(CultureInfo.InvariantCulture)" type="number" name="side"  />
+								</div>
+					
+								@{
+					var selectListTransType = Html.GetEnumSelectList(typeof(TransactionType));
+					 foreach (var selectOption in selectListTransType) { selectOption.Text = L("Enum_TransactionType_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Transaction_TransType">@L("TransType")</label>
+										<select class="form-control m-input m-input--square" name="transType" id="Transaction_TransType" asp-for="@Model.Transaction.TransType" asp-items="@selectListTransType">
+									</select>
+								</div>
+					
+								@{
+					var selectListWalletType = Html.GetEnumSelectList(typeof(WalletTypeEnum));
+					 foreach (var selectOption in selectListWalletType) { selectOption.Text = L("Enum_WalletTypeEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="Transaction_WalletType">@L("WalletType")</label>
+										<select class="form-control m-input m-input--square" name="walletType" id="Transaction_WalletType" asp-for="@Model.Transaction.WalletType" asp-items="@selectListWalletType">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="Transaction_BookingDetailId">@L("BookingDetailId")</label>
+									<input class="form-control m-input" id="Transaction_BookingDetailId" value="@Model.Transaction.BookingDetailId?.ToString(CultureInfo.InvariantCulture)" type="number" name="bookingDetailId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Transaction_RefId">@L("RefId")</label>
+									<input class="form-control m-input" id="Transaction_RefId" value="@Model.Transaction.RefId?.ToString(CultureInfo.InvariantCulture)" type="number" name="refId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="Transaction_Descrition">@L("Descrition")</label>
+									<input class="form-control" id="Transaction_Descrition" value="@Model.Transaction.Descrition" type="text" name="descrition"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

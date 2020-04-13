@@ -1,4 +1,5 @@
-﻿
+﻿using TepayLink.Sdisco.Chat;
+
 using System;
 using Abp.Application.Services.Dto;
 using System.ComponentModel.DataAnnotations;
@@ -8,25 +9,28 @@ namespace TepayLink.Sdisco.Chat.Dtos
     public class CreateOrEditChatconversationDto : EntityDto<long?>
     {
 
-		public long ChatConversationId { get; set; }
-		
-		
 		public long UserId { get; set; }
 		
 		
-		public string Message { get; set; }
+		public long FriendUserId { get; set; }
 		
 		
-		public int Side { get; set; }
+		public int UnreadCount { get; set; }
 		
 		
-		public int ReadState { get; set; }
+		public string ShardChatConversationId { get; set; }
 		
 		
-		public int ReceiverReadState { get; set; }
+		public long? BookingId { get; set; }
 		
 		
-		public string SharedMessageId { get; set; }
+		public string LastMessage { get; set; }
+		
+		
+		public ChatSide Side { get; set; }
+		
+		
+		public int Status { get; set; }
 		
 		
 

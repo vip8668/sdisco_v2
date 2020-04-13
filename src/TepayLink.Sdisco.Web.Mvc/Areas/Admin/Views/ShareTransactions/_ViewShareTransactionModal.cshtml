@@ -1,0 +1,40 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ShareTransactions
+@model ShareTransactionViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ShareTransactionInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("UserId") :</h6>
+                @Model.ShareTransaction.UserId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Type") :</h6>
+                @L("Enum_RevenueTypeEnum_" + (int)Model.ShareTransaction.Type)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("IP") :</h6>
+                @Model.ShareTransaction.IP
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Point") :</h6>
+                @Model.ShareTransaction.Point
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ProductId") :</h6>
+                @Model.ShareTransaction.ProductId
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

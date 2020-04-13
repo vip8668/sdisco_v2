@@ -1,0 +1,52 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Transactions
+@model TransactionViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="TransactionInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("UserId") :</h6>
+                @Model.Transaction.UserId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Amount") :</h6>
+                @Model.Transaction.Amount
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Side") :</h6>
+                @Model.Transaction.Side
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("TransType") :</h6>
+                @L("Enum_TransactionType_" + (int)Model.Transaction.TransType)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("WalletType") :</h6>
+                @L("Enum_WalletTypeEnum_" + (int)Model.Transaction.WalletType)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("BookingDetailId") :</h6>
+                @Model.Transaction.BookingDetailId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("RefId") :</h6>
+                @Model.Transaction.RefId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Descrition") :</h6>
+                @Model.Transaction.Descrition
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

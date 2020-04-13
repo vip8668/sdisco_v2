@@ -35,6 +35,8 @@ namespace TepayLink.Sdisco.Products.Dtos
 		public string Reviewer { get; set; }
 
 
+		 public long? ProductId { get; set; }
 
+		 
     }
 }

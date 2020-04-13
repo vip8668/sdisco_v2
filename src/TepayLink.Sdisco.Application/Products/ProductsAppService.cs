@@ -56,7 +56,7 @@ namespace TepayLink.Sdisco.Products
 						.Include( e => e.HostUserFk)
 						.Include( e => e.PlaceFk)
 						.Include( e => e.LanguageFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Name.Contains(input.Filter) || e.Description.Contains(input.Filter) || e.Policies.Contains(input.Filter) || e.StartTime.Contains(input.Filter) || e.FileName.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Name.Contains(input.Filter) || e.Description.Contains(input.Filter) || e.Policies.Contains(input.Filter) || e.StartTime.Contains(input.Filter) || e.FileName.Contains(input.Filter) || e.ExtraData.Contains(input.Filter) || e.WhatWeDo.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameFilter),  e => e.Name == input.NameFilter)
 						.WhereIf(input.TypeFilter > -1, e => e.Type == typeFilter)
 						.WhereIf(input.StatusFilter > -1, e => e.Status == statusFilter)
@@ -65,6 +65,10 @@ namespace TepayLink.Sdisco.Products
 						.WhereIf(input.MinPriceFilter != null, e => e.Price >= input.MinPriceFilter)
 						.WhereIf(input.MaxPriceFilter != null, e => e.Price <= input.MaxPriceFilter)
 						.WhereIf(input.IsTrendingFilter > -1,  e => (input.IsTrendingFilter == 1 && e.IsTrending) || (input.IsTrendingFilter == 0 && !e.IsTrending) )
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ExtraDataFilter),  e => e.ExtraData == input.ExtraDataFilter)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.WhatWeDoFilter),  e => e.WhatWeDo == input.WhatWeDoFilter)
+						.WhereIf(input.MinLastBookTimeFilter != null, e => e.LastBookTime >= input.MinLastBookTimeFilter)
+						.WhereIf(input.MaxLastBookTimeFilter != null, e => e.LastBookTime <= input.MaxLastBookTimeFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.CategoryNameFilter), e => e.CategoryFk != null && e.CategoryFk.Name == input.CategoryNameFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.UserNameFilter), e => e.HostUserFk != null && e.HostUserFk.Name == input.UserNameFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PlaceNameFilter), e => e.PlaceFk != null && e.PlaceFk.Name == input.PlaceNameFilter)
@@ -107,6 +111,9 @@ namespace TepayLink.Sdisco.Products
                                 IsBestSeller = o.IsBestSeller,
                                 IsTrending = o.IsTrending,
                                 IsTop = o.IsTop,
+                                ExtraData = o.ExtraData,
+                                WhatWeDo = o.WhatWeDo,
+                                LastBookTime = o.LastBookTime,
                                 Id = o.Id
 							},
                          	CategoryName = s1 == null ? "" : s1.Name.ToString(),
@@ -238,7 +245,7 @@ namespace TepayLink.Sdisco.Products
 						.Include( e => e.HostUserFk)
 						.Include( e => e.PlaceFk)
 						.Include( e => e.LanguageFk)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Name.Contains(input.Filter) || e.Description.Contains(input.Filter) || e.Policies.Contains(input.Filter) || e.StartTime.Contains(input.Filter) || e.FileName.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Name.Contains(input.Filter) || e.Description.Contains(input.Filter) || e.Policies.Contains(input.Filter) || e.StartTime.Contains(input.Filter) || e.FileName.Contains(input.Filter) || e.ExtraData.Contains(input.Filter) || e.WhatWeDo.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameFilter),  e => e.Name == input.NameFilter)
 						.WhereIf(input.TypeFilter > -1, e => e.Type == typeFilter)
 						.WhereIf(input.StatusFilter > -1, e => e.Status == statusFilter)
@@ -247,6 +254,10 @@ namespace TepayLink.Sdisco.Products
 						.WhereIf(input.MinPriceFilter != null, e => e.Price >= input.MinPriceFilter)
 						.WhereIf(input.MaxPriceFilter != null, e => e.Price <= input.MaxPriceFilter)
 						.WhereIf(input.IsTrendingFilter > -1,  e => (input.IsTrendingFilter == 1 && e.IsTrending) || (input.IsTrendingFilter == 0 && !e.IsTrending) )
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ExtraDataFilter),  e => e.ExtraData == input.ExtraDataFilter)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.WhatWeDoFilter),  e => e.WhatWeDo == input.WhatWeDoFilter)
+						.WhereIf(input.MinLastBookTimeFilter != null, e => e.LastBookTime >= input.MinLastBookTimeFilter)
+						.WhereIf(input.MaxLastBookTimeFilter != null, e => e.LastBookTime <= input.MaxLastBookTimeFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.CategoryNameFilter), e => e.CategoryFk != null && e.CategoryFk.Name == input.CategoryNameFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.UserNameFilter), e => e.HostUserFk != null && e.HostUserFk.Name == input.UserNameFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.PlaceNameFilter), e => e.PlaceFk != null && e.PlaceFk.Name == input.PlaceNameFilter)
@@ -285,6 +296,9 @@ namespace TepayLink.Sdisco.Products
                                 IsBestSeller = o.IsBestSeller,
                                 IsTrending = o.IsTrending,
                                 IsTop = o.IsTop,
+                                ExtraData = o.ExtraData,
+                                WhatWeDo = o.WhatWeDo,
+                                LastBookTime = o.LastBookTime,
                                 Id = o.Id
 							},
                          	CategoryName = s1 == null ? "" : s1.Name.ToString(),

@@ -44,6 +44,8 @@ namespace TepayLink.Sdisco.Bookings
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Note.Contains(input.Filter))
 						.WhereIf(input.MinRefundAmountFilter != null, e => e.RefundAmount >= input.MinRefundAmountFilter)
 						.WhereIf(input.MaxRefundAmountFilter != null, e => e.RefundAmount <= input.MaxRefundAmountFilter)
+						.WhereIf(input.MinProductDetailComboIdFilter != null, e => e.ProductDetailComboId >= input.MinProductDetailComboIdFilter)
+						.WhereIf(input.MaxProductDetailComboIdFilter != null, e => e.ProductDetailComboId <= input.MaxProductDetailComboIdFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductNameFilter), e => e.ProductFk != null && e.ProductFk.Name == input.ProductNameFilter);
 
 			var pagedAndFilteredBookingDetails = filteredBookingDetails
@@ -75,6 +77,7 @@ namespace TepayLink.Sdisco.Bookings
                                 Note = o.Note,
                                 CancelDate = o.CancelDate,
                                 RefundAmount = o.RefundAmount,
+                                ProductDetailComboId = o.ProductDetailComboId,
                                 Id = o.Id
 							},
                          	ProductName = s1 == null ? "" : s1.Name.ToString()
@@ -165,6 +168,8 @@ namespace TepayLink.Sdisco.Bookings
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Note.Contains(input.Filter))
 						.WhereIf(input.MinRefundAmountFilter != null, e => e.RefundAmount >= input.MinRefundAmountFilter)
 						.WhereIf(input.MaxRefundAmountFilter != null, e => e.RefundAmount <= input.MaxRefundAmountFilter)
+						.WhereIf(input.MinProductDetailComboIdFilter != null, e => e.ProductDetailComboId >= input.MinProductDetailComboIdFilter)
+						.WhereIf(input.MaxProductDetailComboIdFilter != null, e => e.ProductDetailComboId <= input.MaxProductDetailComboIdFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductNameFilter), e => e.ProductFk != null && e.ProductFk.Name == input.ProductNameFilter);
 
 			var query = (from o in filteredBookingDetails
@@ -192,6 +197,7 @@ namespace TepayLink.Sdisco.Bookings
                                 Note = o.Note,
                                 CancelDate = o.CancelDate,
                                 RefundAmount = o.RefundAmount,
+                                ProductDetailComboId = o.ProductDetailComboId,
                                 Id = o.Id
 							},
                          	ProductName = s1 == null ? "" : s1.Name.ToString()

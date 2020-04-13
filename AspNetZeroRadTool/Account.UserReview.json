@@ -1,11 +1,11 @@
 {
-  "IsRegenerate": false,
+  "IsRegenerate": true,
   "MenuPosition": "admin",
   "RelativeNamespace": "Account",
   "EntityName": "UserReview",
   "EntityNamePlural": "UserReviews",
   "TableName": "UserReviews",
-  "PrimaryKeyType": "int",
+  "PrimaryKeyType": "long",
   "BaseClass": "AuditedEntity",
   "EntityHistory": false,
   "AutoMigration": false,
@@ -21,8 +21,8 @@
     {
       "Name": "UserId",
       "Type": "long",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -40,8 +40,8 @@
     {
       "Name": "ReviewCount",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -59,8 +59,8 @@
     {
       "Name": "Itineraty",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -78,8 +78,8 @@
     {
       "Name": "Service",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -97,8 +97,8 @@
     {
       "Name": "Transport",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -116,8 +116,8 @@
     {
       "Name": "GuideTour",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -135,8 +135,8 @@
     {
       "Name": "Food",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -154,8 +154,8 @@
     {
       "Name": "Rating",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,

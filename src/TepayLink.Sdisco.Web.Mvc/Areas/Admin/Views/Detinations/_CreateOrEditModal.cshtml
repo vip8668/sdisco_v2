@@ -39,6 +39,19 @@
 									</select>
 								</div>
 					
+								<div class="m-checkbox-list">
+									<label for="Detination_IsTop" class="kt-checkbox">
+										<input id="Detination_IsTop" type="checkbox" name="isTop" value="true" @Html.Raw(Model.Detination.IsTop ?"checked=\"checked\"":"") />
+										@L("IsTop")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="form-group">
+									<label for="Detination_BookingCount">@L("BookingCount")</label>
+									<input class="form-control m-input" id="Detination_BookingCount" value="@Model.Detination.BookingCount.ToString(CultureInfo.InvariantCulture)" type="number" name="bookingCount"  />
+								</div>
+					
 
             </form>
         </div>

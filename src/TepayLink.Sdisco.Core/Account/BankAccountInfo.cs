@@ -20,7 +20,7 @@ namespace TepayLink.Sdisco.Account
 		public virtual string AccountNo { get; set; }
 		
 
-		public virtual int? BankId { get; set; }
+		public virtual int BankId { get; set; }
 		
         [ForeignKey("BankId")]
 		public Bank BankFk { get; set; }

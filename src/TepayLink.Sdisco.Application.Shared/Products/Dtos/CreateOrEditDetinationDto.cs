@@ -20,6 +20,12 @@ namespace TepayLink.Sdisco.Products.Dtos
 		public DetinationStatusEnum Status { get; set; }
 		
 		
+		public bool IsTop { get; set; }
+		
+		
+		public int BookingCount { get; set; }
+		
+		
 
     }
 }

@@ -9,7 +9,7 @@ using Abp.Domain.Entities;
 namespace TepayLink.Sdisco.Bookings
 {
 	[Table("Bookings")]
-    public class Booking : AuditedEntity , IMayHaveTenant
+    public class Booking : AuditedEntity<long> , IMayHaveTenant
     {
 			public int? TenantId { get; set; }
 			

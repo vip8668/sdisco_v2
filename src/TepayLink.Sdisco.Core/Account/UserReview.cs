@@ -7,7 +7,7 @@ using Abp.Domain.Entities;
 namespace TepayLink.Sdisco.Account
 {
 	[Table("UserReviews")]
-    public class UserReview : AuditedEntity , IMayHaveTenant
+    public class UserReview : AuditedEntity<long> , IMayHaveTenant
     {
 			public int? TenantId { get; set; }
 			

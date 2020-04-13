@@ -28,7 +28,7 @@ namespace TepayLink.Sdisco.Blog
 		public virtual string Comment { get; set; }
 		
 
-		public virtual long? BlogPostId { get; set; }
+		public virtual long BlogPostId { get; set; }
 		
         [ForeignKey("BlogPostId")]
 		public BlogPost BlogPostFk { get; set; }

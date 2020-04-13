@@ -1,0 +1,72 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.RelatedProducts
+@model CreateOrEditRelatedProductModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditRelatedProduct")) : L("CreateNewRelatedProduct")))
+
+<div class="modal-body">
+        <div id="RelatedProductInformationsTab">
+            <form name="RelatedProductInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.RelatedProduct.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="ProductName">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName" name="productName" value="@Model.ProductName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProductLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="RelatedProduct_ProductId" value="@Model.RelatedProduct.ProductId" type="text" name="productId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="RelatedProduct_ProductId" value="" type="text" name="productId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="ProductName2">@L("Product")</label>
+									    <div class="input-group">
+											<input class="form-control" id="ProductName2" name="productName2" value="@Model.ProductName2" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenProduct2LookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearProductName2Button"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="RelatedProduct_RelatedProductId" value="@Model.RelatedProduct.RelatedProductId" type="text" name="relatedProductId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="RelatedProduct_RelatedProductId" value="" type="text" name="relatedProductId"  hidden/>
+								}
+
+
+
+				
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

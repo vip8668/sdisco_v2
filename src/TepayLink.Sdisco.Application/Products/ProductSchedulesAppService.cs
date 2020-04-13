@@ -41,6 +41,7 @@ namespace TepayLink.Sdisco.Products
 			var filteredProductSchedules = _productScheduleRepository.GetAll()
 						.Include( e => e.ProductFk)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Note.Contains(input.Filter) || e.DepartureTime.Contains(input.Filter))
+						.WhereIf(input.AllowBookFilter > -1,  e => (input.AllowBookFilter == 1 && e.AllowBook) || (input.AllowBookFilter == 0 && !e.AllowBook) )
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductNameFilter), e => e.ProductFk != null && e.ProductFk.Name == input.ProductNameFilter);
 
 			var pagedAndFilteredProductSchedules = filteredProductSchedules
@@ -63,10 +64,11 @@ namespace TepayLink.Sdisco.Products
                                 TicketPrice = o.TicketPrice,
                                 CostPrice = o.CostPrice,
                                 HotelPrice = o.HotelPrice,
-                                StartDat = o.StartDat,
+                                StartDate = o.StartDate,
                                 EndDate = o.EndDate,
                                 DepartureTime = o.DepartureTime,
                                 Revenue = o.Revenue,
+                                AllowBook = o.AllowBook,
                                 Id = o.Id
 							},
                          	ProductName = s1 == null ? "" : s1.Name.ToString()
@@ -155,6 +157,7 @@ namespace TepayLink.Sdisco.Products
 			var filteredProductSchedules = _productScheduleRepository.GetAll()
 						.Include( e => e.ProductFk)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Note.Contains(input.Filter) || e.DepartureTime.Contains(input.Filter))
+						.WhereIf(input.AllowBookFilter > -1,  e => (input.AllowBookFilter == 1 && e.AllowBook) || (input.AllowBookFilter == 0 && !e.AllowBook) )
 						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductNameFilter), e => e.ProductFk != null && e.ProductFk.Name == input.ProductNameFilter);
 
 			var query = (from o in filteredProductSchedules
@@ -173,10 +176,11 @@ namespace TepayLink.Sdisco.Products
                                 TicketPrice = o.TicketPrice,
                                 CostPrice = o.CostPrice,
                                 HotelPrice = o.HotelPrice,
-                                StartDat = o.StartDat,
+                                StartDate = o.StartDate,
                                 EndDate = o.EndDate,
                                 DepartureTime = o.DepartureTime,
                                 Revenue = o.Revenue,
+                                AllowBook = o.AllowBook,
                                 Id = o.Id
 							},
                          	ProductName = s1 == null ? "" : s1.Name.ToString()

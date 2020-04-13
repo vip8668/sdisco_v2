@@ -31,7 +31,7 @@ namespace TepayLink.Sdisco.Products
 		
 		public virtual decimal HotelPrice { get; set; }
 		
-		public virtual DateTime StartDat { get; set; }
+		public virtual DateTime StartDate { get; set; }
 		
 		public virtual DateTime EndDate { get; set; }
 		
@@ -39,8 +39,11 @@ namespace TepayLink.Sdisco.Products
 		
 		public virtual decimal Revenue { get; set; }
 		
+		public virtual bool AllowBook { get; set; }
 
-		public virtual long? ProductId { get; set; }
+		public int Avaiable => TotalSlot - LockedSlot - TotalBook;
+
+		public virtual long ProductId { get; set; }
 		
         [ForeignKey("ProductId")]
 		public Product ProductFk { get; set; }

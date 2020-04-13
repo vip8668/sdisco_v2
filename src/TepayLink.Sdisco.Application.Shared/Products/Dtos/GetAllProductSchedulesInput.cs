@@ -7,6 +7,8 @@ namespace TepayLink.Sdisco.Products.Dtos
     {
 		public string Filter { get; set; }
 
+		public int AllowBookFilter { get; set; }
+
 
 		 public string ProductNameFilter { get; set; }
 

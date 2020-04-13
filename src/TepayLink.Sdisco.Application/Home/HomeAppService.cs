@@ -21,7 +21,7 @@ namespace TepayLink.Sdisco.Home
         private IRepository<Place, long> _placeRepository;
         private IRepository<Product, long> _productRepository;
         private IRepository<ApplicationLanguage> _langRepository;
-        private IRepository<Detination,long> _destinationRepository;
+        private IRepository<Detination, long> _destinationRepository;
 
         private ICommonAppService _commonAppService;
 
@@ -147,30 +147,30 @@ namespace TepayLink.Sdisco.Home
         /// <returns></returns>
         public async Task<PagedResultDto<BasicActivityDto>> GetTopActivity(PagedInputDto input)
         {
-            
-            var query = (from a in _productRepository.GetAll()
-                join l in _langRepository.GetAll() on a.LanguageId equals l.Id
-                join p in _placeRepository.GetAll() on a.PlaceId equals p.Id
-                where a.IsTop && a.Type == ProductTypeEnum.Activity
-                              && a.Status == ProductStatusEnum.Publish
-                select new BasicActivityDto
-                {
-                    Id = a.Id,
-                    Name = a.Name,
 
-                    Location = new BasicLocationDto
-                    {
-                        Id = p.Id,
-                        Name = p.Name,
-                        Addess = p.DisplayAddress
-                    },
-                    BookCount = a.BookingCount,
-                    Language = l.DisplayName,
-                });
+            var query = (from a in _productRepository.GetAll()
+                         join l in _langRepository.GetAll() on a.LanguageId equals l.Id
+                         join p in _placeRepository.GetAll() on a.PlaceId equals p.Id
+                         where a.IsTop && a.Type == ProductTypeEnum.Activity
+                                       && a.Status == ProductStatusEnum.Publish
+                         select new BasicActivityDto
+                         {
+                             Id = a.Id,
+                             Name = a.Name,
+
+                             Location = new BasicLocationDto
+                             {
+                                 Id = p.Id,
+                                 Name = p.Name,
+                                 Addess = p.DisplayAddress
+                             },
+                             BookCount = a.BookingCount,
+                             Language = l.DisplayName,
+                         });
             var total = query.Count();
             var list = query.Skip(input.SkipCount).Take(input.MaxResultCount).ToList();
             var itemIds = list.Select((p => p.Id)).ToList();
-            var listSaveItem = await _commonAppService.GetSaveItem(itemIds, ItemTypeEnum.TourItem);
+            var listSaveItem = await _commonAppService.GetSaveItem(itemIds);
             var dicReview = await _commonAppService.GetTourItemReviewSummarys(itemIds);
             var dicThumbImages = await _commonAppService.GetTourItemThumbPhotos(itemIds);
             var dicAvaiableTimes = await _commonAppService.GetAvaiableTimeOfTourItems(itemIds);
@@ -199,10 +199,17 @@ namespace TepayLink.Sdisco.Home
         /// <returns></returns>
         public async Task<PagedResultDto<BasicPlaceDto>> GetTopPlaces(PagedInputDto inputDto)
         {
-            var query = _de.GetAll().Where(p => p.IsTop && p.PlaceType == PlaceTypeEnum.Destination);
+            var query = _destinationRepository.GetAll().Where(p => p.IsTop);
             var total = query.Count();
             var places = query.Skip(inputDto.SkipCount).Take(inputDto.MaxResultCount).ToList();
-            var list = ObjectMapper.Map<List<BasicPlaceDto>>(places);
+            var list = places.Select(p => new BasicPlaceDto
+            {
+                Id = p.Id,
+                PlaceName = p.Name,
+                ThumbImage = p.Image,
+                TotalBooked = p.BookingCount
+
+            }).ToList();
             return new PagedResultDto<BasicPlaceDto>
             {
                 Items = list,
@@ -218,32 +225,32 @@ namespace TepayLink.Sdisco.Home
         {
             var query =
                 (from t in
-                        _tourRepository.GetAll()
-                    join l in _langRepository.GetAll() on t.LanguageId equals l.Id
-                    join c in _tourCategoryRepository.GetAll() on t.CategoryId equals c.Id
-                    join p in _placeRepository.GetAll() on t.PlaceId equals p.Id
-                    //     join r in _tourReviewRepository.GetAll() on t.Id equals r.TourId into rGroup
-                    where t.Type == TourTypeEnum.Tour && t.IsTop // && r.ReviewType == ReviewTypeEnum.Tour
-                                                      && t.Status == TourStatusEnum.Publish
-                    select new BasicTourDto
-                    {
-                        Id = t.Id,
-                        CategoryId = c.Id,
-                        CategoryName = c.Name,
-                        PlaceId = p.Id,
-                        PlaceName = p.PlaceName,
-                        OfferLanguageId = t.LanguageId,
-                        Title = t.Name,
-                        LanguageOffer = l.DisplayName,
-                        SoldCount = t.BookingCount,
-                        IsHotDeal = t.IsHotDeal,
-                        BestSaller = t.IsBestSeller,
-                    });
+                        _productRepository.GetAll()
+                 join l in _langRepository.GetAll() on t.LanguageId equals l.Id
+                 join c in _category.GetAll() on t.CategoryId equals c.Id
+                 join p in _placeRepository.GetAll() on t.PlaceId equals p.Id
+                 //     join r in _tourReviewRepository.GetAll() on t.Id equals r.TourId into rGroup
+                 where t.Type == ProductTypeEnum.Tour && t.IsTop // && r.ReviewType == ReviewTypeEnum.Tour
+                                                   && t.Status == ProductStatusEnum.Publish
+                 select new BasicTourDto
+                 {
+                     Id = t.Id,
+                     CategoryId = c.Id,
+                     CategoryName = c.Name,
+                     PlaceId = p.Id,
+                     PlaceName = p.Name,
+                     OfferLanguageId = t.LanguageId ?? 0,
+                     Title = t.Name,
+                     LanguageOffer = l.DisplayName,
+                     SoldCount = t.BookingCount,
+                     IsHotDeal = t.IsHotDeal,
+                     BestSaller = t.IsBestSeller,
+                 });
             var total = query.Count();
             var list = query.Skip(inputDto.SkipCount).Take(inputDto.MaxResultCount).ToList();
 
             var itemIds = list.Select((p => p.Id)).ToList();
-            var listSaveItem = await _commonAppService.GetSaveItem(itemIds, ItemTypeEnum.Tour);
+            var listSaveItem = await _commonAppService.GetSaveItem(itemIds);
 
 
             var dicReview = await _commonAppService.GetTourReviewSummarys(itemIds);
@@ -278,38 +285,38 @@ namespace TepayLink.Sdisco.Home
         {
             var query =
                 (from t in
-                        _tourRepository.GetAll()
-                    join l in _langRepository.GetAll() on t.LanguageId equals l.Id
-                    join c in _tourCategoryRepository.GetAll() on t.CategoryId equals c.Id
-                    join p in _placeRepository.GetAll() on t.PlaceId equals p.Id
-                    //  join r in _tourReviewRepository.GetAll() on t.Id equals r.TourId
-                    where t.Type == TourTypeEnum.TripPlan && t.IsTop &&
-                          t.IsTop // && r.ReviewType == ReviewTypeEnum.Tour
-                          && t.Status == TourStatusEnum.Publish
-                    select new BasicTourDto
-                    {
-                        Id = t.Id,
-                        CategoryId = c.Id,
-                        CategoryName = c.Name,
-                        PlaceId = p.Id,
-                        PlaceName = p.PlaceName,
-                        OfferLanguageId = t.LanguageId,
-                        //  Rating = r.RatingAvg,
-                        Title = t.Name,
+                        _productRepository.GetAll()
+                 join l in _langRepository.GetAll() on t.LanguageId equals l.Id
+                 join c in _category.GetAll() on t.CategoryId equals c.Id
+                 join p in _placeRepository.GetAll() on t.PlaceId equals p.Id
+                 //  join r in _tourReviewRepository.GetAll() on t.Id equals r.TourId
+                 where t.Type == ProductTypeEnum.Trip && t.IsTop &&
+                       t.IsTop // && r.ReviewType == ReviewTypeEnum.Tour
+                       && t.Status == ProductStatusEnum.Publish
+                 select new BasicTourDto
+                 {
+                     Id = t.Id,
+                     CategoryId = c.Id,
+                     CategoryName = c.Name,
+                     PlaceId = p.Id,
+                     PlaceName = p.Name,
+                     OfferLanguageId = t.LanguageId??0,
+                     //  Rating = r.RatingAvg,
+                     Title = t.Name,
 
-                        LanguageOffer = l.DisplayName,
+                     LanguageOffer = l.DisplayName,
 
-                        // ReviewCount = r.ReviewCount,
-                        SoldCount = t.BookingCount,
-                        TripLength = t.TripLengh,
+                     // ReviewCount = r.ReviewCount,
+                     SoldCount = t.BookingCount,
+                     TripLength = t.TripLengh,
 
-                        IsHotDeal = t.IsHotDeal,
-                        BestSaller = t.IsBestSeller,
-                    });
+                     IsHotDeal = t.IsHotDeal,
+                     BestSaller = t.IsBestSeller,
+                 });
             var total = query.Count();
             var list = query.Skip(inputDto.SkipCount).Take(inputDto.MaxResultCount).ToList();
             var itemIds = list.Select((p => p.Id)).ToList();
-            var listSaveItem = await _commonAppService.GetSaveItem(itemIds, ItemTypeEnum.Tour);
+            var listSaveItem = await _commonAppService.GetSaveItem(itemIds);
             var dicReview = await _commonAppService.GetTourReviewSummarys(itemIds);
             var dicThumbImages = await _commonAppService.GetTourThumbPhotos(itemIds);
             var dicAvaiableTimes = await _commonAppService.GetAvaiableTimeOfTours(itemIds);

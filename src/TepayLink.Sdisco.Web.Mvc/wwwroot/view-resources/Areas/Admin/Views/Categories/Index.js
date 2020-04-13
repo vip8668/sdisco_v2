@@ -46,7 +46,9 @@
                     return {
 					filter: $('#CategoriesTableFilter').val(),
 					nameFilter: $('#NameFilterId').val(),
-					productTypeFilter: $('#ProductTypeFilterId').val()
+					productTypeFilter: $('#ProductTypeFilterId').val(),
+					minOrderFilter: $('#MinOrderFilterId').val(),
+					maxOrderFilter: $('#MaxOrderFilterId').val()
                     };
                 }
             },
@@ -111,6 +113,11 @@
 							return app.localize('Enum_ProductTypeEnum_' + productType);
 						}
 			
+					},
+					{
+						targets: 5,
+						 data: "category.order",
+						 name: "order"   
 					}
             ]
         });
@@ -157,7 +164,9 @@
                 .getCategoriesToExcel({
 				filter : $('#CategoriesTableFilter').val(),
 					nameFilter: $('#NameFilterId').val(),
-					productTypeFilter: $('#ProductTypeFilterId').val()
+					productTypeFilter: $('#ProductTypeFilterId').val(),
+					minOrderFilter: $('#MinOrderFilterId').val(),
+					maxOrderFilter: $('#MaxOrderFilterId').val()
 				})
                 .done(function (result) {
                     app.downloadTempFile(result);

@@ -46,7 +46,10 @@
                     return {
 					filter: $('#DetinationsTableFilter').val(),
 					nameFilter: $('#NameFilterId').val(),
-					statusFilter: $('#StatusFilterId').val()
+					statusFilter: $('#StatusFilterId').val(),
+					isTopFilter: $('#IsTopFilterId').val(),
+					minBookingCountFilter: $('#MinBookingCountFilterId').val(),
+					maxBookingCountFilter: $('#MaxBookingCountFilterId').val()
                     };
                 }
             },
@@ -106,6 +109,23 @@
 							return app.localize('Enum_DetinationStatusEnum_' + status);
 						}
 			
+					},
+					{
+						targets: 4,
+						 data: "detination.isTop",
+						 name: "isTop"  ,
+						render: function (isTop) {
+							if (isTop) {
+								return '<div class="text-center"><i class="fa fa-check kt--font-success" title="True"></i></div>';
+							}
+							return '<div class="text-center"><i class="fa fa-times-circle" title="False"></i></div>';
+					}
+			 
+					},
+					{
+						targets: 5,
+						 data: "detination.bookingCount",
+						 name: "bookingCount"   
 					}
             ]
         });
@@ -152,7 +172,10 @@
                 .getDetinationsToExcel({
 				filter : $('#DetinationsTableFilter').val(),
 					nameFilter: $('#NameFilterId').val(),
-					statusFilter: $('#StatusFilterId').val()
+					statusFilter: $('#StatusFilterId').val(),
+					isTopFilter: $('#IsTopFilterId').val(),
+					minBookingCountFilter: $('#MinBookingCountFilterId').val(),
+					maxBookingCountFilter: $('#MaxBookingCountFilterId').val()
 				})
                 .done(function (result) {
                     app.downloadTempFile(result);

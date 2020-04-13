@@ -13,7 +13,7 @@ namespace TepayLink.Sdisco.Bookings.Dtos
 
 		public DateTime EndDate { get; set; }
 
-		public DateTime TripLength { get; set; }
+		public int TripLength { get; set; }
 
 		public BookingStatusEnum Status { get; set; }
 
@@ -42,6 +42,8 @@ namespace TepayLink.Sdisco.Bookings.Dtos
 		public DateTime? CancelDate { get; set; }
 
 		public decimal? RefundAmount { get; set; }
+
+		public long ProductDetailComboId { get; set; }
 
 
 		 public long? ProductId { get; set; }

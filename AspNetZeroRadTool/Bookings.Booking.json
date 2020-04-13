@@ -1,11 +1,11 @@
 {
-  "IsRegenerate": false,
+  "IsRegenerate": true,
   "MenuPosition": "main",
   "RelativeNamespace": "Bookings",
   "EntityName": "Booking",
   "EntityNamePlural": "Bookings",
   "TableName": "Bookings",
-  "PrimaryKeyType": "int",
+  "PrimaryKeyType": "long",
   "BaseClass": "AuditedEntity",
   "EntityHistory": false,
   "AutoMigration": false,
@@ -21,8 +21,8 @@
     {
       "Name": "StartDate",
       "Type": "DateTime",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -40,8 +40,8 @@
     {
       "Name": "EndDate",
       "Type": "DateTime",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -59,8 +59,8 @@
     {
       "Name": "TripLength",
       "Type": "int",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -78,8 +78,8 @@
     {
       "Name": "Status",
       "Type": "BookingStatusEnum",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -97,8 +97,8 @@
     {
       "Name": "ProductScheduleId",
       "Type": "long",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -116,8 +116,8 @@
     {
       "Name": "Quantity",
       "Type": "int",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -135,8 +135,8 @@
     {
       "Name": "Amount",
       "Type": "decimal",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -154,8 +154,8 @@
     {
       "Name": "Fee",
       "Type": "decimal",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -230,8 +230,8 @@
     {
       "Name": "BonusAmount",
       "Type": "decimal",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -268,8 +268,8 @@
     {
       "Name": "CouponId",
       "Type": "long",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -287,8 +287,8 @@
     {
       "Name": "TotalAmount",
       "Type": "decimal",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,

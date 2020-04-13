@@ -1,4 +1,5 @@
-﻿
+﻿using TepayLink.Sdisco.Products;
+
 
 using System;
 using System.Linq;
@@ -23,26 +24,33 @@ namespace TepayLink.Sdisco.Products
     {
 		 private readonly IRepository<ProductReviewDetail, long> _productReviewDetailRepository;
 		 private readonly IProductReviewDetailsExcelExporter _productReviewDetailsExcelExporter;
+		 private readonly IRepository<Product,long> _lookup_productRepository;
 		 
 
-		  public ProductReviewDetailsAppService(IRepository<ProductReviewDetail, long> productReviewDetailRepository, IProductReviewDetailsExcelExporter productReviewDetailsExcelExporter ) 
+		  public ProductReviewDetailsAppService(IRepository<ProductReviewDetail, long> productReviewDetailRepository, IProductReviewDetailsExcelExporter productReviewDetailsExcelExporter , IRepository<Product, long> lookup_productRepository) 
 		  {
 			_productReviewDetailRepository = productReviewDetailRepository;
 			_productReviewDetailsExcelExporter = productReviewDetailsExcelExporter;
-			
+			_lookup_productRepository = lookup_productRepository;
+		
 		  }
 
 		 public async Task<PagedResultDto<GetProductReviewDetailForViewDto>> GetAll(GetAllProductReviewDetailsInput input)
          {
 			
 			var filteredProductReviewDetails = _productReviewDetailRepository.GetAll()
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Title.Contains(input.Filter) || e.Comment.Contains(input.Filter) || e.ReplyComment.Contains(input.Filter) || e.Avatar.Contains(input.Filter) || e.Reviewer.Contains(input.Filter));
+						.Include( e => e.ProductFk)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Title.Contains(input.Filter) || e.Comment.Contains(input.Filter) || e.ReplyComment.Contains(input.Filter) || e.Avatar.Contains(input.Filter) || e.Reviewer.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductNameFilter), e => e.ProductFk != null && e.ProductFk.Name == input.ProductNameFilter);
 
 			var pagedAndFilteredProductReviewDetails = filteredProductReviewDetails
                 .OrderBy(input.Sorting ?? "id asc")
                 .PageBy(input);
 
 			var productReviewDetails = from o in pagedAndFilteredProductReviewDetails
+                         join o1 in _lookup_productRepository.GetAll() on o.ProductId equals o1.Id into j1
+                         from s1 in j1.DefaultIfEmpty()
+                         
                          select new GetProductReviewDetailForViewDto() {
 							ProductReviewDetail = new ProductReviewDetailDto
 							{
@@ -61,7 +69,8 @@ namespace TepayLink.Sdisco.Products
                                 Avatar = o.Avatar,
                                 Reviewer = o.Reviewer,
                                 Id = o.Id
-							}
+							},
+                         	ProductName = s1 == null ? "" : s1.Name.ToString()
 						};
 
             var totalCount = await filteredProductReviewDetails.CountAsync();
@@ -77,6 +86,12 @@ namespace TepayLink.Sdisco.Products
             var productReviewDetail = await _productReviewDetailRepository.GetAsync(id);
 
             var output = new GetProductReviewDetailForViewDto { ProductReviewDetail = ObjectMapper.Map<ProductReviewDetailDto>(productReviewDetail) };
+
+		    if (output.ProductReviewDetail.ProductId != null)
+            {
+                var _lookupProduct = await _lookup_productRepository.FirstOrDefaultAsync((long)output.ProductReviewDetail.ProductId);
+                output.ProductName = _lookupProduct.Name.ToString();
+            }
 			
             return output;
          }
@@ -87,6 +102,12 @@ namespace TepayLink.Sdisco.Products
             var productReviewDetail = await _productReviewDetailRepository.FirstOrDefaultAsync(input.Id);
            
 		    var output = new GetProductReviewDetailForEditOutput {ProductReviewDetail = ObjectMapper.Map<CreateOrEditProductReviewDetailDto>(productReviewDetail)};
+
+		    if (output.ProductReviewDetail.ProductId != null)
+            {
+                var _lookupProduct = await _lookup_productRepository.FirstOrDefaultAsync((long)output.ProductReviewDetail.ProductId);
+                output.ProductName = _lookupProduct.Name.ToString();
+            }
 			
             return output;
          }
@@ -133,9 +154,14 @@ namespace TepayLink.Sdisco.Products
          {
 			
 			var filteredProductReviewDetails = _productReviewDetailRepository.GetAll()
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Title.Contains(input.Filter) || e.Comment.Contains(input.Filter) || e.ReplyComment.Contains(input.Filter) || e.Avatar.Contains(input.Filter) || e.Reviewer.Contains(input.Filter));
+						.Include( e => e.ProductFk)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Title.Contains(input.Filter) || e.Comment.Contains(input.Filter) || e.ReplyComment.Contains(input.Filter) || e.Avatar.Contains(input.Filter) || e.Reviewer.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ProductNameFilter), e => e.ProductFk != null && e.ProductFk.Name == input.ProductNameFilter);
 
 			var query = (from o in filteredProductReviewDetails
+                         join o1 in _lookup_productRepository.GetAll() on o.ProductId equals o1.Id into j1
+                         from s1 in j1.DefaultIfEmpty()
+                         
                          select new GetProductReviewDetailForViewDto() { 
 							ProductReviewDetail = new ProductReviewDetailDto
 							{
@@ -154,7 +180,8 @@ namespace TepayLink.Sdisco.Products
                                 Avatar = o.Avatar,
                                 Reviewer = o.Reviewer,
                                 Id = o.Id
-							}
+							},
+                         	ProductName = s1 == null ? "" : s1.Name.ToString()
 						 });
 
 
@@ -164,5 +191,34 @@ namespace TepayLink.Sdisco.Products
          }
 
 
+
+		[AbpAuthorize(AppPermissions.Pages_Administration_ProductReviewDetails)]
+         public async Task<PagedResultDto<ProductReviewDetailProductLookupTableDto>> GetAllProductForLookupTable(GetAllForLookupTableInput input)
+         {
+             var query = _lookup_productRepository.GetAll().WhereIf(
+                    !string.IsNullOrWhiteSpace(input.Filter),
+                   e=> e.Name.ToString().Contains(input.Filter)
+                );
+
+            var totalCount = await query.CountAsync();
+
+            var productList = await query
+                .PageBy(input)
+                .ToListAsync();
+
+			var lookupTableDtoList = new List<ProductReviewDetailProductLookupTableDto>();
+			foreach(var product in productList){
+				lookupTableDtoList.Add(new ProductReviewDetailProductLookupTableDto
+				{
+					Id = product.Id,
+					DisplayName = product.Name?.ToString()
+				});
+			}
+
+            return new PagedResultDto<ProductReviewDetailProductLookupTableDto>(
+                totalCount,
+                lookupTableDtoList
+            );
+         }
     }
 }

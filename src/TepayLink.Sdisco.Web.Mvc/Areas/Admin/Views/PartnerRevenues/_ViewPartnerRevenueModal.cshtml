@@ -1,0 +1,44 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.PartnerRevenues
+@model PartnerRevenueViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="PartnerRevenueInformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("Userid") :</h6>
+                @Model.PartnerRevenue.Userid
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("RevenueType") :</h6>
+                @L("Enum_RevenueTypeEnum_" + (int)Model.PartnerRevenue.RevenueType)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ProductId") :</h6>
+                @Model.PartnerRevenue.ProductId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Point") :</h6>
+                @Model.PartnerRevenue.Point
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Money") :</h6>
+                @Model.PartnerRevenue.Money
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Status") :</h6>
+                @L("Enum_RevenueStatusEnum_" + (int)Model.PartnerRevenue.Status)
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

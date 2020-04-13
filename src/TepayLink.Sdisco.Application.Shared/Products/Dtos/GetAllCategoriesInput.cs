@@ -11,6 +11,9 @@ namespace TepayLink.Sdisco.Products.Dtos
 
 		public int ProductTypeFilter { get; set; }
 
+		public int? MaxOrderFilter { get; set; }
+		public int? MinOrderFilter { get; set; }
+
 
 
     }

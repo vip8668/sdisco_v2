@@ -23,7 +23,18 @@ namespace TepayLink.Sdisco.Account.Dtos
 		public string Title { get; set; }
 
 		public string Comment { get; set; }
-
+        /// <summary>
+        /// Avata người đánh giá
+        /// </summary>
+        public string Avatar { get; set; }
+        /// <summary>
+        /// Họ tên người đánh giá
+        /// </summary>
+        public string Reviewer { get; set; }
+        /// <summary>
+        /// Ngày đánh giá
+        /// </summary>
+        public DateTime ReviewDate { get; set; }
 
 
     }

@@ -5,7 +5,7 @@ using Abp.Application.Services.Dto;
 
 namespace TepayLink.Sdisco.Bookings.Dtos
 {
-    public class BookingDto : EntityDto
+    public class BookingDto : EntityDto<long>
     {
 		public DateTime StartDate { get; set; }
 

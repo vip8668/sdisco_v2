@@ -49,7 +49,8 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
 
             var viewModel = new CreateOrEditProductReviewDetailModalViewModel()
             {
-				ProductReviewDetail = getProductReviewDetailForEditOutput.ProductReviewDetail
+				ProductReviewDetail = getProductReviewDetailForEditOutput.ProductReviewDetail,
+					ProductName = getProductReviewDetailForEditOutput.ProductName
             };
 
             return PartialView("_CreateOrEditModal", viewModel);
@@ -62,11 +63,25 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
             var model = new ProductReviewDetailViewModel()
             {
                 ProductReviewDetail = getProductReviewDetailForViewDto.ProductReviewDetail
+                , ProductName = getProductReviewDetailForViewDto.ProductName 
+
             };
 
             return PartialView("_ViewProductReviewDetailModal", model);
         }
 
+        [AbpMvcAuthorize(AppPermissions.Pages_Administration_ProductReviewDetails_Create, AppPermissions.Pages_Administration_ProductReviewDetails_Edit)]
+        public PartialViewResult ProductLookupTableModal(long? id, string displayName)
+        {
+            var viewModel = new ProductReviewDetailProductLookupTableViewModel()
+            {
+                Id = id,
+                DisplayName = displayName,
+                FilterText = ""
+            };
+
+            return PartialView("_ProductReviewDetailProductLookupTableModal", viewModel);
+        }
 
     }
 }

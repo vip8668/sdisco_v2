@@ -15,12 +15,12 @@ namespace TepayLink.Sdisco.Products
 			
 
 
-		public virtual long? ProductId { get; set; }
+		public virtual long ProductId { get; set; }
 		
         [ForeignKey("ProductId")]
 		public Product ProductFk { get; set; }
 		
-		public virtual int? UtilityId { get; set; }
+		public virtual int UtilityId { get; set; }
 		
         [ForeignKey("UtilityId")]
 		public Utility UtilityFk { get; set; }

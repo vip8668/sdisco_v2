@@ -45,6 +45,7 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
 				getProductForEditOutput = new GetProductForEditOutput{
 					Product = new CreateOrEditProductDto()
 				};
+				getProductForEditOutput.Product.LastBookTime = DateTime.Now;
 			}
 
             var viewModel = new CreateOrEditProductModalViewModel()

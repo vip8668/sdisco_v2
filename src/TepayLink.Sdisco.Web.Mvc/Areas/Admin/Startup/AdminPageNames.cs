@@ -4,6 +4,16 @@
     {
         public static class Common
         {
+            public const string Transactions = "Administration.Account.Transactions";
+            public const string WithDrawRequests = "Administration.Account.WithDrawRequests";
+            public const string ShareTransactions = "Administration.KOL.ShareTransactions";
+            public const string PartnerRevenues = "Administration.KOL.PartnerRevenues";
+            public const string ShortLinks = "Administration.Affiliate.ShortLinks";
+            public const string ChatMessageV2s = "Chat.ChatMessageV2s";
+            public const string NearbyPlaces = "Administration.Places.NearbyPlaces";
+            public const string SuggestedProducts = "Administration.Products.SuggestedProducts";
+            public const string RelatedProducts = "Administration.Products.RelatedProducts";
+            public const string SimilarProducts = "Administration.Products.SimilarProducts";
             public const string Chatconversations = "Administration.Chat.Chatconversations";
             public const string UserDefaultCashoutMethodTypes = "Administration.Cashout.UserDefaultCashoutMethodTypes";
             public const string CashoutMethodTypes = "Administration.Cashout.CashoutMethodTypes";

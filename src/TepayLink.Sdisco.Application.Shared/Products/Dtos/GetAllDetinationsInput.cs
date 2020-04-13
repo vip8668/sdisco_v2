@@ -11,6 +11,11 @@ namespace TepayLink.Sdisco.Products.Dtos
 
 		public int StatusFilter { get; set; }
 
+		public int IsTopFilter { get; set; }
+
+		public int? MaxBookingCountFilter { get; set; }
+		public int? MinBookingCountFilter { get; set; }
+
 
 
     }

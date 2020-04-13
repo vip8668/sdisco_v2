@@ -1,0 +1,63 @@
+﻿@using TepayLink.Sdisco.KOL;
+					@using TepayLink.Sdisco.KOL;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.PartnerRevenues
+@model CreateOrEditPartnerRevenueModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditPartnerRevenue")) : L("CreateNewPartnerRevenue")))
+
+<div class="modal-body">
+        <div id="PartnerRevenueInformationsTab">
+            <form name="PartnerRevenueInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.PartnerRevenue.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="PartnerRevenue_Userid">@L("Userid")</label>
+									<input class="form-control m-input" id="PartnerRevenue_Userid" value="@Model.PartnerRevenue.Userid.ToString(CultureInfo.InvariantCulture)" type="number" name="userid"  />
+								</div>
+					
+								@{
+					var selectListRevenueType = Html.GetEnumSelectList(typeof(RevenueTypeEnum));
+					 foreach (var selectOption in selectListRevenueType) { selectOption.Text = L("Enum_RevenueTypeEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="PartnerRevenue_RevenueType">@L("RevenueType")</label>
+										<select class="form-control m-input m-input--square" name="revenueType" id="PartnerRevenue_RevenueType" asp-for="@Model.PartnerRevenue.RevenueType" asp-items="@selectListRevenueType">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="PartnerRevenue_Point">@L("Point")</label>
+									<input class="form-control m-input" id="PartnerRevenue_Point" value="@Model.PartnerRevenue.Point.ToString(CultureInfo.InvariantCulture)" type="number" name="point"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="PartnerRevenue_Money">@L("Money")</label>
+									<input class="form-control m-input" id="PartnerRevenue_Money" value="@Model.PartnerRevenue.Money.ToString(CultureInfo.InvariantCulture)" type="number" name="money"  />
+								</div>
+					
+								@{
+					var selectListStatus = Html.GetEnumSelectList(typeof(RevenueStatusEnum));
+					 foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_RevenueStatusEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="PartnerRevenue_Status">@L("Status")</label>
+										<select class="form-control m-input m-input--square" name="status" id="PartnerRevenue_Status" asp-for="@Model.PartnerRevenue.Status" asp-items="@selectListStatus">
+									</select>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

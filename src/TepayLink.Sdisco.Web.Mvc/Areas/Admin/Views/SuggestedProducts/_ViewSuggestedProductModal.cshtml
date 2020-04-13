@@ -1,0 +1,28 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.SuggestedProducts
+@model SuggestedProductViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="SuggestedProductInformationsTab">
+        
+        <div class="row">
+
+            <div class="col-6 mb-3">
+                <h6>(@L("Product")) @L("Name") :</h6>
+                @Model.ProductName
+            </div>
+            <div class="col-6 mb-3">
+                <h6>(@L("Product")) @L("Name") :</h6>
+                @Model.ProductName2
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

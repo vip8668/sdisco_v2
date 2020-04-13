@@ -1,0 +1,44 @@
+{
+  "IsRegenerate": true,
+  "MenuPosition": "admin",
+  "RelativeNamespace": "Products",
+  "EntityName": "SuggestedProduct",
+  "EntityNamePlural": "SuggestedProducts",
+  "TableName": "SuggestedProducts",
+  "PrimaryKeyType": "long",
+  "BaseClass": "AuditedEntity",
+  "EntityHistory": false,
+  "AutoMigration": false,
+  "UpdateDatabase": false,
+  "CreateUserInterface": true,
+  "CreateViewOnly": true,
+  "CreateExcelExport": true,
+  "PagePermission": {
+    "Host": true,
+    "Tenant": true
+  },
+  "Properties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "TepayLink.Sdisco.Products",
+      "ForeignEntityName": "Product",
+      "IdType": "long",
+      "IsNullable": false,
+      "PropertyName": "ProductId",
+      "DisplayPropertyName": "Name",
+      "DuplicationNumber": 0,
+      "RelationType": "single"
+    },
+    {
+      "Namespace": "TepayLink.Sdisco.Products",
+      "ForeignEntityName": "Product",
+      "IdType": "long",
+      "IsNullable": true,
+      "PropertyName": "SuggestedProductId",
+      "DisplayPropertyName": "Name",
+      "DuplicationNumber": 2,
+      "RelationType": "single"
+    }
+  ],
+  "EnumDefinitions": []
+}

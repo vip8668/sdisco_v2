@@ -1,0 +1,77 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.NearbyPlaces
+@model CreateOrEditNearbyPlaceModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditNearbyPlace")) : L("CreateNewNearbyPlace")))
+
+<div class="modal-body">
+        <div id="NearbyPlaceInformationsTab">
+            <form name="NearbyPlaceInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.NearbyPlace.Id" />
+                }
+
+				            
+								<div class="form-group m-form__group">
+										<label for="PlaceName">@L("Place")</label>
+									    <div class="input-group">
+											<input class="form-control" id="PlaceName" name="placeName" value="@Model.PlaceName" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenPlaceLookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearPlaceNameButton"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="NearbyPlace_PlaceId" value="@Model.NearbyPlace.PlaceId" type="text" name="placeId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="NearbyPlace_PlaceId" value="" type="text" name="placeId"  hidden/>
+								}
+
+            
+								<div class="form-group m-form__group">
+										<label for="PlaceName2">@L("Place")</label>
+									    <div class="input-group">
+											<input class="form-control" id="PlaceName2" name="placeName2" value="@Model.PlaceName2" type="text" disabled>
+										<div class="input-group-append">
+											<button class="btn btn-primary blue" id="OpenPlace2LookupTableButton" type="button"><i class="fa fa-search"></i> @L("Pick")</button>
+										</div> 
+										<div class="input-group-prepend">
+											<button class="btn btn-danger btn-icon" type="button" id="ClearPlaceName2Button"><i class="fa fa-times"></i></button>
+										</div>
+									</div>
+								</div>
+
+								@if (Model.IsEditMode)
+								{
+									<input class="form-control" id="NearbyPlace_NearbyPlaceId" value="@Model.NearbyPlace.NearbyPlaceId" type="text" name="nearbyPlaceId"  hidden/>
+								}
+								 else
+								{ 
+									<input class="form-control" id="NearbyPlace_NearbyPlaceId" value="" type="text" name="nearbyPlaceId"  hidden/>
+								}
+
+
+
+				
+								<div class="form-group">
+									<label for="NearbyPlace_Description">@L("Description")</label>
+									<input class="form-control" id="NearbyPlace_Description" value="@Model.NearbyPlace.Description" type="text" name="description"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

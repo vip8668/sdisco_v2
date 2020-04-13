@@ -34,12 +34,12 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
         } 
 
         [AbpMvcAuthorize(AppPermissions.Pages_Bookings_Create, AppPermissions.Pages_Bookings_Edit)]
-        public async Task<PartialViewResult> CreateOrEditModal(int? id)
+        public async Task<PartialViewResult> CreateOrEditModal(long? id)
         {
 			GetBookingForEditOutput getBookingForEditOutput;
 
 			if (id.HasValue){
-				getBookingForEditOutput = await _bookingsAppService.GetBookingForEdit(new EntityDto { Id = (int) id });
+				getBookingForEditOutput = await _bookingsAppService.GetBookingForEdit(new EntityDto<long> { Id = (long) id });
 			}
 			else {
 				getBookingForEditOutput = new GetBookingForEditOutput{
@@ -56,7 +56,7 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
             return PartialView("_CreateOrEditModal", viewModel);
         }
 
-        public async Task<PartialViewResult> ViewBookingModal(int id)
+        public async Task<PartialViewResult> ViewBookingModal(long id)
         {
 			var getBookingForViewDto = await _bookingsAppService.GetBookingForView(id);
 

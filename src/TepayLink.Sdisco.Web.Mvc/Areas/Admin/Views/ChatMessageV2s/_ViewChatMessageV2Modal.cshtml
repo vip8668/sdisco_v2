@@ -1,0 +1,52 @@
+﻿
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ChatMessageV2s
+@model ChatMessageV2ViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("Details")))
+
+<div class="modal-body">
+    <div id="ChatMessageV2InformationsTab">
+        
+        <div class="row">
+            <div class="col-6 mb-3">
+                <h6>@L("ChatConversationId") :</h6>
+                @Model.ChatMessageV2.ChatConversationId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("UserId") :</h6>
+                @Model.ChatMessageV2.UserId
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Message") :</h6>
+                @Model.ChatMessageV2.Message
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("CreationTime") :</h6>
+                @Model.ChatMessageV2.CreationTime
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("Side") :</h6>
+                @L("Enum_ChatSide_" + (int)Model.ChatMessageV2.Side)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ReadState") :</h6>
+                @L("Enum_ChatMessageReadState_" + (int)Model.ChatMessageV2.ReadState)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("ReceiverReadState") :</h6>
+                @L("Enum_ChatMessageReadState_" + (int)Model.ChatMessageV2.ReceiverReadState)
+            </div>
+            <div class="col-6 mb-3">
+                <h6>@L("SharedMessageId") :</h6>
+                @Model.ChatMessageV2.SharedMessageId
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithClose.cshtml")
+

@@ -53,6 +53,10 @@
 					minPriceFilter: $('#MinPriceFilterId').val(),
 					maxPriceFilter: $('#MaxPriceFilterId').val(),
 					isTrendingFilter: $('#IsTrendingFilterId').val(),
+					extraDataFilter: $('#ExtraDataFilterId').val(),
+					whatWeDoFilter: $('#WhatWeDoFilterId').val(),
+					minLastBookTimeFilter:  getDateFilter($('#MinLastBookTimeFilterId')),
+					maxLastBookTimeFilter:  getDateFilter($('#MaxLastBookTimeFilterId')),
 					categoryNameFilter: $('#CategoryNameFilterId').val(),
 					userNameFilter: $('#UserNameFilterId').val(),
 					placeNameFilter: $('#PlaceNameFilterId').val(),
@@ -242,21 +246,43 @@
 					},
 					{
 						targets: 18,
+						 data: "product.extraData",
+						 name: "extraData"   
+					},
+					{
+						targets: 19,
+						 data: "product.whatWeDo",
+						 name: "whatWeDo"   
+					},
+					{
+						targets: 20,
+						 data: "product.lastBookTime",
+						 name: "lastBookTime" ,
+					render: function (lastBookTime) {
+						if (lastBookTime) {
+							return moment(lastBookTime).format('L');
+						}
+						return "";
+					}
+			  
+					},
+					{
+						targets: 21,
 						 data: "categoryName" ,
 						 name: "categoryFk.name" 
 					},
 					{
-						targets: 19,
+						targets: 22,
 						 data: "userName" ,
 						 name: "hostUserFk.name" 
 					},
 					{
-						targets: 20,
+						targets: 23,
 						 data: "placeName" ,
 						 name: "placeFk.name" 
 					},
 					{
-						targets: 21,
+						targets: 24,
 						 data: "applicationLanguageName" ,
 						 name: "languageFk.name" 
 					}
@@ -312,6 +338,10 @@
 					minPriceFilter: $('#MinPriceFilterId').val(),
 					maxPriceFilter: $('#MaxPriceFilterId').val(),
 					isTrendingFilter: $('#IsTrendingFilterId').val(),
+					extraDataFilter: $('#ExtraDataFilterId').val(),
+					whatWeDoFilter: $('#WhatWeDoFilterId').val(),
+					minLastBookTimeFilter:  getDateFilter($('#MinLastBookTimeFilterId')),
+					maxLastBookTimeFilter:  getDateFilter($('#MaxLastBookTimeFilterId')),
 					categoryNameFilter: $('#CategoryNameFilterId').val(),
 					userNameFilter: $('#UserNameFilterId').val(),
 					placeNameFilter: $('#PlaceNameFilterId').val(),

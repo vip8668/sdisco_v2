@@ -11,13 +11,13 @@ namespace TepayLink.Sdisco.Bookings
     {
         Task<PagedResultDto<GetBookingForViewDto>> GetAll(GetAllBookingsInput input);
 
-        Task<GetBookingForViewDto> GetBookingForView(int id);
+        Task<GetBookingForViewDto> GetBookingForView(long id);
 
-		Task<GetBookingForEditOutput> GetBookingForEdit(EntityDto input);
+		Task<GetBookingForEditOutput> GetBookingForEdit(EntityDto<long> input);
 
 		Task CreateOrEdit(CreateOrEditBookingDto input);
 
-		Task Delete(EntityDto input);
+		Task Delete(EntityDto<long> input);
 
 		Task<FileDto> GetBookingsToExcel(GetAllBookingsForExcelInput input);
 

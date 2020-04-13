@@ -67,6 +67,15 @@
 									
 								</select>
                             </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinOrderFilterId">@L("MinMax") @L("Order")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minOrderFilter" id="MinOrderFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxOrderFilter"  id="MaxOrderFilterId"/>
+									</div>
+                                </div>
+                            </div>
 
                 </div>
                 <div class="row mb-4">
@@ -84,6 +93,7 @@
 								<th>@L("Image")</th>
 								<th>@L("Icon")</th>
 								<th>@L("ProductType")</th>
+								<th>@L("Order")</th>
                         </tr>
                     </thead>
                 </table>

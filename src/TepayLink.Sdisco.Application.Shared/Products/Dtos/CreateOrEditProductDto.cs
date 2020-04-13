@@ -61,6 +61,15 @@ namespace TepayLink.Sdisco.Products.Dtos
 		public bool IsTop { get; set; }
 		
 		
+		public string ExtraData { get; set; }
+		
+		
+		public string WhatWeDo { get; set; }
+		
+		
+		public DateTime? LastBookTime { get; set; }
+		
+		
 		 public int? CategoryId { get; set; }
 		 
 		 		 public long? HostUserId { get; set; }

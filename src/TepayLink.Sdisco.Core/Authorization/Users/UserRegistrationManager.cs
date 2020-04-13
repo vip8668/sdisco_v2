@@ -72,6 +72,7 @@ namespace TepayLink.Sdisco.Authorization.Users
                 IsActive = isNewRegisteredUserActiveByDefault,
                 UserName = userName,
                 IsEmailConfirmed = isEmailConfirmed,
+                UserType = UserTypeEnum.Traveler,
                 Roles = new List<UserRole>()
             };
 
@@ -94,12 +95,71 @@ namespace TepayLink.Sdisco.Authorization.Users
             }
 
             //Notifications
-            await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.ToUserIdentifier());
-            await _appNotifier.WelcomeToTheApplicationAsync(user);
-            await _appNotifier.NewUserRegisteredAsync(user);
+            // await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.ToUserIdentifier());
+            //   await _appNotifier.WelcomeToTheApplicationAsync(user);
+            //  await _appNotifier.NewUserRegisteredAsync(user);
 
             return user;
         }
+
+
+
+
+        public async Task<User> RegisterHostAsync(string name, string surname, string emailAddress, string userName, string plainPassword, bool isEmailConfirmed, string emailActivationLink,
+            string mobile, DateTime dbo, int countryId, string subDomain, string occupation)
+        {
+            CheckForTenant();
+            CheckSelfRegistrationIsEnabled();
+
+            var tenant = await GetActiveTenantAsync();
+            var isNewRegisteredUserActiveByDefault = await SettingManager.GetSettingValueAsync<bool>(AppSettings.UserManagement.IsNewRegisteredUserActiveByDefault);
+
+            await _userPolicy.CheckMaxUserCountAsync(tenant.Id);
+
+            var user = new User
+            {
+                TenantId = tenant.Id,
+                Name = name,
+                Surname = surname,
+                EmailAddress = emailAddress,
+                IsActive = isNewRegisteredUserActiveByDefault,
+                UserName = userName,
+                IsEmailConfirmed = isEmailConfirmed,
+                Roles = new List<UserRole>(),
+                PhoneNumber = mobile,
+                ContryId = countryId,
+                Dob = dbo,
+                UserType = UserTypeEnum.KOL,
+                SubDomain = subDomain,
+                Occupation = occupation
+            };
+
+            user.SetNormalizedNames();
+
+            var defaultRoles = await AsyncQueryableExecuter.ToListAsync(_roleManager.Roles.Where(r => r.IsDefault));
+            foreach (var defaultRole in defaultRoles)
+            {
+                user.Roles.Add(new UserRole(tenant.Id, user.Id, defaultRole.Id));
+            }
+
+            await _userManager.InitializeOptionsAsync(AbpSession.TenantId);
+            CheckErrors(await _userManager.CreateAsync(user, plainPassword));
+            await CurrentUnitOfWork.SaveChangesAsync();
+
+            if (!user.IsEmailConfirmed)
+            {
+                user.SetNewEmailConfirmationCode();
+                await _userEmailer.SendEmailActivationLinkAsync(user, emailActivationLink);
+            }
+
+            //Notifications
+            // await _notificationSubscriptionManager.SubscribeToAllAvailableNotificationsAsync(user.ToUserIdentifier());
+            //   await _appNotifier.WelcomeToTheApplicationAsync(user);
+            //  await _appNotifier.NewUserRegisteredAsync(user);
+
+            return user;
+        }
+
 
         private void CheckForTenant()
         {

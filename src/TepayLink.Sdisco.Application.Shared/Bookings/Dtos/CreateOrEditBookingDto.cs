@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TepayLink.Sdisco.Bookings.Dtos
 {
-    public class CreateOrEditBookingDto : EntityDto<int?>
+    public class CreateOrEditBookingDto : EntityDto<long?>
     {
 
 		public BookingStatusEnum Status { get; set; }

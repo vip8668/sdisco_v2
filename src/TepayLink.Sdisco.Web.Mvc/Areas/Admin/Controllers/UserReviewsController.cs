@@ -34,12 +34,12 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
         } 
 
         [AbpMvcAuthorize(AppPermissions.Pages_Administration_UserReviews_Create, AppPermissions.Pages_Administration_UserReviews_Edit)]
-        public async Task<PartialViewResult> CreateOrEditModal(int? id)
+        public async Task<PartialViewResult> CreateOrEditModal(long? id)
         {
 			GetUserReviewForEditOutput getUserReviewForEditOutput;
 
 			if (id.HasValue){
-				getUserReviewForEditOutput = await _userReviewsAppService.GetUserReviewForEdit(new EntityDto { Id = (int) id });
+				getUserReviewForEditOutput = await _userReviewsAppService.GetUserReviewForEdit(new EntityDto<long> { Id = (long) id });
 			}
 			else {
 				getUserReviewForEditOutput = new GetUserReviewForEditOutput{
@@ -55,7 +55,7 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
             return PartialView("_CreateOrEditModal", viewModel);
         }
 
-        public async Task<PartialViewResult> ViewUserReviewModal(int id)
+        public async Task<PartialViewResult> ViewUserReviewModal(long id)
         {
 			var getUserReviewForViewDto = await _userReviewsAppService.GetUserReviewForView(id);
 

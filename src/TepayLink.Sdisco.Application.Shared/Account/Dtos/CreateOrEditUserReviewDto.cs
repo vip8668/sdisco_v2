@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TepayLink.Sdisco.Account.Dtos
 {
-    public class CreateOrEditUserReviewDto : EntityDto<int?>
+    public class CreateOrEditUserReviewDto : EntityDto<long?>
     {
 
 

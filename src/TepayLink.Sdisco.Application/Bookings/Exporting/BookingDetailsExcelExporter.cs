@@ -53,6 +53,7 @@ namespace TepayLink.Sdisco.Bookings.Exporting
                         L("Note"),
                         L("CancelDate"),
                         L("RefundAmount"),
+                        L("ProductDetailComboId"),
                         (L("Product")) + L("Name")
                         );
 
@@ -61,7 +62,7 @@ namespace TepayLink.Sdisco.Bookings.Exporting
                         _ => _.BookingDetail.BookingId,
                         _ => _timeZoneConverter.Convert(_.BookingDetail.StartDate, _abpSession.TenantId, _abpSession.GetUserId()),
                         _ => _timeZoneConverter.Convert(_.BookingDetail.EndDate, _abpSession.TenantId, _abpSession.GetUserId()),
-                        _ => _timeZoneConverter.Convert(_.BookingDetail.TripLength, _abpSession.TenantId, _abpSession.GetUserId()),
+                        _ => _.BookingDetail.TripLength,
                         _ => _.BookingDetail.Status,
                         _ => _.BookingDetail.ProductScheduleId,
                         _ => _.BookingDetail.Quantity,
@@ -76,6 +77,7 @@ namespace TepayLink.Sdisco.Bookings.Exporting
                         _ => _.BookingDetail.Note,
                         _ => _timeZoneConverter.Convert(_.BookingDetail.CancelDate, _abpSession.TenantId, _abpSession.GetUserId()),
                         _ => _.BookingDetail.RefundAmount,
+                        _ => _.BookingDetail.ProductDetailComboId,
                         _ => _.ProductName
                         );
 
@@ -85,9 +87,6 @@ namespace TepayLink.Sdisco.Bookings.Exporting
 					var endDateColumn = sheet.Column(3);
                     endDateColumn.Style.Numberformat.Format = "yyyy-mm-dd";
 					endDateColumn.AutoFit();
-					var tripLengthColumn = sheet.Column(4);
-                    tripLengthColumn.Style.Numberformat.Format = "yyyy-mm-dd";
-					tripLengthColumn.AutoFit();
 					var cancelDateColumn = sheet.Column(17);
                     cancelDateColumn.Style.Numberformat.Format = "yyyy-mm-dd";
 					cancelDateColumn.AutoFit();

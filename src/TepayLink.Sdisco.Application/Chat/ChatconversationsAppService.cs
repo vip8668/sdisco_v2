@@ -1,4 +1,5 @@
 ﻿
+using TepayLink.Sdisco.Chat;
 
 using System;
 using System.Linq;
@@ -31,21 +32,23 @@ namespace TepayLink.Sdisco.Chat
 
 		 public async Task<PagedResultDto<GetChatconversationForViewDto>> GetAll(GetAllChatconversationsInput input)
          {
+			var sideFilter = (ChatSide) input.SideFilter;
 			
 			var filteredChatconversations = _chatconversationRepository.GetAll()
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Message.Contains(input.Filter) || e.SharedMessageId.Contains(input.Filter))
-						.WhereIf(input.MinChatConversationIdFilter != null, e => e.ChatConversationId >= input.MinChatConversationIdFilter)
-						.WhereIf(input.MaxChatConversationIdFilter != null, e => e.ChatConversationId <= input.MaxChatConversationIdFilter)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.ShardChatConversationId.Contains(input.Filter) || e.LastMessage.Contains(input.Filter))
 						.WhereIf(input.MinUserIdFilter != null, e => e.UserId >= input.MinUserIdFilter)
 						.WhereIf(input.MaxUserIdFilter != null, e => e.UserId <= input.MaxUserIdFilter)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.MessageFilter),  e => e.Message == input.MessageFilter)
-						.WhereIf(input.MinSideFilter != null, e => e.Side >= input.MinSideFilter)
-						.WhereIf(input.MaxSideFilter != null, e => e.Side <= input.MaxSideFilter)
-						.WhereIf(input.MinReadStateFilter != null, e => e.ReadState >= input.MinReadStateFilter)
-						.WhereIf(input.MaxReadStateFilter != null, e => e.ReadState <= input.MaxReadStateFilter)
-						.WhereIf(input.MinReceiverReadStateFilter != null, e => e.ReceiverReadState >= input.MinReceiverReadStateFilter)
-						.WhereIf(input.MaxReceiverReadStateFilter != null, e => e.ReceiverReadState <= input.MaxReceiverReadStateFilter)
-						.WhereIf(!string.IsNullOrWhiteSpace(input.SharedMessageIdFilter),  e => e.SharedMessageId == input.SharedMessageIdFilter);
+						.WhereIf(input.MinFriendUserIdFilter != null, e => e.FriendUserId >= input.MinFriendUserIdFilter)
+						.WhereIf(input.MaxFriendUserIdFilter != null, e => e.FriendUserId <= input.MaxFriendUserIdFilter)
+						.WhereIf(input.MinUnreadCountFilter != null, e => e.UnreadCount >= input.MinUnreadCountFilter)
+						.WhereIf(input.MaxUnreadCountFilter != null, e => e.UnreadCount <= input.MaxUnreadCountFilter)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.ShardChatConversationIdFilter),  e => e.ShardChatConversationId == input.ShardChatConversationIdFilter)
+						.WhereIf(input.MinBookingIdFilter != null, e => e.BookingId >= input.MinBookingIdFilter)
+						.WhereIf(input.MaxBookingIdFilter != null, e => e.BookingId <= input.MaxBookingIdFilter)
+						.WhereIf(!string.IsNullOrWhiteSpace(input.LastMessageFilter),  e => e.LastMessage == input.LastMessageFilter)
+						.WhereIf(input.SideFilter > -1, e => e.Side == sideFilter)
+						.WhereIf(input.MinStatusFilter != null, e => e.Status >= input.MinStatusFilter)
+						.WhereIf(input.MaxStatusFilter != null, e => e.Status <= input.MaxStatusFilter);
 
 			var pagedAndFilteredChatconversations = filteredChatconversations
                 .OrderBy(input.Sorting ?? "id asc")
@@ -55,13 +58,14 @@ namespace TepayLink.Sdisco.Chat
                          select new GetChatconversationForViewDto() {
 							Chatconversation = new ChatconversationDto
 							{
-                                ChatConversationId = o.ChatConversationId,
                                 UserId = o.UserId,
-                                Message = o.Message,
+                                FriendUserId = o.FriendUserId,
+                                UnreadCount = o.UnreadCount,
+                                ShardChatConversationId = o.ShardChatConversationId,
+                                BookingId = o.BookingId,
+                                LastMessage = o.LastMessage,
                                 Side = o.Side,
-                                ReadState = o.ReadState,
-                                ReceiverReadState = o.ReceiverReadState,
-                                SharedMessageId = o.SharedMessageId,
+                                Status = o.Status,
                                 Id = o.Id
 							}
 						};

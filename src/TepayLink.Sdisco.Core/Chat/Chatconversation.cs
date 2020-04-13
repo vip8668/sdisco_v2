@@ -1,4 +1,5 @@
-﻿using System;
+﻿using TepayLink.Sdisco.Chat;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities.Auditing;
@@ -12,19 +13,21 @@ namespace TepayLink.Sdisco.Chat
 			public int? TenantId { get; set; }
 			
 
-		public virtual long ChatConversationId { get; set; }
-		
 		public virtual long UserId { get; set; }
 		
-		public virtual string Message { get; set; }
+		public virtual long FriendUserId { get; set; }
 		
-		public virtual int Side { get; set; }
+		public virtual int UnreadCount { get; set; }
 		
-		public virtual int ReadState { get; set; }
+		public virtual string ShardChatConversationId { get; set; }
 		
-		public virtual int ReceiverReadState { get; set; }
+		public virtual long? BookingId { get; set; }
 		
-		public virtual string SharedMessageId { get; set; }
+		public virtual string LastMessage { get; set; }
+		
+		public virtual ChatSide Side { get; set; }
+		
+		public virtual int Status { get; set; }
 		
 
     }

@@ -14,6 +14,7 @@ namespace TepayLink.Sdisco.Products
         ThingToBuy = 6,
         Hotel = 7,
         Transport = 8,
+        Restaurant=9
 
     }
 

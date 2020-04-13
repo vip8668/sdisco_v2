@@ -1,5 +1,5 @@
 {
-  "IsRegenerate": false,
+  "IsRegenerate": true,
   "MenuPosition": "admin",
   "RelativeNamespace": "Products",
   "EntityName": "ProductReviewDetail",
@@ -21,8 +21,8 @@
     {
       "Name": "RatingAvg",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -40,8 +40,8 @@
     {
       "Name": "Intineraty",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -59,8 +59,8 @@
     {
       "Name": "Service",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -78,8 +78,8 @@
     {
       "Name": "Transport",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -97,8 +97,8 @@
     {
       "Name": "GuideTour",
       "Type": "decimal",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -116,8 +116,8 @@
     {
       "Name": "Food",
       "Type": "double",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -173,8 +173,8 @@
     {
       "Name": "BookingId",
       "Type": "long",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -192,8 +192,8 @@
     {
       "Name": "Read",
       "Type": "bool",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -230,8 +230,8 @@
     {
       "Name": "ReplyId",
       "Type": "long",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -285,6 +285,17 @@
       }
     }
   ],
-  "NavigationProperties": [],
+  "NavigationProperties": [
+    {
+      "Namespace": "TepayLink.Sdisco.Products",
+      "ForeignEntityName": "Product",
+      "IdType": "long",
+      "IsNullable": true,
+      "PropertyName": "ProductId",
+      "DisplayPropertyName": "Name",
+      "DuplicationNumber": 0,
+      "RelationType": "single"
+    }
+  ],
   "EnumDefinitions": []
 }

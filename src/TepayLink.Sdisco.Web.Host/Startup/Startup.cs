@@ -130,7 +130,7 @@ namespace TepayLink.Sdisco.Web.Startup
                     config.UseSqlServerStorage(_appConfiguration.GetConnectionString("Default"));
                 });
             }
-
+            AppConsts.Domain = _appConfiguration["App:Domain"];
             if (WebConsts.GraphQL.Enabled)
             {
                 services.AddAndConfigureGraphQL();

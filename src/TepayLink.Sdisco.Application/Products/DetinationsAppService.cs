@@ -40,7 +40,10 @@ namespace TepayLink.Sdisco.Products
 			var filteredDetinations = _detinationRepository.GetAll()
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Image.Contains(input.Filter) || e.Name.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameFilter),  e => e.Name == input.NameFilter)
-						.WhereIf(input.StatusFilter > -1, e => e.Status == statusFilter);
+						.WhereIf(input.StatusFilter > -1, e => e.Status == statusFilter)
+						.WhereIf(input.IsTopFilter > -1,  e => (input.IsTopFilter == 1 && e.IsTop) || (input.IsTopFilter == 0 && !e.IsTop) )
+						.WhereIf(input.MinBookingCountFilter != null, e => e.BookingCount >= input.MinBookingCountFilter)
+						.WhereIf(input.MaxBookingCountFilter != null, e => e.BookingCount <= input.MaxBookingCountFilter);
 
 			var pagedAndFilteredDetinations = filteredDetinations
                 .OrderBy(input.Sorting ?? "id asc")
@@ -53,6 +56,8 @@ namespace TepayLink.Sdisco.Products
                                 Image = o.Image,
                                 Name = o.Name,
                                 Status = o.Status,
+                                IsTop = o.IsTop,
+                                BookingCount = o.BookingCount,
                                 Id = o.Id
 							}
 						};
@@ -129,7 +134,10 @@ namespace TepayLink.Sdisco.Products
 			var filteredDetinations = _detinationRepository.GetAll()
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Image.Contains(input.Filter) || e.Name.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameFilter),  e => e.Name == input.NameFilter)
-						.WhereIf(input.StatusFilter > -1, e => e.Status == statusFilter);
+						.WhereIf(input.StatusFilter > -1, e => e.Status == statusFilter)
+						.WhereIf(input.IsTopFilter > -1,  e => (input.IsTopFilter == 1 && e.IsTop) || (input.IsTopFilter == 0 && !e.IsTop) )
+						.WhereIf(input.MinBookingCountFilter != null, e => e.BookingCount >= input.MinBookingCountFilter)
+						.WhereIf(input.MaxBookingCountFilter != null, e => e.BookingCount <= input.MaxBookingCountFilter);
 
 			var query = (from o in filteredDetinations
                          select new GetDetinationForViewDto() { 
@@ -138,6 +146,8 @@ namespace TepayLink.Sdisco.Products
                                 Image = o.Image,
                                 Name = o.Name,
                                 Status = o.Status,
+                                IsTop = o.IsTop,
+                                BookingCount = o.BookingCount,
                                 Id = o.Id
 							}
 						 });

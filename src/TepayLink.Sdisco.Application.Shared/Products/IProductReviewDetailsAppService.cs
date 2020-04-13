@@ -22,5 +22,7 @@ namespace TepayLink.Sdisco.Products
 		Task<FileDto> GetProductReviewDetailsToExcel(GetAllProductReviewDetailsForExcelInput input);
 
 		
+		Task<PagedResultDto<ProductReviewDetailProductLookupTableDto>> GetAllProductForLookupTable(GetAllForLookupTableInput input);
+		
     }
 }

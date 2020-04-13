@@ -1,0 +1,158 @@
+﻿@using TepayLink.Sdisco.Authorization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Transactions
+@using TepayLink.Sdisco.Web.Areas.Admin.Startup
+@model TransactionsViewModel
+@{
+    ViewBag.CurrentPageName = AdminPageNames.Common.Transactions;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/Admin/Views/Transactions/Index.js" asp-append-version="true"></script>
+}
+
+ <div class="kt-subheader kt-grid__item">
+  
+    <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title">
+            <span>@L("Transactions")</span>
+        </h3>
+        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        <span class="kt-subheader__desc">
+            @L("TransactionsHeaderInfo")
+        </span>
+    </div>
+    <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+            <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            @if (IsGranted(AppPermissions.Pages_Administration_Transactions_Create))
+            {
+                <button id="CreateNewTransactionButton" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewTransaction")</button>
+            }
+        </div>
+    </div>
+  
+</div>
+<div class="kt-content">
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="TransactionsTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetTransactionsButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinUserIdFilterId">@L("MinMax") @L("UserId")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minUserIdFilter" id="MinUserIdFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxUserIdFilter"  id="MaxUserIdFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinAmountFilterId">@L("MinMax") @L("Amount")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minAmountFilter" id="MinAmountFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxAmountFilter"  id="MaxAmountFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinSideFilterId">@L("MinMax") @L("Side")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minSideFilter" id="MinSideFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxSideFilter"  id="MaxSideFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<label for="TransTypeFilterId">@L("TransType")</label>
+								<select class="form-control" name="TransTypeFilter" id="TransTypeFilterId">
+								<option value="-1">@L("All")</option>
+																			<option value="1">@L("Enum_TransactionType_1")</option>
+
+										<option value="2">@L("Enum_TransactionType_2")</option>
+
+										<option value="3">@L("Enum_TransactionType_3")</option>
+
+										<option value="4">@L("Enum_TransactionType_4")</option>
+
+
+								</select>
+                            </div>
+							<div class="col-md-3">
+								<label for="WalletTypeFilterId">@L("WalletType")</label>
+								<select class="form-control" name="WalletTypeFilter" id="WalletTypeFilterId">
+								<option value="-1">@L("All")</option>
+									
+								</select>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinBookingDetailIdFilterId">@L("MinMax") @L("BookingDetailId")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minBookingDetailIdFilter" id="MinBookingDetailIdFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxBookingDetailIdFilter"  id="MaxBookingDetailIdFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinRefIdFilterId">@L("MinMax") @L("RefId")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minRefIdFilter" id="MinRefIdFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxRefIdFilter"  id="MaxRefIdFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="DescritionFilterId">@L("Descrition")</label>
+									<input type="text" class="form-control" name="descritionFilter" id="DescritionFilterId">
+								</div>
+                            </div>
+
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="TransactionsTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>@L("Actions")</th>
+								<th>@L("UserId")</th>
+								<th>@L("Amount")</th>
+								<th>@L("Side")</th>
+								<th>@L("TransType")</th>
+								<th>@L("WalletType")</th>
+								<th>@L("BookingDetailId")</th>
+								<th>@L("RefId")</th>
+								<th>@L("Descrition")</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+</div>

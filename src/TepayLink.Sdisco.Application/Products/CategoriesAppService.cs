@@ -40,7 +40,9 @@ namespace TepayLink.Sdisco.Products
 			var filteredCategories = _categoryRepository.GetAll()
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Name.Contains(input.Filter) || e.Image.Contains(input.Filter) || e.Icon.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameFilter),  e => e.Name == input.NameFilter)
-						.WhereIf(input.ProductTypeFilter > -1, e => e.ProductType == productTypeFilter);
+						.WhereIf(input.ProductTypeFilter > -1, e => e.ProductType == productTypeFilter)
+						.WhereIf(input.MinOrderFilter != null, e => e.Order >= input.MinOrderFilter)
+						.WhereIf(input.MaxOrderFilter != null, e => e.Order <= input.MaxOrderFilter);
 
 			var pagedAndFilteredCategories = filteredCategories
                 .OrderBy(input.Sorting ?? "id asc")
@@ -54,6 +56,7 @@ namespace TepayLink.Sdisco.Products
                                 Image = o.Image,
                                 Icon = o.Icon,
                                 ProductType = o.ProductType,
+                                Order = o.Order,
                                 Id = o.Id
 							}
 						};
@@ -130,7 +133,9 @@ namespace TepayLink.Sdisco.Products
 			var filteredCategories = _categoryRepository.GetAll()
 						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.Name.Contains(input.Filter) || e.Image.Contains(input.Filter) || e.Icon.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameFilter),  e => e.Name == input.NameFilter)
-						.WhereIf(input.ProductTypeFilter > -1, e => e.ProductType == productTypeFilter);
+						.WhereIf(input.ProductTypeFilter > -1, e => e.ProductType == productTypeFilter)
+						.WhereIf(input.MinOrderFilter != null, e => e.Order >= input.MinOrderFilter)
+						.WhereIf(input.MaxOrderFilter != null, e => e.Order <= input.MaxOrderFilter);
 
 			var query = (from o in filteredCategories
                          select new GetCategoryForViewDto() { 
@@ -140,6 +145,7 @@ namespace TepayLink.Sdisco.Products
                                 Image = o.Image,
                                 Icon = o.Icon,
                                 ProductType = o.ProductType,
+                                Order = o.Order,
                                 Id = o.Id
 							}
 						 });

@@ -8,6 +8,8 @@ namespace TepayLink.Sdisco.Products.Dtos
     {
 		public CreateOrEditProductReviewDetailDto ProductReviewDetail { get; set; }
 
+		public string ProductName { get; set;}
+
 
     }
 }

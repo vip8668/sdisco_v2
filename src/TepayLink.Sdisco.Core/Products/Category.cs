@@ -21,6 +21,8 @@ namespace TepayLink.Sdisco.Products
 		
 		public virtual ProductTypeEnum ProductType { get; set; }
 		
+		public virtual int Order { get; set; }
+		
 
     }
 }

@@ -1,0 +1,84 @@
+﻿@using TepayLink.Sdisco.Chat;
+					@using TepayLink.Sdisco.Chat;
+					@using TepayLink.Sdisco.Chat;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ChatMessageV2s
+@model CreateOrEditChatMessageV2ModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditChatMessageV2")) : L("CreateNewChatMessageV2")))
+
+<div class="modal-body">
+        <div id="ChatMessageV2InformationsTab">
+            <form name="ChatMessageV2InformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ChatMessageV2.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="ChatMessageV2_ChatConversationId">@L("ChatConversationId")</label>
+									<input class="form-control m-input" id="ChatMessageV2_ChatConversationId" value="@Model.ChatMessageV2.ChatConversationId.ToString(CultureInfo.InvariantCulture)" type="number" name="chatConversationId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ChatMessageV2_UserId">@L("UserId")</label>
+									<input class="form-control m-input" id="ChatMessageV2_UserId" value="@Model.ChatMessageV2.UserId.ToString(CultureInfo.InvariantCulture)" type="number" name="userId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ChatMessageV2_Message">@L("Message")</label>
+									<input class="form-control" id="ChatMessageV2_Message" value="@Model.ChatMessageV2.Message" type="text" name="message"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ChatMessageV2_CreationTime">@L("CreationTime")</label>
+									<input class="form-control m-input date-picker" id="ChatMessageV2_CreationTime" type="text" name="creationTime" value="@Model.ChatMessageV2.CreationTime"/>
+								</div>
+					
+								@{
+					var selectListSide = Html.GetEnumSelectList(typeof(ChatSide));
+					 foreach (var selectOption in selectListSide) { selectOption.Text = L("Enum_ChatSide_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="ChatMessageV2_Side">@L("Side")</label>
+										<select class="form-control m-input m-input--square" name="side" id="ChatMessageV2_Side" asp-for="@Model.ChatMessageV2.Side" asp-items="@selectListSide">
+									</select>
+								</div>
+					
+								@{
+					var selectListReadState = Html.GetEnumSelectList(typeof(ChatMessageReadState));
+					 foreach (var selectOption in selectListReadState) { selectOption.Text = L("Enum_ChatMessageReadState_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="ChatMessageV2_ReadState">@L("ReadState")</label>
+										<select class="form-control m-input m-input--square" name="readState" id="ChatMessageV2_ReadState" asp-for="@Model.ChatMessageV2.ReadState" asp-items="@selectListReadState">
+									</select>
+								</div>
+					
+								@{
+					var selectListReceiverReadState = Html.GetEnumSelectList(typeof(ChatMessageReadState));
+					 foreach (var selectOption in selectListReceiverReadState) { selectOption.Text = L("Enum_ChatMessageReadState_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="ChatMessageV2_ReceiverReadState">@L("ReceiverReadState")</label>
+										<select class="form-control m-input m-input--square" name="receiverReadState" id="ChatMessageV2_ReceiverReadState" asp-for="@Model.ChatMessageV2.ReceiverReadState" asp-items="@selectListReceiverReadState">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="ChatMessageV2_SharedMessageId">@L("SharedMessageId")</label>
+									<input class="form-control" id="ChatMessageV2_SharedMessageId" value="@Model.ChatMessageV2.SharedMessageId" type="text" name="sharedMessageId"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

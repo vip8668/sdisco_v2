@@ -11,7 +11,7 @@ namespace TepayLink.Sdisco.Authorization.Accounts
         Task<int?> ResolveTenantId(ResolveTenantIdInput input);
 
         Task<RegisterOutput> Register(RegisterInput input);
-
+        Task<RegisterOutput> RegisterHost(RegisterHostInput input);
         Task SendPasswordResetCode(SendPasswordResetCodeInput input);
 
         Task<ResetPasswordOutput> ResetPassword(ResetPasswordInput input);

@@ -6,5 +6,8 @@ namespace TepayLink.Sdisco.Account
 {
   public  enum WalletTypeEnum
     {
+        Money = 1,
+        Point = 2
     }
+
 }

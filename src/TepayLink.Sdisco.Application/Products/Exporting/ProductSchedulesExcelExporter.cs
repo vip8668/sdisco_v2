@@ -44,10 +44,11 @@ namespace TepayLink.Sdisco.Products.Exporting
                         L("TicketPrice"),
                         L("CostPrice"),
                         L("HotelPrice"),
-                        L("StartDat"),
+                        L("StartDate"),
                         L("EndDate"),
                         L("DepartureTime"),
                         L("Revenue"),
+                        L("AllowBook"),
                         (L("Product")) + L("Name")
                         );
 
@@ -62,16 +63,17 @@ namespace TepayLink.Sdisco.Products.Exporting
                         _ => _.ProductSchedule.TicketPrice,
                         _ => _.ProductSchedule.CostPrice,
                         _ => _.ProductSchedule.HotelPrice,
-                        _ => _timeZoneConverter.Convert(_.ProductSchedule.StartDat, _abpSession.TenantId, _abpSession.GetUserId()),
+                        _ => _timeZoneConverter.Convert(_.ProductSchedule.StartDate, _abpSession.TenantId, _abpSession.GetUserId()),
                         _ => _timeZoneConverter.Convert(_.ProductSchedule.EndDate, _abpSession.TenantId, _abpSession.GetUserId()),
                         _ => _.ProductSchedule.DepartureTime,
                         _ => _.ProductSchedule.Revenue,
+                        _ => _.ProductSchedule.AllowBook,
                         _ => _.ProductName
                         );
 
-					var startDatColumn = sheet.Column(10);
-                    startDatColumn.Style.Numberformat.Format = "yyyy-mm-dd";
-					startDatColumn.AutoFit();
+					var startDateColumn = sheet.Column(10);
+                    startDateColumn.Style.Numberformat.Format = "yyyy-mm-dd";
+					startDateColumn.AutoFit();
 					var endDateColumn = sheet.Column(11);
                     endDateColumn.Style.Numberformat.Format = "yyyy-mm-dd";
 					endDateColumn.AutoFit();

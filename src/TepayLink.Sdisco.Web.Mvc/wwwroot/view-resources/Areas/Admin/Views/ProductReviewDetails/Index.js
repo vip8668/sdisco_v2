@@ -44,7 +44,8 @@
                 ajaxFunction: _productReviewDetailsService.getAll,
                 inputFilter: function () {
                     return {
-					filter: $('#ProductReviewDetailsTableFilter').val()
+					filter: $('#ProductReviewDetailsTableFilter').val(),
+					productNameFilter: $('#ProductNameFilterId').val()
                     };
                 }
             },
@@ -162,6 +163,11 @@
 						targets: 14,
 						 data: "productReviewDetail.reviewer",
 						 name: "reviewer"   
+					},
+					{
+						targets: 15,
+						 data: "productName" ,
+						 name: "productFk.name" 
 					}
             ]
         });
@@ -206,7 +212,8 @@
 		$('#ExportToExcelButton').click(function () {
             _productReviewDetailsService
                 .getProductReviewDetailsToExcel({
-				filter : $('#ProductReviewDetailsTableFilter').val()
+				filter : $('#ProductReviewDetailsTableFilter').val(),
+					productNameFilter: $('#ProductNameFilterId').val()
 				})
                 .done(function (result) {
                     app.downloadTempFile(result);

@@ -45,6 +45,7 @@
                 inputFilter: function () {
                     return {
 					filter: $('#ProductSchedulesTableFilter').val(),
+					allowBookFilter: $('#AllowBookFilterId').val(),
 					productNameFilter: $('#ProductNameFilterId').val()
                     };
                 }
@@ -134,11 +135,11 @@
 					},
 					{
 						targets: 10,
-						 data: "productSchedule.startDat",
-						 name: "startDat" ,
-					render: function (startDat) {
-						if (startDat) {
-							return moment(startDat).format('L');
+						 data: "productSchedule.startDate",
+						 name: "startDate" ,
+					render: function (startDate) {
+						if (startDate) {
+							return moment(startDate).format('L');
 						}
 						return "";
 					}
@@ -168,6 +169,18 @@
 					},
 					{
 						targets: 14,
+						 data: "productSchedule.allowBook",
+						 name: "allowBook"  ,
+						render: function (allowBook) {
+							if (allowBook) {
+								return '<div class="text-center"><i class="fa fa-check kt--font-success" title="True"></i></div>';
+							}
+							return '<div class="text-center"><i class="fa fa-times-circle" title="False"></i></div>';
+					}
+			 
+					},
+					{
+						targets: 15,
 						 data: "productName" ,
 						 name: "productFk.name" 
 					}
@@ -215,6 +228,7 @@
             _productSchedulesService
                 .getProductSchedulesToExcel({
 				filter : $('#ProductSchedulesTableFilter').val(),
+					allowBookFilter: $('#AllowBookFilterId').val(),
 					productNameFilter: $('#ProductNameFilterId').val()
 				})
                 .done(function (result) {

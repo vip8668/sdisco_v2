@@ -38,7 +38,7 @@ namespace TepayLink.Sdisco.Bookings
          {
 			
 			var filteredOrders = _orderRepository.GetAll()
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.OrderCode.Contains(input.Filter) || e.Note.Contains(input.Filter) || e.OrderRef.Contains(input.Filter) || e.BankCode.Contains(input.Filter) || e.Currency.Contains(input.Filter) || e.IssueDate.Contains(input.Filter) || e.NameOnCard.Contains(input.Filter) || e.TransactionId.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.OrderCode.Contains(input.Filter) || e.Note.Contains(input.Filter) || e.OrderRef.Contains(input.Filter) || e.BankCode.Contains(input.Filter) || e.CardNumber.Contains(input.Filter) || e.Currency.Contains(input.Filter) || e.IssueDate.Contains(input.Filter) || e.NameOnCard.Contains(input.Filter) || e.TransactionId.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.IssueDateFilter),  e => e.IssueDate == input.IssueDateFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameOnCardFilter),  e => e.NameOnCard == input.NameOnCardFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.TransactionIdFilter),  e => e.TransactionId == input.TransactionIdFilter);
@@ -139,7 +139,7 @@ namespace TepayLink.Sdisco.Bookings
          {
 			
 			var filteredOrders = _orderRepository.GetAll()
-						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.OrderCode.Contains(input.Filter) || e.Note.Contains(input.Filter) || e.OrderRef.Contains(input.Filter) || e.BankCode.Contains(input.Filter) || e.Currency.Contains(input.Filter) || e.IssueDate.Contains(input.Filter) || e.NameOnCard.Contains(input.Filter) || e.TransactionId.Contains(input.Filter))
+						.WhereIf(!string.IsNullOrWhiteSpace(input.Filter), e => false  || e.OrderCode.Contains(input.Filter) || e.Note.Contains(input.Filter) || e.OrderRef.Contains(input.Filter) || e.BankCode.Contains(input.Filter) || e.CardNumber.Contains(input.Filter) || e.Currency.Contains(input.Filter) || e.IssueDate.Contains(input.Filter) || e.NameOnCard.Contains(input.Filter) || e.TransactionId.Contains(input.Filter))
 						.WhereIf(!string.IsNullOrWhiteSpace(input.IssueDateFilter),  e => e.IssueDate == input.IssueDateFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.NameOnCardFilter),  e => e.NameOnCard == input.NameOnCardFilter)
 						.WhereIf(!string.IsNullOrWhiteSpace(input.TransactionIdFilter),  e => e.TransactionId == input.TransactionIdFilter);

@@ -125,6 +125,28 @@
                             </div>
 							<div class="col-md-3">
 								<div class="form-group">
+									<label for="ExtraDataFilterId">@L("ExtraData")</label>
+									<input type="text" class="form-control" name="extraDataFilter" id="ExtraDataFilterId">
+								</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="WhatWeDoFilterId">@L("WhatWeDo")</label>
+									<input type="text" class="form-control" name="whatWeDoFilter" id="WhatWeDoFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                    <div class="form-group">
+										<label for="MinLastBookTimeFilterId">@L("LastBookTimeRange")</label>
+										<div class="input-group">
+											<input class="form-control m-input date-picker" type="text" placeholder="@L("MinValue")"  id="MinLastBookTimeFilterId">
+											<span style="line-height: 40px;padding: 0 15px 0 15px;"> &mdash; </span>
+											<input class="form-control m-input date-picker" type="text" placeholder="@L("MaxValue")"  id="MaxLastBookTimeFilterId">
+										</div>
+									</div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
 									<label for="CategoryNameFilterId">(@L("Category")) @L("Name")</label>
 									<input type="text" class="form-control" name="categoryNameFilter" id="CategoryNameFilterId">
 								</div>
@@ -177,6 +199,9 @@
 								<th>@L("IsBestSeller")</th>
 								<th>@L("IsTrending")</th>
 								<th>@L("IsTop")</th>
+								<th>@L("ExtraData")</th>
+								<th>@L("WhatWeDo")</th>
+								<th>@L("LastBookTime")</th>
 								<th>@L("CategoryName")</th>
 								<th>@L("UserName")</th>
 								<th>@L("PlaceName")</th>

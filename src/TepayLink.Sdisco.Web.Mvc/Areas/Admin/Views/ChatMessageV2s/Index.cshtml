@@ -1,0 +1,158 @@
+﻿@using TepayLink.Sdisco.Authorization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ChatMessageV2s
+@using TepayLink.Sdisco.Web.Areas.Admin.Startup
+@model ChatMessageV2sViewModel
+@{
+    ViewBag.CurrentPageName = AdminPageNames.Common.ChatMessageV2s;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/Admin/Views/ChatMessageV2s/Index.js" asp-append-version="true"></script>
+}
+
+ <div class="kt-subheader kt-grid__item">
+  
+    <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title">
+            <span>@L("ChatMessageV2s")</span>
+        </h3>
+        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        <span class="kt-subheader__desc">
+            @L("ChatMessageV2sHeaderInfo")
+        </span>
+    </div>
+    <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+            <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            @if (IsGranted(AppPermissions.Pages_ChatMessageV2s_Create))
+            {
+                <button id="CreateNewChatMessageV2Button" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewChatMessageV2")</button>
+            }
+        </div>
+    </div>
+  
+</div>
+<div class="kt-content">
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="ChatMessageV2sTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetChatMessageV2sButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinChatConversationIdFilterId">@L("MinMax") @L("ChatConversationId")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minChatConversationIdFilter" id="MinChatConversationIdFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxChatConversationIdFilter"  id="MaxChatConversationIdFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinUserIdFilterId">@L("MinMax") @L("UserId")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minUserIdFilter" id="MinUserIdFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxUserIdFilter"  id="MaxUserIdFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="MessageFilterId">@L("Message")</label>
+									<input type="text" class="form-control" name="messageFilter" id="MessageFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                    <div class="form-group">
+										<label for="MinCreationTimeFilterId">@L("CreationTimeRange")</label>
+										<div class="input-group">
+											<input class="form-control m-input date-picker" type="text" placeholder="@L("MinValue")"  id="MinCreationTimeFilterId">
+											<span style="line-height: 40px;padding: 0 15px 0 15px;"> &mdash; </span>
+											<input class="form-control m-input date-picker" type="text" placeholder="@L("MaxValue")"  id="MaxCreationTimeFilterId">
+										</div>
+									</div>
+                            </div>
+							<div class="col-md-3">
+								<label for="SideFilterId">@L("Side")</label>
+								<select class="form-control" name="SideFilter" id="SideFilterId">
+								<option value="-1">@L("All")</option>
+																			<option value="1">@L("Enum_ChatSide_1")</option>
+
+										<option value="2">@L("Enum_ChatSide_2")</option>
+
+
+								</select>
+                            </div>
+							<div class="col-md-3">
+								<label for="ReadStateFilterId">@L("ReadState")</label>
+								<select class="form-control" name="ReadStateFilter" id="ReadStateFilterId">
+								<option value="-1">@L("All")</option>
+																			<option value="1">@L("Enum_ChatMessageReadState_1")</option>
+
+										<option value="2">@L("Enum_ChatMessageReadState_2")</option>
+
+
+								</select>
+                            </div>
+							<div class="col-md-3">
+								<label for="ReceiverReadStateFilterId">@L("ReceiverReadState")</label>
+								<select class="form-control" name="ReceiverReadStateFilter" id="ReceiverReadStateFilterId">
+								<option value="-1">@L("All")</option>
+																			<option value="1">@L("Enum_ChatMessageReadState_1")</option>
+
+										<option value="2">@L("Enum_ChatMessageReadState_2")</option>
+
+
+								</select>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="SharedMessageIdFilterId">@L("SharedMessageId")</label>
+									<input type="text" class="form-control" name="sharedMessageIdFilter" id="SharedMessageIdFilterId">
+								</div>
+                            </div>
+
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="ChatMessageV2sTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>@L("Actions")</th>
+								<th>@L("ChatConversationId")</th>
+								<th>@L("UserId")</th>
+								<th>@L("Message")</th>
+								<th>@L("CreationTime")</th>
+								<th>@L("Side")</th>
+								<th>@L("ReadState")</th>
+								<th>@L("ReceiverReadState")</th>
+								<th>@L("SharedMessageId")</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+</div>

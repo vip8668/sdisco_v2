@@ -21,6 +21,10 @@ namespace TepayLink.Sdisco.Products
 		
 		public virtual DetinationStatusEnum Status { get; set; }
 		
+		public virtual bool IsTop { get; set; }
+		
+		public virtual int BookingCount { get; set; }
+		
 
     }
 }

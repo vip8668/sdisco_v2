@@ -30,6 +30,13 @@ namespace TepayLink.Sdisco.Authorization
 
             var pages = context.GetPermissionOrNull(AppPermissions.Pages) ?? context.CreatePermission(AppPermissions.Pages, L("Pages"));
 
+            var chatMessageV2s = pages.CreateChildPermission(AppPermissions.Pages_ChatMessageV2s, L("ChatMessageV2s"));
+            chatMessageV2s.CreateChildPermission(AppPermissions.Pages_ChatMessageV2s_Create, L("CreateNewChatMessageV2"));
+            chatMessageV2s.CreateChildPermission(AppPermissions.Pages_ChatMessageV2s_Edit, L("EditChatMessageV2"));
+            chatMessageV2s.CreateChildPermission(AppPermissions.Pages_ChatMessageV2s_Delete, L("DeleteChatMessageV2"));
+
+
+
             var chatconversations = pages.CreateChildPermission(AppPermissions.Pages_Chatconversations, L("Chatconversations"));
             chatconversations.CreateChildPermission(AppPermissions.Pages_Chatconversations_Create, L("CreateNewChatconversation"));
             chatconversations.CreateChildPermission(AppPermissions.Pages_Chatconversations_Edit, L("EditChatconversation"));
@@ -104,6 +111,69 @@ namespace TepayLink.Sdisco.Authorization
             pages.CreateChildPermission(AppPermissions.Pages_DemoUiComponents, L("DemoUiComponents"));
 
             var administration = pages.CreateChildPermission(AppPermissions.Pages_Administration, L("Administration"));
+
+            var transactions = administration.CreateChildPermission(AppPermissions.Pages_Administration_Transactions, L("Transactions"));
+            transactions.CreateChildPermission(AppPermissions.Pages_Administration_Transactions_Create, L("CreateNewTransaction"));
+            transactions.CreateChildPermission(AppPermissions.Pages_Administration_Transactions_Edit, L("EditTransaction"));
+            transactions.CreateChildPermission(AppPermissions.Pages_Administration_Transactions_Delete, L("DeleteTransaction"));
+
+
+
+            var withDrawRequests = administration.CreateChildPermission(AppPermissions.Pages_Administration_WithDrawRequests, L("WithDrawRequests"));
+            withDrawRequests.CreateChildPermission(AppPermissions.Pages_Administration_WithDrawRequests_Create, L("CreateNewWithDrawRequest"));
+            withDrawRequests.CreateChildPermission(AppPermissions.Pages_Administration_WithDrawRequests_Edit, L("EditWithDrawRequest"));
+            withDrawRequests.CreateChildPermission(AppPermissions.Pages_Administration_WithDrawRequests_Delete, L("DeleteWithDrawRequest"));
+
+
+
+            var shareTransactions = administration.CreateChildPermission(AppPermissions.Pages_Administration_ShareTransactions, L("ShareTransactions"));
+            shareTransactions.CreateChildPermission(AppPermissions.Pages_Administration_ShareTransactions_Create, L("CreateNewShareTransaction"));
+            shareTransactions.CreateChildPermission(AppPermissions.Pages_Administration_ShareTransactions_Edit, L("EditShareTransaction"));
+            shareTransactions.CreateChildPermission(AppPermissions.Pages_Administration_ShareTransactions_Delete, L("DeleteShareTransaction"));
+
+
+
+            var partnerRevenues = administration.CreateChildPermission(AppPermissions.Pages_Administration_PartnerRevenues, L("PartnerRevenues"));
+            partnerRevenues.CreateChildPermission(AppPermissions.Pages_Administration_PartnerRevenues_Create, L("CreateNewPartnerRevenue"));
+            partnerRevenues.CreateChildPermission(AppPermissions.Pages_Administration_PartnerRevenues_Edit, L("EditPartnerRevenue"));
+            partnerRevenues.CreateChildPermission(AppPermissions.Pages_Administration_PartnerRevenues_Delete, L("DeletePartnerRevenue"));
+
+
+
+            var shortLinks = administration.CreateChildPermission(AppPermissions.Pages_Administration_ShortLinks, L("ShortLinks"));
+            shortLinks.CreateChildPermission(AppPermissions.Pages_Administration_ShortLinks_Create, L("CreateNewShortLink"));
+            shortLinks.CreateChildPermission(AppPermissions.Pages_Administration_ShortLinks_Edit, L("EditShortLink"));
+            shortLinks.CreateChildPermission(AppPermissions.Pages_Administration_ShortLinks_Delete, L("DeleteShortLink"));
+
+
+
+            var nearbyPlaces = administration.CreateChildPermission(AppPermissions.Pages_Administration_NearbyPlaces, L("NearbyPlaces"));
+            nearbyPlaces.CreateChildPermission(AppPermissions.Pages_Administration_NearbyPlaces_Create, L("CreateNewNearbyPlace"));
+            nearbyPlaces.CreateChildPermission(AppPermissions.Pages_Administration_NearbyPlaces_Edit, L("EditNearbyPlace"));
+            nearbyPlaces.CreateChildPermission(AppPermissions.Pages_Administration_NearbyPlaces_Delete, L("DeleteNearbyPlace"));
+
+
+
+            var suggestedProducts = administration.CreateChildPermission(AppPermissions.Pages_Administration_SuggestedProducts, L("SuggestedProducts"));
+            suggestedProducts.CreateChildPermission(AppPermissions.Pages_Administration_SuggestedProducts_Create, L("CreateNewSuggestedProduct"));
+            suggestedProducts.CreateChildPermission(AppPermissions.Pages_Administration_SuggestedProducts_Edit, L("EditSuggestedProduct"));
+            suggestedProducts.CreateChildPermission(AppPermissions.Pages_Administration_SuggestedProducts_Delete, L("DeleteSuggestedProduct"));
+
+
+
+            var relatedProducts = administration.CreateChildPermission(AppPermissions.Pages_Administration_RelatedProducts, L("RelatedProducts"));
+            relatedProducts.CreateChildPermission(AppPermissions.Pages_Administration_RelatedProducts_Create, L("CreateNewRelatedProduct"));
+            relatedProducts.CreateChildPermission(AppPermissions.Pages_Administration_RelatedProducts_Edit, L("EditRelatedProduct"));
+            relatedProducts.CreateChildPermission(AppPermissions.Pages_Administration_RelatedProducts_Delete, L("DeleteRelatedProduct"));
+
+
+
+            var similarProducts = administration.CreateChildPermission(AppPermissions.Pages_Administration_SimilarProducts, L("SimilarProducts"));
+            similarProducts.CreateChildPermission(AppPermissions.Pages_Administration_SimilarProducts_Create, L("CreateNewSimilarProduct"));
+            similarProducts.CreateChildPermission(AppPermissions.Pages_Administration_SimilarProducts_Edit, L("EditSimilarProduct"));
+            similarProducts.CreateChildPermission(AppPermissions.Pages_Administration_SimilarProducts_Delete, L("DeleteSimilarProduct"));
+
+
 
             var chatconversations = administration.CreateChildPermission(AppPermissions.Pages_Administration_Chatconversations, L("Chatconversations"));
             chatconversations.CreateChildPermission(AppPermissions.Pages_Administration_Chatconversations_Create, L("CreateNewChatconversation"));

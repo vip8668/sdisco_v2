@@ -1,0 +1,57 @@
+﻿@using TepayLink.Sdisco.KOL;
+					
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.ShareTransactions
+@model CreateOrEditShareTransactionModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditShareTransaction")) : L("CreateNewShareTransaction")))
+
+<div class="modal-body">
+        <div id="ShareTransactionInformationsTab">
+            <form name="ShareTransactionInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.ShareTransaction.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="ShareTransaction_UserId">@L("UserId")</label>
+									<input class="form-control m-input" id="ShareTransaction_UserId" value="@Model.ShareTransaction.UserId.ToString(CultureInfo.InvariantCulture)" type="number" name="userId"  />
+								</div>
+					
+								@{
+					var selectListType = Html.GetEnumSelectList(typeof(RevenueTypeEnum));
+					 foreach (var selectOption in selectListType) { selectOption.Text = L("Enum_RevenueTypeEnum_" + selectOption.Value); }
+					}
+								<div class="form-group m-form__group">
+									<label for="ShareTransaction_Type">@L("Type")</label>
+										<select class="form-control m-input m-input--square" name="type" id="ShareTransaction_Type" asp-for="@Model.ShareTransaction.Type" asp-items="@selectListType">
+									</select>
+								</div>
+					
+								<div class="form-group">
+									<label for="ShareTransaction_IP">@L("IP")</label>
+									<input class="form-control" id="ShareTransaction_IP" value="@Model.ShareTransaction.IP" type="text" name="ip"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ShareTransaction_Point">@L("Point")</label>
+									<input class="form-control m-input" id="ShareTransaction_Point" value="@Model.ShareTransaction.Point.ToString(CultureInfo.InvariantCulture)" type="number" name="point"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ShareTransaction_ProductId">@L("ProductId")</label>
+									<input class="form-control m-input" id="ShareTransaction_ProductId" value="@Model.ShareTransaction.ProductId.ToString(CultureInfo.InvariantCulture)" type="number" name="productId"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

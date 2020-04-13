@@ -8,6 +8,9 @@ namespace TepayLink.Sdisco.Products.Dtos
     public class CreateOrEditProductScheduleDto : EntityDto<long?>
     {
 
+		public bool AllowBook { get; set; }
+		
+		
 		 public long? ProductId { get; set; }
 		 
 		 

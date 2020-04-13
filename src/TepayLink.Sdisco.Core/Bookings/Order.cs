@@ -32,7 +32,7 @@ namespace TepayLink.Sdisco.Bookings
 		
 		public virtual long CardId { get; set; }
 		
-		public virtual long CardNumber { get; set; }
+		public virtual string CardNumber { get; set; }
 		
 		public virtual string Currency { get; set; }
 		

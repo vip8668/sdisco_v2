@@ -47,6 +47,8 @@
 					filter: $('#BookingDetailsTableFilter').val(),
 					minRefundAmountFilter: $('#MinRefundAmountFilterId').val(),
 					maxRefundAmountFilter: $('#MaxRefundAmountFilterId').val(),
+					minProductDetailComboIdFilter: $('#MinProductDetailComboIdFilterId').val(),
+					maxProductDetailComboIdFilter: $('#MaxProductDetailComboIdFilterId').val(),
 					productNameFilter: $('#ProductNameFilterId').val()
                     };
                 }
@@ -121,14 +123,7 @@
 					{
 						targets: 4,
 						 data: "bookingDetail.tripLength",
-						 name: "tripLength" ,
-					render: function (tripLength) {
-						if (tripLength) {
-							return moment(tripLength).format('L');
-						}
-						return "";
-					}
-			  
+						 name: "tripLength"   
 					},
 					{
 						targets: 5,
@@ -220,6 +215,11 @@
 					},
 					{
 						targets: 19,
+						 data: "bookingDetail.productDetailComboId",
+						 name: "productDetailComboId"   
+					},
+					{
+						targets: 20,
 						 data: "productName" ,
 						 name: "productFk.name" 
 					}
@@ -269,6 +269,8 @@
 				filter : $('#BookingDetailsTableFilter').val(),
 					minRefundAmountFilter: $('#MinRefundAmountFilterId').val(),
 					maxRefundAmountFilter: $('#MaxRefundAmountFilterId').val(),
+					minProductDetailComboIdFilter: $('#MinProductDetailComboIdFilterId').val(),
+					maxProductDetailComboIdFilter: $('#MaxProductDetailComboIdFilterId').val(),
 					productNameFilter: $('#ProductNameFilterId').val()
 				})
                 .done(function (result) {

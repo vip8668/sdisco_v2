@@ -24,13 +24,15 @@ namespace TepayLink.Sdisco.Products.Dtos
 
 		public decimal HotelPrice { get; set; }
 
-		public DateTime StartDat { get; set; }
+		public DateTime StartDate { get; set; }
 
 		public DateTime EndDate { get; set; }
 
 		public string DepartureTime { get; set; }
 
 		public decimal Revenue { get; set; }
+
+		public bool AllowBook { get; set; }
 
 
 		 public long? ProductId { get; set; }

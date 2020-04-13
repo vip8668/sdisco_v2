@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.Extensions;
@@ -23,6 +24,44 @@ namespace TepayLink.Sdisco.Authorization.Users
         public string GoogleAuthenticatorKey { get; set; }
 
         public List<UserOrganizationUnit> OrganizationUnits { get; set; }
+
+
+
+
+        public DateTime? Dob { get; set; }
+        public byte? Gender { get; set; }
+        public int? ContryId { get; set; }
+
+        public long? CityId { get; set; }
+        public long? DistrictId { get; set; }
+        public long? PrecintId { get; set; }
+
+        [MaxLength(4000)]
+        public string AboutMe { get; set; }
+
+        public string Work { get; set; }
+        public float? Rating { get; set; }
+        public string Ranking { get; set; }
+
+        public int? CurrencyId { get; set; }
+        [MaxLength(50)]
+        public string LanguageSpeak { get; set; }
+        public int Point { get; set; }
+        [MaxLength(300)]
+        public string Avatar { get; set; }
+
+        public string SubDomain { get; set; }
+
+        public string Occupation { get; set; }
+
+        public UserTypeEnum UserType { get; set; }
+
+        [MaxLength(300)]
+        public string Address { get; set; }
+
+
+        public long? HostUserId { get; set; }
+
 
         //Can add application specific user properties here
 

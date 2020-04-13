@@ -7,7 +7,9 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Models.ProductReviewDetails
     {
        public CreateOrEditProductReviewDetailDto ProductReviewDetail { get; set; }
 
-	   
+	   		public string ProductName { get; set;}
+
+
 	   public bool IsEditMode => ProductReviewDetail.Id.HasValue;
     }
 }

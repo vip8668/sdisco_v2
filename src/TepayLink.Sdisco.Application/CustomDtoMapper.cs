@@ -1,4 +1,10 @@
-﻿using TepayLink.Sdisco.Chat.Dtos;
+﻿using TepayLink.Sdisco.KOL.Dtos;
+using TepayLink.Sdisco.KOL;
+using TepayLink.Sdisco.Affiliate.Dtos;
+using TepayLink.Sdisco.Affiliate;
+using TepayLink.Sdisco.Places.Dtos;
+using TepayLink.Sdisco.Places;
+using TepayLink.Sdisco.Chat.Dtos;
 using TepayLink.Sdisco.Cashout.Dtos;
 using TepayLink.Sdisco.Cashout;
 using TepayLink.Sdisco.Search.Dtos;
@@ -6,11 +12,11 @@ using TepayLink.Sdisco.Search;
 using TepayLink.Sdisco.Client.Dtos;
 using TepayLink.Sdisco.Client;
 using TepayLink.Sdisco.Bookings.Dtos;
-using TepayLink.Sdisco.Booking;
-using TepayLink.Sdisco.Bookings.Dtos;
+
+
 using TepayLink.Sdisco.Bookings;
 using TepayLink.Sdisco.Products.Dtos;
-using TepayLink.Sdisco.Product;
+
 using TepayLink.Sdisco.Help.Dtos;
 using TepayLink.Sdisco.Help;
 using TepayLink.Sdisco.Blog.Dtos;
@@ -66,6 +72,26 @@ namespace TepayLink.Sdisco
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditTransactionDto, Transaction>().ReverseMap();
+            configuration.CreateMap<TransactionDto, Transaction>().ReverseMap();
+            configuration.CreateMap<CreateOrEditWithDrawRequestDto, WithDrawRequest>().ReverseMap();
+            configuration.CreateMap<WithDrawRequestDto, WithDrawRequest>().ReverseMap();
+            configuration.CreateMap<CreateOrEditShareTransactionDto, ShareTransaction>().ReverseMap();
+            configuration.CreateMap<ShareTransactionDto, ShareTransaction>().ReverseMap();
+            configuration.CreateMap<CreateOrEditPartnerRevenueDto, PartnerRevenue>().ReverseMap();
+            configuration.CreateMap<PartnerRevenueDto, PartnerRevenue>().ReverseMap();
+            configuration.CreateMap<CreateOrEditShortLinkDto, ShortLink>().ReverseMap();
+            configuration.CreateMap<ShortLinkDto, ShortLink>().ReverseMap();
+            configuration.CreateMap<CreateOrEditChatMessageV2Dto, ChatMessageV2>().ReverseMap();
+            configuration.CreateMap<ChatMessageV2Dto, ChatMessageV2>().ReverseMap();
+            configuration.CreateMap<CreateOrEditNearbyPlaceDto, NearbyPlace>().ReverseMap();
+            configuration.CreateMap<NearbyPlaceDto, NearbyPlace>().ReverseMap();
+            configuration.CreateMap<CreateOrEditSuggestedProductDto, SuggestedProduct>().ReverseMap();
+            configuration.CreateMap<SuggestedProductDto, SuggestedProduct>().ReverseMap();
+            configuration.CreateMap<CreateOrEditRelatedProductDto, RelatedProduct>().ReverseMap();
+            configuration.CreateMap<RelatedProductDto, RelatedProduct>().ReverseMap();
+            configuration.CreateMap<CreateOrEditSimilarProductDto, SimilarProduct>().ReverseMap();
+            configuration.CreateMap<SimilarProductDto, SimilarProduct>().ReverseMap();
             configuration.CreateMap<CreateOrEditChatconversationDto, Chatconversation>().ReverseMap();
             configuration.CreateMap<ChatconversationDto, Chatconversation>().ReverseMap();
             configuration.CreateMap<CreateOrEditUserDefaultCashoutMethodTypeDto, UserDefaultCashoutMethodType>().ReverseMap();
@@ -81,7 +107,7 @@ namespace TepayLink.Sdisco
             configuration.CreateMap<CreateOrEditWalletDto, Wallet>().ReverseMap();
             configuration.CreateMap<WalletDto, Wallet>().ReverseMap();
             configuration.CreateMap<CreateOrEditPartnerShipDto, PartnerShip>().ReverseMap();
-            configuration.CreateMap<PartnerShipDto, PartnerShip>().ReverseMap();
+            //  configuration.CreateMap<PartnerShipDto, PartnerShip>().ReverseMap();
             configuration.CreateMap<CreateOrEditPartnerDto, Partner>().ReverseMap();
             configuration.CreateMap<PartnerDto, Partner>().ReverseMap();
             configuration.CreateMap<CreateOrEditOrderDto, Order>().ReverseMap();
@@ -94,8 +120,8 @@ namespace TepayLink.Sdisco
             configuration.CreateMap<ClaimReasonDto, ClaimReason>().ReverseMap();
             configuration.CreateMap<CreateOrEditBookingDetailDto, BookingDetail>().ReverseMap();
             configuration.CreateMap<BookingDetailDto, BookingDetail>().ReverseMap();
-            configuration.CreateMap<CreateOrEditBookingDto, Booking>().ReverseMap();
-            configuration.CreateMap<BookingDto, Booking>().ReverseMap();
+            // configuration.CreateMap<CreateOrEditBookingDto, Booking>().ReverseMap();
+            // configuration.CreateMap<BookingDto, Booking>().ReverseMap();
             configuration.CreateMap<CreateOrEditCountryDto, Country>().ReverseMap();
             configuration.CreateMap<CountryDto, Country>().ReverseMap();
             configuration.CreateMap<CreateOrEditCurrencyDto, Currency>().ReverseMap();
@@ -250,6 +276,8 @@ namespace TepayLink.Sdisco
                     options => options.MapFrom(l => l.WebhookEvent.Data));
 
             configuration.CreateMap<WebhookSendAttempt, GetAllSendAttemptsOfWebhookEventOutput>();
+
+            configuration.CreateMap<HelpCategory, TepayLink.Sdisco.Help.Dto.HelpCategoryDto>();
 
             /* ADD YOUR OWN CUSTOM AUTOMAPPER MAPPINGS HERE */
         }

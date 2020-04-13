@@ -14,7 +14,7 @@ namespace TepayLink.Sdisco.Account
 			
 
 
-		public virtual long? ProductId { get; set; }
+		public virtual long ProductId { get; set; }
 		
         [ForeignKey("ProductId")]
 		public Product ProductFk { get; set; }

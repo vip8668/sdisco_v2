@@ -87,6 +87,11 @@ namespace TepayLink.Sdisco.Authorization.Accounts
             return Task.FromResult(tenantId);
         }
 
+        /// <summary>
+        /// Đăng ký tài khoản
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<RegisterOutput> Register(RegisterInput input)
         {
             if (UseCaptchaOnRegistration())
@@ -98,7 +103,7 @@ namespace TepayLink.Sdisco.Authorization.Accounts
                 input.Name,
                 input.Surname,
                 input.EmailAddress,
-                input.UserName,
+                input.EmailAddress,
                 input.Password,
                 false,
                 AppUrlService.CreateEmailActivationUrlFormat(AbpSession.TenantId)
@@ -111,6 +116,42 @@ namespace TepayLink.Sdisco.Authorization.Accounts
                 CanLogin = user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin)
             };
         }
+
+
+        /// <summary>
+        /// Đăng ký HOST
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<RegisterOutput> RegisterHost(RegisterHostInput input)
+        {
+            if (UseCaptchaOnRegistration())
+            {
+                await RecaptchaValidator.ValidateAsync(input.CaptchaResponse);
+            }
+
+            var user = await _userRegistrationManager.RegisterHostAsync(
+                input.Name,
+                input.Surname,
+                input.EmailAddress,
+                input.EmailAddress,
+                input.Password,
+                false,
+                AppUrlService.CreateEmailActivationUrlFormat(AbpSession.TenantId),
+                input.Mobile,
+                input.Dob,
+                input.CountryId,
+                input.SubDomain, input.Occupation
+            );
+
+            var isEmailConfirmationRequiredForLogin = await SettingManager.GetSettingValueAsync<bool>(AbpZeroSettingNames.UserManagement.IsEmailConfirmationRequiredForLogin);
+
+            return new RegisterOutput
+            {
+                CanLogin = user.IsActive && (user.IsEmailConfirmed || !isEmailConfirmationRequiredForLogin)
+            };
+        }
+
 
         public async Task SendPasswordResetCode(SendPasswordResetCodeInput input)
         {

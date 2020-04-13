@@ -48,7 +48,8 @@ namespace TepayLink.Sdisco.Products.Exporting
                         L("ReplyComment"),
                         L("ReplyId"),
                         L("Avatar"),
-                        L("Reviewer")
+                        L("Reviewer"),
+                        (L("Product")) + L("Name")
                         );
 
                     AddObjects(
@@ -66,7 +67,8 @@ namespace TepayLink.Sdisco.Products.Exporting
                         _ => _.ProductReviewDetail.ReplyComment,
                         _ => _.ProductReviewDetail.ReplyId,
                         _ => _.ProductReviewDetail.Avatar,
-                        _ => _.ProductReviewDetail.Reviewer
+                        _ => _.ProductReviewDetail.Reviewer,
+                        _ => _.ProductName
                         );
 
 					

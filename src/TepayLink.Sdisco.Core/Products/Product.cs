@@ -66,6 +66,12 @@ namespace TepayLink.Sdisco.Products
 		
 		public virtual string FileName { get; set; }
 		
+		public virtual string ExtraData { get; set; }
+		
+		public virtual string WhatWeDo { get; set; }
+		
+		public virtual DateTime? LastBookTime { get; set; }
+		
 
 		public virtual int? CategoryId { get; set; }
 		
