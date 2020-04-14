@@ -1,5 +1,5 @@
 using System;
-using SDisco.Tour;
+
 
 namespace SDisco.Affiliate.Dto
 {

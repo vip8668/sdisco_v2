@@ -1,0 +1,124 @@
+﻿@using TepayLink.Sdisco.Authorization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BookingRefunds
+@using TepayLink.Sdisco.Web.Areas.Admin.Startup
+@model BookingRefundsViewModel
+@{
+    ViewBag.CurrentPageName = AdminPageNames.Common.BookingRefunds;
+}
+@section Scripts
+{
+    <script abp-src="/view-resources/Areas/Admin/Views/BookingRefunds/Index.js" asp-append-version="true"></script>
+}
+
+ <div class="kt-subheader kt-grid__item">
+  
+    <div class="kt-subheader__main">
+        <h3 class="kt-subheader__title">
+            <span>@L("BookingRefunds")</span>
+        </h3>
+        <span class="kt-subheader__separator kt-subheader__separator--v"></span>
+        <span class="kt-subheader__desc">
+            @L("BookingRefundsHeaderInfo")
+        </span>
+    </div>
+    <div class="kt-subheader__toolbar">
+        <div class="kt-subheader__wrapper">
+            <button id="ExportToExcelButton" class="btn btn-outline-success"><i class="fa fa-file-excel"></i> @L("ExportToExcel")</button>
+            @if (IsGranted(AppPermissions.Pages_Administration_BookingRefunds_Create))
+            {
+                <button id="CreateNewBookingRefundButton" class="btn btn-primary blue"><i class="fa fa-plus"></i> @L("CreateNewBookingRefund")</button>
+            }
+        </div>
+    </div>
+  
+</div>
+<div class="kt-content">
+    <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__body">
+            <div class="kt-form">
+                <div class="row align-items-center mb-4">
+                    <div class="col-xl-12">
+                        <div class="form-group align-items-center">
+                            <div class="input-group">
+                                <input type="text" id="BookingRefundsTableFilter" class="form-control m-input" placeholder="@L("SearchWithThreeDot")" value="@Model.FilterText">
+                                <span class="input-group-btn">
+                                    <button id="GetBookingRefundsButton" class="btn btn-primary" type="submit"><i class="flaticon-search-1"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+                <div id="AdvacedAuditFiltersArea" style="display: none" class="row mb-4">
+                    <div class="col-md-12">
+						<div class="kt-separator kt-separator--border-dashed"></div>
+					</div>
+
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinBookingDetailIdFilterId">@L("MinMax") @L("BookingDetailId")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minBookingDetailIdFilter" id="MinBookingDetailIdFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxBookingDetailIdFilter"  id="MaxBookingDetailIdFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinRefundMethodIdFilterId">@L("MinMax") @L("RefundMethodId")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minRefundMethodIdFilter" id="MinRefundMethodIdFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxRefundMethodIdFilter"  id="MaxRefundMethodIdFilterId"/>
+									</div>
+                                </div>
+                            </div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="DescriptionFilterId">@L("Description")</label>
+									<input type="text" class="form-control" name="descriptionFilter" id="DescriptionFilterId">
+								</div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinStatusFilterId">@L("MinMax") @L("Status")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minStatusFilter" id="MinStatusFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxStatusFilter"  id="MaxStatusFilterId"/>
+									</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                 <div class="form-group">
+									<label  for="MinAmountFilterId">@L("MinMax") @L("Amount")</label>
+									<div class="input-group">
+										<input type="number" class="form-control m-input" placeholder="@L("MinValue")" name="minAmountFilter" id="MinAmountFilterId"/>
+                                        <input type="number" class="form-control m-input" placeholder="@L("MaxValue")" name="maxAmountFilter"  id="MaxAmountFilterId"/>
+									</div>
+                                </div>
+                            </div>
+
+                </div>
+                <div class="row mb-4">
+                    <div class="col-xl-12">
+                        <span id="ShowAdvancedFiltersSpan" class="text-muted clickable-item"><i class="fa fa-angle-down"></i> @L("ShowAdvancedFilters")</span>
+                        <span id="HideAdvancedFiltersSpan" class="text-muted clickable-item" style="display: none"><i class="fa fa-angle-up"></i> @L("HideAdvancedFilters")</span>
+                    </div>
+                </div>
+            <div class="row align-items-center">
+                <table id="BookingRefundsTable" class="display table table-striped table-bordered table-hover dt-responsive nowrap">
+                    <thead>
+                        <tr>
+                            <th>@L("Actions")</th>
+								<th>@L("BookingDetailId")</th>
+								<th>@L("RefundMethodId")</th>
+								<th>@L("Description")</th>
+								<th>@L("Status")</th>
+								<th>@L("Amount")</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+</div>

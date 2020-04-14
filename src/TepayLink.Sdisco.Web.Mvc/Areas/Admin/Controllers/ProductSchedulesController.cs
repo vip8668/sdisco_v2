@@ -45,6 +45,8 @@ namespace TepayLink.Sdisco.Web.Areas.Admin.Controllers
 				getProductScheduleForEditOutput = new GetProductScheduleForEditOutput{
 					ProductSchedule = new CreateOrEditProductScheduleDto()
 				};
+				getProductScheduleForEditOutput.ProductSchedule.StartDate = DateTime.Now;
+				getProductScheduleForEditOutput.ProductSchedule.EndDate = DateTime.Now;
 			}
 
             var viewModel = new CreateOrEditProductScheduleModalViewModel()

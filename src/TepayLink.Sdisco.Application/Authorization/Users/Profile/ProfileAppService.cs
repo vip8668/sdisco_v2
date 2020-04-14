@@ -14,7 +14,7 @@ using Abp.Configuration;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.Extensions;
-using Abp.Localization;
+using Abp.Localization; 
 using Abp.Runtime.Caching;
 using Abp.Runtime.Session;
 using Abp.Timing;
@@ -331,17 +331,17 @@ namespace TepayLink.Sdisco.Authorization.Users.Profile
             };
         }
 
-        [DisableAuditing]
-        public async Task<GetProfilePictureOutput> GetProfilePicture()
-        {
-            var user = await UserManager.GetUserByIdAsync(AbpSession.GetUserId());
-            if (user.ProfilePictureId == null)
-            {
-                return new GetProfilePictureOutput(string.Empty);
-            }
-
-            return await GetProfilePictureById(user.ProfilePictureId.Value);
-        }
+        // [DisableAuditing]
+        // public async Task<GetProfilePictureOutput> GetProfilePicture()
+        // {
+        //     var user = await UserManager.GetUserByIdAsync(AbpSession.GetUserId());
+        //     if (user.ProfilePictureId == null)
+        //     {
+        //         return new GetProfilePictureOutput(string.Empty);
+        //     }
+        //
+        //     return await GetProfilePictureById(user.ProfilePictureId.Value);
+        // }
 
         public async Task<GetProfilePictureOutput> GetFriendProfilePictureById(GetFriendProfilePictureByIdInput input)
         {

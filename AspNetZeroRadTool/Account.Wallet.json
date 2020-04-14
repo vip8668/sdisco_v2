@@ -1,6 +1,6 @@
 {
-  "IsRegenerate": false,
-  "MenuPosition": null,
+  "IsRegenerate": true,
+  "MenuPosition": "",
   "RelativeNamespace": "Account",
   "EntityName": "Wallet",
   "EntityNamePlural": "Wallets",
@@ -8,8 +8,8 @@
   "PrimaryKeyType": "long",
   "BaseClass": "AuditedEntity",
   "EntityHistory": false,
-  "AutoMigration": false,
-  "UpdateDatabase": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
   "CreateUserInterface": false,
   "CreateViewOnly": true,
   "CreateExcelExport": true,
@@ -21,8 +21,8 @@
     {
       "Name": "Balance",
       "Type": "decimal",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -40,8 +40,8 @@
     {
       "Name": "Type",
       "Type": "WalletTypeEnum",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TepayLink.Sdisco.Account;
 using TepayLink.Sdisco.AdminConfig;
+using TepayLink.Sdisco.AdminConfig.Dtos;
 using TepayLink.Sdisco.Authorization.Users;
 using TepayLink.Sdisco.Blog.Dtos;
 using TepayLink.Sdisco.Products;
@@ -29,6 +30,18 @@ namespace TepayLink.Sdisco.Blog
         private readonly IRepository<User, long> _userRepository;
         private readonly IRepository<UserSubcriber, long> _userSubcriberRepository;
         private readonly ICommonAppService _commonAppService;
+
+        public BlogAppService(IRepository<BlogPost, long> blogPostRepository, IRepository<BlogComment, long> blogCommentRepository, IRepository<Product, long> tourrepository, IRepository<PartnerShip> partnerShipRepository, IRepository<BlogProductRelated, long> blogTourRelateRepository, IRepository<User, long> userRepository, IRepository<UserSubcriber, long> userSubcriberRepository, ICommonAppService commonAppService)
+        {
+            _blogPostRepository = blogPostRepository;
+            _blogCommentRepository = blogCommentRepository;
+            _tourrepository = tourrepository;
+            _partnerShipRepository = partnerShipRepository;
+            _blogTourRelateRepository = blogTourRelateRepository;
+            _userRepository = userRepository;
+            _userSubcriberRepository = userSubcriberRepository;
+            _commonAppService = commonAppService;
+        }
 
         public async Task<PagedResultDto<BasicBlogPostDto>> GetBlogPost(GetBlogPostInputDto input)
         {

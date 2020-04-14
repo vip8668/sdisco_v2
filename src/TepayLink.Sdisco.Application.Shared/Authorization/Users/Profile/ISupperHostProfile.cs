@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using TepayLink.Sdisco.Authorization.Users.Profile.Dto;
-using TepayLink.Sdisco.Booking.Dtos;
+
+using TepayLink.Sdisco.Bookings.Dtos;
 using TepayLink.Sdisco.Dto;
 using TepayLink.Sdisco.Tour.Dtos;
 

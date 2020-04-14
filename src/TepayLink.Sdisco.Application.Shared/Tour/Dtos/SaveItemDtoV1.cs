@@ -1,6 +1,6 @@
 namespace TepayLink.Sdisco.Tour.Dtos
 {
-    public class SaveItemDto
+    public class SaveItemDtoV1
     {
         public long ItemId { get; set; }
     }

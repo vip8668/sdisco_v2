@@ -1,4 +1,6 @@
-﻿using TepayLink.Sdisco.KOL.Dtos;
+﻿using TepayLink.Sdisco.Reports.Dtos;
+using TepayLink.Sdisco.Reports;
+using TepayLink.Sdisco.KOL.Dtos;
 using TepayLink.Sdisco.KOL;
 using TepayLink.Sdisco.Affiliate.Dtos;
 using TepayLink.Sdisco.Affiliate;
@@ -9,8 +11,8 @@ using TepayLink.Sdisco.Cashout.Dtos;
 using TepayLink.Sdisco.Cashout;
 using TepayLink.Sdisco.Search.Dtos;
 using TepayLink.Sdisco.Search;
-using TepayLink.Sdisco.Client.Dtos;
-using TepayLink.Sdisco.Client;
+using TepayLink.Sdisco.Clients.Dtos;
+using TepayLink.Sdisco.Clients;
 using TepayLink.Sdisco.Bookings.Dtos;
 
 
@@ -65,6 +67,8 @@ using TepayLink.Sdisco.Notifications.Dto;
 using TepayLink.Sdisco.Organizations.Dto;
 using TepayLink.Sdisco.Sessions.Dto;
 using TepayLink.Sdisco.WebHooks.Dto;
+using TepayLink.Sdisco.Banks.Dtos;
+using TepayLink.Sdisco.Tour.Dtos;
 
 namespace TepayLink.Sdisco
 {
@@ -72,6 +76,12 @@ namespace TepayLink.Sdisco
     {
         public static void CreateMappings(IMapperConfigurationExpression configuration)
         {
+            configuration.CreateMap<CreateOrEditRevenueByMonthDto, RevenueByMonth>().ReverseMap();
+            configuration.CreateMap<RevenueByMonthDto, RevenueByMonth>().ReverseMap();
+            configuration.CreateMap<CreateOrEditBookingRefundDto, BookingRefund>().ReverseMap();
+            configuration.CreateMap<BookingRefundDto, BookingRefund>().ReverseMap();
+            configuration.CreateMap<CreateOrEditRefundReasonDto, RefundReason>().ReverseMap();
+            configuration.CreateMap<RefundReasonDto, RefundReason>().ReverseMap();
             configuration.CreateMap<CreateOrEditTransactionDto, Transaction>().ReverseMap();
             configuration.CreateMap<TransactionDto, Transaction>().ReverseMap();
             configuration.CreateMap<CreateOrEditWithDrawRequestDto, WithDrawRequest>().ReverseMap();
@@ -277,7 +287,15 @@ namespace TepayLink.Sdisco
 
             configuration.CreateMap<WebhookSendAttempt, GetAllSendAttemptsOfWebhookEventOutput>();
 
-            configuration.CreateMap<HelpCategory, TepayLink.Sdisco.Help.Dto.HelpCategoryDto>();
+            configuration.CreateMap<HelpCategory, TepayLink.Sdisco.Help.Dto.HelpCategoryDtoV1>();
+
+            configuration.CreateMap<ProductReview, ReviewSummaryDto>();
+
+            configuration.CreateMap<CreateBankAccountInputDto, BankAccountInfo>();
+            configuration.CreateMap<BankBranch, BankBranchDto>();
+
+           
+
 
             /* ADD YOUR OWN CUSTOM AUTOMAPPER MAPPINGS HERE */
         }

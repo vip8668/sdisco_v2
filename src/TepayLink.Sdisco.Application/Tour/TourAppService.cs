@@ -31,6 +31,20 @@ namespace TepayLink.Sdisco.Tour
         private readonly IRepository<ProductSchedule, long> _tourScheduleRepository;
         private readonly IRepository<ProductDetailCombo, long> _tourDetailItemRepository;
 
+        public TourAppService(IRepository<Product, long> tourRepository, IRepository<User, long> userRepository, IRepository<ApplicationLanguage> langRepository, IRepository<ProductDetail, long> tourDetailRepository, IRepository<Place, long> placeRepository, IRepository<Category, int> tourCategoryRepository, IRepository<SimilarProduct, long> similarTourRepisitory, IRepository<SuggestedProduct, long> suggestTourRepository, ICommonAppService commonAppService, IRepository<ProductSchedule, long> tourScheduleRepository, IRepository<ProductDetailCombo, long> tourDetailItemRepository)
+        {
+            _tourRepository = tourRepository;
+            _userRepository = userRepository;
+            _langRepository = langRepository;
+            _tourDetailRepository = tourDetailRepository;
+            _placeRepository = placeRepository;
+            _tourCategoryRepository = tourCategoryRepository;
+            _similarTourRepisitory = similarTourRepisitory;
+            _suggestTourRepository = suggestTourRepository;
+            _commonAppService = commonAppService;
+            _tourScheduleRepository = tourScheduleRepository;
+            _tourDetailItemRepository = tourDetailItemRepository;
+        }
 
         public async Task<GuestPhotoDto> GetGuestPhoto(GetGuestPhotoInput input)
         {
@@ -135,7 +149,7 @@ namespace TepayLink.Sdisco.Tour
                 join l in _langRepository.GetAll() on t.LanguageId equals l.Id
                 join c in _tourCategoryRepository.GetAll() on t.CategoryId equals c.Id
                 join p in _placeRepository.GetAll() on t.PlaceId equals p.Id
-                where t.Type == ProductTypeEnum.Trip
+                where t.Type == ProductTypeEnum.TripPlan
                       && t.Status == ProductStatusEnum.Publish
                       && sm.ProductId == tourId
                 select new BasicTourDto
@@ -168,7 +182,7 @@ namespace TepayLink.Sdisco.Tour
              join l in _langRepository.GetAll() on t.LanguageId equals l.Id
              join c in _tourCategoryRepository.GetAll() on t.CategoryId equals c.Id
              join p in _placeRepository.GetAll() on t.PlaceId equals p.Id
-             where t.Type == ProductTypeEnum.Trip
+             where t.Type == ProductTypeEnum.TripPlan
                    && t.Status == ProductStatusEnum.Publish
 
              select new BasicTourDto
@@ -213,8 +227,15 @@ namespace TepayLink.Sdisco.Tour
         public async Task<List<BasicTourCategoryDto>> GetCategory()
         {
             var listCategories = _tourCategoryRepository.GetAll()
-                .Where(p => p.ProductType == ProductTypeEnum.Tour).OrderBy(p => p.Order).ToList();
-            return ObjectMapper.Map<List<BasicTourCategoryDto>>(listCategories);
+                .Where(p => p.ProductType == ProductTypeEnum.Tour).OrderBy(p => p.Order).ToList().Select(p=> new BasicTourCategoryDto
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    
+                    SearchType = p.ProductType.ToString("G"),
+                    
+                }).ToList();
+            return listCategories;
         }
 
         public async Task<PagedResultDto<ReviewDetailDto>> GetReviewDetail(GetReviewDetailInput input)

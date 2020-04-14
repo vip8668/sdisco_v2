@@ -2,11 +2,11 @@
 using Abp.Runtime.Session;
 using Abp.Timing.Timezone;
 using TepayLink.Sdisco.DataExporting.Excel.EpPlus;
-using TepayLink.Sdisco.Client.Dtos;
+using TepayLink.Sdisco.Clients.Dtos;
 using TepayLink.Sdisco.Dto;
 using TepayLink.Sdisco.Storage;
 
-namespace TepayLink.Sdisco.Client.Exporting
+namespace TepayLink.Sdisco.Clients.Exporting
 {
     public class ClientSettingsExcelExporter : EpPlusExcelExporterBase, IClientSettingsExcelExporter
     {

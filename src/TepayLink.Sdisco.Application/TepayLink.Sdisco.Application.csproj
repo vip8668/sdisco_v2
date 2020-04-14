@@ -28,4 +28,8 @@
     <ProjectReference Include="..\TepayLink.Sdisco.EntityFrameworkCore\TepayLink.Sdisco.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Search\NewFolder\" />
+  </ItemGroup>
+
 </Project>

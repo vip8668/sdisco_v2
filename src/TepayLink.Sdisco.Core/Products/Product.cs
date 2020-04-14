@@ -25,7 +25,7 @@ namespace TepayLink.Sdisco.Products
 		public virtual ProductStatusEnum Status { get; set; }
 		
 		public virtual string Description { get; set; }
-		
+		public virtual string Overview { get; set; }
 		public virtual string Policies { get; set; }
 		
 		public virtual int Duration { get; set; }
@@ -39,9 +39,10 @@ namespace TepayLink.Sdisco.Products
 		public virtual int TotalSlot { get; set; }
 		
 		public virtual decimal Price { get; set; }
-		
+		public virtual decimal CostPrice { get; set; }
 		public virtual bool InstantBook { get; set; }
-		
+		public virtual int Star { get; set; }
+
 		public virtual int TripLengh { get; set; }
 		
 		public virtual bool IsHotDeal { get; set; }
@@ -59,7 +60,7 @@ namespace TepayLink.Sdisco.Products
 		public virtual int ShareCount { get; set; }
 		
 		public virtual int ViewCount { get; set; }
-		
+		public virtual int LikeCount { get; set; }
 		public virtual long? ParentId { get; set; }
 		
 		public virtual long? TripCoppyId { get; set; }
@@ -73,7 +74,7 @@ namespace TepayLink.Sdisco.Products
 		public virtual DateTime? LastBookTime { get; set; }
 		
 
-		public virtual int? CategoryId { get; set; }
+		public virtual int CategoryId { get; set; }
 		
         [ForeignKey("CategoryId")]
 		public Category CategoryFk { get; set; }

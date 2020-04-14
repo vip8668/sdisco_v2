@@ -4,6 +4,9 @@
     {
         public static class Common
         {
+            public const string RevenueByMonths = "Administration.Reports.RevenueByMonths";
+            public const string BookingRefunds = "Administration.Bookings.BookingRefunds";
+            public const string RefundReasons = "Administration.Bookings.RefundReasons";
             public const string Transactions = "Administration.Account.Transactions";
             public const string WithDrawRequests = "Administration.Account.WithDrawRequests";
             public const string ShareTransactions = "Administration.KOL.ShareTransactions";

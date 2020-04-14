@@ -2,22 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.Localization;
 using Abp.Runtime.Session;
+using Abp.UI;
 using Microsoft.AspNetCore.Http;
+
 using SDisco.Home.Dto;
 using TepayLink.Sdisco.Account;
 using TepayLink.Sdisco.Authorization.Users;
+using TepayLink.Sdisco.KOL;
 using TepayLink.Sdisco.Products;
 using TepayLink.Sdisco.Products.Dtos;
 using TepayLink.Sdisco.Tour;
 using TepayLink.Sdisco.Tour.Dtos;
+using TepayLink.Sdisco.TripPlanManager.Dto;
+using TepayLink.Sdisco.Utils;
 
 namespace TepayLink.Sdisco.Tours
 {
+    [RemoteService(false)]
     public class CommonAppService : SdiscoAppServiceBase, ICommonAppService
     {
         private readonly IRepository<ProductReview, long> _tourReviewRepository;
@@ -29,7 +36,7 @@ namespace TepayLink.Sdisco.Tours
         private readonly IRepository<ProductSchedule, long> _itemScheduleRepository;
         private readonly IRepository<ProductDetail, long> _tourDetailRepository;
         private readonly IRepository<Place, long> _placeRepository;
-       // private readonly IRepository<TourDetailSchedule, long> _tourDetailScheduleRepository;
+        // private readonly IRepository<TourDetailSchedule, long> _tourDetailScheduleRepository;
         private readonly IRepository<Category> _tourCategoryRepository;
         private readonly IRepository<SimilarProduct, long> _similarTourItemRepository;
         private readonly IRepository<RelatedProduct, long> _relatedTourWithTourItemRepository;
@@ -42,14 +49,40 @@ namespace TepayLink.Sdisco.Tours
         private readonly IRepository<ShareTransaction, long> _shareTransactionRepository;
         private readonly IRepository<TransPortdetail, long> _transportDetailRepository;
         private readonly IRepository<ProductDetailCombo, long> _tourDetailItemRepository;
-        private readonly IRepository<FeeConfig, long> _feeConfigRepository;
+        private readonly IRepository<ProductSchedule, long> _productSchedule;
+        //private readonly IRepository<FeeConfig, long> _feeConfigRepository;
 
+        public CommonAppService(IRepository<ProductReview, long> tourReviewRepository, IRepository<ProductReviewDetail, long> tourReviewDetailRepository, IRepository<Product, long> tourRepository, IRepository<ProductImage, long> imageRepository, IRepository<User, long> userRepository, IRepository<ApplicationLanguage> langRepository, IRepository<ProductSchedule, long> itemScheduleRepository, IRepository<ProductDetail, long> tourDetailRepository, IRepository<Place, long> placeRepository, IRepository<Category> tourCategoryRepository, IRepository<SimilarProduct, long> similarTourItemRepository, IRepository<RelatedProduct, long> relatedTourWithTourItemRepository, IRepository<Utility, int> utilityRepository, IRepository<ProductUtility, long> tourUtilityRepository, IHttpContextAccessor httpContextAccessor, IRepository<SaveItem, long> saveItemRepository, IRepository<Wallet, long> walletRepository, IRepository<PartnerRevenue, long> partnerRevenueRepository, IRepository<ShareTransaction, long> shareTransactionRepository, IRepository<TransPortdetail, long> transportDetailRepository, IRepository<ProductDetailCombo, long> tourDetailItemRepository, IRepository<ProductSchedule, long> productSchedule)
+        {
+            _tourReviewRepository = tourReviewRepository;
+            _tourReviewDetailRepository = tourReviewDetailRepository;
+            _tourRepository = tourRepository;
+            _imageRepository = imageRepository;
+            _userRepository = userRepository;
+            _langRepository = langRepository;
+            _itemScheduleRepository = itemScheduleRepository;
+            _tourDetailRepository = tourDetailRepository;
+            _placeRepository = placeRepository;
+            _tourCategoryRepository = tourCategoryRepository;
+            _similarTourItemRepository = similarTourItemRepository;
+            _relatedTourWithTourItemRepository = relatedTourWithTourItemRepository;
+            _utilityRepository = utilityRepository;
+            _tourUtilityRepository = tourUtilityRepository;
+            _httpContextAccessor = httpContextAccessor;
+            _saveItemRepository = saveItemRepository;
+            _walletRepository = walletRepository;
+            _partnerRevenueRepository = partnerRevenueRepository;
+            _shareTransactionRepository = shareTransactionRepository;
+            _transportDetailRepository = transportDetailRepository;
+            _tourDetailItemRepository = tourDetailItemRepository;
+            _productSchedule = productSchedule;
+        }
 
         public async Task<PagedResultDto<ReviewDetailDto>> GetTourItemReviewDetail(GetReviewDetailInput input)
         {
             var query = (from p in _tourReviewDetailRepository.GetAll()
                          join q in _userRepository.GetAll() on p.CreatorUserId equals q.Id
-                         where  p.ProductId == input.ItemId
+                         where p.ProductId == input.ItemId
                          select new ReviewDetailDto
                          {
                              Avatar = q.Avatar,
@@ -166,7 +199,7 @@ namespace TepayLink.Sdisco.Tours
         {
             var query = from p in _utilityRepository.GetAll()
                         join q in _tourUtilityRepository.GetAll() on p.Id equals q.UtilityId
-                        where  itemIds.Contains(q.ProductId)
+                        where itemIds.Contains(q.ProductId)
                         select new
                         {
                             ItemId = q.ProductId,
@@ -209,10 +242,10 @@ namespace TepayLink.Sdisco.Tours
             else
             {
                 var query = _tourReviewRepository
-                    .GetAll().Where(p =>  tourIds.Contains(p.ProductId));
+                    .GetAll().Where(p => tourIds.Contains(p.ProductId??0));
                 foreach (var item in query)
                 {
-                    dic.Add(item.ProductId, ObjectMapper.Map<ReviewSummaryDto>(item));
+                    dic.Add(item.ProductId??0, ObjectMapper.Map<ReviewSummaryDto>(item));
                 }
             }
 
@@ -222,7 +255,7 @@ namespace TepayLink.Sdisco.Tours
         public async Task<ReviewSummaryDto> GetTourReviewSummary(long tourId)
         {
             var item = _tourReviewRepository
-                .GetAll().FirstOrDefault(p =>  p.ProductId == tourId);
+                .GetAll().FirstOrDefault(p => p.ProductId == tourId);
             if (item != null)
             {
                 return ObjectMapper.Map<ReviewSummaryDto>(item);
@@ -235,7 +268,7 @@ namespace TepayLink.Sdisco.Tours
         {
             //todo xem lai cho nay
             return 0;
-           // return _tourRepository.GetAll().Where(p => p.Id == tourId).Select(p => p.TotalRevenew).FirstOrDefault();
+            // return _tourRepository.GetAll().Where(p => p.Id == tourId).Select(p => p.TotalRevenew).FirstOrDefault();
         }
 
         public async Task<Dictionary<long, ReviewSummaryDto>> GetTourReviewSummarys(List<long> tourIds)
@@ -249,10 +282,10 @@ namespace TepayLink.Sdisco.Tours
             else
             {
                 var query = _tourReviewRepository
-                    .GetAll().Where(p => tourIds.Contains(p.ProductId));
+                    .GetAll().Where(p => tourIds.Contains(p.ProductId??0));
                 foreach (var item in query)
                 {
-                    dic.Add(item.ProductId, ObjectMapper.Map<ReviewSummaryDto>(item));
+                    dic.Add(item.ProductId??0, ObjectMapper.Map<ReviewSummaryDto>(item));
                 }
             }
 
@@ -378,7 +411,7 @@ namespace TepayLink.Sdisco.Tours
                 Hotel = p.HotelPrice,
                 Ticket = p.TicketPrice,
                 OldPrice = 0,
-                ServiceFee =0
+                ServiceFee = 0
             }
             ).OrderBy(p => p.Price).FirstOrDefault();
         }
@@ -401,7 +434,7 @@ namespace TepayLink.Sdisco.Tours
                         Hotel = p.HotelPrice,
                         Ticket = p.TicketPrice,
                         OldPrice = 0,
-                        ServiceFee =0
+                        ServiceFee = 0
                     }
                 );
 
@@ -447,7 +480,7 @@ namespace TepayLink.Sdisco.Tours
                         Price = p.Price,
 
                         OldPrice = 0,
-                        ServiceFee =0
+                        ServiceFee = 0
                     }
                 );
 
@@ -468,7 +501,7 @@ namespace TepayLink.Sdisco.Tours
         public async Task<List<PhotoDto>> GetTourItemPhoto(long itemId)
         {
             return _imageRepository.GetAll().Where(p =>
-                    p.ImageType == ImageType.TourImage && p.ProductId == itemId )
+                    p.ImageType == ImageType.TourImage && p.ProductId == itemId)
                 .Select(p =>
                     new PhotoDto
                     {
@@ -481,7 +514,7 @@ namespace TepayLink.Sdisco.Tours
         public async Task<List<PhotoDto>> GetTourItemThumbPhoto(long itemId)
         {
             return _imageRepository.GetAll().Where(p =>
-                    p.ImageType == ImageType.ThumbImage && p.ProductId == itemId )
+                    p.ImageType == ImageType.ThumbImage && p.ProductId == itemId)
                 .Select(p =>
                     new PhotoDto
                     {
@@ -503,7 +536,7 @@ namespace TepayLink.Sdisco.Tours
             else
             {
                 var query = _imageRepository.GetAll().Where(p =>
-                        p.ImageType == ImageType.ThumbImage && itemIds.Contains(p.ProductId ?? 0) )
+                        p.ImageType == ImageType.ThumbImage && itemIds.Contains(p.ProductId ?? 0))
                     .Select(p =>
                         new ProductImage
                         {
@@ -620,7 +653,7 @@ namespace TepayLink.Sdisco.Tours
                      CategoryName = c.Name,
                      PlaceId = p.Id,
                      PlaceName = p.DisplayAddress,
-                     OfferLanguageId = t.LanguageId??0,
+                     OfferLanguageId = t.LanguageId ?? 0,
                      Title = t.Name,
 
                      LanguageOffer = l.DisplayName,
@@ -649,7 +682,7 @@ namespace TepayLink.Sdisco.Tours
                      CategoryName = c.Name,
                      PlaceId = p.Id,
                      PlaceName = p.DisplayAddress,
-                     OfferLanguageId = t.LanguageId??0,
+                     OfferLanguageId = t.LanguageId ?? 0,
                      Title = t.Name,
 
                      LanguageOffer = l.DisplayName,
@@ -699,7 +732,7 @@ namespace TepayLink.Sdisco.Tours
                      CategoryName = c.Name,
                      PlaceId = p.Id,
                      PlaceName = p.DisplayAddress,
-                     OfferLanguageId = t.LanguageId??0,
+                     OfferLanguageId = t.LanguageId ?? 0,
                      Title = t.Name,
                      LanguageOffer = l.DisplayName,
                      SoldCount = t.BookingCount,
@@ -729,11 +762,11 @@ namespace TepayLink.Sdisco.Tours
         }
 
 
-        public async Task<List<SaveItemDto>> GetSaveItem(List<long> itemIds)
+        public async Task<List<SaveItemDtoV1>> GetSaveItem(List<long> itemIds)
         {
             var items = _saveItemRepository.GetAll().Where(p =>
-                    itemIds.Contains(p.ProductId)  && p.CreatorUserId == AbpSession.UserId)
-                .Select(p => new SaveItemDto
+                    itemIds.Contains(p.ProductId) && p.CreatorUserId == AbpSession.UserId)
+                .Select(p => new SaveItemDtoV1
                 {
                     ItemId = p.ProductId
                 }).ToList();
@@ -830,16 +863,16 @@ namespace TepayLink.Sdisco.Tours
                 {
                     ImageType = imageType,
                     ProductId = itemId,
-                    
+
                     Url = photo,
                 });
 
             }
         }
 
-        public void DeleteImageOfTour(long itemId, IList<ImageType> imageTypes)
+        public void DeleteImageOfTour(long itemId, List<ImageType> imageTypes)
         {
-            _imageRepository.Delete(p => p.ProductId == itemId  && imageTypes.Contains(p.ImageType));
+            _imageRepository.Delete(p => p.ProductId == itemId && imageTypes.Contains(p.ImageType));
 
         }
         [UnitOfWork]
@@ -919,7 +952,7 @@ namespace TepayLink.Sdisco.Tours
                 input.CategoryIds = (await GetSearchCategory()).Select(p => int.Parse(p.Id.ToString())).ToList();
 
             var tempList =
-                (from p in _tourItemRepository.GetAll()
+                (from p in _tourRepository.GetAll()
                  join l in _langRepository.GetAll() on p.LanguageId equals l.Id
                  join place in _placeRepository.GetAll() on p.PlaceId equals place.Id
                  where p.Name.Contains(input.Keyword)
@@ -933,14 +966,14 @@ namespace TepayLink.Sdisco.Tours
                      Description = p.Description,
                      Language = l.DisplayName,
                      Type = p.Type,
-                     LanguageId = p.LanguageId,
+                     LanguageId = p.LanguageId ?? 0,
                      StartTime = p.StartTime,
                      Duration = p.Duration,
                      InstantBook = p.InstantBook,
                      Location = new BasicLocationDto
                      {
-                         Addess = place.Address,
-                         Name = place.PlaceName,
+                         Addess = place.DisplayAddress,
+                         Name = place.Name,
                          Id = place.Id,
                          Lat = place.Lat,
                          Long = place.Long
@@ -955,7 +988,7 @@ namespace TepayLink.Sdisco.Tours
             var itemList = new List<SearchItemOutputDto>();
 
             var utilites =
-                await GetUtilities(tempList.Select(p => p.Id).ToList(), ItemTypeEnum.TourItem);
+                await GetUtilities(tempList.Select(p => p.Id).ToList());
 
             foreach (var item in tempList)
             {
@@ -972,7 +1005,7 @@ namespace TepayLink.Sdisco.Tours
         {
             long hostUserId = GetHostUserId(AbpSession.UserId ?? 0);
             var itemList =
-                (from p in _tourItemRepository.GetAll()
+                (from p in _tourRepository.GetAll()
                  join place in _placeRepository.GetAll() on p.PlaceId equals place.Id
 
                  where p.Name.Contains(input.Keyword)
@@ -982,13 +1015,13 @@ namespace TepayLink.Sdisco.Tours
                      Id = p.Id,
                      Name = p.Name,
                      Star = p.Star,
-                     LanguageId = p.LanguageId,
+                     LanguageId = p.LanguageId ?? 0,
 
-                     Address = p.Address,
+                     Address = "",
                      Location = new BasicLocationDto
                      {
-                         Addess = place.Address,
-                         Name = place.PlaceName
+                         Addess = place.DisplayAddress,
+                         Name = place.Name
                      },
 
                      InstantBook = p.InstantBook,
@@ -996,13 +1029,13 @@ namespace TepayLink.Sdisco.Tours
                  }).ToList();
             List<long> hotelIds = itemList.Select(p => p.Id).Distinct().ToList();
 
-            List<TourItem> listRoom = new List<TourItem>();
+            List<Product> listRoom = new List<Product>();
             if (hotelIds.Any())
             {
-                listRoom = _tourItemRepository.GetAll().Where(p => hotelIds.Contains(p.ParentId ?? 0)).ToList();
+                listRoom = _tourRepository.GetAll().Where(p => hotelIds.Contains(p.ParentId ?? 0)).ToList();
             }
             var utilites =
-                await GetUtilities(hotelIds, ItemTypeEnum.TourItem);
+                await GetUtilities(hotelIds);
 
             var langIds = itemList.Select(p => p.LanguageId).ToList().Distinct();
             var langs = _langRepository.GetAll().Where(p => langIds.Contains(p.Id));
@@ -1034,16 +1067,16 @@ namespace TepayLink.Sdisco.Tours
         {
             long hostUserId = GetHostUserId(AbpSession.UserId ?? 0);
             var tempList =
-                (from p in _tourItemRepository.GetAll()
+                (from p in _tourRepository.GetAll()
 
-                 join t in _transportDetailRepository.GetAll() on p.Id equals t.ItemId
+                 join t in _transportDetailRepository.GetAll() on p.Id equals t.ProductId
                  where t.From.Contains(input.From) &&
                        t.To.Contains(input.To)
                        && (p.HostUserId == hostUserId || checkHostUser == false)
                  select new SearchTransportOutputDto
                  {
                      Id = p.Id,
-                     LanguageId = p.LanguageId,
+                     LanguageId = p.LanguageId ?? 0,
 
                      Description = p.Description,
                      From = t.From,
@@ -1066,7 +1099,7 @@ namespace TepayLink.Sdisco.Tours
             var itemList = new List<SearchTransportOutputDto>();
 
             var utilites =
-                await GetUtilities(tempList.Select(p => p.Id).ToList(), ItemTypeEnum.TourItem);
+                await GetUtilities(tempList.Select(p => p.Id).ToList());
             var langIds = itemList.Select(p => p.LanguageId).ToList().Distinct();
             var langs = _langRepository.GetAll().Where(p => langIds.Contains(p.Id));
             foreach (var item in tempList)
@@ -1083,16 +1116,16 @@ namespace TepayLink.Sdisco.Tours
             return itemList;
         }
 
-        private DB.Place GetPlace(string address)
+        private Place GetPlace(string address)
         {
-            var place = _placeRepository.FirstOrDefault(p => p.Address == address);
+            var place = _placeRepository.FirstOrDefault(p => p.DisplayAddress == address);
 
             if (place == null)
             {
-                place = new DB.Place
+                place = new Place
                 {
-                    Address = address,
-                    PlaceName = address,
+                    DisplayAddress = address,
+                    Name = address,
                 };
                 place.Id = _placeRepository.InsertAndGetId(place);
             }
@@ -1105,16 +1138,16 @@ namespace TepayLink.Sdisco.Tours
 
             long hostUserId = GetHostUserId(AbpSession.UserId ?? 0);
 
-            DB.Place place = GetPlace(input.Address);
-            var hotel = new TourItem
+            Place place = GetPlace(input.Address);
+            var hotel = new Product
             {
                 Name = input.Name,
                 Star = input.Star,
-                Type = TourItemTypeEnum.Hotel,
+                Type = ProductTypeEnum.Hotel,
                 PlaceId = place.Id,
-                Status = isFromHost ? StatusEnum.Active : StatusEnum.WaitApprove,
+                Status = isFromHost ? ProductStatusEnum.Publish : ProductStatusEnum.WaitApprove,
                 LanguageId = input.Language,
-                Address = input.Address,
+                //  Address = input.Address,
                 Description = input.Description,
                 HostUserId = hostUserId,
                 InstantBook = input.InstantBook,
@@ -1122,27 +1155,27 @@ namespace TepayLink.Sdisco.Tours
                 Policies = input.Policy,
             };
             //insert hotel
-            hotel.Id = _tourItemRepository.InsertAndGetId(hotel);
-            InsertImages(input.Photos, hotel.Id, ImageTypeEnum.TourImage, ItemTypeEnum.TourItem);
+            hotel.Id = _tourRepository.InsertAndGetId(hotel);
+            InsertImages(input.Photos, hotel.Id, ImageType.TourImage);
             if (input.ThumbImages == null || input.ThumbImages.Count == 0)
                 input.ThumbImages = input.Photos;
-            InsertImages(input.ThumbImages, hotel.Id, ImageTypeEnum.ThumbImage, ItemTypeEnum.TourItem);
+            InsertImages(input.ThumbImages, hotel.Id, ImageType.ThumbImage);
             //insert photo 
-            var rooms = new List<TourItem>();
+            var rooms = new List<Product>();
             long selectedReoomId = 0;
             foreach (var room in input.Rooms)
             {
-                var itemRoom = new TourItem
+                var itemRoom = new Product
                 {
                     Name = room.RoomName,
                     Price = room.Price,
                     CostPrice = room.CostPrice,
                     ParentId = hotel.Id,
-                    Type = TourItemTypeEnum.HotelRoom,
+                    Type = ProductTypeEnum.HotelRoom,
                     LanguageId = input.Language,
                     HostUserId = hostUserId
                 };
-                itemRoom.Id = _tourItemRepository.InsertAndGetId(itemRoom);
+                itemRoom.Id = _tourRepository.InsertAndGetId(itemRoom);
                 if (room.Selected)
                     selectedReoomId = itemRoom.Id;
                 rooms.Add(itemRoom);
@@ -1163,7 +1196,7 @@ namespace TepayLink.Sdisco.Tours
                 Location = new BasicLocationDto
                 {
                     Id = place.Id,
-                    Name = place.PlaceName
+                    Name = place.Name
                 },
                 Star = input.Star,
                 Rooms = rooms.Select(p => new RoomDto
@@ -1184,10 +1217,10 @@ namespace TepayLink.Sdisco.Tours
             };
             foreach (var utilityId in input.UtilitiesId)
             {
-                var tourUtility = new TourUtility
+                var tourUtility = new ProductUtility
                 {
-                    ItemId = hotel.Id,
-                    Type = ItemTypeEnum.TourItem,
+                    ProductId = hotel.Id,
+
                     UtilityId = utilityId
                 };
                 _tourUtilityRepository.Insert(tourUtility);
@@ -1203,14 +1236,14 @@ namespace TepayLink.Sdisco.Tours
             if (!Validate.ValidateStartTime(input.StartTime))
                 throw new UserFriendlyException("Start time is invalid");
             long hostUserId = GetHostUserId(AbpSession.UserId ?? 0);
-            var transport = new TourItem
+            var transport = new Product
             {
                 Name = input.Name,
-                Type = TourItemTypeEnum.Transport,
+                Type = ProductTypeEnum.Transport,
                 Price = input.Price,
-                Status = isFromHost ? StatusEnum.Active : StatusEnum.WaitApprove,
+                Status = isFromHost ? ProductStatusEnum.Publish : ProductStatusEnum.WaitApprove,
                 StartTime = input.StartTime,
-                Address = input.Address,
+                //  Address = input.Address,
                 CostPrice = input.CostPrice,
                 InstantBook = input.InstantBook,
                 Policies = input.Policy,
@@ -1221,22 +1254,22 @@ namespace TepayLink.Sdisco.Tours
                 Description = input.Description,
                 HostUserId = hostUserId
             };
-            transport.Id = _tourItemRepository.InsertAndGetId(transport);
+            transport.Id = _tourRepository.InsertAndGetId(transport);
 
 
-            InsertImages(input.Photos, transport.Id, ImageTypeEnum.TourImage, ItemTypeEnum.TourItem);
+            InsertImages(input.Photos, transport.Id, ImageType.TourImage);
             if (input.ThumbImages == null || input.ThumbImages.Count == 0)
                 input.ThumbImages = input.Photos;
-            InsertImages(input.ThumbImages, transport.Id, ImageTypeEnum.ThumbImage, ItemTypeEnum.TourItem);
+            InsertImages(input.ThumbImages, transport.Id, ImageType.ThumbImage);
 
 
             //Detail transport
 
-            _transportDetailRepository.Insert(new TransportDetail
+            _transportDetailRepository.Insert(new TransPortdetail
             {
                 From = input.From,
                 To = input.To,
-                ItemId = transport.Id,
+                ProductId = transport.Id,
                 TotalSeat = input.TotalSeat,
                 IsTaxi = input.IsTaxi
             });
@@ -1271,10 +1304,10 @@ namespace TepayLink.Sdisco.Tours
 
             foreach (var utilityId in input.UtilitiesId)
             {
-                var tourUtility = new TourUtility
+                var tourUtility = new ProductUtility
                 {
-                    ItemId = transport.Id,
-                    Type = ItemTypeEnum.TourItem,
+                    ProductId = transport.Id,
+
                     UtilityId = utilityId
                 };
                 _tourUtilityRepository.Insert(tourUtility);
@@ -1294,23 +1327,23 @@ namespace TepayLink.Sdisco.Tours
             var place = GetPlace(input.Address);
             if (place == null)
             {
-                place = new DB.Place
+                place = new Place
                 {
-                    Address = input.Address,
-                    PlaceName = input.Address,
+                    DisplayAddress = input.Address,
+                    Name = input.Address,
                 };
                 place.Id = _placeRepository.InsertAndGetId(place);
             }
 
-            var activity = new TourItem
+            var activity = new Product
             {
                 Name = input.Name,
-                Type = TourItemTypeEnum.Activity,
+                Type = ProductTypeEnum.Activity,
                 Price = input.Price,
-                Status = isFromHost ? StatusEnum.Active : StatusEnum.WaitApprove,
+                Status = isFromHost ? ProductStatusEnum.Publish : ProductStatusEnum.WaitApprove,
                 PlaceId = place.Id,
                 LanguageId = input.Language,
-                Address = input.Address,
+                //Address = input.Address,
                 IncludeTourGuide = input.IncludeTourGuide,
                 Description = input.Description,
                 HostUserId = hostUserId,
@@ -1321,14 +1354,14 @@ namespace TepayLink.Sdisco.Tours
                 InstantBook = input.InstantBook,
             };
 
-            activity.Id = _tourItemRepository.InsertAndGetId(activity);
+            activity.Id = _tourRepository.InsertAndGetId(activity);
 
 
 
-            InsertImages(input.Photos, activity.Id, ImageTypeEnum.TourImage, ItemTypeEnum.TourItem);
+            InsertImages(input.Photos, activity.Id, ImageType.TourImage);
             if (input.ThumbImages == null || input.ThumbImages.Count == 0)
                 input.ThumbImages = input.Photos;
-            InsertImages(input.ThumbImages, activity.Id, ImageTypeEnum.ThumbImage, ItemTypeEnum.TourItem);
+            InsertImages(input.ThumbImages, activity.Id, ImageType.ThumbImage);
 
             var language = _langRepository.FirstOrDefault(p => p.Id == input.Language);
             var item = new SearchItemOutputDto
@@ -1339,12 +1372,12 @@ namespace TepayLink.Sdisco.Tours
                 Location = new BasicLocationDto
                 {
                     Id = place.Id,
-                    Name = place.PlaceName,
+                    Name = place.Name
                 },
                 Language = language?.DisplayName,
                 IncludeTourGuide = input.IncludeTourGuide,
                 Description = input.Description,
-                Type = TourItemTypeEnum.Activity,
+                Type = ProductTypeEnum.Activity,
                 Price = new BasicPriceDto
                 {
                     Price = input.Price,
@@ -1361,10 +1394,10 @@ namespace TepayLink.Sdisco.Tours
 
             foreach (var utilityId in input.UtilitiesId)
             {
-                var tourUtility = new TourUtility
+                var tourUtility = new ProductUtility
                 {
-                    ItemId = activity.Id,
-                    Type = ItemTypeEnum.TourItem,
+                    ProductId = activity.Id,
+
                     UtilityId = utilityId
                 };
                 _tourUtilityRepository.Insert(tourUtility);
@@ -1380,26 +1413,26 @@ namespace TepayLink.Sdisco.Tours
         {
             return new List<BasicItemDto>()
             {
+                //new BasicItemDto
+                //{
+                //    Id = (byte) TourItemTypeEnum.Place,
+                //    Name = TourItemTypeEnum.Place.ToString("G")
+                //},
+                //new BasicItemDto
+                //{
+                //    Id = (byte) TourItemTypeEnum.Tour,
+                //    Name = TourItemTypeEnum.Tour.ToString("G")
+                //},
                 new BasicItemDto
                 {
-                    Id = (byte) TourItemTypeEnum.Place,
-                    Name = TourItemTypeEnum.Place.ToString("G")
-                },
-                new BasicItemDto
-                {
-                    Id = (byte) TourItemTypeEnum.Tour,
-                    Name = TourItemTypeEnum.Tour.ToString("G")
-                },
-                new BasicItemDto
-                {
-                    Id = (byte) TourItemTypeEnum.Activity,
-                    Name = TourItemTypeEnum.Activity.ToString("G")
+                    Id = (byte) ProductTypeEnum.Activity,
+                    Name = ProductTypeEnum.Activity.ToString("G")
                 },
 
                 new BasicItemDto
                 {
-                    Id = (byte) TourItemTypeEnum.ShowTicket,
-                    Name = TourItemTypeEnum.ShowTicket.ToString("G")
+                    Id = (byte) ProductTypeEnum.TicketShow,
+                    Name = ProductTypeEnum.TicketShow.ToString("G")
                 }
             };
         }
@@ -1407,16 +1440,16 @@ namespace TepayLink.Sdisco.Tours
         public async Task<CustomizeTripOutputDto> GetTripForEditOrCustomize(long tourId)
         {
             var trip = _tourRepository.FirstOrDefault(p => p.Id == tourId);
-            var user = trip.Type == TourTypeEnum.Tour ?
+            var user = trip.Type == ProductTypeEnum.Tour ?
                 _userRepository.FirstOrDefault(p => p.Id == trip.HostUserId) :
                 _userRepository.FirstOrDefault(p => p.Id == trip.CreatorUserId);
-            var tourSchedule = _tourScheduleRepository.FirstOrDefault(p => p.TourId == tourId);
+            var tourSchedule = _productSchedule.FirstOrDefault(p => p.ProductId == tourId);
             var customTrip = new CustomizeTripOutputDto
             {
                 StartDate = tourSchedule != null ? tourSchedule.StartDate : (DateTime?)(null),
                 Title = trip.Name,
                 InstallBook = trip.InstantBook,
-                LanguageId = trip.LanguageId,
+                LanguageId = trip.LanguageId ?? 0,
                 Overview = trip.Overview,
                 Policy = trip.Policies,
                 Description = trip.Description,
@@ -1432,28 +1465,28 @@ namespace TepayLink.Sdisco.Tours
                 }
             };
             var plan = new List<DayOfTripPlanCustomizeDto>();
-            var tourDetails = _tourDetailRepository.GetAll().Where(p => p.TourId == tourId).ToList();
-            var tourItemDetailSchedules = _tourDetailItemRepository.GetAll().Where(p => p.TourId == tourId);
-            var tourItemIds = tourItemDetailSchedules.Select(p => p.ItemId).ToList().Distinct().ToList();
-            var tourItems = _tourItemRepository.GetAll().Where(p => tourItemIds.Contains(p.Id));
+            var tourDetails = _tourDetailRepository.GetAll().Where(p => p.ProductId == tourId).ToList();
+            var tourItemDetailSchedules = _tourDetailItemRepository.GetAll().Where(p => p.ProductId == tourId);
+            var tourItemIds = tourItemDetailSchedules.Select(p => p.ItemId ?? 0).ToList().Distinct().ToList();
+            var tourItems = _tourRepository.GetAll().Where(p => tourItemIds.Contains(p.Id));
             var languagesIds = tourItems.Select(p => p.LanguageId).Distinct().ToList();
             var placeIds = tourItems.Select(p => p.PlaceId).Distinct().ToList();
             var places = _placeRepository.GetAll().Where(p => placeIds.Contains(p.Id)).ToList();
-            var hotelIds = tourItems.Where(p => p.Type == TourItemTypeEnum.Hotel).Select(p => p.Id).ToList();
-            var transportIds = tourItems.Where(p => p.Type == TourItemTypeEnum.Transport).Select(p => p.Id).ToList();
+            var hotelIds = tourItems.Where(p => p.Type == ProductTypeEnum.Hotel).Select(p => p.Id).ToList();
+            var transportIds = tourItems.Where(p => p.Type == ProductTypeEnum.Transport).Select(p => p.Id).ToList();
             var languages = _langRepository.GetAll().Where(p => languagesIds.Contains(p.Id));
-            var allRooms = _tourItemRepository.GetAll().Where(p => hotelIds.Contains(p.ParentId ?? 0)).ToList();
-            var transportDetails = _transportDetailRepository.GetAll().Where(p => transportIds.Contains(p.ItemId)).ToList();
+            var allRooms = _tourRepository.GetAll().Where(p => hotelIds.Contains(p.ParentId ?? 0)).ToList();
+            var transportDetails = _transportDetailRepository.GetAll().Where(p => transportIds.Contains(p.ProductId ?? 0)).ToList();
             var tourThumImagesDic = await GetTourItemThumbPhotos(tourItemIds);
             var tourReviewDic = await GetTourItemReviewSummarys(tourItemIds);
             var utilites =
-                await GetUtilities(tourItemIds, ItemTypeEnum.TourItem);
+                await GetUtilities(tourItemIds);
             foreach (var item in tourDetails)
             {
                 var hotels = new List<SearchHotelOutputDto>();
                 var transports = new List<SearchTransportOutputDto>();
                 var listItem = new List<SearchItemOutputDto>();
-                var itemInDays = tourItemDetailSchedules.Where(p => p.TourDetailId == item.Id);
+                var itemInDays = tourItemDetailSchedules.Where(p => p.ProductDetailId == item.Id);
                 foreach (var itemInDay in itemInDays)
                 {
                     var tourItem = tourItems.FirstOrDefault(p => p.Id == itemInDay.ItemId);
@@ -1464,13 +1497,13 @@ namespace TepayLink.Sdisco.Tours
                         new BasicLocationDto
                         {
                             Id = p.Id,
-                            Name = p.PlaceName,
-                            Addess = p.Address,
+                            Name = p.Name,
+                            Addess = p.DisplayAddress,
                             Lat = p.Lat,
                             Long = p.Long
                         })).FirstOrDefault();
 
-                    if (tourItem.Type == TourItemTypeEnum.Hotel)
+                    if (tourItem.Type == ProductTypeEnum.Hotel)
                     {
                         var rooms = allRooms.Where(p => p.ParentId == tourItem.Id).Select(p =>
                             new RoomDto
@@ -1491,11 +1524,11 @@ namespace TepayLink.Sdisco.Tours
                             Description = itemInDay.Description,
                             Name = tourItem.Name,
                             Location = location,
-                            LanguageId = tourItem.LanguageId,
+                            LanguageId = tourItem.LanguageId??0,
                             Language = languages.FirstOrDefault(p => p.Id == tourItem.LanguageId)?.DisplayName,
                             Star = tourItem.Star,
                             Status = tourItem.Status,
-                            Address = tourItem.Address,
+                            //Address = tourItem.Address,
 
                             InstantBook = tourItem.InstantBook,
                             Review = tourReviewDic.ContainsKey(tourItem.Id) ? tourReviewDic[tourItem.Id] : null,
@@ -1512,9 +1545,9 @@ namespace TepayLink.Sdisco.Tours
 
                         hotels.Add(hotelItem);
                     }
-                    else if (tourItem.Type == TourItemTypeEnum.Transport)
+                    else if (tourItem.Type == ProductTypeEnum.Transport)
                     {
-                        var transportDetail = transportDetails.FirstOrDefault(p => p.ItemId == tourItem.Id);
+                        var transportDetail = transportDetails.FirstOrDefault(p => p.ProductId == tourItem.Id);
 
                         if (transportDetail == null)
                             continue;
@@ -1523,7 +1556,7 @@ namespace TepayLink.Sdisco.Tours
                             TourDetailItemId = itemInDay.Id,
                             Id = tourItem.Id,
                             Description = itemInDay.Description,
-                            LanguageId = tourItem.LanguageId,
+                            LanguageId = tourItem.LanguageId??0,
                             Language = languages.FirstOrDefault(p => p.Id == tourItem.LanguageId)?.DisplayName,
                             TotalSeat = transportDetail.TotalSeat,
                             Status = tourItem.Status,
@@ -1561,7 +1594,7 @@ namespace TepayLink.Sdisco.Tours
                             Id = tourItem.Id,
                             Description = itemInDay.Description,
                             Name = tourItem.Name,
-                            LanguageId = tourItem.LanguageId,
+                            LanguageId = tourItem.LanguageId??0,
 
                             Review = tourReviewDic.ContainsKey(tourItem.Id) ? tourReviewDic[tourItem.Id] : null,
                             ThumbImages = tourThumImagesDic.ContainsKey(tourItem.Id)
@@ -1606,25 +1639,27 @@ namespace TepayLink.Sdisco.Tours
         }
         public async Task<decimal> GetFeeByHostUser(long userId, long price)
         {
-            var fee = _feeConfigRepository.FirstOrDefault(p => p.HostUserId == userId);
-            if (fee != null)
-            {
-                var feeAmount = fee.FeePercent * price / 100;
-
-                return (decimal)Math.Round(feeAmount, 2);
-            }
             return 0;
+            //var fee = _feeConfigRepository.FirstOrDefault(p => p.HostUserId == userId);
+            //if (fee != null)
+            //{
+            //    var feeAmount = fee.FeePercent * price / 100;
+
+            //    return (decimal)Math.Round(feeAmount, 2);
+            //}
+            //return 0;
         }
 
         public async Task<List<FeeConfigDto>> GetFeeConfigs(List<long> userIds)
         {
-            var fee = _feeConfigRepository.GetAll().Where(p => userIds.Contains(p.HostUserId)).Select(p => new FeeConfigDto
-            {
-                FeePercent = p.FeePercent,
-                HostUserId = p.HostUserId,
-                Id = p.Id
-            });
-            return fee.ToList();
+            return new List<FeeConfigDto>();
+            //var fee = _feeConfigRepository.GetAll().Where(p => userIds.Contains(p.HostUserId)).Select(p => new FeeConfigDto
+            //{
+            //    FeePercent = p.FeePercent,
+            //    HostUserId = p.HostUserId,
+            //    Id = p.Id
+            //});
+            //return fee.ToList();
 
         }
 

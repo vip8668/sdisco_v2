@@ -17,11 +17,18 @@ namespace TepayLink.Sdisco.Bookings
         private readonly IRepository<BookingDetail, long> _bookingDetailRepository;
         private readonly IRepository<Product, long> _tourRepository;
         private readonly IRepository<ProductSchedule, long> _productScheduleRepository;
- 
 
 
+        public OrderAppService(IRepository<Order, long> orderRepository, IRepository<Booking, long> bookingRepository, IRepository<BookingDetail, long> bookingDetailRepository, IRepository<Product, long> tourRepository, IRepository<ProductSchedule, long> productScheduleRepository)
+        {
+            _orderRepository = orderRepository;
+            _bookingRepository = bookingRepository;
+            _bookingDetailRepository = bookingDetailRepository;
+            _tourRepository = tourRepository;
+            _productScheduleRepository = productScheduleRepository;
+        }
 
-        public async Task<Dto.OrderDto> CreateOrder(CreateOrderInputDto input)
+        public async Task<OrderDto> CreateOrder(CreateOrderInputDto input)
         {
             var order = new Order
             {
@@ -35,7 +42,7 @@ namespace TepayLink.Sdisco.Bookings
                 BookingId = input.BookingId
             };
             order.Id = _orderRepository.InsertAndGetId(order);
-            return new Dto.OrderDto
+            return new OrderDto
             {
                 Amount = input.Amount,
                 Id = order.Id,

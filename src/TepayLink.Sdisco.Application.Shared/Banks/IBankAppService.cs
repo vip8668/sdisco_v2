@@ -12,9 +12,9 @@ namespace TepayLink.Sdisco.Banks
     public interface IBankAppService : IApplicationService
     {
 
-        Task<List<Dtos.BankDto>> GetBankList();
-        Task<List<Dtos.BankDto>> GetBankListByType(BankTypeEnum Type);
-        Task<List<Dtos.BankBranchDto>> GetBankBranch(int bakId);
+        Task<List<BankDto>> GetBankList();
+        Task<List<BankDto>> GetBankListByType(BankTypeEnum Type);
+        Task<List<BankBranchDto>> GetBankBranch(int bakId);
         Task CreateBankAccountInfo(CreateBankAccountInputDto bankAccountDto);
         Task UpdateBankAccountInfo(CreateBankAccountInputDto bankAccountDto);
         Task<List<BankAccountInforDto>> GetBankAccountInfo();

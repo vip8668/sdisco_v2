@@ -4,7 +4,7 @@ using SDisco.Home.Dto;
 using TepayLink.Sdisco.Products;
 using TepayLink.Sdisco.Tour.Dtos;
 
-namespace TepayLink.Sdisco.Booking.Dtos
+namespace TepayLink.Sdisco.Bookings.Dtos
 {
     public class AvaiableTimeOfTourDto
     {
@@ -32,8 +32,9 @@ namespace TepayLink.Sdisco.Booking.Dtos
         /// <summary>
         /// Item Type : tour, tripplan/ activity, ticket
         /// </summary>
-        public ProductTypeEnum ItemType { get; set; }
-
+        //  public ProductTypeEnum ItemType { get; set; }
+        public int ItemType
+        { get; set; }
         /// <summary>
         /// Số slot trống
         /// </summary>

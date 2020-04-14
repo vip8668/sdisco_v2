@@ -9,13 +9,16 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using TepayLink.Sdisco.AdminConfig;
 using TepayLink.Sdisco.Banks.Dtos;
 using TepayLink.Sdisco.Bookings;
+using TepayLink.Sdisco.Configuration;
 using TepayLink.Sdisco.MultiTenancy.Payments.Paypal;
 using TepayLink.Sdisco.MultiTenancy.Payments.PayPal;
 using TepayLink.Sdisco.Payment.Dto;
 using TepayLink.Sdisco.Products;
+using Order = TepayLink.Sdisco.Bookings.Order;
 
 namespace TepayLink.Sdisco.Payment
 {
@@ -42,7 +45,20 @@ namespace TepayLink.Sdisco.Payment
 
         private readonly IPayPalPaymentAppService _payPalPaymentAppService;
 
-
+        public PaymentAppService(IRepository<Bank> bankRepository,IWebHostEnvironment hostingEnvironment, IRepository<Order, long> orderRepository, IOrderAppService orderAppService, IRepository<Booking, long> bookingRepository, IRepository<Product, long> tourRepository, IRepository<BookingDetail, long> bookingDetailRepository, PayPalGatewayManager payPalGatewayManager, PayPalPaymentGatewayConfiguration payPalPaymentGatewayConfiguration, IPayPalPaymentAppService payPalPaymentAppService)
+        {
+            _bankRepository = bankRepository;
+            _orderRepository = orderRepository;
+            _orderAppService = orderAppService;
+            _bookingRepository = bookingRepository;
+            _tourRepository = tourRepository;
+            _bookingDetailRepository = bookingDetailRepository;
+        
+            _payPalGatewayManager = payPalGatewayManager;
+            _payPalPaymentGatewayConfiguration = payPalPaymentGatewayConfiguration;
+            _payPalPaymentAppService = payPalPaymentAppService;
+            _configuration = hostingEnvironment.GetAppConfiguration();
+        }
 
         /// <summary>
         /// Phương thức thanh toán
@@ -273,19 +289,20 @@ namespace TepayLink.Sdisco.Payment
         [RemoteService(false)]
         [AbpAllowAnonymous]
         [UnitOfWork]
-        public async Task ConfirmPaymentPaypal(long paymentId, string paypalPaymentId, string paypalPayerId)
+        public async Task ConfirmPaymentPaypal(long paymentId, string paypalOrderId)
         {
             var order = _orderRepository.FirstOrDefault(p => p.Id == paymentId);
 
-            await _payPalGatewayManager.CaptureOrderAsync(
-                new PayPalCaptureOrderRequestInput(paymentId.ToString())
+
+          string id=  await _payPalGatewayManager.CaptureOrderAsync(
+                new PayPalCaptureOrderRequestInput(paypalOrderId)
             );
             order.Status = OrderStatus.Success;
-            order.OrderRef = paypalPaymentId;
-            order.TransactionId = paypalPayerId;
-            order.NameOnCard = paypalPayerId;
+            order.OrderRef = paypalOrderId;
+            order.TransactionId = id;
+            order.NameOnCard = paypalOrderId;
             order.BankCode = "PAYPAL";
-            order.CardNumber = paypalPayerId;
+            order.CardNumber = paypalOrderId;
             _orderRepository.Update(order);
             _orderAppService.UpdteOrderPaySucess(order.Id);
         }

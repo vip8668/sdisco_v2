@@ -1,7 +1,7 @@
 ﻿using Abp.Application.Services.Dto;
 using System;
 
-namespace TepayLink.Sdisco.Client.Dtos
+namespace TepayLink.Sdisco.Clients.Dtos
 {
     public class GetAllClientSettingsForExcelInput
     {

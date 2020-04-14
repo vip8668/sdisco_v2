@@ -1,9 +1,10 @@
-﻿using TepayLink.Sdisco.KOL;
+﻿using TepayLink.Sdisco.Reports;
+using TepayLink.Sdisco.KOL;
 using TepayLink.Sdisco.Affiliate;
 using TepayLink.Sdisco.Places;
 using TepayLink.Sdisco.Cashout;
 using TepayLink.Sdisco.Search;
-using TepayLink.Sdisco.Client;
+using TepayLink.Sdisco.Clients;
 
 using TepayLink.Sdisco.Bookings;
 using TepayLink.Sdisco.Products;
@@ -30,6 +31,12 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
 {
     public class SdiscoDbContext : AbpZeroDbContext<Tenant, Role, User, SdiscoDbContext>, IAbpPersistedGrantDbContext
     {
+        public virtual DbSet<RevenueByMonth> RevenueByMonths { get; set; }
+
+        public virtual DbSet<BookingRefund> BookingRefunds { get; set; }
+
+        public virtual DbSet<RefundReason> RefundReasons { get; set; }
+
         public virtual DbSet<Transaction> Transactions { get; set; }
 
         public virtual DbSet<WithDrawRequest> WithDrawRequests { get; set; }
@@ -39,7 +46,7 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
         public virtual DbSet<PartnerRevenue> PartnerRevenues { get; set; }
 
         public virtual DbSet<ShortLink> ShortLinks { get; set; }
-
+        public virtual DbSet<MyUserLogin> MyUserLogins { get; set; }
         public virtual DbSet<ChatMessageV2> ChatMessageV2s { get; set; }
 
         public virtual DbSet<NearbyPlace> NearbyPlaces { get; set; }
@@ -214,7 +221,22 @@ namespace TepayLink.Sdisco.EntityFrameworkCore
            
            
            
-            modelBuilder.Entity<Transaction>(t =>
+           
+           
+           
+            modelBuilder.Entity<RevenueByMonth>(r =>
+            {
+                r.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<BookingRefund>(b =>
+            {
+                b.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<RefundReason>(r =>
+            {
+                r.HasIndex(e => new { e.TenantId });
+            });
+ modelBuilder.Entity<Transaction>(t =>
             {
                 t.HasIndex(e => new { e.TenantId });
             });

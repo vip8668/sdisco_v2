@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 
-namespace TepayLink.Sdisco.Booking.Dtos
+namespace TepayLink.Sdisco.Bookings.Dtos
 {
   
     

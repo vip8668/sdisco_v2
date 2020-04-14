@@ -45,7 +45,6 @@
                 inputFilter: function () {
                     return {
 					filter: $('#ProductSchedulesTableFilter').val(),
-					allowBookFilter: $('#AllowBookFilterId').val(),
 					productNameFilter: $('#ProductNameFilterId').val()
                     };
                 }
@@ -228,7 +227,6 @@
             _productSchedulesService
                 .getProductSchedulesToExcel({
 				filter : $('#ProductSchedulesTableFilter').val(),
-					allowBookFilter: $('#AllowBookFilterId').val(),
 					productNameFilter: $('#ProductNameFilterId').val()
 				})
                 .done(function (result) {

@@ -25,6 +25,12 @@ namespace TepayLink.Sdisco.Tour
 
         private readonly IRepository<SaveItem, long> _saveItemRepository;
 
+        public FavouriteAppService(IRepository<Product, long> tourRepository, ICommonAppService commonAppService, IRepository<SaveItem, long> saveItemRepository)
+        {
+            _tourRepository = tourRepository;
+            _commonAppService = commonAppService;
+            _saveItemRepository = saveItemRepository;
+        }
 
         public async Task<PagedResultDto<BasicTourDto>> GetFavouriteTour(PagedInputDto input)
         {
@@ -62,7 +68,7 @@ namespace TepayLink.Sdisco.Tour
             var query = from p in _tourRepository.GetAll()
                         join q in _saveItemRepository.GetAll() on p.Id equals q.ProductId
                      //   join place in _placeRepository.GetAll() on p.PlaceId equals place.Id
-                        where p.Type == ProductTypeEnum.Trip && q.CreatorUserId == AbpSession.UserId
+                        where p.Type == ProductTypeEnum.TripPlan && q.CreatorUserId == AbpSession.UserId
 
                         select new BasicTourDto
                         {

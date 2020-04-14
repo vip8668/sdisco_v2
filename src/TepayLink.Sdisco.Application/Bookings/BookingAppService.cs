@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TepayLink.Sdisco.Booking.Dtos;
+
 using TepayLink.Sdisco.Bookings.Dtos;
 using TepayLink.Sdisco.Payment;
 using TepayLink.Sdisco.Payment.Dto;
@@ -52,6 +52,24 @@ namespace TepayLink.Sdisco.Bookings
         private readonly IRepository<ClaimReason, int> _claimRepository;
         private readonly IRepository<BookingClaim, long> _bookingClaimRepository;
 
+        public BookingAppService(IRepository<ProductSchedule, long> tourScheduleRepository, IRepository<Product, long> tourRepository, ICommonAppService commonAppService, IRepository<Booking, long> bookingRepository, IRepository<ProductDetail, long> tourDetailRepository, IRepository<ProductDetailCombo, long> tourDetailItemRepository, IRepository<ProductImage, long> imageRepository, IRepository<BookingDetail, long> bookingDetailRepository, IRepository<Coupon, long> couponRepository, IPaymentAppService paymentAppService, IOrderAppService orderAppService, IRepository<ProductReviewDetail, long> tourReviewDetailRepository, IRepository<ProductReview, long> tourReviewRepository, IRepository<ClaimReason, int> claimRepository, IRepository<BookingClaim, long> bookingClaimRepository)
+        {
+            _tourScheduleRepository = tourScheduleRepository;
+            _tourRepository = tourRepository;
+            _commonAppService = commonAppService;
+            _bookingRepository = bookingRepository;
+            _tourDetailRepository = tourDetailRepository;
+            _tourDetailItemRepository = tourDetailItemRepository;
+            _imageRepository = imageRepository;
+            _bookingDetailRepository = bookingDetailRepository;
+            _couponRepository = couponRepository;
+            _paymentAppService = paymentAppService;
+            _orderAppService = orderAppService;
+            _tourReviewDetailRepository = tourReviewDetailRepository;
+            _tourReviewRepository = tourReviewRepository;
+            _claimRepository = claimRepository;
+            _bookingClaimRepository = bookingClaimRepository;
+        }
 
 
         private async Task<List<AvaiableTimeOfTourDto>> GetAvaiableTimeOfTourBySelectedDate(
@@ -68,7 +86,7 @@ namespace TepayLink.Sdisco.Bookings
                         TourScheduleId = p.Id,
                         StartTime = p.StartDate,
                         ToTime = p.EndDate,
-                        ItemType = (ProductTypeEnum)input.Type,
+                        ItemType = input.Type,
                         TotalSlot = p.TotalSlot,
                         InstallBook = item.InstantBook,
                         Price = new BasicPriceDto
@@ -248,7 +266,7 @@ namespace TepayLink.Sdisco.Bookings
                             Quantity = p.Quantity,
                             TotalAmount = p.Amount + p.Fee,
 
-                            ItemType = p.ProductFk.Type,
+                           // ItemType = p.ProductFk.Type,
                             BookingId = p.BookingId,
                             ItemScheduleId = p.ProductScheduleId,
                             BookingDetailId = p.Id,
@@ -273,7 +291,7 @@ namespace TepayLink.Sdisco.Bookings
                              Status = p.Status,
                              Title = q.Name,
                              ItemId = q.Id,
-                             ItemType = p.ItemType,
+                            // ItemType = p.ItemType,
                              BookingId = p.BookingId,
                              ItemScheduleId = p.ItemScheduleId,
                              BookingDetailId = p.BookingDetailId,
@@ -518,6 +536,10 @@ namespace TepayLink.Sdisco.Bookings
         /// <param name="input"></param>
         /// <returns></returns>
         /// <exception cref="UserFriendlyException"></exception>
+        
+        
+        //todo chỗ này xem lại
+        [AbpAllowAnonymous]
         public async Task<CheckCouponOutputDto> CheckCouponCode(CheckCouponInputDto input)
         {
             var couponcode = _couponRepository.FirstOrDefault(p => p.Code == input.CouponCode);
@@ -540,11 +562,11 @@ namespace TepayLink.Sdisco.Bookings
 
 
             var tour = _tourRepository.GetAll().Where(p => p.Id == tourId).FirstOrDefault();
-            if (tour.Type != ProductTypeEnum.Trip)
+            if (tour.Type != ProductTypeEnum.TripPlan)
             {
                 var items = _tourScheduleRepository.GetAll()
                     .Where(p => p.ProductId == tourId && p.StartDate >= fromDate && p.StartDate < todate &&
-                                p.StartDate >= DateTime.Today && p.Avaiable > 0)
+                                p.StartDate >= DateTime.Today && (p.TotalSlot - p.LockedSlot - p.TotalBook)>0)
                     .Select(p => new AvaiableTimeDto
                     {
                         Price = new BasicPriceDto
@@ -814,7 +836,7 @@ namespace TepayLink.Sdisco.Bookings
             decimal amount = 0;
             decimal serviceFee = 0;
             //  item.Type = TourTypeEnum.Tour;
-            if (item.Type == ProductTypeEnum.Trip)
+            if (item.Type == ProductTypeEnum.TripPlan)
             {
                 //Tinh lai gia cua item.
 
@@ -1007,12 +1029,12 @@ namespace TepayLink.Sdisco.Bookings
         /// </summary>
         /// <param name="bookingId"></param>
         /// <returns></returns>
-        public async Task<TepayLink.Sdisco.Booking.Dto.BookingDetailDto> GetBookingDetail(long bookingId)
+        public async Task<TepayLink.Sdisco.Bookings.Dto.BookingDetailDtoV1> GetBookingDetail(long bookingId)
         {
             var booking = _bookingDetailRepository.FirstOrDefault(p => p.Id == bookingId);
             if (booking == null)
                 return null;
-            var item = new TepayLink.Sdisco.Booking.Dto.BookingDetailDto
+            var item = new TepayLink.Sdisco.Bookings.Dto.BookingDetailDtoV1
             {
                 Amount = booking.Amount,
                 FromDate = booking.StartDate,
@@ -1027,7 +1049,7 @@ namespace TepayLink.Sdisco.Bookings
             return item;
         }
 
-        public async Task<TepayLink.Sdisco.Booking.Dto.BookingDetailDto> GetPendingBooking(long bookingId)
+        public async Task<TepayLink.Sdisco.Bookings.Dto.BookingDetailDtoV1> GetPendingBooking(long bookingId)
         {
             var booking = _bookingRepository.FirstOrDefault(p => p.Id == bookingId);
             if (booking == null)
@@ -1035,7 +1057,7 @@ namespace TepayLink.Sdisco.Bookings
             if (booking.Status != BookingStatusEnum.WaitPayment)
                 return null;
             var bookingDetail = _bookingDetailRepository.FirstOrDefault(p => p.BookingId == bookingId);
-            var item = new TepayLink.Sdisco.Booking.Dto.BookingDetailDto
+            var item = new TepayLink.Sdisco.Bookings.Dto.BookingDetailDtoV1
             {
                 Amount = booking.Amount,
                 FromDate = booking.StartDate,
@@ -1052,7 +1074,7 @@ namespace TepayLink.Sdisco.Bookings
             return item;
         }
 
-        public async Task<TepayLink.Sdisco.Booking.Dto.BookingDetailDto> BookingInfo(long bookingId)
+        public async Task<TepayLink.Sdisco.Bookings.Dto.BookingDetailDtoV1> BookingInfo(long bookingId)
         {
             var booking = _bookingRepository.FirstOrDefault(p => p.Id == bookingId);
             if (booking == null)
@@ -1060,7 +1082,7 @@ namespace TepayLink.Sdisco.Bookings
             //            if (booking.Status != BookingStatusEnum.WaitPayment)
             //                return null;
             var bookingDetail = _bookingDetailRepository.FirstOrDefault(p => p.BookingId == bookingId);
-            var item = new TepayLink.Sdisco.Booking.Dto.BookingDetailDto
+            var item = new TepayLink.Sdisco.Bookings.Dto.BookingDetailDtoV1
             {
                 Amount = booking.Amount,
                 FromDate = booking.StartDate,

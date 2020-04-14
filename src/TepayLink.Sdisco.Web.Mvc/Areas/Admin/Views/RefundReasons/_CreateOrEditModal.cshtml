@@ -1,0 +1,31 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.RefundReasons
+@model CreateOrEditRefundReasonModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditRefundReason")) : L("CreateNewRefundReason")))
+
+<div class="modal-body">
+        <div id="RefundReasonInformationsTab">
+            <form name="RefundReasonInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.RefundReason.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="RefundReason_ReasonText">@L("ReasonText")</label>
+									<input class="form-control" id="RefundReason_ReasonText" value="@Model.RefundReason.ReasonText" type="text" name="reasonText"     />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

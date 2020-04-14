@@ -6,6 +6,21 @@
     /// </summary>
     public static class AppPermissions
     {
+        public const string Pages_Administration_RevenueByMonths = "Pages.Administration.RevenueByMonths";
+        public const string Pages_Administration_RevenueByMonths_Create = "Pages.Administration.RevenueByMonths.Create";
+        public const string Pages_Administration_RevenueByMonths_Edit = "Pages.Administration.RevenueByMonths.Edit";
+        public const string Pages_Administration_RevenueByMonths_Delete = "Pages.Administration.RevenueByMonths.Delete";
+
+        public const string Pages_Administration_BookingRefunds = "Pages.Administration.BookingRefunds";
+        public const string Pages_Administration_BookingRefunds_Create = "Pages.Administration.BookingRefunds.Create";
+        public const string Pages_Administration_BookingRefunds_Edit = "Pages.Administration.BookingRefunds.Edit";
+        public const string Pages_Administration_BookingRefunds_Delete = "Pages.Administration.BookingRefunds.Delete";
+
+        public const string Pages_Administration_RefundReasons = "Pages.Administration.RefundReasons";
+        public const string Pages_Administration_RefundReasons_Create = "Pages.Administration.RefundReasons.Create";
+        public const string Pages_Administration_RefundReasons_Edit = "Pages.Administration.RefundReasons.Edit";
+        public const string Pages_Administration_RefundReasons_Delete = "Pages.Administration.RefundReasons.Delete";
+
         public const string Pages_Administration_Transactions = "Pages.Administration.Transactions";
         public const string Pages_Administration_Transactions_Create = "Pages.Administration.Transactions.Create";
         public const string Pages_Administration_Transactions_Edit = "Pages.Administration.Transactions.Edit";
@@ -251,11 +266,7 @@
         public const string Pages_Administration_Products_Edit = "Pages.Administration.Products.Edit";
         public const string Pages_Administration_Products_Delete = "Pages.Administration.Products.Delete";
 
-        public const string Pages_Products = "Pages.Products";
-        public const string Pages_Products_Create = "Pages.Products.Create";
-        public const string Pages_Products_Edit = "Pages.Products.Edit";
-        public const string Pages_Products_Delete = "Pages.Products.Delete";
-
+       
         public const string Pages_Administration_Categories = "Pages.Administration.Categories";
         public const string Pages_Administration_Categories_Create = "Pages.Administration.Categories.Create";
         public const string Pages_Administration_Categories_Edit = "Pages.Administration.Categories.Edit";

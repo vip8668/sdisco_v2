@@ -26,6 +26,16 @@ namespace TepayLink.Sdisco.Tour
         private readonly ICommonAppService _commonAppService;
         private readonly IRepository<Category> _tourCategoryRepository;
 
+        public ActivityAppService(IRepository<Product, long> tourRepository, IRepository<User, long> userRepository, IRepository<ApplicationLanguage> langRepository, IRepository<Place, long> placeRepository, IRepository<ProductSchedule, long> productScheduleRepository, ICommonAppService commonAppService, IRepository<Category> tourCategoryRepository)
+        {
+            _tourRepository = tourRepository;
+            _userRepository = userRepository;
+            _langRepository = langRepository;
+            _placeRepository = placeRepository;
+            _productScheduleRepository = productScheduleRepository;
+            _commonAppService = commonAppService;
+            _tourCategoryRepository = tourCategoryRepository;
+        }
 
         public async Task<ActivityDetailDto> GetActivityDetail(long activityId)
         {

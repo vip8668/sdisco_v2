@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
-using TepayLink.Sdisco.Client.Dtos;
+using TepayLink.Sdisco.Clients.Dtos;
 using TepayLink.Sdisco.Dto;
 
-namespace TepayLink.Sdisco.Client
+namespace TepayLink.Sdisco.Clients
 {
     public interface IClientSettingsAppService : IApplicationService 
     {

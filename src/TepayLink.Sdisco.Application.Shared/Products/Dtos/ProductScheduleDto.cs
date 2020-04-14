@@ -35,7 +35,7 @@ namespace TepayLink.Sdisco.Products.Dtos
 		public bool AllowBook { get; set; }
 
 
-		 public long? ProductId { get; set; }
+		 public long ProductId { get; set; }
 
 		 
     }

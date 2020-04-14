@@ -9,11 +9,7 @@ using TepayLink.Sdisco.Tour.Dtos;
 
 namespace TepayLink.Sdisco.Authorization.Users.Profile.Dto
 {
-    public class RefundReasonDto : Entity
-    {
-        public string ReasonText { get; set; }
-
-    }
+    
 
     public class RefundMethod
     {

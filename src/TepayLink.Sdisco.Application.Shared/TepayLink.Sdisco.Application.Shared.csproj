@@ -17,4 +17,10 @@
     <ProjectReference Include="..\TepayLink.Sdisco.Core.Shared\TepayLink.Sdisco.Core.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+    <Folder Include="Search\Dto\" />
+    <Folder Include="TripplanManager\Dto\" />
+  </ItemGroup>
+
 </Project>

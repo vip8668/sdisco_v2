@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using TepayLink.Sdisco.AdminConfig.Dtos;
 using TepayLink.Sdisco.Blog.Dtos;
 
 namespace TepayLink.Sdisco.Blog

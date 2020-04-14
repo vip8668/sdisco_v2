@@ -51,7 +51,16 @@ namespace TepayLink.Sdisco.Utils
         }
     }
 
+    public static class Validate
+    {
 
+        public static bool ValidateStartTime(string startTime)
+        {
+            if (string.IsNullOrEmpty(startTime))
+                return true;
+            return true;
+        }
+    }
     public class Hashids
     {
         public const string DEFAULT_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";

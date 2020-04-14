@@ -7,7 +7,7 @@ using TepayLink.Sdisco.Products;
 using TepayLink.Sdisco.Tour.Dtos;
 using TepayLink.Sdisco.Utils;
 
-namespace TepayLink.Sdisco.Booking.Dtos
+namespace TepayLink.Sdisco.Bookings.Dtos
 {
     public class MyBookingDto
     {
@@ -31,7 +31,8 @@ namespace TepayLink.Sdisco.Booking.Dtos
         /// </summary>
         public long ItemId { get; set; }
 
-        public ProductTypeEnum ItemType { get; set; }
+        //public ProductTypeEnum ItemType { get; set; }
+        public int ItemType => 1;
         public long ItemScheduleId { get; set; }
 
         /// <summary>

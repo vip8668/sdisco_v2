@@ -25,6 +25,18 @@ namespace TepayLink.Sdisco.Tour
         private readonly IRepository<Category> _tourItemCategoryRepository;
         private readonly ICommonAppService _commonAppService;
 
+        public ShowAppService(IRepository<Product, long> tourItemRepository, IRepository<ProductImage, long> imageRepository, IRepository<User, long> userRepository, IRepository<ApplicationLanguage> langRepository, IRepository<ProductSchedule, long> itemScheduleRepository, IRepository<Place, long> placeRepository, IRepository<Category> tourItemCategoryRepository, ICommonAppService commonAppService)
+        {
+            _tourItemRepository = tourItemRepository;
+            _imageRepository = imageRepository;
+            _userRepository = userRepository;
+            _langRepository = langRepository;
+            _itemScheduleRepository = itemScheduleRepository;
+            _placeRepository = placeRepository;
+            _tourItemCategoryRepository = tourItemCategoryRepository;
+            _commonAppService = commonAppService;
+        }
+
         public async Task<ShowDetailDetailDto> GetShowDetail(long showId)
         {
             var itemSchedule = _itemScheduleRepository.GetAll().Where(p => p.ProductId == showId).OrderBy(p => p.Price)

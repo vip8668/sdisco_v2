@@ -55,6 +55,7 @@ namespace TepayLink.Sdisco.Web.Startup
 
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            AppConsts.Domain = _appConfiguration["App:Domain"];
             // MVC
             services.AddControllersWithViews(options =>
             {
@@ -64,6 +65,16 @@ namespace TepayLink.Sdisco.Web.Startup
                 .AddRazorRuntimeCompilation()
 #endif
                 .AddNewtonsoftJson();
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "sdisco.net.Session";
+                //options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+                
+            });
 
             IdentityRegistrar.Register(services);
 
@@ -162,6 +173,7 @@ namespace TepayLink.Sdisco.Web.Startup
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            app.UseSession();
             //Initializes ABP framework.
             app.UseAbp(options =>
             {

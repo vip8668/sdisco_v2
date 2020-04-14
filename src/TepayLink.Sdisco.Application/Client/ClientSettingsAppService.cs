@@ -7,8 +7,8 @@ using Abp.Linq.Extensions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Abp.Domain.Repositories;
-using TepayLink.Sdisco.Client.Exporting;
-using TepayLink.Sdisco.Client.Dtos;
+using TepayLink.Sdisco.Clients.Exporting;
+using TepayLink.Sdisco.Clients.Dtos;
 using TepayLink.Sdisco.Dto;
 using Abp.Application.Services.Dto;
 using TepayLink.Sdisco.Authorization;
@@ -16,7 +16,7 @@ using Abp.Extensions;
 using Abp.Authorization;
 using Microsoft.EntityFrameworkCore;
 
-namespace TepayLink.Sdisco.Client
+namespace TepayLink.Sdisco.Clients
 {
 	[AbpAuthorize(AppPermissions.Pages_Administration_ClientSettings)]
     public class ClientSettingsAppService : SdiscoAppServiceBase, IClientSettingsAppService

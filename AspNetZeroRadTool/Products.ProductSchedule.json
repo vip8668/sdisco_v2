@@ -8,8 +8,8 @@
   "PrimaryKeyType": "long",
   "BaseClass": "AuditedEntity",
   "EntityHistory": false,
-  "AutoMigration": false,
-  "UpdateDatabase": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
   "CreateUserInterface": true,
   "CreateViewOnly": true,
   "CreateExcelExport": true,
@@ -34,7 +34,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -53,7 +53,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -72,7 +72,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -91,7 +91,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -110,7 +110,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -129,7 +129,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -148,7 +148,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -167,7 +167,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -186,7 +186,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -205,7 +205,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -224,7 +224,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -243,7 +243,7 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
@@ -262,14 +262,14 @@
       "UserInterface": {
         "AdvancedFilter": false,
         "List": true,
-        "CreateOrUpdate": false
+        "CreateOrUpdate": true
       }
     },
     {
       "Name": "AllowBook",
       "Type": "bool",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -279,7 +279,7 @@
       "Nullable": false,
       "Regex": "",
       "UserInterface": {
-        "AdvancedFilter": true,
+        "AdvancedFilter": false,
         "List": true,
         "CreateOrUpdate": true
       }
@@ -290,7 +290,7 @@
       "Namespace": "TepayLink.Sdisco.Products",
       "ForeignEntityName": "Product",
       "IdType": "long",
-      "IsNullable": true,
+      "IsNullable": false,
       "PropertyName": "ProductId",
       "DisplayPropertyName": "Name",
       "DuplicationNumber": 0,

@@ -1,5 +1,5 @@
 {
-  "IsRegenerate": false,
+  "IsRegenerate": true,
   "MenuPosition": "main",
   "RelativeNamespace": "Account",
   "EntityName": "Partner",
@@ -8,8 +8,8 @@
   "PrimaryKeyType": "long",
   "BaseClass": "AuditedEntity",
   "EntityHistory": false,
-  "AutoMigration": false,
-  "UpdateDatabase": false,
+  "AutoMigration": true,
+  "UpdateDatabase": true,
   "CreateUserInterface": true,
   "CreateViewOnly": true,
   "CreateExcelExport": true,
@@ -135,8 +135,8 @@
     {
       "Name": "Status",
       "Type": "byte",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -154,8 +154,8 @@
     {
       "Name": "AlreadyBecomeSdiscoPartner",
       "Type": "bool",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,
@@ -173,8 +173,8 @@
     {
       "Name": "HasDriverLicense",
       "Type": "bool",
-      "MaxLength": 0,
-      "MinLength": 0,
+      "MaxLength": -1,
+      "MinLength": -1,
       "Range": {
         "IsRangeSet": false,
         "MinimumValue": 0,

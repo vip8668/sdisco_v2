@@ -28,7 +28,7 @@ namespace TepayLink.Sdisco.Products
 		public virtual double Food { get; set; }
 		
 
-		public virtual long ProductId { get; set; }
+		public virtual long? ProductId { get; set; }
 		
         [ForeignKey("ProductId")]
 		public Product ProductFk { get; set; }

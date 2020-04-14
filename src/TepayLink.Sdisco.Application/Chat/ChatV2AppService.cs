@@ -34,6 +34,15 @@ namespace TepayLink.Sdisco.Chat
 
         private static FirebaseClient _firebaseClient;
 
+        public ChatV2AppService(IRepository<ChatMessageV2, long> chatMessageRepository, IRepository<Chatconversation, long> chatConversationRepository, IRepository<Product, long> tourRepository, IRepository<Booking, long> bookingRepository, IRepository<User, long> userRepository)
+        {
+            _chatMessageRepository = chatMessageRepository;
+            _chatConversationRepository = chatConversationRepository;
+            _tourRepository = tourRepository;
+            _bookingRepository = bookingRepository;
+            _userRepository = userRepository;
+        }
+
         public ChatV2AppService(IRepository<ChatMessageV2, long> chatMessageRepository,
            IRepository<Chatconversation, long> chatConversationRepository, IRepository<Product, long> tourRepository,
            IRepository<Booking, long> bookingRepository, IRepository<User, long> userRepository,
@@ -68,7 +77,7 @@ namespace TepayLink.Sdisco.Chat
         /// <exception cref="UserFriendlyException"></exception>
         /// <exception cref="Exception"></exception>
         [UnitOfWork]
-        public async Task<ChatMessageV2Dto> SendMessage(SendChatMessageV2Dto input)
+        public async Task<ChatMessagev2Dto> SendMessage(SendChatMessageV2Dto input)
         {
             var receiver = new UserIdentifier(AbpSession.TenantId, input.UserId);
 
@@ -189,7 +198,7 @@ namespace TepayLink.Sdisco.Chat
                     _firebaseClient.SetTaskAsync($"message/{sendDto.userId}/{sendDto.chatConversationId}/" + sendDto.id,
                         sendDto);
 
-                    return new ChatMessageV2Dto
+                    return new ChatMessagev2Dto
                     {
                         Id = senderMessage.Id,
                         CreationTime = DateTime.Now,
@@ -257,7 +266,7 @@ namespace TepayLink.Sdisco.Chat
                 p.ProductId
             }).ToList();
             //
-            var itemIds = bookingItems.Select(p => p.ProductId).Distinct().ToList();
+            var itemIds = bookingItems.Select(p => p.ProductId??0).Distinct().ToList();
             var tourItems = _tourRepository.GetAll().Where(p => itemIds.Contains(p.Id)).Select(p => new
             {
                 p.Name,
@@ -351,7 +360,7 @@ namespace TepayLink.Sdisco.Chat
         /// <param name="input"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<PagedResultDto<ChatMessageV2Dto>> GetChatMessage(GetChatMessageDto input)
+        public async Task<PagedResultDto<ChatMessagev2Dto>> GetChatMessage(GetChatMessageDto input)
         {
             var chatConversation = _chatConversationRepository.FirstOrDefault(p =>
                 p.ShardChatConversationId == input.ChatConversationId && p.UserId == AbpSession.UserId);
@@ -360,7 +369,7 @@ namespace TepayLink.Sdisco.Chat
                 var mesageList = _chatMessageRepository.GetAll()
                     .Where(p => p.UserId == AbpSession.UserId && p.ChatConversationId == chatConversation.Id)
                     .WhereIf(input.LastId > 0, p => p.Id < input.LastId)
-                    .Select(p => new ChatMessageV2Dto
+                    .Select(p => new ChatMessagev2Dto
                     {
                         Id = p.Id,
                         Message = p.Message,
@@ -371,7 +380,7 @@ namespace TepayLink.Sdisco.Chat
                 var total = mesageList.Count();
                 var list = mesageList.OrderByDescending(p => p.Id).Take(input.MaxResultCount).ToList();
                 list = list.OrderBy(p => p.CreationTime).ToList();
-                return new PagedResultDto<ChatMessageV2Dto>
+                return new PagedResultDto<ChatMessagev2Dto>
                 {
                     Items = list,
                     TotalCount = total
@@ -388,7 +397,7 @@ namespace TepayLink.Sdisco.Chat
         /// <param name="input"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<PagedResultDto<ChatMessageV2Dto>> GetChatMessageByBookingId(GetChatMessageDto input)
+        public async Task<PagedResultDto<ChatMessagev2Dto>> GetChatMessageByBookingId(GetChatMessageDto input)
         {
             var chatConversation = _chatConversationRepository.FirstOrDefault(p =>
                 p.ShardChatConversationId == input.ChatConversationId && p.UserId == AbpSession.UserId);
@@ -397,7 +406,7 @@ namespace TepayLink.Sdisco.Chat
                 var mesageList = _chatMessageRepository.GetAll()
                     .Where(p => p.UserId == AbpSession.UserId && p.ChatConversationId == chatConversation.Id)
                     .WhereIf(input.LastId > 0, p => p.Id < input.LastId)
-                    .Select(p => new ChatMessageV2Dto
+                    .Select(p => new ChatMessagev2Dto
                     {
                         Id = p.Id,
                         Message = p.Message,
@@ -408,7 +417,7 @@ namespace TepayLink.Sdisco.Chat
                 var total = mesageList.Count();
                 var list = mesageList.OrderByDescending(p => p.Id).Take(input.MaxResultCount).ToList();
                 list = list.OrderBy(p => p.CreationTime).ToList();
-                return new PagedResultDto<ChatMessageV2Dto>
+                return new PagedResultDto<ChatMessagev2Dto>
                 {
                     Items = list,
                     TotalCount = total
@@ -436,7 +445,7 @@ namespace TepayLink.Sdisco.Chat
             return user;
         }
 
-        public async Task<List<ChatMessageV2Dto>> SearchChatMessage(SearchMessageDto input)
+        public async Task<List<ChatMessagev2Dto>> SearchChatMessage(SearchMessageDto input)
         {
             var chatConversation = _chatConversationRepository.FirstOrDefault(p =>
                 p.ShardChatConversationId == input.ChatConversationId && p.UserId == AbpSession.UserId);
@@ -446,7 +455,7 @@ namespace TepayLink.Sdisco.Chat
                 var mesageList = _chatMessageRepository.GetAll()
                     .Where(p => p.UserId == AbpSession.UserId && p.ChatConversationId == chatConversation.Id &&
                                 p.Message.Contains(input.KeyWord))
-                    .Select(p => new ChatMessageV2Dto
+                    .Select(p => new ChatMessagev2Dto
                     {
                         Id = p.Id,
                         Message = p.Message,

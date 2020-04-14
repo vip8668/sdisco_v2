@@ -31,16 +31,81 @@
 
 								@if (Model.IsEditMode)
 								{
-									<input class="form-control" id="ProductSchedule_ProductId" value="@Model.ProductSchedule.ProductId" type="text" name="productId"  hidden/>
+									<input class="form-control" id="ProductSchedule_ProductId" value="@Model.ProductSchedule.ProductId" type="text" name="productId" required hidden/>
 								}
 								 else
 								{ 
-									<input class="form-control" id="ProductSchedule_ProductId" value="" type="text" name="productId"  hidden/>
+									<input class="form-control" id="ProductSchedule_ProductId" value="" type="text" name="productId" required hidden/>
 								}
 
 
 
 				
+								<div class="form-group">
+									<label for="ProductSchedule_TotalSlot">@L("TotalSlot")</label>
+									<input class="form-control m-input" id="ProductSchedule_TotalSlot" value="@Model.ProductSchedule.TotalSlot.ToString(CultureInfo.InvariantCulture)" type="number" name="totalSlot"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_TotalBook">@L("TotalBook")</label>
+									<input class="form-control m-input" id="ProductSchedule_TotalBook" value="@Model.ProductSchedule.TotalBook.ToString(CultureInfo.InvariantCulture)" type="number" name="totalBook"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_LockedSlot">@L("LockedSlot")</label>
+									<input class="form-control m-input" id="ProductSchedule_LockedSlot" value="@Model.ProductSchedule.LockedSlot.ToString(CultureInfo.InvariantCulture)" type="number" name="lockedSlot"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_TripLength">@L("TripLength")</label>
+									<input class="form-control m-input" id="ProductSchedule_TripLength" value="@Model.ProductSchedule.TripLength.ToString(CultureInfo.InvariantCulture)" type="number" name="tripLength"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_Note">@L("Note")</label>
+									<input class="form-control" id="ProductSchedule_Note" value="@Model.ProductSchedule.Note" type="text" name="note"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_Price">@L("Price")</label>
+									<input class="form-control m-input" id="ProductSchedule_Price" value="@Model.ProductSchedule.Price.ToString(CultureInfo.InvariantCulture)" type="number" name="price"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_TicketPrice">@L("TicketPrice")</label>
+									<input class="form-control m-input" id="ProductSchedule_TicketPrice" value="@Model.ProductSchedule.TicketPrice.ToString(CultureInfo.InvariantCulture)" type="number" name="ticketPrice"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_CostPrice">@L("CostPrice")</label>
+									<input class="form-control m-input" id="ProductSchedule_CostPrice" value="@Model.ProductSchedule.CostPrice.ToString(CultureInfo.InvariantCulture)" type="number" name="costPrice"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_HotelPrice">@L("HotelPrice")</label>
+									<input class="form-control m-input" id="ProductSchedule_HotelPrice" value="@Model.ProductSchedule.HotelPrice.ToString(CultureInfo.InvariantCulture)" type="number" name="hotelPrice"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_StartDate">@L("StartDate")</label>
+									<input class="form-control m-input date-picker" id="ProductSchedule_StartDate" type="text" name="startDate" value="@Model.ProductSchedule.StartDate"/>
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_EndDate">@L("EndDate")</label>
+									<input class="form-control m-input date-picker" id="ProductSchedule_EndDate" type="text" name="endDate" value="@Model.ProductSchedule.EndDate"/>
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_DepartureTime">@L("DepartureTime")</label>
+									<input class="form-control" id="ProductSchedule_DepartureTime" value="@Model.ProductSchedule.DepartureTime" type="text" name="departureTime"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductSchedule_Revenue">@L("Revenue")</label>
+									<input class="form-control m-input" id="ProductSchedule_Revenue" value="@Model.ProductSchedule.Revenue.ToString(CultureInfo.InvariantCulture)" type="number" name="revenue"  />
+								</div>
+					
 								<div class="m-checkbox-list">
 									<label for="ProductSchedule_AllowBook" class="kt-checkbox">
 										<input id="ProductSchedule_AllowBook" type="checkbox" name="allowBook" value="true" @Html.Raw(Model.ProductSchedule.AllowBook ?"checked=\"checked\"":"") />

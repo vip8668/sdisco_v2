@@ -19,7 +19,7 @@ namespace TepayLink.Sdisco.Authorization.Users.Profile
 
         Task<GetPasswordComplexitySettingOutput> GetPasswordComplexitySetting();
 
-        Task<GetProfilePictureOutput> GetProfilePicture();
+      //  Task<GetProfilePictureOutput> GetProfilePicture();
 
         Task<GetProfilePictureOutput> GetProfilePictureById(Guid profilePictureId);
 

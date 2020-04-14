@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TepayLink.Sdisco.Help.Dto;
+using TepayLink.Sdisco.Help.Dtos;
 
 namespace TepayLink.Sdisco.Help
 {
@@ -22,10 +23,10 @@ namespace TepayLink.Sdisco.Help
             _helpContentRepository = helpContentRepository;
         }
 
-        public async Task<List<HelpCategoryDto>> GetCategories(HelpTypeEnum type)
+        public async Task<List<HelpCategoryDtoV1>> GetCategories(HelpTypeEnum type)
         {
             var list = _helpCategory.GetAll().Where(p => p.Type == type).ToList();
-            return ObjectMapper.Map<List<HelpCategoryDto>>(list);
+            return ObjectMapper.Map<List<HelpCategoryDtoV1>>(list);
         }
         public async Task<PagedResultDto<HelpContentDto>> GetHelpContent(HelpContentSearchInputDto input)
         {

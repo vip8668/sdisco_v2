@@ -1,0 +1,51 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.BookingRefunds
+@model CreateOrEditBookingRefundModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditBookingRefund")) : L("CreateNewBookingRefund")))
+
+<div class="modal-body">
+        <div id="BookingRefundInformationsTab">
+            <form name="BookingRefundInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.BookingRefund.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="BookingRefund_BookingDetailId">@L("BookingDetailId")</label>
+									<input class="form-control m-input" id="BookingRefund_BookingDetailId" value="@Model.BookingRefund.BookingDetailId.ToString(CultureInfo.InvariantCulture)" type="number" name="bookingDetailId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="BookingRefund_RefundMethodId">@L("RefundMethodId")</label>
+									<input class="form-control m-input" id="BookingRefund_RefundMethodId" value="@Model.BookingRefund.RefundMethodId.ToString(CultureInfo.InvariantCulture)" type="number" name="refundMethodId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="BookingRefund_Description">@L("Description")</label>
+									<input class="form-control" id="BookingRefund_Description" value="@Model.BookingRefund.Description" type="text" name="description"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="BookingRefund_Status">@L("Status")</label>
+									<input class="form-control m-input" id="BookingRefund_Status" value="@Model.BookingRefund.Status.ToString(CultureInfo.InvariantCulture)" type="number" name="status"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="BookingRefund_Amount">@L("Amount")</label>
+									<input class="form-control m-input" id="BookingRefund_Amount" value="@Model.BookingRefund.Amount.ToString(CultureInfo.InvariantCulture)" type="number" name="amount"  />
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

@@ -1,0 +1,41 @@
+﻿
+@using System.Globalization
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.Common.Modals
+@using TepayLink.Sdisco.Web.Areas.Admin.Models.RevenueByMonths
+@model CreateOrEditRevenueByMonthModalViewModel
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditRevenueByMonth")) : L("CreateNewRevenueByMonth")))
+
+<div class="modal-body">
+        <div id="RevenueByMonthInformationsTab">
+            <form name="RevenueByMonthInformationsForm" role="form" novalidate class="form-validation">
+
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" value="@Model.RevenueByMonth.Id" />
+                }
+
+				
+
+				
+								<div class="form-group">
+									<label for="RevenueByMonth_UserId">@L("UserId")</label>
+									<input class="form-control m-input" id="RevenueByMonth_UserId" value="@Model.RevenueByMonth.UserId.ToString(CultureInfo.InvariantCulture)" type="number" name="userId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="RevenueByMonth_Revenue">@L("Revenue")</label>
+									<input class="form-control m-input" id="RevenueByMonth_Revenue" value="@Model.RevenueByMonth.Revenue.ToString(CultureInfo.InvariantCulture)" type="number" name="revenue"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="RevenueByMonth_Date">@L("Date")</label>
+									<input class="form-control m-input date-picker" id="RevenueByMonth_Date" type="text" name="date" value="@Model.RevenueByMonth.Date"/>
+								</div>
+					
+
+            </form>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Areas/Admin/Views/Common/Modals/_ModalFooterWithSaveAndCancel.cshtml")

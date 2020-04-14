@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "https://localhost:44302/",
-      "sslPort": 44302
+      "applicationUrl": "http://127.0.0.1:4302",
+    
     }
   },
   "profiles": {
@@ -18,7 +18,7 @@
     "TepayLink.Sdisco.Web": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:44302",
+      "applicationUrl": "http://127.0.0.1:4302",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

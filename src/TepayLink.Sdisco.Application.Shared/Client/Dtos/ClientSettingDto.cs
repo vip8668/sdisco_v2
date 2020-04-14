@@ -2,7 +2,7 @@
 using System;
 using Abp.Application.Services.Dto;
 
-namespace TepayLink.Sdisco.Client.Dtos
+namespace TepayLink.Sdisco.Clients.Dtos
 {
     public class ClientSettingDto : EntityDto<long>
     {

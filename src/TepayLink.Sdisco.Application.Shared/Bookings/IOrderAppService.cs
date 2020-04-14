@@ -10,7 +10,7 @@ namespace TepayLink.Sdisco.Bookings
 {
     public interface IOrderAppService : IApplicationService
     {
-        Task<Dto.OrderDto> CreateOrder(CreateOrderInputDto input);
+        Task<OrderDto> CreateOrder(CreateOrderInputDto input);
         Task ConfirmOrder(ConfirmOrderDto input);
 
         Task UpdteOrderPaySucess(long orderId);

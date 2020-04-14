@@ -36,7 +36,17 @@ namespace TepayLink.Sdisco.Affiliate
         private readonly IRepository<ShortLink, long> _shortLinkRepository;
 
 
-
+        public AffiliateAppService(IRepository<Partner, long> partnerRepository, IRepository<Transaction, long> transactionRepository, IRepository<Product, long> tourRepository, IRepository<PartnerRevenue, long> partnerRevenueRepository, IRepository<ShareTransaction, long> shareTransactionRepository, ICommonAppService commonAppService, IRepository<WithDrawRequest, long> withDrawRequestRepository, IRepository<ShortLink, long> shortLinkRepository)
+        {
+            _partnerRepository = partnerRepository;
+            _transactionRepository = transactionRepository;
+            _tourRepository = tourRepository;
+            _partnerRevenueRepository = partnerRevenueRepository;
+            _shareTransactionRepository = shareTransactionRepository;
+            _commonAppService = commonAppService;
+            _withDrawRequestRepository = withDrawRequestRepository;
+            _shortLinkRepository = shortLinkRepository;
+        }
 
 
         /// <summary>
@@ -79,7 +89,7 @@ namespace TepayLink.Sdisco.Affiliate
             var query =
                 (from t in
                         _tourRepository.GetAll()
-                 where t.Type == ProductTypeEnum.Trip
+                 where t.Type == ProductTypeEnum.TripPlan
                        && t.CreatorUserId == AbpSession.UserId
                        && t.Status == ProductStatusEnum.Publish
                  select new AffiliateTourDTo

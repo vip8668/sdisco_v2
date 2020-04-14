@@ -1,4 +1,4 @@
-﻿using TepayLink.Sdisco.Client.Dtos;
+﻿using TepayLink.Sdisco.Clients.Dtos;
 
 namespace TepayLink.Sdisco.Web.Areas.Admin.Models.ClientSettings
 {

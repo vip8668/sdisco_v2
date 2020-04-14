@@ -79,7 +79,7 @@ namespace TepayLink.Sdisco.Web.Controllers
             _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
             _userManager = userManager;
             _signInManager = signInManager;
-            orderRepository = _orderRepository;
+            _orderRepository = orderRepository;
             _configuration = hostingEnvironment.GetAppConfiguration();
             _session = session;
 

@@ -1,6 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <localizationDictionary culture="en">
-  <texts>    <text name="Transaction">Transaction</text>
+  <texts>    <text name="Reports">Reports</text>
+    <text name="RevenueByMonth">Revenue by month</text>
+    <text name="RevenueByMonthsHeaderInfo">Revenue by months header info</text>
+    <text name="CreateNewRevenueByMonth">Create new revenue by month</text>
+    <text name="EditRevenueByMonth">Edit revenue by month</text>
+    <text name="DeleteRevenueByMonth">Delete revenue by month</text>
+    <text name="RevenueByMonths">Revenue by months</text>
+    <text name="BookingRefund">Booking refund</text>
+    <text name="RefundMethodId">Refund method id</text>
+    <text name="BookingRefundsHeaderInfo">Booking refunds header info</text>
+    <text name="CreateNewBookingRefund">Create new booking refund</text>
+    <text name="EditBookingRefund">Edit booking refund</text>
+    <text name="DeleteBookingRefund">Delete booking refund</text>
+    <text name="BookingRefunds">Booking refunds</text>
+    <text name="RefundReason">Refund reason</text>
+    <text name="ReasonText">Reason text</text>
+    <text name="RefundReasonsHeaderInfo">Refund reasons header info</text>
+    <text name="CreateNewRefundReason">Create new refund reason</text>
+    <text name="EditRefundReason">Edit refund reason</text>
+    <text name="DeleteRefundReason">Delete refund reason</text>
+    <text name="RefundReasons">Refund reasons</text>
+    <text name="Transaction">Transaction</text>
     <text name="TransType">Trans type</text>
     <text name="WalletType">Wallet type</text>
     <text name="RefId">Ref id</text>

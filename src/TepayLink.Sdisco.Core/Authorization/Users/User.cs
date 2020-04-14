@@ -25,7 +25,7 @@ namespace TepayLink.Sdisco.Authorization.Users
 
         public List<UserOrganizationUnit> OrganizationUnits { get; set; }
 
-
+        public virtual ICollection<MyUserLogin> MyUserLogins { get; set; }
 
 
         public DateTime? Dob { get; set; }
@@ -101,6 +101,10 @@ namespace TepayLink.Sdisco.Authorization.Users
              * It should be short and easy to enter in a mobile application, where user can not click a link.
              */
             PasswordResetCode = Guid.NewGuid().ToString("N").Truncate(10).ToUpperInvariant();
+        }
+        public static string CreateRandomPassword()
+        {
+            return Guid.NewGuid().ToString("N").Truncate(16);
         }
 
         public void Unlock()

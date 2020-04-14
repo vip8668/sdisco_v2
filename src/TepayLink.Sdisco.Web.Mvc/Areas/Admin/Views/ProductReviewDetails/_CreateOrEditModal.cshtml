@@ -41,6 +41,74 @@
 
 
 				
+								<div class="form-group">
+									<label for="ProductReviewDetail_RatingAvg">@L("RatingAvg")</label>
+									<input class="form-control m-input" id="ProductReviewDetail_RatingAvg" value="@Model.ProductReviewDetail.RatingAvg.ToString(CultureInfo.InvariantCulture)" type="number" name="ratingAvg"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_Intineraty">@L("Intineraty")</label>
+									<input class="form-control m-input" id="ProductReviewDetail_Intineraty" value="@Model.ProductReviewDetail.Intineraty.ToString(CultureInfo.InvariantCulture)" type="number" name="intineraty"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_Service">@L("Service")</label>
+									<input class="form-control m-input" id="ProductReviewDetail_Service" value="@Model.ProductReviewDetail.Service.ToString(CultureInfo.InvariantCulture)" type="number" name="service"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_Transport">@L("Transport")</label>
+									<input class="form-control m-input" id="ProductReviewDetail_Transport" value="@Model.ProductReviewDetail.Transport.ToString(CultureInfo.InvariantCulture)" type="number" name="transport"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_GuideTour">@L("GuideTour")</label>
+									<input class="form-control m-input" id="ProductReviewDetail_GuideTour" value="@Model.ProductReviewDetail.GuideTour.ToString(CultureInfo.InvariantCulture)" type="number" name="guideTour"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_Food">@L("Food")</label>
+									<input class="form-control m-input" id="ProductReviewDetail_Food" value="@Model.ProductReviewDetail.Food.ToString(CultureInfo.InvariantCulture)" type="number" name="food"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_Title">@L("Title")</label>
+									<input class="form-control" id="ProductReviewDetail_Title" value="@Model.ProductReviewDetail.Title" type="text" name="title"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_BookingId">@L("BookingId")</label>
+									<input class="form-control m-input" id="ProductReviewDetail_BookingId" value="@Model.ProductReviewDetail.BookingId.ToString(CultureInfo.InvariantCulture)" type="number" name="bookingId"  />
+								</div>
+					
+								<div class="m-checkbox-list">
+									<label for="ProductReviewDetail_Read" class="kt-checkbox">
+										<input id="ProductReviewDetail_Read" type="checkbox" name="read" value="true" @Html.Raw(Model.ProductReviewDetail.Read ?"checked=\"checked\"":"") />
+										@L("Read")
+										<span></span>
+									</label>
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_ReplyComment">@L("ReplyComment")</label>
+									<input class="form-control" id="ProductReviewDetail_ReplyComment" value="@Model.ProductReviewDetail.ReplyComment" type="text" name="replyComment"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_ReplyId">@L("ReplyId")</label>
+									<input class="form-control m-input" id="ProductReviewDetail_ReplyId" value="@Model.ProductReviewDetail.ReplyId?.ToString(CultureInfo.InvariantCulture)" type="number" name="replyId"  />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_Avatar">@L("Avatar")</label>
+									<input class="form-control" id="ProductReviewDetail_Avatar" value="@Model.ProductReviewDetail.Avatar" type="text" name="avatar"     />
+								</div>
+					
+								<div class="form-group">
+									<label for="ProductReviewDetail_Reviewer">@L("Reviewer")</label>
+									<input class="form-control" id="ProductReviewDetail_Reviewer" value="@Model.ProductReviewDetail.Reviewer" type="text" name="reviewer"     />
+								</div>
+					
 
             </form>
         </div>

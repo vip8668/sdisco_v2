@@ -7,14 +7,17 @@ namespace TepayLink.Sdisco.Products
     public enum ProductTypeEnum
     {
         Tour = 1,
-        Trip = 2,
+        TripPlan = 2,
         Activity = 3,
         TicketPlace = 4,
         TicketShow = 5,
         ThingToBuy = 6,
         Hotel = 7,
         Transport = 8,
-        Restaurant=9
+        Restaurant=9,
+        HotelRoom = 9,
+
+
 
     }
 

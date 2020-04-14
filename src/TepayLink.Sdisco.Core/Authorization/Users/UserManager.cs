@@ -32,7 +32,7 @@ namespace TepayLink.Sdisco.Authorization.Users
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly ILocalizationManager _localizationManager;
         private readonly ISettingManager _settingManager;
-
+  private readonly IRepository<User, long> _userRepository;
         public UserManager(
             UserStore userStore,
             IOptions<IdentityOptions> optionsAccessor,
@@ -51,7 +51,8 @@ namespace TepayLink.Sdisco.Authorization.Users
             IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
             IOrganizationUnitSettings organizationUnitSettings,
             ISettingManager settingManager, 
-            ILocalizationManager localizationManager)
+            ILocalizationManager localizationManager,
+            IRepository<User, long> userRepository)
             : base(
                   roleManager,
                   userStore,
@@ -74,6 +75,7 @@ namespace TepayLink.Sdisco.Authorization.Users
             _unitOfWorkManager = unitOfWorkManager;
             _settingManager = settingManager;
             _localizationManager = localizationManager;
+            _userRepository = userRepository;
         }
 
         [UnitOfWork]
@@ -122,7 +124,10 @@ namespace TepayLink.Sdisco.Authorization.Users
 
             await base.SetGrantedPermissionsAsync(user, permissions);
         }
-
+        public User GetUserByUserName(string usreName)
+        {
+            return _userRepository.FirstOrDefault(p => p.UserName == usreName);
+        }
         public async Task<string> CreateRandomPassword()
         {
             var passwordComplexitySetting = new PasswordComplexitySetting

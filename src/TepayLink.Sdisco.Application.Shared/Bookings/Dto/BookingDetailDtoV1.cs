@@ -7,9 +7,9 @@ using TepayLink.Sdisco.Products;
 using TepayLink.Sdisco.Tour.Dtos;
 using TepayLink.Sdisco.Utils;
 
-namespace TepayLink.Sdisco.Booking.Dto
+namespace TepayLink.Sdisco.Bookings.Dto
 {
-   public class BookingDetailDto
+   public class BookingDetailDtoV1
     {
         public TourDetailDto TourDetail { get; set; }
 

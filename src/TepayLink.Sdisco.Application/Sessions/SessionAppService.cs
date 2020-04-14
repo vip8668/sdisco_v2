@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Auditing;
+using Abp.Authorization;
 using Abp.Runtime.Session;
 using Microsoft.EntityFrameworkCore;
 using TepayLink.Sdisco.Editions;
@@ -26,6 +27,16 @@ namespace TepayLink.Sdisco.Sessions
             _subscriptionPaymentRepository = subscriptionPaymentRepository;
         }
 
+        [AbpAuthorize]
+        public async Task<UserLoginInfoDto> GetCurrentUserformations()
+        {
+
+            return ObjectMapper.Map<UserLoginInfoDto>(await GetCurrentUserAsync());
+
+
+        }
+
+        
         [DisableAuditing]
         public async Task<GetCurrentLoginInformationsOutput> GetCurrentLoginInformations()
         {

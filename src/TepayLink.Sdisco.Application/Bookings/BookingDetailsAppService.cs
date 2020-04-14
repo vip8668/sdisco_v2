@@ -77,7 +77,7 @@ namespace TepayLink.Sdisco.Bookings
                                 Note = o.Note,
                                 CancelDate = o.CancelDate,
                                 RefundAmount = o.RefundAmount,
-                                ProductDetailComboId = o.ProductDetailComboId,
+                                ProductDetailComboId = o.ProductDetailComboId??0,
                                 Id = o.Id
 							},
                          	ProductName = s1 == null ? "" : s1.Name.ToString()
@@ -197,7 +197,7 @@ namespace TepayLink.Sdisco.Bookings
                                 Note = o.Note,
                                 CancelDate = o.CancelDate,
                                 RefundAmount = o.RefundAmount,
-                                ProductDetailComboId = o.ProductDetailComboId,
+                                ProductDetailComboId = o.ProductDetailComboId??0,
                                 Id = o.Id
 							},
                          	ProductName = s1 == null ? "" : s1.Name.ToString()

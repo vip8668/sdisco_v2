@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TepayLink.Sdisco.Account.Dtos;
 
 namespace TepayLink.Sdisco.Authorization.Users.Profile.Dto
 {

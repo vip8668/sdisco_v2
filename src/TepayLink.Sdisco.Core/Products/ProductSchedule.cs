@@ -41,8 +41,7 @@ namespace TepayLink.Sdisco.Products
 		
 		public virtual bool AllowBook { get; set; }
 
-		public int Avaiable => TotalSlot - LockedSlot - TotalBook;
-
+		public int Avaiable =>TotalSlot - LockedSlot - TotalBook;
 		public virtual long ProductId { get; set; }
 		
         [ForeignKey("ProductId")]

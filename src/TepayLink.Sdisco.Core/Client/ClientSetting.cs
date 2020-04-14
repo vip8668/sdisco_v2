@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities.Auditing;
 using Abp.Domain.Entities;
 
-namespace TepayLink.Sdisco.Client
+namespace TepayLink.Sdisco.Clients
 {
 	[Table("ClientSettings")]
     public class ClientSetting : AuditedEntity<long> , IMayHaveTenant

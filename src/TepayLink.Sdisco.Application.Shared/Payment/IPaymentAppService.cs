@@ -21,7 +21,7 @@ namespace TepayLink.Sdisco.Payment
 
 
         Task CreateUpdatePayment(PaymentResultDto paymentResult);
-        Task ConfirmPaymentPaypal(long paymentId, string paypalPaymentId, string paypalPayerId);
+        Task ConfirmPaymentPaypal(long paymentId, string paypalOrderId);
 
         Task ConfirmPaymentVtc(string ordercode, string transerf, string paymentType,
             OrderStatus status);

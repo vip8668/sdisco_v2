@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TepayLink.Sdisco.Dto;
 using TepayLink.Sdisco.Products;
 
-namespace TepayLink.Sdisco.Booking.Dtos
+namespace TepayLink.Sdisco.Bookings.Dtos
 {
     public class MyBookingInputDto : PagedInputDto
     {

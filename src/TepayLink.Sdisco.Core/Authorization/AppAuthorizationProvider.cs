@@ -37,10 +37,7 @@ namespace TepayLink.Sdisco.Authorization
 
 
 
-            var chatconversations = pages.CreateChildPermission(AppPermissions.Pages_Chatconversations, L("Chatconversations"));
-            chatconversations.CreateChildPermission(AppPermissions.Pages_Chatconversations_Create, L("CreateNewChatconversation"));
-            chatconversations.CreateChildPermission(AppPermissions.Pages_Chatconversations_Edit, L("EditChatconversation"));
-            chatconversations.CreateChildPermission(AppPermissions.Pages_Chatconversations_Delete, L("DeleteChatconversation"));
+        
 
 
 
@@ -111,6 +108,27 @@ namespace TepayLink.Sdisco.Authorization
             pages.CreateChildPermission(AppPermissions.Pages_DemoUiComponents, L("DemoUiComponents"));
 
             var administration = pages.CreateChildPermission(AppPermissions.Pages_Administration, L("Administration"));
+
+            var revenueByMonths = administration.CreateChildPermission(AppPermissions.Pages_Administration_RevenueByMonths, L("RevenueByMonths"));
+            revenueByMonths.CreateChildPermission(AppPermissions.Pages_Administration_RevenueByMonths_Create, L("CreateNewRevenueByMonth"));
+            revenueByMonths.CreateChildPermission(AppPermissions.Pages_Administration_RevenueByMonths_Edit, L("EditRevenueByMonth"));
+            revenueByMonths.CreateChildPermission(AppPermissions.Pages_Administration_RevenueByMonths_Delete, L("DeleteRevenueByMonth"));
+
+
+
+            var bookingRefunds = administration.CreateChildPermission(AppPermissions.Pages_Administration_BookingRefunds, L("BookingRefunds"));
+            bookingRefunds.CreateChildPermission(AppPermissions.Pages_Administration_BookingRefunds_Create, L("CreateNewBookingRefund"));
+            bookingRefunds.CreateChildPermission(AppPermissions.Pages_Administration_BookingRefunds_Edit, L("EditBookingRefund"));
+            bookingRefunds.CreateChildPermission(AppPermissions.Pages_Administration_BookingRefunds_Delete, L("DeleteBookingRefund"));
+
+
+
+            var refundReasons = administration.CreateChildPermission(AppPermissions.Pages_Administration_RefundReasons, L("RefundReasons"));
+            refundReasons.CreateChildPermission(AppPermissions.Pages_Administration_RefundReasons_Create, L("CreateNewRefundReason"));
+            refundReasons.CreateChildPermission(AppPermissions.Pages_Administration_RefundReasons_Edit, L("EditRefundReason"));
+            refundReasons.CreateChildPermission(AppPermissions.Pages_Administration_RefundReasons_Delete, L("DeleteRefundReason"));
+
+
 
             var transactions = administration.CreateChildPermission(AppPermissions.Pages_Administration_Transactions, L("Transactions"));
             transactions.CreateChildPermission(AppPermissions.Pages_Administration_Transactions_Create, L("CreateNewTransaction"));

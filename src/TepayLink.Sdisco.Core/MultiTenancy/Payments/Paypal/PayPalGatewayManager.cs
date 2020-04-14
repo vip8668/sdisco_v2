@@ -5,6 +5,10 @@ using Abp.UI;
 using PayPalCheckoutSdk.Core;
 using PayPalCheckoutSdk.Orders;
 
+//using PayPalCheckoutSdk.Core;
+//using PayPalCheckoutSdk.Orders;
+//using Order = PayPalCheckoutSdk.Orders.Order;
+
 namespace TepayLink.Sdisco.MultiTenancy.Payments.Paypal
 {
     public class PayPalGatewayManager : SdiscoServiceBase, ITransientDependency
@@ -50,5 +54,23 @@ namespace TepayLink.Sdisco.MultiTenancy.Payments.Paypal
 
             return payment.Id;
         }
+
+        //public async Task<string> ExecutePaymentAsync(PayPalExecutePaymentRequestInput input)
+        //{
+        //    var request = new PaymentExecuteRequest(input.PaymentId);
+        //    request.RequestBody(new PaymentExecution()
+        //    {
+        //        PayerId = input.PayerId
+        //    });
+
+        //    var response = await _client.Execute(request);
+        //    var payment = response.Result<Payment>();
+        //    if (payment.State != "approved")
+        //    {
+        //        throw new UserFriendlyException(L("PaymentFailed"));
+        //    }
+
+        //    return payment.Id;
+        //}
     }
 }

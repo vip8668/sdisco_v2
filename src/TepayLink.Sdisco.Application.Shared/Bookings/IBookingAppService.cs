@@ -6,8 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using TepayLink.Sdisco.Booking.Dto;
-using TepayLink.Sdisco.Booking.Dtos;
+using TepayLink.Sdisco.Bookings.Dtos;
 using TepayLink.Sdisco.Payment.Dto;
 using TepayLink.Sdisco.Tour.Dtos;
 
@@ -45,7 +44,7 @@ namespace TepayLink.Sdisco.Bookings
         Task<CheckCouponOutputDto> CheckCouponCode(CheckCouponInputDto input);
 
         Task<List<AvaiableTimeDto>> GetAvaiableTimesInMonthOfTour(DateTime month, long tourId, int itemType);
-        Task<BookingDetailDto> GetBookingDetail(long bookingId);
+        Task<TepayLink.Sdisco.Bookings.Dto.BookingDetailDtoV1> GetBookingDetail(long bookingId);
         Task<List<MyBookingGroupByDayDto>> MyBooking(MyBookingInput1Dto inputDto);
         Task<NapasOutputDto> BookingPedingTour(PayPendingBooking input);
     }

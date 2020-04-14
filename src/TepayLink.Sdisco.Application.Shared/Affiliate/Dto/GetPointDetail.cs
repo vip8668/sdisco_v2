@@ -1,6 +1,5 @@
 using System;
-using SDisco.Dto;
-using SDisco.Tour;
+
 using TepayLink.Sdisco.Dto;
 
 namespace SDisco.Affiliate.Dto

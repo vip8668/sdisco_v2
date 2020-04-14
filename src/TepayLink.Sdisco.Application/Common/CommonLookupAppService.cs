@@ -11,7 +11,7 @@ using Abp.Localization;
 using Microsoft.EntityFrameworkCore;
 using SDisco.Home.Dto;
 using TepayLink.Sdisco.AdminConfig;
-using TepayLink.Sdisco.Client;
+using TepayLink.Sdisco.Clients;
 using TepayLink.Sdisco.Common.Dto;
 using TepayLink.Sdisco.Editions;
 using TepayLink.Sdisco.Editions.Dto;
@@ -20,7 +20,7 @@ using TepayLink.Sdisco.Products;
 
 namespace TepayLink.Sdisco.Common
 {
-    [AbpAuthorize]
+
     public class CommonLookupAppService : SdiscoAppServiceBase, ICommonLookupAppService
     {
         private readonly EditionManager _editionManager;
@@ -31,11 +31,16 @@ namespace TepayLink.Sdisco.Common
         private readonly IRepository<ClientSetting, long> _clientSettingRepository;
 
 
-        public CommonLookupAppService(EditionManager editionManager)
+        public CommonLookupAppService(EditionManager editionManager, IApplicationLanguageManager applicationLanguageManager, IRepository<Country> countryRepository, IRepository<Currency> currencyRepository, IRepository<Place, long> placeRepository, IRepository<ClientSetting, long> clientSettingRepository)
         {
             _editionManager = editionManager;
+            _applicationLanguageManager = applicationLanguageManager;
+            _countryRepository = countryRepository;
+            _currencyRepository = currencyRepository;
+            _placeRepository = placeRepository;
+            _clientSettingRepository = clientSettingRepository;
         }
-
+        [AbpAuthorize]
         public async Task<ListResultDto<SubscribableEditionComboboxItemDto>> GetEditionsForCombobox(bool onlyFreeItems = false)
         {
             var subscribableEditions = (await _editionManager.Editions.Cast<SubscribableEdition>().ToListAsync())
@@ -46,7 +51,7 @@ namespace TepayLink.Sdisco.Common
                 subscribableEditions.Select(e => new SubscribableEditionComboboxItemDto(e.Id.ToString(), e.DisplayName, e.IsFree)).ToList()
             );
         }
-
+        [AbpAuthorize]
         public async Task<PagedResultDto<NameValueDto>> FindUsers(FindUsersInput input)
         {
             if (AbpSession.TenantId != null)
@@ -85,7 +90,7 @@ namespace TepayLink.Sdisco.Common
                     );
             }
         }
-
+        [AbpAuthorize]
         public GetDefaultEditionNameOutput GetDefaultEditionName()
         {
             return new GetDefaultEditionNameOutput

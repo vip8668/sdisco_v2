@@ -386,7 +386,7 @@ namespace TepayLink.Sdisco.Web.Controllers
                     }
                 case AbpLoginResultType.UnknownExternalLogin:
                     {
-                        var newUser = await RegisterExternalUserAsync(externalUser);
+                        var newUser = await RegisterExternalUserAsync(externalUser,model.ProviderAccessCode, model.Avatar);
                         if (!newUser.IsActive)
                         {
                             return new ExternalAuthenticateResultModel
@@ -451,35 +451,58 @@ namespace TepayLink.Sdisco.Web.Controllers
 
         #endregion
 
-        private async Task<User> RegisterExternalUserAsync(ExternalAuthUserInfo externalLoginInfo)
+         private async Task<User> RegisterExternalUserAsync(ExternalAuthUserInfo externalLoginInfo, string accessCode, string avartar)
         {
-            string username;
-
-            using (var providerManager = _externalLoginInfoManagerFactory.GetExternalLoginInfoManager(externalLoginInfo.Provider))
+            User user = _userManager.GetUserByUserName(externalLoginInfo.EmailAddress);
+            if (user == null)
             {
-                username = providerManager.Object.GetUserNameFromExternalAuthUserInfo(externalLoginInfo);
+                user = await _userRegistrationManager.RegisterAsync(
+               externalLoginInfo.Name,
+               externalLoginInfo.Surname,
+               externalLoginInfo.EmailAddress,
+               externalLoginInfo.EmailAddress,
+
+               Authorization.Users.User.CreateRandomPassword(),
+               true,
+               null
+           );
+
+                user.MyUserLogins = new List<MyUserLogin>
+                {
+                    new MyUserLogin
+                    {
+                        LoginProvider = externalLoginInfo.Provider,
+                        ProviderKey = externalLoginInfo.ProviderKey,
+                        TenantId = user.TenantId,
+                        AccessCode=accessCode,
+                        UserId=user.Id
+                    }
+                };
             }
-
-            var user = await _userRegistrationManager.RegisterAsync(
-                externalLoginInfo.Name,
-                externalLoginInfo.Surname,
-                externalLoginInfo.EmailAddress,
-                username,
-                await _userManager.CreateRandomPassword(),
-                true,
-                null
-            );
-
-            user.Logins = new List<UserLogin>
+            else
             {
-                new UserLogin
+                MyUserLogin userLogin = new MyUserLogin
                 {
                     LoginProvider = externalLoginInfo.Provider,
                     ProviderKey = externalLoginInfo.ProviderKey,
-                    TenantId = user.TenantId
+                    TenantId = user.TenantId,
+                    AccessCode = accessCode,
+                    UserId = user.Id
+                };
+                if (user.MyUserLogins == null)
+                {
+                    user.MyUserLogins = new List<MyUserLogin>
+                    {
+                        userLogin
+                    };
                 }
-            };
-
+                else
+                {
+                    user.MyUserLogins.Add(userLogin);
+                }
+            }
+            user.Avatar = avartar;
+            await _userManager.UpdateAsync(user);
             await CurrentUnitOfWork.SaveChangesAsync();
 
             return user;

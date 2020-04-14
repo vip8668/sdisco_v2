@@ -3,8 +3,11 @@ using System.Threading.Tasks;
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using SDisco.Home.Dto;
+using TepayLink.Sdisco.KOL;
 using TepayLink.Sdisco.Products;
+using TepayLink.Sdisco.Products.Dtos;
 using TepayLink.Sdisco.Tour.Dtos;
+using TepayLink.Sdisco.TripPlanManager.Dto;
 
 namespace TepayLink.Sdisco.Tour
 {
@@ -18,7 +21,7 @@ namespace TepayLink.Sdisco.Tour
 
         Task<ReviewSummaryDto> GetTourItemReviewSummary(long tourId);
 
-        Task<Dictionary<long, List<UtilityDto>>> GetUtilities(List<long> itemIds, ItemTypeEnum type);
+        Task<Dictionary<long, List<UtilityDto>>> GetUtilities(List<long> itemIds);
 
         Task<List<UtilityDto>> GetUtilityByIds(List<int> utilitiesId);
 
@@ -51,7 +54,7 @@ namespace TepayLink.Sdisco.Tour
         Task<List<BasicTourDto>> GetRelateTour(long itemId);
 
 
-        Task<List<SaveItemDto>> GetSaveItem(List<long> itemIds);
+        Task<List<SaveItemDtoV1>> GetSaveItem(List<long> itemIds);
 
 
         Task<bool> IsSave(long itemIds);
@@ -74,8 +77,8 @@ namespace TepayLink.Sdisco.Tour
         long GetHostUserId(long userId);
 
 
-        void InsertImages(List<string> photos, long itemId, ImageType imageType, ItemTypeEnum itemType);
-        void DeleteImageOfTour(long itemId, ItemTypeEnum itemType, List<ImageTypeEnum> imageTypes);
+        void InsertImages(List<string> photos, long itemId, ImageType imageType);
+        void DeleteImageOfTour(long itemId, List<ImageType> imageTypes);
 
         Task ProcessBonus(long tripId, RevenueTypeEnum type);
 

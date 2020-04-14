@@ -9,6 +9,7 @@ using TepayLink.Sdisco.AdminConfig;
 using TepayLink.Sdisco.Banks.Dtos;
 using System.Linq;
 using Abp.UI;
+using TepayLink.Sdisco.AdminConfig.Dtos;
 
 namespace TepayLink.Sdisco.Banks
 {
@@ -23,6 +24,12 @@ namespace TepayLink.Sdisco.Banks
         private readonly IRepository<BankBranch> _bankBranchRepository;
 
 
+        public BankAppService(IRepository<Bank> bankRepository, IRepository<BankAccountInfo, long> bankAccountInfoRepository, IRepository<BankBranch> bankBranchRepository)
+        {
+            _bankRepository = bankRepository;
+            _bankAccountInfoRepository = bankAccountInfoRepository;
+            _bankBranchRepository = bankBranchRepository;
+        }
 
         public async Task CreateBankAccountInfo(CreateBankAccountInputDto bankAccountDto)
         {

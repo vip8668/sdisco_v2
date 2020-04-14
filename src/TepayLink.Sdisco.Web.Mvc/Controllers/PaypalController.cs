@@ -65,11 +65,11 @@ namespace TepayLink.Sdisco.Web.Controllers
 
         [HttpPost]
         [UnitOfWork(IsDisabled = true)]
-        public async Task<ActionResult> ConfirmPayment(long paymentId, string paypalPaymentId, string paypalPayerId)
+        public async Task<ActionResult> ConfirmPayment(long paymentId, string paypalOrderId)
         {
             try
             {
-                await _paymentAppService.ConfirmPaymentPaypal(paymentId, paypalPaymentId, paypalPayerId);
+                await _paymentAppService.ConfirmPaymentPaypal(paymentId, paypalOrderId);
 
                 var returnUrl = await GetSuccessUrlAsync(paymentId);
                 return Redirect(returnUrl);

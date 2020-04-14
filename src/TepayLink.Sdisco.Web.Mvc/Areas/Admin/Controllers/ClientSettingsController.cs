@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using TepayLink.Sdisco.Web.Areas.Admin.Models.ClientSettings;
 using TepayLink.Sdisco.Web.Controllers;
 using TepayLink.Sdisco.Authorization;
-using TepayLink.Sdisco.Client;
-using TepayLink.Sdisco.Client.Dtos;
+using TepayLink.Sdisco.Clients;
+using TepayLink.Sdisco.Clients.Dtos;
 using Abp.Application.Services.Dto;
 using Abp.Extensions;
 

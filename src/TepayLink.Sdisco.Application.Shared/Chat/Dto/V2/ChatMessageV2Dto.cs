@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TepayLink.Sdisco.Chat.Dto.V2
 {
-    public class ChatMessageV2Dto
+    public class ChatMessagev2Dto
     {
         public long Id { get; set; }
 

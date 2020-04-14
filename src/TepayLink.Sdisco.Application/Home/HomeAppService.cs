@@ -26,6 +26,16 @@ namespace TepayLink.Sdisco.Home
         private ICommonAppService _commonAppService;
 
 
+        public HomeAppService(IRepository<Category> category, IRepository<Place, long> placeRepository, IRepository<Product, long> productRepository, IRepository<ApplicationLanguage> langRepository, IRepository<Detination, long> destinationRepository, ICommonAppService commonAppService)
+        {
+            _category = category;
+            _placeRepository = placeRepository;
+            _productRepository = productRepository;
+            _langRepository = langRepository;
+            _destinationRepository = destinationRepository;
+            _commonAppService = commonAppService;
+        }
+
         /// <summary>
         /// Lấy banner quảng cáo
         /// </summary>
@@ -123,7 +133,7 @@ namespace TepayLink.Sdisco.Home
         public async Task<List<BasicTourCategoryDto>> GetListTripCatgory()
         {
             var listCategories = _category.GetAll()
-                .Where(p => p.ProductType == ProductTypeEnum.Trip).Select(p =>
+                .Where(p => p.ProductType == ProductTypeEnum.TripPlan).Select(p =>
                     new BasicTourCategoryDto
                     {
                         Id = p.Id,
@@ -290,7 +300,7 @@ namespace TepayLink.Sdisco.Home
                  join c in _category.GetAll() on t.CategoryId equals c.Id
                  join p in _placeRepository.GetAll() on t.PlaceId equals p.Id
                  //  join r in _tourReviewRepository.GetAll() on t.Id equals r.TourId
-                 where t.Type == ProductTypeEnum.Trip && t.IsTop &&
+                 where t.Type == ProductTypeEnum.TripPlan && t.IsTop &&
                        t.IsTop // && r.ReviewType == ReviewTypeEnum.Tour
                        && t.Status == ProductStatusEnum.Publish
                  select new BasicTourDto

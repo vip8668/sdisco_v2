@@ -2,7 +2,7 @@
 
 using TepayLink.Sdisco.Bookings;
 
-namespace TepayLink.Sdisco.Booking.Dtos
+namespace TepayLink.Sdisco.Bookings.Dtos
 {
     public class UpdateBookingStatusDto
     {

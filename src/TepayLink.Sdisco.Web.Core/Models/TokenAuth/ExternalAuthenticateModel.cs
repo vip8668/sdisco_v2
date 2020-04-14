@@ -19,5 +19,6 @@ namespace TepayLink.Sdisco.Web.Models.TokenAuth
         public string ReturnUrl { get; set; }
 
         public bool? SingleSignIn { get; set; }
+        public string Avatar { get; set; }
     }
 }
